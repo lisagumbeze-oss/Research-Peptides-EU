@@ -36,6 +36,14 @@ export async function sendTransactionalEmail(params: {
     replyTo: params.replyTo
   });
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    const msg =
+      typeof error === 'object' && error !== null && 'message' in error && typeof (error as { message: unknown }).message === 'string'
+        ? (error as { message: string }).message
+        : typeof error === 'string'
+          ? error
+          : JSON.stringify(error);
+    throw new Error(msg);
+  }
   return { sent: true as const };
 }

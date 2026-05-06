@@ -12,11 +12,13 @@ export default function Contact() {
   const [message, setMessage] = React.useState('');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitState, setSubmitState] = React.useState<'idle' | 'success' | 'error'>('idle');
+  const [submitErrorDetail, setSubmitErrorDetail] = React.useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitState('idle');
+    setSubmitErrorDetail('');
     try {
       await postContactEmail({ fullName, email, subject, message });
       setSubmitState('success');
@@ -25,9 +27,11 @@ export default function Contact() {
       setEmail('');
       setSubject('General Research Inquiry');
       setMessage('');
-    } catch {
+    } catch (err: unknown) {
+      const detail = err instanceof Error ? err.message : 'Dispatch failed. Please try again in a moment.';
       setSubmitState('error');
-      addToast('Dispatch failed. Please try again in a moment.', 'error');
+      setSubmitErrorDetail(detail);
+      addToast('Dispatch failed.', 'error');
     } finally {
       setIsSubmitting(false);
     }
@@ -160,9 +164,12 @@ export default function Contact() {
                 </p>
               )}
               {submitState === 'error' && (
-                <p className="text-xs font-bold text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
-                  Dispatch failed. Please try again in a moment.
-                </p>
+                <div className="text-xs font-bold text-red-700 bg-red-50 border border-red-200 rounded-xl px-4 py-3 space-y-1">
+                  <p>Dispatch failed.</p>
+                  {submitErrorDetail && (
+                    <p className="font-medium text-red-600/95 whitespace-pre-wrap break-words leading-relaxed">{submitErrorDetail}</p>
+                  )}
+                </div>
               )}
 
               <button
