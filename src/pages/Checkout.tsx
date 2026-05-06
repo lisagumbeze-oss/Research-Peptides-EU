@@ -25,7 +25,7 @@ const SHIPPING_METHODS = {
 const EUROPEAN_COUNTRIES = Array.from(new Set(europeanLocations.map(l => l.country)));
 
 export default function Checkout() {
-  const { items, getTotal, clearCart } = useCartStore();
+  const { items, getTotal, getSubtotal, clearCart } = useCartStore();
   const { user } = useAuthStore();
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -48,6 +48,14 @@ export default function Checkout() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [placedOrderId, setPlacedOrderId] = useState<string | null>(null);
+  const [checkoutMessage, setCheckoutMessage] = useState('');
+  const [lockedTotals, setLockedTotals] = useState<{
+    subtotal: number;
+    promoDiscount: number;
+    cryptoDiscount: number;
+    shippingCost: number;
+    finalTotal: number;
+  } | null>(null);
 
   const [promoCode, setPromoCode] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState(0);
@@ -72,7 +80,7 @@ export default function Checkout() {
 
   // Get available methods based on country and total
   const getAvailableMethods = () => {
-    const subtotal = getTotal();
+    const subtotal = getSubtotal();
     let baseMethods = [];
     let threshold = 500;
 
@@ -111,13 +119,15 @@ export default function Checkout() {
   const selectedMethod = availableMethods.find(m => m.id === selectedShippingId) || availableMethods[0];
   const shippingCost = selectedMethod.price;
   
-  // Calculate Crypto Discount (5% incentive)
-  const cryptoDiscount = paymentMethod === 'crypto' ? (getTotal() - appliedDiscount) * 0.05 : 0;
-  const finalTotalValue = getTotal() - appliedDiscount - cryptoDiscount + shippingCost;
+  const subtotalValue = getSubtotal();
+  const promoDiscountValue = Math.min(appliedDiscount, subtotalValue);
+  // Calculate crypto discount after promo discount is applied.
+  const cryptoDiscount = paymentMethod === 'crypto' ? (subtotalValue - promoDiscountValue) * 0.05 : 0;
+  const finalTotalValue = subtotalValue - promoDiscountValue - cryptoDiscount + shippingCost;
 
   const applyPromo = () => {
     if (promoCode.toUpperCase() === 'PEPTI10') {
-      const discount = getTotal() * 0.1;
+      const discount = getSubtotal() * 0.1;
       setAppliedDiscount(discount);
       setPromoError('');
     } else {
@@ -136,7 +146,17 @@ export default function Checkout() {
 
     setIsSubmitting(true);
     
+    let createdOrderId: string | null = null;
     try {
+      setLockedTotals({
+        subtotal: subtotalValue,
+        promoDiscount: promoDiscountValue,
+        cryptoDiscount,
+        shippingCost,
+        finalTotal: finalTotalValue
+      });
+      setCheckoutMessage('');
+
       // NOTE: We wrap non-schema columns (payment_method, crypto_discount) inside shipping_address JSON
       // to avoid Supabase errors until columns are officially added to the database.
       const orderData = {
@@ -157,43 +177,31 @@ export default function Checkout() {
       const { data: orderResponse, error } = await supabase.from('orders').insert([orderData]).select().single();
       if (error) throw error;
       const orderId = orderResponse.id;
+      createdOrderId = orderId;
       setPlacedOrderId(orderId);
 
-      // 2. Clear cart
-      clearCart();
-
+      // Supabase-only payment flow (no external API URL dependency).
       if (paymentMethod === 'crypto') {
-        const returnUrl = `${window.location.origin}/orders`;
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-        const paymentRes = await fetch(`${apiUrl}/api/payment/create`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ amount: finalTotalValue, order_id: orderId, return_url: returnUrl })
-        });
-        const paymentData = await paymentRes.json();
-        if (paymentRes.ok && paymentData.success && paymentData.invoice_url) {
-          window.location.href = paymentData.invoice_url;
-        } else {
-          // If Plisio fails, we still have the order saved.
-          setStep(4);
-        }
+        setCheckoutMessage('Order created successfully. Crypto payment instructions will be sent by email shortly.');
       } else if (paymentMethod === 'card') {
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-        const cardRes = await fetch(`${apiUrl}/api/payment/manual-card`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ order_id: orderId, card_details: cardDetails })
-        });
-        if (!cardRes.ok) throw new Error("Card submission failed");
-        setStep(4); // Success step
+        setCheckoutMessage('Order created successfully. Card payment is queued for manual billing review.');
       } else {
-        // Bank Transfer
-        setStep(4); // Success step
+        setCheckoutMessage('Order created successfully. Bank transfer instructions will be sent by email shortly.');
       }
+      clearCart();
+      setStep(4);
 
     } catch (error: any) {
       console.error("Order submission failed:", error);
-      alert(`Failed to process order: ${error.message || "Unknown error"}`);
+      if (createdOrderId) {
+        setPlacedOrderId(createdOrderId);
+        setCheckoutMessage('Order saved successfully. Please use your order ID for support and payment follow-up.');
+        clearCart();
+        setStep(4);
+      } else {
+        const fallbackMessage = 'Failed to process order. Please try again.';
+        alert(`Failed to process order: ${error?.message || fallbackMessage}`);
+      }
       // Don't set step to 4 on hard errors unless we want to show a failure state
     } finally {
       setIsSubmitting(false);
@@ -414,6 +422,11 @@ export default function Checkout() {
                     ? "An admin will contact you shortly via email with transfer details." 
                     : "Your order is now being processed by our analytical team."}
                 </p>
+                {checkoutMessage && (
+                  <p className="text-amber-700 bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 mt-4 text-sm font-semibold max-w-lg mx-auto">
+                    {checkoutMessage}
+                  </p>
+                )}
                 <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
                   {user ? (
                     <button onClick={() => navigate('/orders')} className="bg-gray-900 text-white px-10 py-4 rounded-2xl font-black hover:bg-black transition-all">
@@ -440,27 +453,27 @@ export default function Checkout() {
             <div className="space-y-3">
               <div className="flex justify-between text-sm font-bold text-gray-500">
                 <span>Subtotal</span>
-                <span>{formatCurrency(getTotal())}</span>
+                <span>{formatCurrency(lockedTotals?.subtotal ?? subtotalValue)}</span>
               </div>
-              {appliedDiscount > 0 && (
+              {(lockedTotals?.promoDiscount ?? promoDiscountValue) > 0 && (
                 <div className="flex justify-between text-sm font-black text-emerald-500">
                   <span>Promo Discount</span>
-                  <span>-{formatCurrency(appliedDiscount)}</span>
+                  <span>-{formatCurrency(lockedTotals?.promoDiscount ?? promoDiscountValue)}</span>
                 </div>
               )}
-              {cryptoDiscount > 0 && (
+              {(lockedTotals?.cryptoDiscount ?? cryptoDiscount) > 0 && (
                 <div className="flex justify-between text-sm font-black text-orange-500">
                   <span>Crypto Incentive (5%)</span>
-                  <span>-{formatCurrency(cryptoDiscount)}</span>
+                  <span>-{formatCurrency(lockedTotals?.cryptoDiscount ?? cryptoDiscount)}</span>
                 </div>
               )}
               <div className="flex justify-between text-sm font-bold text-gray-500">
                 <span>Logistic Costs</span>
-                <span>{formatCurrency(shippingCost)}</span>
+                <span>{formatCurrency(lockedTotals?.shippingCost ?? shippingCost)}</span>
               </div>
               <div className="pt-4 border-t border-gray-100 flex justify-between items-end">
                 <span className="text-sm font-black text-gray-900 uppercase">Total Payable</span>
-                <span className="text-2xl font-black text-blue-600 leading-none">{formatCurrency(finalTotalValue)}</span>
+                <span className="text-2xl font-black text-blue-600 leading-none">{formatCurrency(lockedTotals?.finalTotal ?? finalTotalValue)}</span>
               </div>
             </div>
 
