@@ -180,6 +180,15 @@ export default function Checkout() {
       createdOrderId = orderId;
       setPlacedOrderId(orderId);
 
+      // Backend SMTP email trigger (best-effort, non-blocking).
+      fetch('/api/email/order-created', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ order_id: orderId })
+      }).catch(() => {
+        // no-op
+      });
+
       // Supabase-only payment flow (no external API URL dependency).
       if (paymentMethod === 'crypto') {
         setCheckoutMessage('Order created successfully. Crypto payment instructions will be sent by email shortly.');

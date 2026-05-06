@@ -292,5 +292,138 @@ export const referenceSeedProducts: SeedProduct[] = [
     rating: 5.0,
     reviewCount: 215,
     variants: [{ name: '30mL Bottle', price: 14.25 }]
+  },
+  {
+    title: 'BPC 157 x 10 Vials',
+    description: 'BPC-157 (Body Protection Compound-157) for research use only. Supplied as lyophilized material in sterile vials for controlled laboratory workflows.',
+    price: 67.50,
+    inventory: 120,
+    categories: ['peptides'],
+    specifications: ['Research use only', '10 vials per pack', 'Lyophilized format'],
+    image: 'https://www.wholesalepeptides.co.uk/cdn/shop/files/D2209E07-6C7A-484A-9005-6713BA343604.png?v=1768901946',
+    rating: 4.9,
+    reviewCount: 42,
+    variants: [
+      { name: '5mg', price: 67.50 },
+      { name: '10mg', price: 103.50 }
+    ]
+  },
+  {
+    title: 'BPC 157 + GHK-CU + TB500 x 10 Vials',
+    description: 'Combination research bundle containing BPC-157, GHK-CU, and TB-500 in lyophilized sterile vials for laboratory assay development and compound stability work.',
+    price: 269.10,
+    inventory: 80,
+    categories: ['peptide-blends', 'peptides'],
+    specifications: ['BPC 157 10mg + GHK-CU 50mg + TB500 10mg', '10 vials per pack', 'Research use only'],
+    image: 'https://www.wholesalepeptides.co.uk/cdn/shop/files/D2209E07-6C7A-484A-9005-6713BA343604.png?v=1768901946',
+    rating: 4.8,
+    reviewCount: 18,
+    variants: [{ name: 'BPC 157 10mg + GHK-CU 50mg + TB500 10mg', price: 269.10 }]
+  },
+  {
+    title: 'BPC 157 + TB500 x 10 Vials',
+    description: 'Dual-peptide blend of BPC-157 and TB-500 for research use only, supplied lyophilized for controlled in-vitro and analytical studies.',
+    price: 157.50,
+    inventory: 90,
+    categories: ['peptide-blends', 'peptides'],
+    specifications: ['5mg + 5mg or 10mg + 10mg', '10 vials per pack', 'Research use only'],
+    image: 'https://www.wholesalepeptides.co.uk/cdn/shop/files/D2209E07-6C7A-484A-9005-6713BA343604.png?v=1768901946',
+    rating: 4.8,
+    reviewCount: 21,
+    variants: [
+      { name: '5+5mg', price: 157.50 },
+      { name: '10+10mg', price: 283.50 }
+    ]
+  },
+  {
+    title: 'DIOSA GLOW 70mg Prefilled Pen',
+    description: 'Multi-compound blend (BPC-157, TB500, GHK-CU) for laboratory research use. Prefilled pen kit format with consistent composition for controlled workflows.',
+    price: 76.50,
+    inventory: 75,
+    categories: ['peptide-blends', 'peptides'],
+    specifications: ['BPC-157 10mg / TB500 10mg / GHK-CU 50mg', '70mg total', 'Research use only'],
+    image: 'https://www.wholesalepeptides.co.uk/cdn/shop/files/Untitled_design-30.png?v=1774787130',
+    rating: 4.7,
+    reviewCount: 14,
+    variants: [
+      { name: '1 x Pen Kits', price: 76.50 },
+      { name: '5 x Pen Kits', price: 337.50 },
+      { name: '10 x Pen Kits', price: 540.00 },
+      { name: '20 x Pen Kits', price: 900.00 }
+    ]
+  },
+  {
+    title: 'GHK-CU x 10 Vials',
+    description: 'GHK-Cu (Copper Tripeptide-1) research material supplied in lyophilized sterile vials for peptide-metal interaction and assay development work.',
+    price: 46.80,
+    inventory: 100,
+    categories: ['peptides', 'research-chemicals'],
+    specifications: ['50mg and 100mg options', '10 vials per pack', 'Research use only'],
+    image: 'https://www.wholesalepeptides.co.uk/cdn/shop/files/D2209E07-6C7A-484A-9005-6713BA343604.png?v=1768901946',
+    rating: 4.7,
+    reviewCount: 16,
+    variants: [
+      { name: '50mg', price: 46.80 },
+      { name: '100mg', price: 62.10 }
+    ]
+  },
+  {
+    title: 'HCG x 10 Vials',
+    description: 'Human Chorionic Gonadotropin (HCG) for research use only, delivered in lyophilized format for analytical testing and controlled lab protocols.',
+    price: 103.50,
+    inventory: 95,
+    categories: ['research-chemicals', 'peptides'],
+    specifications: ['5000iu and 1000iu variants', '10 vials per pack', 'Research use only'],
+    image: 'https://www.wholesalepeptides.co.uk/cdn/shop/files/D2209E07-6C7A-484A-9005-6713BA343604.png?v=1768901946',
+    rating: 4.6,
+    reviewCount: 13,
+    variants: [
+      { name: '5000iu', price: 103.50 },
+      { name: '1000iu', price: 211.50 }
+    ]
+  },
+  {
+    title: 'MOTS-c x 10 Vials',
+    description: 'MOTS-c peptide for research use only, supplied in lyophilized vials for metabolic signaling and compound characterization studies.',
+    price: 94.50,
+    inventory: 85,
+    categories: ['peptides', 'research-chemicals'],
+    specifications: ['10mg and 40mg options', '10 vials per pack', 'Research use only'],
+    image: 'https://www.wholesalepeptides.co.uk/cdn/shop/files/D2209E07-6C7A-484A-9005-6713BA343604.png?v=1768901946',
+    rating: 4.7,
+    reviewCount: 17,
+    variants: [
+      { name: '10mg', price: 94.50 },
+      { name: '40mg', price: 245.70 }
+    ]
+  },
+  {
+    title: 'Tirzepatide 100mg One Vial',
+    description: 'High-purity Tirzepatide single vial format for research use only. Lyophilized presentation for controlled laboratory handling.',
+    price: 90.00,
+    inventory: 70,
+    categories: ['peptides', 'research-chemicals'],
+    specifications: ['100mg single vial', 'Lyophilized format', 'Research use only'],
+    image: 'https://www.wholesalepeptides.co.uk/cdn/shop/files/D2209E07-6C7A-484A-9005-6713BA343604.png?v=1768901946',
+    rating: 4.8,
+    reviewCount: 19,
+    variants: [{ name: '100mg', price: 90.00 }]
+  },
+  {
+    title: 'Vio Labs Retatrutide 40mg / 3ml Prefilled Pen',
+    description: 'Retatrutide prefilled pen format for laboratory and research use. Precision-controlled delivery system for consistent handling across protocols.',
+    price: 144.00,
+    inventory: 65,
+    categories: ['peptides', 'research-chemicals'],
+    specifications: ['40mg per pen', '3ml total volume', 'Research use only'],
+    image: 'https://www.wholesalepeptides.co.uk/cdn/shop/files/ChatGPTImageDec21_2025at09_10_00PM_png.webp?v=1775409152',
+    rating: 4.8,
+    reviewCount: 22,
+    variants: [
+      { name: '1 x Pen Kits', price: 144.00 },
+      { name: '5 x Pen Kits', price: 540.00 },
+      { name: '10 x Pen Kits', price: 720.00 },
+      { name: '20 x Pen Kits', price: 1260.00 }
+    ]
   }
 ];

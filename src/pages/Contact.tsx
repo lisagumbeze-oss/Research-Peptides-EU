@@ -3,6 +3,36 @@ import { Mail, Phone, MessageSquare, Clock, ArrowRight, ShieldCheck, MapPin } fr
 import { motion } from 'motion/react';
 
 export default function Contact() {
+  const [fullName, setFullName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [subject, setSubject] = React.useState('General Research Inquiry');
+  const [message, setMessage] = React.useState('');
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitState, setSubmitState] = React.useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitState('idle');
+    try {
+      const response = await fetch('/api/email/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullName, email, subject, message })
+      });
+      if (!response.ok) throw new Error('Failed to submit');
+      setSubmitState('success');
+      setFullName('');
+      setEmail('');
+      setSubject('General Research Inquiry');
+      setMessage('');
+    } catch {
+      setSubmitState('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="bg-white min-h-screen pt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -72,13 +102,16 @@ export default function Contact() {
             className="bg-white border border-gray-100 shadow-2xl shadow-gray-200/50 rounded-[3rem] p-8 md:p-12"
           >
             <h3 className="text-2xl font-black mb-8 tracking-tight">Send a Dispatch</h3>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-4">Full Name</label>
                   <input 
                     type="text" 
                     placeholder="Researcher Name"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    required
                     className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all text-sm font-medium"
                   />
                 </div>
@@ -87,6 +120,9 @@ export default function Contact() {
                   <input 
                     type="email" 
                     placeholder="official@institution.uk"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                     className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all text-sm font-medium"
                   />
                 </div>
@@ -94,7 +130,11 @@ export default function Contact() {
 
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-4">Subject</label>
-                <select className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all text-sm font-medium appearance-none">
+                <select
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                  className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all text-sm font-medium appearance-none"
+                >
                   <option>General Research Inquiry</option>
                   <option>Bulk/Institutional Procurement</option>
                   <option>Product Stability Data (COA)</option>
@@ -107,11 +147,29 @@ export default function Contact() {
                 <textarea 
                   rows={5}
                   placeholder="How can our technical team assist your research?"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
                   className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all text-sm font-medium"
                 ></textarea>
               </div>
 
-              <button className="w-full bg-blue-600 text-white font-black py-5 rounded-2xl hover:bg-blue-700 transition-all active:scale-95 shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 uppercase tracking-widest text-xs">
+              {submitState === 'success' && (
+                <p className="text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
+                  Dispatch sent successfully. We will reply shortly.
+                </p>
+              )}
+              {submitState === 'error' && (
+                <p className="text-xs font-bold text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                  Dispatch failed. Please try again in a moment.
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-blue-600 text-white font-black py-5 rounded-2xl hover:bg-blue-700 transition-all active:scale-95 shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 uppercase tracking-widest text-xs disabled:opacity-60"
+              >
                 Transmit Dispatch
                 <ArrowRight className="h-4 w-4" />
               </button>

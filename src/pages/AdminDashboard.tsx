@@ -25,6 +25,9 @@ export default function AdminDashboard() {
   const [inventory, setInventory] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [isSeeding, setIsSeeding] = useState(false);
+  const [expandedOrderId, setExpandedOrderId] = useState<string | null>(null);
+  const [txidDraft, setTxidDraft] = useState('');
+  const [isSavingOrder, setIsSavingOrder] = useState(false);
 
   const seedReferenceCatalog = async () => {
     setIsSeeding(true);
@@ -99,11 +102,49 @@ export default function AdminDashboard() {
     try {
       const { error } = await supabase.from('orders').update({ status }).eq('id', orderId);
       if (error) throw error;
+
+      // Backend SMTP status email trigger (best-effort, non-blocking).
+      fetch('/api/email/order-status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ order_id: orderId, status })
+      }).catch(() => {
+        // no-op
+      });
+
       addToast(`Order ${orderId.substring(0, 8)} updated to ${status}`);
       fetchData();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error updating order:", error);
-      addToast("Failed to update order status", "error");
+      addToast(error?.message || "Failed to update order status", "error");
+    }
+  };
+
+  const openOrderActions = (order: any) => {
+    if (expandedOrderId === order.id) {
+      setExpandedOrderId(null);
+      setTxidDraft('');
+      return;
+    }
+    setExpandedOrderId(order.id);
+    setTxidDraft(order.crypto_tx_hash || '');
+  };
+
+  const saveOrderMeta = async (orderId: string) => {
+    setIsSavingOrder(true);
+    try {
+      const { error } = await supabase
+        .from('orders')
+        .update({ crypto_tx_hash: txidDraft || null })
+        .eq('id', orderId);
+      if (error) throw error;
+      addToast(`Order ${orderId.substring(0, 8)} metadata updated`, "success");
+      fetchData();
+    } catch (error: any) {
+      console.error("Error saving order metadata:", error);
+      addToast(error?.message || "Failed to save order metadata", "error");
+    } finally {
+      setIsSavingOrder(false);
     }
   };
 
@@ -340,39 +381,71 @@ export default function AdminDashboard() {
                      </tr>
                    </thead>
                    <tbody className="divide-y divide-gray-100">
-                     {orders.map(order => (
-                       <tr key={order.id} className="group hover:bg-gray-50 transition-colors">
-                         <td className="px-8 py-6 font-mono text-sm text-gray-500">#{order.id.substring(0, 8)}</td>
-                         <td className="px-8 py-6">
-                            <p className="font-bold text-sm text-gray-900">{order.user_id?.substring(0, 8) || 'Guest'}</p>
-                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">{new Date(order.created_at).toLocaleDateString()}</p>
-                         </td>
-                         <td className="px-8 py-6 font-black text-blue-600">{formatCurrency(order.total_amount)}</td>
-                         <td className="px-8 py-6">
-                            <select 
-                              value={order.status}
-                              onChange={(e) => updateOrderStatus(order.id, e.target.value)}
-                              className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider outline-none cursor-pointer border-0
-                                ${order.status === 'delivered' ? 'bg-green-100 text-green-700' : 
-                                  order.status === 'shipped' ? 'bg-blue-100 text-blue-700' : 
-                                  order.status === 'paid' ? 'bg-purple-100 text-purple-700' : 
-                                  'bg-yellow-100 text-yellow-700'}`}
-                            >
-                               <option value="pending">Pending</option>
-                               <option value="paid">Paid</option>
-                               <option value="shipped">Shipped</option>
-                               <option value="delivered">Delivered</option>
-                               <option value="canceled">Canceled</option>
-                            </select>
-                         </td>
-                         <td className="px-8 py-6 font-mono text-[10px] text-gray-400 truncate max-w-[150px]">{order.crypto_tx_hash || 'N/A'}</td>
-                         <td className="px-8 py-6 text-right relative">
-                            <button className="text-gray-400 hover:text-gray-900">
-                               <Plus className="h-5 w-5" />
-                            </button>
-                         </td>
-                       </tr>
-                     ))}
+                    {orders.map(order => (
+                      <React.Fragment key={order.id}>
+                        <tr className="group hover:bg-gray-50 transition-colors">
+                          <td className="px-8 py-6 font-mono text-sm text-gray-500">#{order.id.substring(0, 8)}</td>
+                          <td className="px-8 py-6">
+                             <p className="font-bold text-sm text-gray-900">{order.user_id?.substring(0, 8) || 'Guest'}</p>
+                             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">{new Date(order.created_at).toLocaleDateString()}</p>
+                          </td>
+                          <td className="px-8 py-6 font-black text-blue-600">{formatCurrency(order.total_amount)}</td>
+                          <td className="px-8 py-6">
+                             <select 
+                                value={order.status}
+                                onChange={(e) => updateOrderStatus(order.id, e.target.value)}
+                                className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider outline-none cursor-pointer border-0
+                                  ${order.status === 'delivered' ? 'bg-green-100 text-green-700' : 
+                                    order.status === 'shipped' ? 'bg-blue-100 text-blue-700' : 
+                                    order.status === 'paid' ? 'bg-purple-100 text-purple-700' : 
+                                    order.status === 'processing' ? 'bg-indigo-100 text-indigo-700' :
+                                    'bg-yellow-100 text-yellow-700'}`}
+                             >
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="paid">Paid</option>
+                                <option value="shipped">Shipped</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="canceled">Canceled</option>
+                             </select>
+                          </td>
+                          <td className="px-8 py-6 font-mono text-[10px] text-gray-400 truncate max-w-[150px]">{order.crypto_tx_hash || 'N/A'}</td>
+                          <td className="px-8 py-6 text-right relative">
+                             <button
+                               onClick={() => openOrderActions(order)}
+                               className="text-gray-400 hover:text-gray-900"
+                               title="Open order actions"
+                             >
+                                <Plus className={`h-5 w-5 transition-transform ${expandedOrderId === order.id ? 'rotate-45' : ''}`} />
+                             </button>
+                          </td>
+                        </tr>
+                        {expandedOrderId === order.id && (
+                          <tr className="bg-gray-50/70">
+                            <td colSpan={6} className="px-8 py-5">
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
+                                <div className="md:col-span-2">
+                                  <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">Crypto TXID / Hash</label>
+                                  <input
+                                    value={txidDraft}
+                                    onChange={(e) => setTxidDraft(e.target.value)}
+                                    placeholder="Paste transaction hash"
+                                    className="w-full p-3 bg-white border border-gray-200 rounded-xl text-xs font-mono outline-none focus:ring-2 focus:ring-blue-500"
+                                  />
+                                </div>
+                                <button
+                                  onClick={() => saveOrderMeta(order.id)}
+                                  disabled={isSavingOrder}
+                                  className="bg-blue-600 text-white px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-blue-700 disabled:opacity-60"
+                                >
+                                  {isSavingOrder ? 'Saving...' : 'Save TXID'}
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                      </React.Fragment>
+                    ))}
                    </tbody>
                  </table>
                </div>
