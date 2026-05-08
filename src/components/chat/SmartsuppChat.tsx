@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { MessageCircle } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -13,8 +14,9 @@ declare global {
  * Docs: https://docs.smartsupp.com/chat-box/configuration/
  */
 export default function SmartsuppChat() {
+  const key = (import.meta.env.VITE_SMARTSUPP_KEY as string | undefined)?.trim();
+
   useEffect(() => {
-    const key = import.meta.env.VITE_SMARTSUPP_KEY as string | undefined;
     if (!key) return;
 
     const brandColor =
@@ -56,5 +58,57 @@ export default function SmartsuppChat() {
     document.head.appendChild(script);
   }, []);
 
-  return null;
+  useEffect(() => {
+    if (!key) return;
+
+    const styleId = 'smartsupp-left-dock-style';
+    const existing = document.getElementById(styleId);
+    if (existing) return;
+
+    const style = document.createElement('style');
+    style.id = styleId;
+    style.textContent = `
+      /* Force Smartsupp widget and bubble to the left side */
+      #smartsupp-widget-container,
+      .smartsupp-widget-container,
+      iframe[id*="smartsupp"],
+      iframe[src*="smartsuppchat.com"] {
+        left: 16px !important;
+        right: auto !important;
+      }
+      @media (min-width: 768px) {
+        #smartsupp-widget-container,
+        .smartsupp-widget-container,
+        iframe[id*="smartsupp"],
+        iframe[src*="smartsuppchat.com"] {
+          left: 32px !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }, [key]);
+
+  const openChat = () => {
+    try {
+      if (window.smartsupp) {
+        window.smartsupp('chat:open');
+      }
+    } catch {
+      // no-op
+    }
+  };
+
+  if (!key) return null;
+
+  return (
+    <button
+      type="button"
+      onClick={openChat}
+      className="fixed bottom-24 md:bottom-8 left-4 md:left-8 z-50 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-3 shadow-xl shadow-blue-600/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+      aria-label="Open live chat"
+      title="Open live chat"
+    >
+      <MessageCircle className="h-5 w-5" aria-hidden />
+    </button>
+  );
 }
