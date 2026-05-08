@@ -71,11 +71,18 @@ export default function SmartsuppChat() {
         /* Hide the default Smartsupp bubble iframe and container */
         #smartsupp-widget-container iframe[id*="bubble"],
         .smartsupp-widget-bubble,
-        #smartsupp-widget-bubble {
+        #smartsupp-widget-bubble,
+        /* Smartsupp v3 specific selectors */
+        #smartsupp-widget-container div[aria-label="Open Smartsupp chat"],
+        #smartsupp-widget-container button[aria-label="Open Smartsupp chat"],
+        .smartsupp-widget-v3 div[aria-label*="chat"],
+        [data-testid="widget-button"] {
           display: none !important;
           visibility: hidden !important;
           opacity: 0 !important;
           pointer-events: none !important;
+          width: 0 !important;
+          height: 0 !important;
         }
       `;
       document.head.appendChild(style);
