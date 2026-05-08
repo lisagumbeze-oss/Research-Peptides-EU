@@ -177,12 +177,8 @@ export default function Checkout() {
   const validatePaymentStep = () => {
     const errors: Record<string, string> = {};
     if (!paymentMethod) errors.paymentMethod = 'Please select a payment method.';
-    if (paymentMethod === 'card' && billingCallbackNote.trim().length > 600) {
-      errors.billingCallbackNote = 'Billing callback note must be 600 characters or less.';
-    }
     setPaymentErrors(errors);
     if (Object.keys(errors).length > 0) {
-      if (errors.billingCallbackNote) focusField('checkout-billing-callback-note');
       return false;
     }
     return true;

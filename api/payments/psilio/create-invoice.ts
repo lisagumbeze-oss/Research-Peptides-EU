@@ -6,6 +6,13 @@ type CreateInvoiceBody = {
   name?: string;
 };
 
+function firstDefined(...values: Array<string | undefined>): string | undefined {
+  for (const value of values) {
+    if (typeof value === 'string' && value.trim()) return value.trim();
+  }
+  return undefined;
+}
+
 function pickPaymentUrl(payload: any): string | null {
   if (!payload || typeof payload !== 'object') return null;
 
@@ -40,16 +47,17 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ success: false, error: 'Method not allowed' });
   }
 
-  const apiUrl = process.env.PSILIO_CREATE_INVOICE_URL;
-  const secret = process.env.PSILIO_SECRET_KEY;
-  const successUrl = process.env.PSILIO_SUCCESS_URL;
-  const failedUrl = process.env.PSILIO_FAILED_URL;
-  const statusUrl = process.env.PSILIO_STATUS_URL;
+  const apiUrl = firstDefined(process.env.PSILIO_CREATE_INVOICE_URL, process.env.PLISIO_CREATE_INVOICE_URL);
+  const secret = firstDefined(process.env.PSILIO_SECRET_KEY, process.env.PLISIO_SECRET_KEY);
+  const successUrl = firstDefined(process.env.PSILIO_SUCCESS_URL, process.env.PLISIO_SUCCESS_URL);
+  const failedUrl = firstDefined(process.env.PSILIO_FAILED_URL, process.env.PLISIO_FAILED_URL);
+  const statusUrl = firstDefined(process.env.PSILIO_STATUS_URL, process.env.PLISIO_STATUS_URL);
 
   if (!apiUrl || !secret) {
     return res.status(500).json({
       success: false,
-      error: 'Psilio is not configured. Missing PSILIO_CREATE_INVOICE_URL or PSILIO_SECRET_KEY.',
+      error:
+        'Plisio is not configured. Missing PSILIO_CREATE_INVOICE_URL/PLISIO_CREATE_INVOICE_URL or PSILIO_SECRET_KEY/PLISIO_SECRET_KEY.',
     });
   }
 
@@ -82,48 +90,84 @@ export default async function handler(req: any, res: any) {
     if (successUrl) params.set('success_callback_url', successUrl);
     if (failedUrl) params.set('fail_callback_url', failedUrl);
 
-    const upstream = await fetch(apiUrl, {
+    const postAttempt = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json',
       },
       body: params.toString(),
     });
 
-    const text = await upstream.text();
-    let json: any = {};
+    const postText = await postAttempt.text();
+    let postJson: any = {};
     try {
-      json = text ? JSON.parse(text) : {};
+      postJson = postText ? JSON.parse(postText) : {};
     } catch {
-      json = {};
+      postJson = {};
     }
 
-    if (!upstream.ok || (json && json.status === 'error')) {
-      return res.status(502).json({
-        success: false,
-        error: `Psilio API failed (${upstream.status}). ${
-          typeof json?.data?.message === 'string'
-            ? json.data.message
-            : typeof json?.message === 'string'
-              ? json.message
-              : text
-        }`,
+    let paymentUrl = null as string | null;
+    let finalStatusCode = postAttempt.status;
+    let finalJson = postJson;
+    let finalText = postText;
+    let finalError =
+      typeof postJson?.data?.message === 'string'
+        ? postJson.data.message
+        : typeof postJson?.message === 'string'
+          ? postJson.message
+          : postText;
+
+    if (postAttempt.ok && postJson?.status !== 'error') {
+      paymentUrl = pickPaymentUrl(postJson);
+    }
+
+    // Plisio integrations can vary by method; fall back to GET if POST did not yield a usable URL.
+    if (!paymentUrl) {
+      const join = apiUrl.includes('?') ? '&' : '?';
+      const getAttempt = await fetch(`${apiUrl}${join}${params.toString()}`, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
       });
+      const getText = await getAttempt.text();
+      let getJson: any = {};
+      try {
+        getJson = getText ? JSON.parse(getText) : {};
+      } catch {
+        getJson = {};
+      }
+
+      finalStatusCode = getAttempt.status;
+      finalJson = getJson;
+      finalText = getText;
+      finalError =
+        typeof getJson?.data?.message === 'string'
+          ? getJson.data.message
+          : typeof getJson?.message === 'string'
+            ? getJson.message
+            : getText;
+
+      if (getAttempt.ok && getJson?.status !== 'error') {
+        paymentUrl = pickPaymentUrl(getJson);
+      }
     }
 
-    const paymentUrl = pickPaymentUrl(json);
     if (!paymentUrl) {
       return res.status(502).json({
         success: false,
-        error: 'Psilio invoice created but no payment URL was returned.',
-        response: json,
+        error: `Plisio invoice request failed (${finalStatusCode}). ${
+          typeof finalError === 'string' && finalError.trim()
+            ? finalError
+            : 'No payment URL was returned.'
+        }`,
+        response: finalJson || finalText,
       });
     }
 
     return res.status(200).json({
       success: true,
       paymentUrl,
-      raw: json,
+      raw: finalJson,
     });
   } catch (error: any) {
     console.error('psilio create-invoice handler:', error);
