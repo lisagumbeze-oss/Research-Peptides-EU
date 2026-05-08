@@ -9,7 +9,7 @@ const faqs = [
     questions: [
       {
         q: "Are these products safe for human or animal consumption?",
-        a: "Absolutely not. All products sold by PeptiStore are strictly for laboratory research and scientific application only. They are not for human or veterinary use."
+        a: "Absolutely not. All products sold by Research Peptides UK are strictly for laboratory research and scientific application only. They are not for human or veterinary use."
       },
       {
         q: "How do you verify the purity of your peptides?",
@@ -75,7 +75,7 @@ export default function FAQ() {
             Support Intelligence
           </div>
           <h1>Researcher FAQ</h1>
-          <p className="text-gray-500 mt-4 font-medium italic">Standard protocols and common inquiries for PeptiStore researchers.</p>
+          <p className="text-gray-500 mt-4 font-medium italic">Standard protocols and common inquiries for Research Peptides UK researchers.</p>
         </motion.div>
 
         <div className="space-y-12">

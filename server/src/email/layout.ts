@@ -11,7 +11,7 @@ export function formatCurrency(value: number) {
 }
 
 export function renderBrandLayout(params: { title: string; preheader: string; bodyHtml: string }) {
-  const brandName = process.env.EMAIL_BRAND_NAME || 'PeptiStore';
+  const brandName = process.env.EMAIL_BRAND_NAME || 'Research Peptides UK';
   const supportAddress = process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.uk';
 
   return `<!doctype html>

@@ -7,8 +7,8 @@
   },
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "source": "/product-feed.xml",
+      "destination": "/api/product-feed"
     },
     {
       "source": "/((?!api/|assets/|favicon|src/).*)",

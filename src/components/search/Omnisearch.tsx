@@ -6,6 +6,8 @@ import { useCartStore } from '../../store/useCartStore';
 import { supabase } from '../../supabase';
 import { formatCurrency } from '../../lib/utils';
 import { useNavigate } from 'react-router-dom';
+import { ProductImagePlaceholder } from '../products/ProductImagePlaceholder';
+import { productPath } from '../../lib/productUrl';
 
 const POPULAR_SEARCHES = ['BPC-157', 'TB-500', 'Semaglutide', 'CJC-1295', 'AOD-9604'];
 
@@ -54,9 +56,9 @@ export default function Omnisearch() {
     return () => clearTimeout(debounce);
   }, [query]);
 
-  const handleProductClick = (id: string) => {
+  const handleProductClick = (product: any) => {
     closeSearch();
-    navigate(`/product/${id}`);
+    navigate(productPath(product));
   };
 
   return (
@@ -117,14 +119,23 @@ export default function Omnisearch() {
                     <div
                       key={product.id}
                       className="group flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all cursor-pointer border border-transparent hover:border-blue-100 dark:hover:border-blue-900/50"
-                      onClick={() => handleProductClick(product.id)}
+                      onClick={() => handleProductClick(product)}
                     >
                       <div className="h-16 w-16 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0">
+                        {product.images?.[0] ? (
                         <img 
-                          src={product.images?.[0]} 
+                          src={product.images[0]} 
                           alt="" 
                           className="h-full w-full object-cover"
                         />
+                        ) : (
+                          <ProductImagePlaceholder
+                            productId={String(product.id)}
+                            title={product.title}
+                            className="h-full w-full min-h-16"
+                            compact
+                          />
+                        )}
                       </div>
                       <div className="flex-grow min-w-0">
                         <h4 className="text-sm font-bold text-gray-900 dark:text-white truncate">

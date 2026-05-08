@@ -19,6 +19,8 @@ export type SeedProduct = {
   image: string;
   rating: number;
   reviewCount: number;
+  /** Optional RRP for sale / strike-through on cards (requires DB column + migration). */
+  compareAtPrice?: number;
   variants?: ProductVariant[];
 };
 
@@ -67,7 +69,12 @@ export const referenceSeedCategories: SeedCategory[] = [
     name: 'Lab Supplies',
     slug: 'lab-supplies',
     description: 'Bacteriostatic water and essential chemical reconstitution supplies.',
-  }
+  },
+  {
+    name: 'Peptide Powder',
+    slug: 'peptide-powder',
+    description: 'Lyophilized peptide powders from wholesale price list (SKU-mapped variants).',
+  },
 ];
 
 export const referenceSeedProducts: SeedProduct[] = [
@@ -82,6 +89,7 @@ export const referenceSeedProducts: SeedProduct[] = [
     image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=900&q=80',
     rating: 4.9,
     reviewCount: 42,
+    compareAtPrice: 175.0,
     variants: [
       { name: '5mg', price: 142.50 },
       { name: '10mg', price: 265.00 },
@@ -98,6 +106,7 @@ export const referenceSeedProducts: SeedProduct[] = [
     image: 'https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&w=900&q=80',
     rating: 4.8,
     reviewCount: 89,
+    compareAtPrice: 134.99,
     variants: [
         { name: '2mg', price: 114.00 },
         { name: '5mg', price: 195.00 }

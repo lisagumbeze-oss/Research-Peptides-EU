@@ -83,7 +83,7 @@ export default function BlogPost() {
                 </div>
                 <div>
                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Authored by</p>
-                   <p className="text-sm font-black text-gray-900">Peptistore Editorial Board</p>
+                   <p className="text-sm font-black text-gray-900">Research Peptides UK Editorial Board</p>
                 </div>
              </div>
              <button className="p-4 rounded-2xl bg-gray-50 text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all">

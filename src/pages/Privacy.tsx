@@ -26,7 +26,7 @@ export default function Privacy() {
               <h2 className="m-0">Data Overview</h2>
             </div>
             <p>
-              PeptiStore is committed to protecting the privacy and security of our researchers' information. 
+              Research Peptides UK is committed to protecting the privacy and security of our researchers' information.
               This policy outlines how we collect, use, and safeguard the data you provide when accessing our research catalog or conducting transactions.
             </p>
           </section>

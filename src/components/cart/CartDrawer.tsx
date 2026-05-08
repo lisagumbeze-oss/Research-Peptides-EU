@@ -3,12 +3,15 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 import { useCartStore } from '../../store/useCartStore';
 import { Link } from 'react-router-dom';
+import { ProductImagePlaceholder } from '../products/ProductImagePlaceholder';
+import { formatCurrency } from '../../lib/utils';
 
 const FREE_SHIPPING_THRESHOLD = 500;
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQuantity, getSubtotal, getTotal, addItem } = useCartStore();
 
+  const cartLineCount = items.reduce((sum, i) => sum + i.quantity, 0);
   const subtotal = getSubtotal();
   const progress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
   const amountToFreeShipping = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
@@ -39,11 +42,15 @@ export default function CartDrawer() {
               <div className="flex items-center space-x-2">
                 <ShoppingBag className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                 <h2 className="text-lg font-bold text-gray-900 dark:text-white">Your Cart</h2>
-                <span className="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300">
-                  {items.length} 
+                <span
+                  className="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300 tabular-nums"
+                  aria-label={`${cartLineCount} items in cart`}
+                >
+                  {cartLineCount}
                 </span>
               </div>
               <button
+                type="button"
                 onClick={closeCart}
                 className="p-2 text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
                 aria-label="Close cart"
@@ -57,7 +64,9 @@ export default function CartDrawer() {
               <div className="flex justify-between text-sm mb-2">
                 <span className="font-medium text-gray-700 dark:text-gray-300">Free UK/EU Shipping</span>
                 <span className="text-gray-500 dark:text-gray-400">
-                  {amountToFreeShipping > 0 ? `£${amountToFreeShipping.toFixed(2)} away` : 'Unlocked!'}
+                  {amountToFreeShipping > 0
+                    ? `${formatCurrency(amountToFreeShipping)} away`
+                    : 'Unlocked!'}
                 </span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 overflow-hidden">
@@ -77,17 +86,22 @@ export default function CartDrawer() {
             <div className="flex-1 overflow-y-auto p-4 flex flex-col space-y-4">
               {items.length === 0 ? (
                 <div className="flex flex-col h-full">
-                  <div className="flex-grow flex flex-col items-center justify-center p-8 space-y-4 text-center">
+                  <div
+                    className="flex-grow flex flex-col items-center justify-center p-8 space-y-4 text-center"
+                    role="status"
+                    aria-live="polite"
+                  >
                     <div className="w-20 h-20 bg-gray-50 dark:bg-gray-800 rounded-full flex items-center justify-center mb-2">
-                      <ShoppingBag className="w-10 h-10 text-gray-300 dark:text-gray-700" />
+                      <ShoppingBag className="w-10 h-10 text-gray-300 dark:text-gray-700" aria-hidden />
                     </div>
                     <h3 className="text-xl font-black text-gray-900 dark:text-white">Your cart is empty</h3>
                     <p className="text-gray-500 dark:text-gray-400 text-sm max-w-[240px]">
                       Research compounds and lab essentials will appear here once added.
                     </p>
-                    <button 
-                      onClick={closeCart} 
-                      className="bg-blue-600 text-white px-8 py-3 rounded-2xl font-black text-sm hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+                    <button
+                      type="button"
+                      onClick={closeCart}
+                      className="bg-blue-600 text-white px-8 py-3 rounded-2xl font-black text-sm hover:bg-blue-700 transition-all shadow-lg shadow-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
                     >
                       Start Shopping
                     </button>
@@ -105,9 +119,10 @@ export default function CartDrawer() {
                           <img src={essential.image} className="w-12 h-12 rounded-xl object-cover" alt="" />
                           <div className="flex-1">
                             <p className="text-xs font-bold text-gray-900 dark:text-white leading-tight">{essential.title}</p>
-                            <p className="text-xs font-black text-blue-600 mt-0.5">£{essential.price}</p>
+                            <p className="text-xs font-black text-blue-600 mt-0.5">{formatCurrency(essential.price)}</p>
                           </div>
-                          <button 
+                          <button
+                            type="button"
                             onClick={() => addItem({
                               productId: essential.id,
                               title: essential.title,
@@ -115,9 +130,10 @@ export default function CartDrawer() {
                               quantity: 1,
                               imageUrl: essential.image
                             })}
-                            className="p-2 bg-gray-50 dark:bg-gray-800 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all"
+                            className="p-2 bg-gray-50 dark:bg-gray-800 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                            aria-label={`Add ${essential.title} to cart`}
                           >
-                            <Plus className="h-4 w-4" />
+                            <Plus className="h-4 w-4" aria-hidden />
                           </button>
                         </div>
                       ))}
@@ -135,11 +151,20 @@ export default function CartDrawer() {
                       exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
                       className="flex space-x-4 py-2"
                     >
+                      {item.imageUrl ? (
                       <img
                         src={item.imageUrl}
                         alt={item.title}
                         className="w-20 h-20 object-cover rounded-lg border dark:border-gray-800"
                       />
+                      ) : (
+                        <ProductImagePlaceholder
+                          productId={item.productId}
+                          title={item.title}
+                          className="h-20 w-20 shrink-0 rounded-lg border border-gray-100 dark:border-gray-800"
+                          compact
+                        />
+                      )}
                       <div className="flex-1 flex flex-col justify-between">
                         <div>
                           <div className="flex justify-between items-start">
@@ -147,10 +172,12 @@ export default function CartDrawer() {
                               {item.title}
                             </h3>
                             <button
+                              type="button"
                               onClick={() => removeItem(item.productId, item.specification)}
-                              className="text-gray-400 hover:text-red-500 transition-colors"
+                              className="text-gray-400 hover:text-red-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+                              aria-label={`Remove ${item.title} from cart`}
                             >
-                              <Trash2 className="w-4 h-4" />
+                              <Trash2 className="w-4 h-4" aria-hidden />
                             </button>
                           </div>
                           {item.specification && (
@@ -160,11 +187,13 @@ export default function CartDrawer() {
                         
                         <div className="flex items-center justify-between mt-2">
                           <div className="flex items-center border dark:border-gray-700 rounded-md">
-                            <button 
+                            <button
+                              type="button"
                               onClick={() => updateQuantity(item.productId, Math.max(1, item.quantity - 1), item.specification)}
-                              className="p-1 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                              className="p-1 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+                              aria-label={`Decrease quantity of ${item.title}`}
                             >
-                              <Minus className="w-3 h-3" />
+                              <Minus className="w-3 h-3" aria-hidden />
                             </button>
                             <input 
                               type="number" 
@@ -173,15 +202,17 @@ export default function CartDrawer() {
                               onChange={(e) => updateQuantity(item.productId, Math.max(1, parseInt(e.target.value) || 1), item.specification)}
                               className="w-10 text-center text-sm font-medium text-gray-900 dark:text-white bg-transparent border-x dark:border-gray-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             />
-                            <button 
+                            <button
+                              type="button"
                               onClick={() => updateQuantity(item.productId, item.quantity + 1, item.specification)}
-                              className="p-1 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                              className="p-1 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
+                              aria-label={`Increase quantity of ${item.title}`}
                             >
-                              <Plus className="w-3 h-3" />
+                              <Plus className="w-3 h-3" aria-hidden />
                             </button>
                           </div>
-                          <span className="font-bold text-gray-900 dark:text-white">
-                            £{(item.price * item.quantity).toFixed(2)}
+                          <span className="font-bold text-gray-900 dark:text-white tabular-nums">
+                            {formatCurrency(item.price * item.quantity)}
                           </span>
                         </div>
                       </div>
@@ -227,7 +258,8 @@ export default function CartDrawer() {
                         <div className="flex-1 space-y-1">
                           <h4 className="font-bold text-gray-900 dark:text-white">{upsell.title}</h4>
                           <p className="text-sm text-gray-500 dark:text-gray-400">{upsell.price}</p>
-                          <button 
+                          <button
+                            type="button"
                             onClick={() => addItem({
                               productId: upsell.id,
                               title: upsell.title,
@@ -235,7 +267,8 @@ export default function CartDrawer() {
                               quantity: 1,
                               imageUrl: upsell.image
                             })}
-                            className="mt-2 bg-blue-600 dark:bg-indigo-600 text-white px-8 py-2 rounded-full text-xs font-black uppercase tracking-widest hover:bg-blue-700 dark:hover:bg-indigo-500 transition-all active:scale-95 shadow-md shadow-blue-100 dark:shadow-none"
+                            className="mt-2 bg-blue-600 dark:bg-indigo-600 text-white px-8 py-2 rounded-full text-xs font-black uppercase tracking-widest hover:bg-blue-700 dark:hover:bg-indigo-500 transition-all active:scale-95 shadow-md shadow-blue-100 dark:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500"
+                            aria-label={`Add ${upsell.title} to cart`}
                           >
                             ADD
                           </button>
@@ -252,7 +285,7 @@ export default function CartDrawer() {
               <div className="p-4 border-t dark:border-gray-800 bg-gray-50 dark:bg-gray-900 shrink-0">
                 <div className="flex justify-between text-base font-medium text-gray-900 dark:text-white mb-4">
                   <p>Subtotal</p>
-                  <p>£{getTotal().toFixed(2)}</p>
+                  <p className="tabular-nums">{formatCurrency(getTotal())}</p>
                 </div>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
                   Shipping and taxes calculated at checkout.

@@ -3,10 +3,16 @@ import { supabase } from '../supabase';
 import { useAuthStore } from '../store/useAuthStore';
 import { useWishlistStore } from '../store/useWishlistStore';
 import { Link } from 'react-router-dom';
-import { formatCurrency } from '../lib/utils';
-import { Heart, ShoppingCart, Trash2, ChevronRight, User, Package, Settings, ArrowRight } from 'lucide-react';
+import { Heart, ShoppingCart, ChevronRight, User, Package, Settings, ArrowRight } from 'lucide-react';
 import { useCartStore } from '../store/useCartStore';
 import { motion, AnimatePresence } from 'motion/react';
+import { ProductCardRating } from '../components/products/ProductCardRating';
+import { ProductImagePlaceholder } from '../components/products/ProductImagePlaceholder';
+import { ProductCardPriceBlock } from '../components/products/ProductCardPriceBlock';
+import { productPath } from '../lib/productUrl';
+import { formatCurrency } from '../lib/utils';
+import { ProductBadge } from '../components/products/ProductBadge';
+import { getPrimaryProductBadge } from '../lib/productBadges';
 
 export default function Wishlist() {
   const { user, profile } = useAuthStore();
@@ -59,7 +65,7 @@ export default function Wishlist() {
                <div className="h-24 w-24 rounded-full bg-blue-50 p-1 mb-4">
                  <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-xl bg-white flex items-center justify-center">
                    {profile.photo_url ? (
-                     <img src={profile.photo_url} alt="" className="w-full h-full object-cover" />
+                     <img src={profile.photo_url} alt={profile.display_name ? `${profile.display_name} profile photo` : 'Profile photo'} className="w-full h-full object-cover" />
                    ) : (
                      <User className="h-12 w-12 text-blue-100" />
                    )}
@@ -134,11 +140,11 @@ export default function Wishlist() {
                       ].map((p) => (
                         <div key={p.id} className="bg-white p-6 rounded-[2rem] border border-gray-100 group">
                            <div className="aspect-square rounded-2xl bg-gray-50 mb-4 overflow-hidden">
-                              <img src={p.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="" />
+                              <img src={p.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={p.title} />
                            </div>
                            <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-1">{p.category}</p>
                            <h4 className="font-black text-gray-900 leading-tight mb-2">{p.title}</h4>
-                           <p className="text-lg font-black text-gray-900">£{p.price.toFixed(2)}</p>
+                           <p className="text-lg font-black text-gray-900 tabular-nums">{formatCurrency(p.price)}</p>
                         </div>
                       ))}
                    </div>
@@ -147,7 +153,9 @@ export default function Wishlist() {
             ) : (
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                 <AnimatePresence>
-                  {products.map((product, idx) => (
+                  {products.map((product, idx) => {
+                    const primaryBadge = getPrimaryProductBadge(product);
+                    return (
                     <motion.div 
                       key={product.id}
                       layout
@@ -158,7 +166,7 @@ export default function Wishlist() {
                       className="group bg-white rounded-[2.5rem] border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 relative"
                     >
                       {/* Image Area */}
-                      <Link to={`/product/${product.id}`} className="block relative aspect-square overflow-hidden bg-gray-50">
+                      <Link to={productPath(product)} className="block relative aspect-square overflow-hidden bg-gray-50">
                         {product.images?.[0] ? (
                           <img 
                             src={product.images[0]} 
@@ -166,10 +174,23 @@ export default function Wishlist() {
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                           />
                         ) : (
-                           <div className="w-full h-full flex items-center justify-center text-gray-300 font-black uppercase tracking-tighter text-4xl">
-                              {product.title.substring(0, 1)}
-                           </div>
+                          <ProductImagePlaceholder productId={String(product.id)} title={product.title} className="h-full min-h-full" />
                         )}
+                        <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 flex flex-col items-start gap-1 z-10 pointer-events-none">
+                          {primaryBadge ? <ProductBadge type={primaryBadge} size="sm" /> : null}
+                          {Number(product.inventory) < 10 ? <ProductBadge type="low_stock" size="sm" /> : null}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            toggleWishlist(product.id, user.id);
+                          }}
+                          className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-20 p-2.5 rounded-full bg-red-50/95 text-red-500 backdrop-blur-sm shadow-inner transition-all duration-300 active:scale-75"
+                          aria-label={`Remove ${product.title} from wishlist`}
+                        >
+                          <Heart className="h-5 w-5" fill="currentColor" aria-hidden />
+                        </button>
                         <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors" />
                       </Link>
 
@@ -177,28 +198,26 @@ export default function Wishlist() {
                       <div className="p-8">
                          <div className="flex justify-between items-start mb-4">
                             <div>
-                               <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-1">{product.category}</p>
-                               <Link to={`/product/${product.id}`} className="text-lg font-black text-gray-900 leading-tight block hover:text-blue-600 transition-colors">
+                               <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-1">
+                                 {Array.isArray(product.categories) ? product.categories[0] : product.category}
+                               </p>
+                              <Link to={productPath(product)} className="text-lg font-black text-gray-900 leading-tight block hover:text-blue-600 transition-colors">
                                  {product.title}
                                </Link>
+                               <ProductCardRating
+                                 rating={product.rating}
+                                 reviewCount={product.review_count}
+                                 className="mt-2"
+                               />
                             </div>
                          </div>
 
                          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-50">
-                             <span className="text-xl font-black text-gray-900">
-                               {product.variants && product.variants.length > 1 
-                                 ? `${formatCurrency(Math.min(...product.variants.map((v: any) => v.display_price)))} – ${formatCurrency(Math.max(...product.variants.map((v: any) => v.display_price)))}`
-                                 : formatCurrency(product.price)}
-                             </span>
+                             <ProductCardPriceBlock product={product} />
                             
                             <div className="flex gap-2">
                                <button 
-                                 onClick={() => toggleWishlist(product.id, user.id)}
-                                 className="p-3 rounded-2xl bg-gray-50 text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all group/trash"
-                               >
-                                  <Trash2 className="h-5 w-5 transition-transform group-hover/trash:scale-110" />
-                               </button>
-                               <button 
+                                 type="button"
                                  onClick={() => addItem({
                                    productId: product.id,
                                    title: product.title,
@@ -207,14 +226,15 @@ export default function Wishlist() {
                                    imageUrl: product.images?.[0] || ''
                                  })}
                                  className="flex items-center justify-center bg-blue-600 text-white w-12 h-12 rounded-2xl hover:bg-gray-900 hover:shadow-lg transition-all duration-300 shadow-blue-100"
+                                 aria-label={`Add ${product.title} to cart`}
                                >
-                                  <ShoppingCart className="h-5 w-5" />
+                                  <ShoppingCart className="h-5 w-5" aria-hidden />
                                </button>
                             </div>
                          </div>
                       </div>
                     </motion.div>
-                  ))}
+                  )})}
                 </AnimatePresence>
               </div>
             )}

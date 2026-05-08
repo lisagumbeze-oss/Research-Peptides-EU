@@ -63,20 +63,19 @@ export default function Contact() {
               <div className="p-8 bg-gray-50 rounded-[2rem] border border-gray-100">
                 <Mail className="h-6 w-6 text-blue-600 mb-4" />
                 <h4 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">Email Protocols</h4>
-                <p className="font-bold text-gray-900 break-all">info@researchpeptide.uk</p>
+                <p className="font-bold text-gray-900 break-words">info@researchpeptide.uk</p>
               </div>
               <div className="p-8 bg-gray-50 rounded-[2rem] border border-gray-100">
                 <Phone className="h-6 w-6 text-blue-600 mb-4" />
                 <h4 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">Liaison Line</h4>
-                <p className="font-bold text-gray-900">+44 800 000 0000</p>
+                <p className="font-bold text-gray-900">+44 7508 227474</p>
               </div>
               <div className="p-8 bg-gray-50 rounded-[2rem] border border-gray-100 sm:col-span-2">
                 <MapPin className="h-6 w-6 text-blue-600 mb-4" />
                 <h4 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">Office Address</h4>
                 <p className="font-bold text-gray-900 leading-relaxed">
-                  828 Park Lane<br />
-                  Chester<br />
-                  CH05 4GE<br />
+                  Address provided via support channel<br />
+                  For verified logistics and returns only<br />
                   United Kingdom
                 </p>
               </div>
@@ -109,32 +108,37 @@ export default function Contact() {
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-4">Full Name</label>
+                  <label htmlFor="contact-full-name" className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-4">Full Name</label>
                   <input 
+                    id="contact-full-name"
                     type="text" 
                     placeholder="Researcher Name"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     required
+                    autoComplete="name"
                     className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all text-sm font-medium"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-4">Email Address</label>
+                  <label htmlFor="contact-email" className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-4">Email Address</label>
                   <input 
+                    id="contact-email"
                     type="email" 
                     placeholder="official@institution.uk"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    autoComplete="email"
                     className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all text-sm font-medium"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-4">Subject</label>
+                <label htmlFor="contact-subject" className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-4">Subject</label>
                 <select
+                  id="contact-subject"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all text-sm font-medium appearance-none"
@@ -147,8 +151,9 @@ export default function Contact() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-4">Your Message</label>
+                <label htmlFor="contact-message" className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-4">Your Message</label>
                 <textarea 
+                  id="contact-message"
                   rows={5}
                   placeholder="How can our technical team assist your research?"
                   value={message}
@@ -178,7 +183,7 @@ export default function Contact() {
                 className="w-full bg-blue-600 text-white font-black py-5 rounded-2xl hover:bg-blue-700 transition-all active:scale-95 shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 uppercase tracking-widest text-xs disabled:opacity-60"
               >
                 Transmit Dispatch
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4" aria-hidden />
               </button>
             </form>
           </motion.div>

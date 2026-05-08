@@ -7,11 +7,14 @@
     "node": "20.x"
   },
   "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
+    "dev": "vite --port=5173 --host=0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "db:test": "tsx server/scripts/test-db.ts",
+    "db:migrate": "tsx server/scripts/migrate.ts",
+    "db:import:powder": "tsx server/scripts/import-peptide-powder-catalog.ts"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",

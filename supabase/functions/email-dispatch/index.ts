@@ -24,7 +24,7 @@ const formatCurrency = (value: number) =>
   new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(value || 0);
 
 function renderLayout(title: string, preheader: string, bodyHtml: string) {
-  const brandName = Deno.env.get('EMAIL_BRAND_NAME') || 'PeptiStore';
+  const brandName = Deno.env.get('EMAIL_BRAND_NAME') || 'Research Peptides UK';
   const supportAddress = Deno.env.get('EMAIL_SUPPORT_ADDRESS') || 'info@researchpeptide.uk';
   return `<!doctype html><html><head><meta charset="UTF-8" /><title>${safe(title)}</title></head><body style="margin:0;padding:0;background:#f3f6fb;font-family:Inter,Arial,sans-serif;color:#0f172a;"><div style="display:none;max-height:0;overflow:hidden;opacity:0;">${safe(preheader)}</div><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="padding:24px 12px;"><tr><td align="center"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#ffffff;border-radius:18px;overflow:hidden;border:1px solid #e2e8f0;"><tr><td style="background:linear-gradient(120deg,#0f172a,#1d4ed8);padding:24px;"><h1 style="margin:0;font-size:20px;line-height:1.2;color:#ffffff;font-weight:800;">${safe(brandName)}</h1><p style="margin:6px 0 0;color:#bfdbfe;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;">Research Operations</p></td></tr><tr><td style="padding:28px;">${bodyHtml}</td></tr><tr><td style="padding:20px 28px;border-top:1px solid #e2e8f0;background:#f8fafc;"><p style="margin:0;font-size:12px;color:#475569;line-height:1.6;">Need help? Reply to this email or contact <strong>${safe(supportAddress)}</strong>.</p></td></tr></table></td></tr></table></body></html>`;
 }
@@ -51,7 +51,7 @@ async function sendEmail(to: string, subject: string, html: string, text: string
   const transporter = createTransporter();
   if (!transporter) throw new Error('SMTP transport is not configured');
   await transporter.sendMail({
-    from: Deno.env.get('SMTP_FROM') || 'PeptiStore <no-reply@researchpeptide.uk>',
+    from: Deno.env.get('SMTP_FROM') || 'Research Peptides UK <no-reply@researchpeptide.uk>',
     to,
     subject,
     html,

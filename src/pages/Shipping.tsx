@@ -98,7 +98,7 @@ export default function Shipping() {
           <section className="prose prose-blue max-w-none">
             <h2 className="text-3xl font-black text-gray-900 tracking-tight mb-6">Delivery Insurance & Protocols</h2>
             <p className="text-gray-600">
-              In the rare event of a logistics failure (loss in transit), PeptiStore provides a one-time reshipment protocol for verified tracked losses, 
+              In the rare event of a logistics failure (loss in transit), Research Peptides UK provides a one-time reshipment protocol for verified tracked losses,
               provided that the initial delivery address provided was accurate and comprehensive. 
               Please contact our logistics liaison if your order has exceeded the estimated delivery window by more than 48 hours.
             </p>

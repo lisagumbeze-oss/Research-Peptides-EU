@@ -1,4 +1,4 @@
-import { safeHtml } from './safeHtml';
+import { safeHtml } from './safeHtml.js';
 
 export function formatCurrency(value: number) {
   return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(value || 0);
@@ -14,7 +14,7 @@ export function stripHtml(input: string) {
 }
 
 function renderBrandLayout(params: { title: string; preheader: string; bodyHtml: string }) {
-  const brandName = process.env.EMAIL_BRAND_NAME || 'PeptiStore';
+  const brandName = process.env.EMAIL_BRAND_NAME || 'Research Peptides UK';
   const supportAddress = process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.uk';
 
   return `<!doctype html>
@@ -269,7 +269,7 @@ export function renderContactSubmittedAdminEmail(payload: ContactEmailPayload): 
 }
 
 export function renderContactSubmittedCustomerEmail(payload: ContactEmailPayload): EmailRenderResult {
-  const brandName = process.env.EMAIL_BRAND_NAME || 'PeptiStore';
+  const brandName = process.env.EMAIL_BRAND_NAME || 'Research Peptides UK';
 
   const bodyHtml = `
     <p style="margin:0 0 12px;font-size:14px;color:#334155;">Hi ${safeHtml(payload.fullName)},</p>

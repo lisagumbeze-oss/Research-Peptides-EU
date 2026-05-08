@@ -2,10 +2,14 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/useCartStore';
 import { formatCurrency } from '../lib/utils';
+import { ProductImagePlaceholder } from '../components/products/ProductImagePlaceholder';
 import { Trash2, Plus, Minus, Tag, X } from 'lucide-react';
+import { CartPageSkeleton } from '../components/Skeleton';
+import { PRIMARY_PROMO_CODE } from '../lib/promoCodes';
+import { productPath } from '../lib/productUrl';
 
 export default function Cart() {
-  const { items, removeItem, updateQuantity, getTotal, getSubtotal, promoCode, discount, applyPromoCode, clearPromoCode } = useCartStore();
+  const { items, removeItem, updateQuantity, getTotal, getSubtotal, promoCode, discount, applyPromoCode, clearPromoCode, hasHydrated } = useCartStore();
   const [promoInput, setPromoInput] = React.useState('');
   const [promoError, setPromoError] = React.useState('');
   const navigate = useNavigate();
@@ -20,12 +24,23 @@ export default function Cart() {
     }
   };
 
+  if (!hasHydrated) {
+    return <CartPageSkeleton />;
+  }
+
   if (items.length === 0) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+      <div
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center"
+        role="status"
+        aria-live="polite"
+      >
         <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
-        <p className="text-gray-600 mb-8">Looks like you haven't added any peptides to your cart yet.</p>
-        <Link to="/shop" className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700">
+        <p className="text-gray-600 mb-8">Looks like you haven&apos;t added any peptides to your cart yet.</p>
+        <Link
+          to="/shop"
+          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+        >
           Continue Shopping
         </Link>
       </div>
@@ -43,11 +58,16 @@ export default function Cart() {
                 {item.imageUrl ? (
                   <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs text-center px-2">No Image available</div>
+                  <ProductImagePlaceholder
+                    productId={item.productId}
+                    title={item.title}
+                    className="h-full w-full min-h-0"
+                    compact
+                  />
                 )}
               </div>
               <div className="ml-6 flex-grow">
-                <Link to={`/product/${item.productId}`} className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors">
+                <Link to={productPath({ title: item.title })} className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors">
                   {item.title}
                 </Link>
                 {item.specification && (
@@ -59,24 +79,30 @@ export default function Cart() {
                 <div className="flex items-center mt-4 space-x-6">
                   <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
                     <button 
+                      type="button"
                       onClick={() => updateQuantity(item.productId, Math.max(1, item.quantity - 1), item.specification)}
                       className="p-1 px-3 text-gray-600 hover:bg-gray-200 transition-colors border-r border-gray-200"
+                      aria-label={`Decrease quantity of ${item.title}`}
                     >
-                      <Minus className="h-4 w-4" />
+                      <Minus className="h-4 w-4" aria-hidden />
                     </button>
-                    <span className="px-5 py-1 text-sm font-bold text-gray-900">{item.quantity}</span>
+                    <span className="px-5 py-1 text-sm font-bold text-gray-900" aria-live="polite">{item.quantity}</span>
                     <button 
+                      type="button"
                       onClick={() => updateQuantity(item.productId, item.quantity + 1, item.specification)}
                       className="p-1 px-3 text-gray-600 hover:bg-gray-200 transition-colors border-l border-gray-200"
+                      aria-label={`Increase quantity of ${item.title}`}
                     >
-                      <Plus className="h-4 w-4" />
+                      <Plus className="h-4 w-4" aria-hidden />
                     </button>
                   </div>
                   <button 
+                    type="button"
                     onClick={() => removeItem(item.productId, item.specification)}
                     className="text-red-500 hover:text-red-700 text-sm font-semibold flex items-center transition-colors px-2 py-1 hover:bg-red-50 rounded-md"
+                    aria-label={`Remove ${item.title} from cart`}
                   >
-                    <Trash2 className="h-4 w-4 mr-1.5" /> Remove
+                    <Trash2 className="h-4 w-4 mr-1.5" aria-hidden /> Remove
                   </button>
                 </div>
               </div>
@@ -91,16 +117,18 @@ export default function Cart() {
           <h2 className="text-2xl font-bold mb-6 text-gray-900">Order Summary</h2>
           
           <div className="mb-6">
-            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block">Promo Code</label>
+            <label htmlFor="cart-promo-code" className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block">Promo Code</label>
             <div className="flex gap-2">
               <input 
+                id="cart-promo-code"
                 type="text" 
                 value={promoInput}
                 onChange={(e) => setPromoInput(e.target.value)}
-                placeholder="Enter code (PEPTIDE10)"
+                placeholder={`Enter code (${PRIMARY_PROMO_CODE})`}
                 className="flex-grow px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium"
               />
               <button 
+                type="button"
                 onClick={handleApplyPromo}
                 className="px-6 py-3 bg-gray-900 text-white rounded-xl text-sm font-bold hover:bg-black transition-all active:scale-95"
               >
@@ -114,8 +142,8 @@ export default function Cart() {
                   <Tag className="h-4 w-4 text-blue-600 mr-2" />
                   <span className="text-sm font-bold text-blue-700">{promoCode} Applied</span>
                 </div>
-                <button onClick={clearPromoCode} className="text-blue-400 hover:text-blue-600">
-                  <X className="h-4 w-4" />
+                <button type="button" onClick={clearPromoCode} className="text-blue-400 hover:text-blue-600" aria-label="Remove promotion code">
+                  <X className="h-4 w-4" aria-hidden />
                 </button>
               </div>
             )}
@@ -145,6 +173,7 @@ export default function Cart() {
             </div>
           </div>
           <button 
+            type="button"
             onClick={() => navigate('/checkout')}
             className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 hover:shadow-blue-300 active:scale-[0.98]"
           >

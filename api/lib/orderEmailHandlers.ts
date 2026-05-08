@@ -1,12 +1,12 @@
-import { fetchOrderById, patchOrderShippingAddress } from './supabaseOrders';
+import { fetchOrderById, patchOrderShippingAddress } from './supabaseOrders.js';
 import {
   renderOrderCreatedAdminEmail,
   renderOrderCreatedCustomerEmail,
   renderOrderStatusCustomerEmail,
   type OrderEmailPayload,
   type OrderLineItem
-} from './emailTemplates';
-import { sendTransactionalEmail } from './resendSend';
+} from './emailTemplates.js';
+import { sendTransactionalEmail } from './resendSend.js';
 
 function getAdminRecipient() {
   return process.env.EMAIL_ADMIN_TO || process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.uk';
@@ -78,9 +78,17 @@ export async function handleOrderCreated(orderId: string) {
     })
   ]);
 
-  const failures = results.filter((r) => r.status === 'rejected');
-  if (failures.length === results.length) {
-    throw (failures[0] as PromiseRejectedResult).reason;
+  const failures = results.filter((r) => r.status === 'rejected') as PromiseRejectedResult[];
+  if (failures.length > 0) {
+    const reasons = failures
+      .map((f) => {
+        const reason = f.reason;
+        if (reason instanceof Error) return reason.message;
+        if (typeof reason === 'string') return reason;
+        return JSON.stringify(reason);
+      })
+      .join(' | ');
+    throw new Error(`Order-created email dispatch failed: ${reasons}`);
   }
 
   const successes = results.filter((r) => r.status === 'fulfilled') as PromiseFulfilledResult<any>[];
@@ -90,10 +98,7 @@ export async function handleOrderCreated(orderId: string) {
   }
 
   await markOrderEvent(orderId, shipping, 'order_created');
-  return { 
-    sent: true as const, 
-    partialFailure: failures.length > 0 
-  };
+  return { sent: true as const, recipients: ['admin', 'customer'] as const };
 }
 
 export async function handleOrderStatus(orderId: string, status: string) {

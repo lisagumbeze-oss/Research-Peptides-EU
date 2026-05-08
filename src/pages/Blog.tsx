@@ -35,7 +35,7 @@ export default function Blog() {
                  className="flex items-center gap-2 mb-6"
                >
                   <Sparkles className="h-4 w-4 text-blue-600" />
-                  <span className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">Peptistore Journals</span>
+                  <span className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">Research Peptides UK Journals</span>
                </motion.div>
                <h1 className="mb-8">
                   Scientific <br /><span className="text-blue-600">Insights</span> & Research.

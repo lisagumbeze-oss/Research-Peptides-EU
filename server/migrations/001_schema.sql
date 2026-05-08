@@ -94,4 +94,4 @@ CREATE TABLE IF NOT EXISTS fx_rates_cache (
 );
 
 -- Optional existing tables linkage (for sync)
--- We will link to Peptistore's actual `products` later via API.
+-- We will link to Research Peptides UK's actual `products` later via API.

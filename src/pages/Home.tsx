@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Zap, Truck, ShoppingCart, Star, Heart, Sparkles, Users, Globe, Activity, LifeBuoy, Send, Award } from 'lucide-react';
 import { motion } from 'motion/react';
 import { supabase } from '../supabase';
-import { formatCurrency } from '../lib/utils';
 import { useCartStore } from '../store/useCartStore';
 import { useToastStore } from '../store/useToastStore';
 import { useWishlistStore } from '../store/useWishlistStore';
@@ -14,6 +13,13 @@ import heroBg from '../assets/hero_bg.png';
 import vialsHero from '../assets/vials_hero.png';
 import heroImage from '../assets/hero_peptides.png';
 import scientistLab from '../assets/scientist_lab.png';
+import { CatalogTrustStrip } from '../components/products/CatalogTrustStrip';
+import { ProductCardRating } from '../components/products/ProductCardRating';
+import { ProductImagePlaceholder } from '../components/products/ProductImagePlaceholder';
+import { ProductCardPriceBlock } from '../components/products/ProductCardPriceBlock';
+import { productPath } from '../lib/productUrl';
+import { ProductBadge } from '../components/products/ProductBadge';
+import { getPrimaryProductBadge } from '../lib/productBadges';
 
 export default function Home() {
   const [featured, setFeatured] = useState<any[]>([]);
@@ -42,6 +48,7 @@ export default function Home() {
           <img
             src={heroBg}
             alt=""
+            aria-hidden={true}
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E]/80 via-transparent to-[#0A0F1E]/60" />
@@ -80,6 +87,7 @@ export default function Home() {
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <button
+                    type="button"
                     onClick={openWizard}
                     className="inline-flex items-center gap-3 bg-blue-600/20 backdrop-blur-md border border-blue-500/30 text-white font-bold py-4 px-8 rounded-xl hover:bg-blue-600 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/10 uppercase text-sm tracking-wider group"
                   >
@@ -104,6 +112,8 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      <CatalogTrustStrip />
 
       {/* Trust Stats Section */}
       <section className="bg-gray-50 py-16">
@@ -206,7 +216,9 @@ export default function Home() {
             </div>
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10">
-              {featured.map((product, i) => (
+              {featured.map((product, i) => {
+                const primaryBadge = getPrimaryProductBadge(product);
+                return (
                 <motion.div
                   key={product.id}
                   initial={{ opacity: 0, y: 30 }}
@@ -216,26 +228,31 @@ export default function Home() {
                   className="group relative bg-white rounded-[3rem] p-4 shadow-xl shadow-gray-200/40 border border-gray-100 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 hover:-translate-y-3"
                 >
                   {/* Badge */}
-                  <div className="absolute top-8 left-8 z-20">
-                    <span className="bg-blue-600 text-white text-[9px] font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-lg shadow-blue-200 animate-pulse">
-                      Elite Seller
-                    </span>
+                  <div className="absolute top-4 left-4 md:top-8 md:left-8 z-20 flex flex-col items-start gap-1">
+                    {primaryBadge ? <ProductBadge type={primaryBadge} size="sm" className="animate-pulse" /> : <ProductBadge type="elite" size="sm" className="animate-pulse" />}
+                    {Number(product.inventory) < 10 ? <ProductBadge type="low_stock" size="sm" /> : null}
                   </div>
 
-                  <Link to={`/product/${product.id}`} className="block relative aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-gray-50 mb-8">
-                    <img
-                      src={product.images?.[0]}
-                      alt={product.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                    />
+                  <Link to={productPath(product)} className="block relative aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-gray-50 mb-8">
+                    {product.images?.[0] ? (
+                      <img
+                        src={product.images[0]}
+                        alt={product.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                      />
+                    ) : (
+                      <ProductImagePlaceholder productId={String(product.id)} title={product.title} className="h-full min-h-full rounded-[2.5rem]" />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.preventDefault();
                         toggleWishlist(product.id, user?.id || '');
                       }}
                       className="absolute top-4 right-4 p-4 rounded-full bg-white/90 backdrop-blur-md text-gray-300 hover:text-red-500 transition-all active:scale-75 shadow-xl hover:shadow-red-100"
+                      aria-label={productIds.includes(product.id) ? `Remove ${product.title} from wishlist` : `Add ${product.title} to wishlist`}
                     >
                       <Heart className="h-5 w-5" fill={productIds.includes(product.id) ? "currentColor" : "none"} />
                     </button>
@@ -247,20 +264,23 @@ export default function Home() {
                        <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">In Stock: UK Dispatch</span>
                     </div>
                     
-                    <Link to={`/product/${product.id}`} className="text-xl font-black text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 mb-2">
+                    <Link to={productPath(product)} className="text-xl font-black text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 mb-2">
                       {product.title}
                     </Link>
+                    <ProductCardRating
+                      rating={product.rating}
+                      reviewCount={product.review_count}
+                      className="mb-3"
+                      starClassName="h-3.5 w-3.5"
+                    />
                     
                     <div className="flex items-center justify-between mt-4 pt-6 border-t border-gray-50">
                       <div>
                         <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Stock Verified</p>
-                        <span className="text-xl font-black text-gray-900">
-                          {product.variants && product.variants.length > 1 
-                            ? `${formatCurrency(Math.min(...product.variants.map((v: any) => v.display_price)))} – ${formatCurrency(Math.max(...product.variants.map((v: any) => v.display_price)))}`
-                            : formatCurrency(product.price)}
-                        </span>
+                        <ProductCardPriceBlock product={product} />
                       </div>
                       <button
+                        type="button"
                         onClick={() => {
                           addItem({
                             productId: product.id,
@@ -272,13 +292,14 @@ export default function Home() {
                           addToast(`${product.title} secured in cart`);
                         }}
                         className="bg-gray-900 text-white p-5 rounded-2xl hover:bg-blue-600 hover:shadow-2xl hover:shadow-blue-200 transition-all active:scale-95 group/btn"
+                        aria-label={`Add ${product.title} to cart`}
                       >
                         <ShoppingCart className="h-6 w-6 transition-transform group-hover/btn:scale-110" />
                       </button>
                     </div>
                   </div>
                 </motion.div>
-              ))}
+              )})}
             </div>
           )}
         </div>
@@ -293,7 +314,7 @@ export default function Home() {
             <div>
               <h2 className="mb-8 leading-tight">
                 WHY RESEARCHERS <br />
-                <span className="text-blue-500">TRUST PEPTISTORE</span>
+                <span className="text-blue-500">TRUST RESEARCH PEPTIDES UK</span>
               </h2>
               <div className="space-y-8">
                 {[
@@ -324,7 +345,7 @@ export default function Home() {
             <div className="relative">
               {/* Reduced height aspect ratio: aspect-video or aspect-[16/10] */}
               <div className="aspect-video lg:aspect-[4/3] bg-gray-800 rounded-[3rem] overflow-hidden border border-white/5 relative group">
-                <img src={heroImage} alt="" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" />
+                <img src={heroImage} alt="Premium peptide research laboratory setting" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center p-8 bg-black/40 backdrop-blur-xl border border-white/10 rounded-[2rem] w-3/4 mx-auto">
                     <Star className="h-10 w-10 text-blue-500 mx-auto mb-4 fill-current" />
@@ -401,7 +422,7 @@ export default function Home() {
                   </div>
                   <div className="space-y-6 text-gray-500 font-medium leading-[1.8]">
                      <p className="text-lg text-gray-900 font-bold leading-relaxed">
-                       Peptistore is the leading specialist for high-purity research compounds in the UK, bridging the gap between cutting-edge molecular engineering and institutional lab access.
+                       Research Peptides UK is the leading specialist for high-purity research compounds in the UK, bridging the gap between cutting-edge molecular engineering and institutional lab access.
                      </p>
                      <p>
                        Our British-sourced peptides are engineered for precision, offering unmatched structural integrity and molecular purity. Every compound is strictly for laboratory research, provided with comprehensive technical documentation to uphold the standards your study deserves.

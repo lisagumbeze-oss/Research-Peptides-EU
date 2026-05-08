@@ -21,7 +21,7 @@ interface AuthState {
   fetchProfile: (uid: string, email: string, displayName: string | null, photoURL: string | null) => Promise<void>;
 }
 
-const adminEmails = (import.meta.env.VITE_ADMIN_EMAILS || 'peptistore3@gmail.com')
+const adminEmails = (import.meta.env.VITE_ADMIN_EMAILS || 'admin@researchpeptide.co.uk')
   .split(',')
   .map((e) => e.trim().toLowerCase())
   .filter(Boolean);

@@ -21,6 +21,13 @@ import Shipping from './pages/Shipping';
 import Contact from './pages/Contact';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
+import RefundReturns from './pages/RefundReturns';
+import PeptideGuide from './pages/PeptideGuide';
+import AboutUs from './pages/AboutUs';
+import PeptideCalculator from './pages/PeptideCalculator';
+import COALibrary from './pages/COALibrary';
+import PeptideInformation from './pages/PeptideInformation';
+import PeptideResearch from './pages/PeptideResearch';
 import { useAuthStore } from './store/useAuthStore';
 import { useWishlistStore } from './store/useWishlistStore';
 import { supabase } from './supabase';
@@ -79,6 +86,7 @@ function AppRoutes() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="shop" element={<Shop />} />
+          <Route path="product/:slug" element={<ProductDetails />} />
           <Route path="product/:id" element={<ProductDetails />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
@@ -94,8 +102,15 @@ function AppRoutes() {
           <Route path="faq" element={<FAQ />} />
           <Route path="shipping" element={<Shipping />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="about-us" element={<AboutUs />} />
+          <Route path="peptide-guide" element={<PeptideGuide />} />
+          <Route path="peptide-calculator" element={<PeptideCalculator />} />
+          <Route path="coas" element={<COALibrary />} />
+          <Route path="peptide-information" element={<PeptideInformation />} />
+          <Route path="peptide-research" element={<PeptideResearch />} />
           <Route path="terms" element={<Terms />} />
           <Route path="privacy" element={<Privacy />} />
+          <Route path="refund-returns" element={<RefundReturns />} />
         </Route>
       </Routes>
     </AnimatePresence>

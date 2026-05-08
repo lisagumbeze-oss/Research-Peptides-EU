@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { History, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { supabase } from '../../supabase';
+import { ProductImagePlaceholder } from './ProductImagePlaceholder';
+import { productPath } from '../../lib/productUrl';
 
 export default function RecentlyViewedSidebar() {
   const [products, setProducts] = useState<any[]>([]);
@@ -58,11 +60,21 @@ export default function RecentlyViewedSidebar() {
             {products.map((product) => (
               <Link
                 key={product.id}
-                to={`/product/${product.id}`}
+                to={productPath(product)}
                 className="relative group"
               >
                 <div className="h-12 w-12 rounded-full overflow-hidden border-2 border-transparent group-hover:border-blue-500 transition-all shadow-md">
-                  <img src={product.images?.[0]} alt="" className="h-full w-full object-cover group-hover:scale-110 transition-transform" />
+                  {product.images?.[0] ? (
+                  <img src={product.images[0]} alt="" className="h-full w-full object-cover group-hover:scale-110 transition-transform" />
+                  ) : (
+                    <ProductImagePlaceholder
+                      productId={String(product.id)}
+                      title={product.title}
+                      className="h-full w-full min-h-12"
+                      compact
+                      monogram={false}
+                    />
+                  )}
                 </div>
                 {/* Tooltip on hover */}
                 <span className="absolute right-14 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-xl">

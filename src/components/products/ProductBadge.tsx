@@ -1,7 +1,7 @@
 import React from 'react';
-import { Award, Zap, Shield, Beaker } from 'lucide-react';
+import { Award, Tag, Zap, Shield, Beaker } from 'lucide-react';
 
-export type BadgeType = 'elite' | 'bestseller' | 'low_stock' | 'new' | 'verified';
+export type BadgeType = 'elite' | 'bestseller' | 'sale' | 'low_stock' | 'new' | 'verified';
 
 interface ProductBadgeProps {
   type: BadgeType;
@@ -20,8 +20,13 @@ const badgeConfigs = {
     icon: Zap,
     classes: 'bg-amber-500 text-white border-amber-400/20 shadow-sm shadow-amber-100'
   },
+  sale: {
+    label: 'Sale',
+    icon: Tag,
+    classes: 'bg-rose-50 text-rose-700 border-rose-100'
+  },
   low_stock: {
-    label: 'Limited Stock',
+    label: 'Low Stock',
     icon: Zap,
     classes: 'bg-red-50 text-red-600 border-red-100'
   },
@@ -43,9 +48,9 @@ export function ProductBadge({ type, className = '', size = 'sm' }: ProductBadge
   
   return (
     <div className={`
-      inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border
+      inline-flex items-center gap-1 px-2.5 py-1 rounded-full border shadow-sm
       font-black uppercase tracking-widest leading-none
-      ${size === 'sm' ? 'text-[9px]' : 'text-[10px]'}
+      ${size === 'sm' ? 'text-[8px]' : 'text-[10px]'}
       ${config.classes}
       ${className}
     `}>

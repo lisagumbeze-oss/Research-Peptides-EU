@@ -1,15 +1,14 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import {
   renderContactSubmittedAdminEmail,
   renderContactSubmittedCustomerEmail
-} from '../lib/emailTemplates';
-import { sendTransactionalEmail } from '../lib/resendSend';
+} from '../lib/emailTemplates.js';
+import { sendTransactionalEmail } from '../lib/resendSend.js';
 
 function getAdminRecipient() {
   return process.env.EMAIL_ADMIN_TO || process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.uk';
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, error: 'Method not allowed' });
   }
@@ -24,7 +23,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const adminTemplate = renderContactSubmittedAdminEmail(payload);
     const customerTemplate = renderContactSubmittedCustomerEmail(payload);
 
-    // Send emails separately so one failure doesn't block the other (though usually both fail if config is missing)
+    // Both admin + customer emails are required for a successful submit.
     const results = await Promise.allSettled([
       sendTransactionalEmail({
         to: getAdminRecipient(),
@@ -41,10 +40,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       })
     ]);
 
-    const failures = results.filter((r) => r.status === 'rejected');
-    if (failures.length === results.length) {
-      // Both failed - likely a configuration issue
-      throw (failures[0] as PromiseRejectedResult).reason;
+    const failures = results.filter((r) => r.status === 'rejected') as PromiseRejectedResult[];
+    if (failures.length > 0) {
+      const reasons = failures
+        .map((f) => {
+          const reason = f.reason;
+          if (reason instanceof Error) return reason.message;
+          if (typeof reason === 'string') return reason;
+          return JSON.stringify(reason);
+        })
+        .join(' | ');
+      throw new Error(`Contact email dispatch failed: ${reasons}`);
     }
 
     const successes = results.filter((r) => r.status === 'fulfilled') as PromiseFulfilledResult<any>[];
@@ -53,7 +59,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({ 
       success: true, 
       dryRun,
-      partialFailure: failures.length > 0 
+      recipients: ['admin', 'customer']
     });
   } catch (error: unknown) {
     console.error('contact handler:', error);

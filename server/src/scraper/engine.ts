@@ -1,6 +1,7 @@
 import { chromium, Browser, Page } from 'playwright';
 import { extractStructuredData, ScrapedProduct } from './extractors/structured.js';
 import { extractFromDom } from './extractors/dom.js';
+import { extractLegalContent, ScrapedLegalPage } from './extractors/legalContent.js';
 import winston from 'winston';
 
 const logger = winston.createLogger({
@@ -71,5 +72,40 @@ export class ScraperEngine {
     }
 
     return productData;
+  }
+
+  async scrapeLegalPage(url: string): Promise<ScrapedLegalPage | null> {
+    if (!this.browser) await this.init();
+    const context = await this.browser!.newContext({
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    });
+
+    const page = await context.newPage();
+    let legalData: ScrapedLegalPage | null = null;
+
+    try {
+      logger.info(`Visiting legal/support URL: ${url}`);
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      await page.waitForLoadState('networkidle', { timeout: 8000 }).catch(() => undefined);
+
+      const title = await page.title();
+      if (title.includes('Just a moment') || title.includes('Cloudflare') || title.includes('Attention Required')) {
+        throw new Error(`Blocked by Cloudflare/WAF. Page Title: ${title}`);
+      }
+
+      const html = await page.content();
+      if (html.includes('403 Forbidden')) {
+        throw new Error('Blocked by 403 Forbidden directly.');
+      }
+
+      legalData = await extractLegalContent(page);
+    } catch (error) {
+      logger.error(`Error scraping legal/support page ${url}:`, error);
+    } finally {
+      await page.close();
+      await context.close();
+    }
+
+    return legalData;
   }
 }

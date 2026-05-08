@@ -7,6 +7,8 @@ import { supabase } from '../supabase';
 import { CheckCircle, Loader2, Truck, Package, Globe, Shield, CreditCard, Landmark, Bitcoin, AlertCircle } from 'lucide-react';
 import { europeanLocations } from '../data/europeanCountries';
 import { postOrderCreatedEmail } from '../lib/transactionalEmailApi';
+import { CheckoutSkeleton } from '../components/Skeleton';
+import { PRIMARY_PROMO_CODE, PROMO_DISCOUNT_PERCENT, isValidPromoCode } from '../lib/promoCodes';
 
 const SHIPPING_METHODS = {
   UK: [
@@ -26,7 +28,7 @@ const SHIPPING_METHODS = {
 const EUROPEAN_COUNTRIES = Array.from(new Set(europeanLocations.map(l => l.country)));
 
 export default function Checkout() {
-  const { items, getTotal, getSubtotal, clearCart } = useCartStore();
+  const { items, getTotal, getSubtotal, clearCart, hasHydrated } = useCartStore();
   const { user } = useAuthStore();
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -62,6 +64,8 @@ export default function Checkout() {
   const [appliedDiscount, setAppliedDiscount] = useState(0);
   const [promoError, setPromoError] = useState('');
   const [showPromo, setShowPromo] = useState(false);
+  const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({});
+  const [paymentErrors, setPaymentErrors] = useState<Record<string, string>>({});
 
   // Sync email if user logs in/out
   React.useEffect(() => {
@@ -69,6 +73,10 @@ export default function Checkout() {
       setShipping(s => ({ ...s, email: user.email }));
     }
   }, [user]);
+
+  if (!hasHydrated) {
+    return <CheckoutSkeleton />;
+  }
 
   if (items.length === 0) {
     if (placedOrderId) {
@@ -127,21 +135,87 @@ export default function Checkout() {
   const finalTotalValue = subtotalValue - promoDiscountValue - cryptoDiscount + shippingCost;
 
   const applyPromo = () => {
-    if (promoCode.toUpperCase() === 'PEPTI10') {
-      const discount = getSubtotal() * 0.1;
+    if (isValidPromoCode(promoCode)) {
+      const discount = getSubtotal() * (PROMO_DISCOUNT_PERCENT / 100);
       setAppliedDiscount(discount);
       setPromoError('');
     } else {
-      setPromoError('Invalid code. Try PEPTI10');
+      setPromoError(`Invalid code. Try ${PRIMARY_PROMO_CODE}`);
       setAppliedDiscount(0);
     }
   };
 
+  const focusField = (id: string) => {
+    const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null;
+    el?.focus();
+  };
+
+  const validateShippingStep = () => {
+    const errors: Record<string, string> = {};
+    if (!shipping.email.trim()) errors.email = 'Email is required.';
+    if (!shipping.fullName.trim()) errors.fullName = 'Full name is required.';
+    if (!shipping.phone.trim()) errors.phone = 'Phone number is required.';
+    if (!shipping.address.trim()) errors.address = 'Street address is required.';
+    if (!shipping.city.trim()) errors.city = 'City is required.';
+    if (!shipping.postalCode.trim()) errors.postalCode = 'Postal code is required.';
+    if (!shipping.country.trim()) errors.country = 'Country is required.';
+    if (!selectedShippingId) errors.shippingMethod = 'Please select a shipping method.';
+    setShippingErrors(errors);
+    if (Object.keys(errors).length > 0) {
+      const firstKey = Object.keys(errors)[0];
+      const idMap: Record<string, string> = {
+        email: 'checkout-email',
+        fullName: 'checkout-full-name',
+        phone: 'checkout-phone',
+        address: 'checkout-address-line',
+        city: 'checkout-city',
+        postalCode: 'checkout-postal',
+        country: 'checkout-country',
+        shippingMethod: 'checkout-shipping-method-legend',
+      };
+      focusField(idMap[firstKey] || 'checkout-email');
+      return false;
+    }
+    return true;
+  };
+
+  const validatePaymentStep = () => {
+    const errors: Record<string, string> = {};
+    if (!paymentMethod) errors.paymentMethod = 'Please select a payment method.';
+    if (paymentMethod === 'card') {
+      if (!cardDetails.number.trim()) errors.cardNumber = 'Card number is required.';
+      if (!cardDetails.expiry.trim()) errors.cardExpiry = 'Expiry is required.';
+      if (!cardDetails.cvc.trim()) errors.cardCvc = 'CVV is required.';
+      if (!cardDetails.name.trim()) errors.cardName = 'Cardholder name is required.';
+    }
+    setPaymentErrors(errors);
+    if (Object.keys(errors).length > 0) {
+      if (errors.cardNumber) focusField('checkout-card-number');
+      else if (errors.cardExpiry) focusField('checkout-card-expiry');
+      else if (errors.cardCvc) focusField('checkout-card-cvc');
+      else if (errors.cardName) focusField('checkout-card-name');
+      return false;
+    }
+    return true;
+  };
+
+  const handleContinueToPayment = () => {
+    if (!validateShippingStep()) return;
+    setStep(2);
+  };
+
+  const handleConfirmPaymentChoice = () => {
+    if (!validatePaymentStep()) return;
+    setStep(3);
+  };
+
   const handleOrderSubmit = async () => {
-    // Guest email validation
-    if (!shipping.email) {
-      alert("Please provide an email address for order correspondence.");
+    if (!validateShippingStep()) {
       setStep(1);
+      return;
+    }
+    if (!validatePaymentStep()) {
+      setStep(2);
       return;
     }
 
@@ -181,20 +255,23 @@ export default function Checkout() {
       createdOrderId = orderId;
       setPlacedOrderId(orderId);
 
+      let emailDispatchFailed = false;
       try {
         await postOrderCreatedEmail(orderId);
       } catch (emailError) {
         console.error('Order email trigger failed', emailError);
-        setCheckoutMessage('Order placed, but email dispatch failed. Please contact support with your order ID.');
+        emailDispatchFailed = true;
       }
 
       // Supabase-only payment flow (no external API URL dependency).
-      if (paymentMethod === 'crypto') {
-        setCheckoutMessage('Order created successfully. Crypto payment instructions will be sent by email shortly.');
+      if (emailDispatchFailed) {
+        setCheckoutMessage('Order placed, but one or more transactional emails failed. Please contact support with your order ID.');
+      } else if (paymentMethod === 'crypto') {
+        setCheckoutMessage('Order created successfully. Admin and customer emails were sent. Crypto payment instructions will follow by email.');
       } else if (paymentMethod === 'card') {
-        setCheckoutMessage('Order created successfully. Card payment is queued for manual billing review.');
+        setCheckoutMessage('Order created successfully. Admin and customer emails were sent. Card payment is queued for manual billing review.');
       } else {
-        setCheckoutMessage('Order created successfully. Bank transfer instructions will be sent by email shortly.');
+        setCheckoutMessage('Order created successfully. Admin and customer emails were sent. Bank transfer instructions will follow by email.');
       }
       clearCart();
       setStep(4);
@@ -254,33 +331,39 @@ export default function Checkout() {
                 <h2 className="text-2xl font-black text-gray-900">Shipping Details</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Email Address</label>
-                    <input required type="email" value={shipping.email} onChange={e => setShipping({...shipping, email: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="researcher@university.edu" disabled={!!user} />
+                    <label htmlFor="checkout-email" className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Email Address</label>
+                    <input id="checkout-email" required type="email" value={shipping.email} onChange={e => setShipping({...shipping, email: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="researcher@university.edu" disabled={!!user} autoComplete="email" />
                     {user && <p className="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-widest">Locked to account email</p>}
+                    {shippingErrors.email && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.email}</p>}
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Full Name</label>
-                    <input required type="text" value={shipping.fullName} onChange={e => setShipping({...shipping, fullName: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="John Doe" />
+                    <label htmlFor="checkout-full-name" className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Full Name</label>
+                    <input id="checkout-full-name" required type="text" value={shipping.fullName} onChange={e => setShipping({...shipping, fullName: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="John Doe" autoComplete="name" />
+                    {shippingErrors.fullName && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.fullName}</p>}
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Phone Number</label>
-                    <input required type="tel" value={shipping.phone} onChange={e => setShipping({...shipping, phone: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="+44 7700 900000" />
+                    <label htmlFor="checkout-phone" className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Phone Number</label>
+                    <input id="checkout-phone" required type="tel" value={shipping.phone} onChange={e => setShipping({...shipping, phone: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="+44 7700 900000" autoComplete="tel" />
+                    {shippingErrors.phone && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.phone}</p>}
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Street Address</label>
-                    <input required type="text" value={shipping.address} onChange={e => setShipping({...shipping, address: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="123 Research Way" />
+                    <label htmlFor="checkout-address-line" className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Street Address</label>
+                    <input id="checkout-address-line" required type="text" value={shipping.address} onChange={e => setShipping({...shipping, address: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="123 Research Way" autoComplete="street-address" />
+                    {shippingErrors.address && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.address}</p>}
                   </div>
                   <div>
-                    <label className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">City</label>
-                    <input required type="text" value={shipping.city} onChange={e => setShipping({...shipping, city: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="London" />
+                    <label htmlFor="checkout-city" className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">City</label>
+                    <input id="checkout-city" required type="text" value={shipping.city} onChange={e => setShipping({...shipping, city: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="London" autoComplete="address-level2" />
+                    {shippingErrors.city && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.city}</p>}
                   </div>
                   <div>
-                    <label className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Postal Code</label>
-                    <input required type="text" value={shipping.postalCode} onChange={e => setShipping({...shipping, postalCode: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="SW1A 1AA" />
+                    <label htmlFor="checkout-postal" className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Postal Code</label>
+                    <input id="checkout-postal" required type="text" value={shipping.postalCode} onChange={e => setShipping({...shipping, postalCode: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900" placeholder="SW1A 1AA" autoComplete="postal-code" />
+                    {shippingErrors.postalCode && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.postalCode}</p>}
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Country</label>
-                    <select value={shipping.country} onChange={e => setShipping({...shipping, country: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900 appearance-none cursor-pointer">
+                    <label htmlFor="checkout-country" className="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Country</label>
+                    <select id="checkout-country" value={shipping.country} onChange={e => setShipping({...shipping, country: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-gray-900 appearance-none cursor-pointer" autoComplete="country-name">
                       <option value="United Kingdom">United Kingdom</option>
                       <optgroup label="Europe">
                         {EUROPEAN_COUNTRIES.filter(c => c !== 'United Kingdom').sort().map(c => <option key={c} value={c}>{c}</option>)}
@@ -291,14 +374,17 @@ export default function Checkout() {
                         <option value="Other">Other International</option>
                       </optgroup>
                     </select>
+                    {shippingErrors.country && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.country}</p>}
                   </div>
                 </div>
 
-                <div className="space-y-4 pt-4 border-t border-gray-100">
-                  <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Select Shipping Service</h3>
-                  <div className="grid grid-cols-1 gap-3">
+                <fieldset className="space-y-4 pt-4 border-0 border-t border-gray-100 min-w-0">
+                  <legend id="checkout-shipping-method-legend" className="text-xs font-black uppercase tracking-widest text-gray-400 px-0">
+                    Select Shipping Service
+                  </legend>
+                  <div className="grid grid-cols-1 gap-3" role="radiogroup" aria-labelledby="checkout-shipping-method-legend">
                     {availableMethods.map((m) => (
-                      <button key={m.id} onClick={() => setSelectedShippingId(m.id)} className={`flex items-center justify-between p-4 rounded-2xl border-2 transition-all ${selectedShippingId === m.id ? 'border-blue-600 bg-blue-50/50' : 'border-gray-50 bg-gray-50/50 hover:border-gray-200'}`}>
+                      <button key={m.id} type="button" role="radio" aria-checked={selectedShippingId === m.id} onClick={() => setSelectedShippingId(m.id)} className={`flex items-center justify-between p-4 rounded-2xl border-2 transition-all ${selectedShippingId === m.id ? 'border-blue-600 bg-blue-50/50' : 'border-gray-50 bg-gray-50/50 hover:border-gray-200'}`}>
                         <div className="flex items-center gap-4 text-left">
                           <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedShippingId === m.id ? 'border-blue-600 bg-blue-600' : 'border-gray-300'}`}>
                             {selectedShippingId === m.id && <div className="w-2 h-2 rounded-full bg-white" />}
@@ -312,9 +398,10 @@ export default function Checkout() {
                       </button>
                     ))}
                   </div>
-                </div>
+                  {shippingErrors.shippingMethod && <p className="text-xs font-semibold text-red-600">{shippingErrors.shippingMethod}</p>}
+                </fieldset>
 
-                <button onClick={() => setStep(2)} className="w-full bg-gray-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all shadow-xl shadow-gray-200">
+                <button type="button" onClick={handleContinueToPayment} className="w-full bg-gray-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all shadow-xl shadow-gray-200">
                   Continue to Payment
                 </button>
               </div>
@@ -323,35 +410,36 @@ export default function Checkout() {
             {step === 2 && (
               <div className="space-y-8">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-2xl font-black text-gray-900">Payment Method</h2>
-                  <button onClick={() => setStep(1)} className="text-xs font-black text-blue-600 uppercase tracking-widest hover:underline">Edit Shipping</button>
+                  <h2 id="checkout-payment-heading" className="text-2xl font-black text-gray-900">Payment Method</h2>
+                  <button type="button" onClick={() => setStep(1)} className="text-xs font-black text-blue-600 uppercase tracking-widest hover:underline">Edit Shipping</button>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-4" role="radiogroup" aria-labelledby="checkout-payment-heading">
                   {[
-                    { id: 'crypto', name: 'Cryptocurrency', icon: Bitcoin, subtext: 'Pay with BTC, ETH, USDT (+5% OFF)', color: 'text-orange-500', badge: 'Save 5%' },
-                    { id: 'card', name: 'Credit / Debit Card', icon: CreditCard, subtext: 'Secure Manual Processing', color: 'text-blue-600' },
-                    { id: 'bank', name: 'Bank Transfer', icon: Landmark, subtext: 'Direct Structural Payment', color: 'text-gray-900' },
-                  ].map((p) => (
-                    <button key={p.id} onClick={() => setPaymentMethod(p.id as any)} className={`relative flex items-center gap-5 p-6 rounded-[2rem] border-2 transition-all ${paymentMethod === p.id ? 'border-blue-600 bg-blue-50/30' : 'border-gray-50 bg-gray-50/30 hover:border-gray-200'}`}>
-                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${paymentMethod === p.id ? 'bg-blue-600 text-white' : 'bg-white text-gray-400 border border-gray-100'}`}>
-                        <p.icon className="w-8 h-8" />
+                    { id: 'crypto', name: 'Cryptocurrency', icon: Bitcoin, subtext: 'Pay with BTC, ETH, USDT (+5% OFF)', badge: 'Save 5%' },
+                    { id: 'card', name: 'Credit / Debit Card', icon: CreditCard, subtext: 'Secure Manual Processing' },
+                    { id: 'bank', name: 'Bank Transfer', icon: Landmark, subtext: 'Direct Structural Payment' },
+                  ].map((method) => (
+                    <button key={method.id} type="button" role="radio" aria-checked={paymentMethod === method.id} onClick={() => setPaymentMethod(method.id as 'card' | 'bank' | 'crypto')} className={`relative flex items-center gap-5 p-6 rounded-[2rem] border-2 transition-all ${paymentMethod === method.id ? 'border-blue-600 bg-blue-50/30' : 'border-gray-50 bg-gray-50/30 hover:border-gray-200'}`}>
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${paymentMethod === method.id ? 'bg-blue-600 text-white' : 'bg-white text-gray-400 border border-gray-100'}`}>
+                        <method.icon className="w-8 h-8" aria-hidden />
                       </div>
                       <div className="text-left flex-1">
                         <div className="flex items-center gap-2">
-                           <p className="text-lg font-black text-gray-900">{p.name}</p>
-                           {p.badge && <span className="bg-emerald-500 text-white text-[8px] font-black px-2 py-0.5 rounded-full uppercase">{p.badge}</span>}
+                           <span className="text-lg font-black text-gray-900">{method.name}</span>
+                           {method.badge && <span className="bg-emerald-500 text-white text-[8px] font-black px-2 py-0.5 rounded-full uppercase">{method.badge}</span>}
                         </div>
-                        <p className="text-xs font-bold text-gray-400">{p.subtext}</p>
+                        <p className="text-xs font-bold text-gray-400">{method.subtext}</p>
                       </div>
-                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${paymentMethod === p.id ? 'border-blue-600 bg-blue-600' : 'border-gray-200'}`}>
-                        {paymentMethod === p.id && <div className="w-2.5 h-2.5 rounded-full bg-white shadow-sm" />}
+                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${paymentMethod === method.id ? 'border-blue-600 bg-blue-600' : 'border-gray-200'}`}>
+                        {paymentMethod === method.id && <div className="w-2.5 h-2.5 rounded-full bg-white shadow-sm" />}
                       </div>
                     </button>
                   ))}
                 </div>
+                {paymentErrors.paymentMethod && <p className="text-xs font-semibold text-red-600">{paymentErrors.paymentMethod}</p>}
 
-                <button onClick={() => setStep(3)} className="w-full bg-gray-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all shadow-xl shadow-gray-200">
+                <button type="button" onClick={handleConfirmPaymentChoice} className="w-full bg-gray-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all shadow-xl shadow-gray-200">
                   Confirm Payment Choice
                 </button>
               </div>
@@ -361,27 +449,44 @@ export default function Checkout() {
               <div className="space-y-8">
                 <div className="flex items-center justify-between">
                   <h2 className="text-2xl font-black text-gray-900">Final Confirmation</h2>
-                  <button onClick={() => setStep(2)} className="text-xs font-black text-blue-600 uppercase tracking-widest hover:underline">Change Method</button>
+                  <button type="button" onClick={() => setStep(2)} className="text-xs font-black text-blue-600 uppercase tracking-widest hover:underline">Change Method</button>
                 </div>
 
                 {paymentMethod === 'card' && (
-                  <div className="space-y-6">
+                  <fieldset className="space-y-6 border-0 min-w-0 p-0">
+                    <legend className="sr-only">Card payment details</legend>
                     <div className="bg-blue-50 p-4 rounded-2xl border border-blue-100 flex gap-3">
-                      <AlertCircle className="w-5 h-5 text-blue-600 shrink-0" />
+                      <AlertCircle className="w-5 h-5 text-blue-600 shrink-0" aria-hidden />
                       <p className="text-xs font-bold text-blue-900 leading-relaxed">
                         Card payments are processed manually. Your details will be securely sent to our billing team for review. 
                         Your order status will update to <span className="underline">Processing</span> immediately.
                       </p>
                     </div>
                     <div className="space-y-4">
-                      <input type="text" placeholder="Card Number" value={cardDetails.number} onChange={e => setCardDetails({...cardDetails, number: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none font-bold text-gray-900" />
-                      <div className="grid grid-cols-2 gap-4">
-                        <input type="text" placeholder="MM/YY" value={cardDetails.expiry} onChange={e => setCardDetails({...cardDetails, expiry: e.target.value})} className="p-4 bg-gray-50 border-none rounded-2xl outline-none font-bold text-gray-900" />
-                        <input type="text" placeholder="CVV" value={cardDetails.cvc} onChange={e => setCardDetails({...cardDetails, cvc: e.target.value})} className="p-4 bg-gray-50 border-none rounded-2xl outline-none font-bold text-gray-900" />
+                      <div>
+                        <label htmlFor="checkout-card-number" className="sr-only">Card number</label>
+                        <input id="checkout-card-number" type="text" placeholder="Card Number" value={cardDetails.number} onChange={e => setCardDetails({...cardDetails, number: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none font-bold text-gray-900" autoComplete="cc-number" />
+                        {paymentErrors.cardNumber && <p className="mt-1 text-xs font-semibold text-red-600">{paymentErrors.cardNumber}</p>}
                       </div>
-                      <input type="text" placeholder="Cardholder Name" value={cardDetails.name} onChange={e => setCardDetails({...cardDetails, name: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none font-bold text-gray-900" />
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label htmlFor="checkout-card-expiry" className="sr-only">Expiry (MM/YY)</label>
+                          <input id="checkout-card-expiry" type="text" placeholder="MM/YY" value={cardDetails.expiry} onChange={e => setCardDetails({...cardDetails, expiry: e.target.value})} className="p-4 bg-gray-50 border-none rounded-2xl outline-none font-bold text-gray-900 w-full" autoComplete="cc-exp" />
+                          {paymentErrors.cardExpiry && <p className="mt-1 text-xs font-semibold text-red-600">{paymentErrors.cardExpiry}</p>}
+                        </div>
+                        <div>
+                          <label htmlFor="checkout-card-cvc" className="sr-only">Security code (CVV)</label>
+                          <input id="checkout-card-cvc" type="text" placeholder="CVV" value={cardDetails.cvc} onChange={e => setCardDetails({...cardDetails, cvc: e.target.value})} className="p-4 bg-gray-50 border-none rounded-2xl outline-none font-bold text-gray-900 w-full" autoComplete="cc-csc" />
+                          {paymentErrors.cardCvc && <p className="mt-1 text-xs font-semibold text-red-600">{paymentErrors.cardCvc}</p>}
+                        </div>
+                      </div>
+                      <div>
+                        <label htmlFor="checkout-card-name" className="sr-only">Cardholder name</label>
+                        <input id="checkout-card-name" type="text" placeholder="Cardholder Name" value={cardDetails.name} onChange={e => setCardDetails({...cardDetails, name: e.target.value})} className="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none font-bold text-gray-900" autoComplete="cc-name" />
+                        {paymentErrors.cardName && <p className="mt-1 text-xs font-semibold text-red-600">{paymentErrors.cardName}</p>}
+                      </div>
                     </div>
-                  </div>
+                  </fieldset>
                 )}
 
                 {paymentMethod === 'bank' && (
@@ -390,7 +495,7 @@ export default function Checkout() {
                     <div>
                       <h3 className="text-xl font-black text-gray-900">Awaiting Connection</h3>
                       <p className="text-sm font-bold text-gray-500 mt-2">
-                        After placing your order, an administrator will contact you at <span className="text-blue-600">{user?.email}</span> with structured payment instructions.
+                        After placing your order, an administrator will contact you at <span className="text-blue-600">{shipping.email}</span> with structured payment instructions.
                       </p>
                     </div>
                   </div>
@@ -409,8 +514,8 @@ export default function Checkout() {
                   </div>
                 )}
 
-                <button onClick={handleOrderSubmit} disabled={isSubmitting} className="w-full bg-blue-600 text-white py-6 rounded-2xl font-black text-xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 flex items-center justify-center gap-3">
-                  {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin" /> : 'Complete Secure Purchase'}
+                <button type="button" onClick={handleOrderSubmit} disabled={isSubmitting} className="w-full bg-blue-600 text-white py-6 rounded-2xl font-black text-xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 flex items-center justify-center gap-3">
+                  {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin" aria-hidden /> : 'Complete Secure Purchase'}
                 </button>
               </div>
             )}
@@ -437,7 +542,7 @@ export default function Checkout() {
                 )}
                 <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
                   {user ? (
-                    <button onClick={() => navigate('/orders')} className="bg-gray-900 text-white px-10 py-4 rounded-2xl font-black hover:bg-black transition-all">
+                    <button type="button" onClick={() => navigate('/orders')} className="bg-gray-900 text-white px-10 py-4 rounded-2xl font-black hover:bg-black transition-all">
                       View My History
                     </button>
                   ) : (
@@ -445,7 +550,7 @@ export default function Checkout() {
                       Please save your Order ID above. Since you checked out as a guest, this is your primary reference for correspondence.
                     </div>
                   )}
-                  <button onClick={() => navigate('/')} className="bg-white text-gray-900 border-2 border-gray-100 px-10 py-4 rounded-2xl font-black hover:bg-gray-50 transition-all">
+                  <button type="button" onClick={() => navigate('/')} className="bg-white text-gray-900 border-2 border-gray-100 px-10 py-4 rounded-2xl font-black hover:bg-gray-50 transition-all">
                     Continue Research
                   </button>
                 </div>
@@ -488,12 +593,13 @@ export default function Checkout() {
             {step < 3 && (
               <div className="mt-8 pt-8 border-t border-gray-100">
                 {!showPromo ? (
-                   <button onClick={() => setShowPromo(true)} className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">Apply Reference Code?</button>
+                   <button type="button" onClick={() => setShowPromo(true)} className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">Apply Reference Code?</button>
                 ) : (
                   <div className="space-y-2">
                     <div className="flex gap-2">
-                      <input type="text" placeholder="CODE" value={promoCode} onChange={e => setPromoCode(e.target.value)} className="flex-1 p-3 bg-gray-50 border-none rounded-xl outline-none text-xs font-black" />
-                      <button onClick={applyPromo} className="bg-gray-900 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest">Apply</button>
+                      <label htmlFor="checkout-promo-code" className="sr-only">Promotion code</label>
+                      <input id="checkout-promo-code" type="text" placeholder={PRIMARY_PROMO_CODE} value={promoCode} onChange={e => setPromoCode(e.target.value)} className="flex-1 p-3 bg-gray-50 border-none rounded-xl outline-none text-xs font-black" />
+                      <button type="button" onClick={applyPromo} className="bg-gray-900 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest">Apply</button>
                     </div>
                     {promoError && <p className="text-[10px] text-red-500 font-bold">{promoError}</p>}
                     {appliedDiscount > 0 && <p className="text-[10px] text-emerald-500 font-bold">✓ Reference Code Accepted</p>}

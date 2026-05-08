@@ -5,6 +5,7 @@ import { formatCurrency } from '../lib/utils';
 import { Package, ExternalLink, ChevronRight, User, Heart, Settings, Truck, CheckCircle2, Clock, CreditCard } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
+import { productPath } from '../lib/productUrl';
 
 export default function Orders() {
   const { user, profile } = useAuthStore();
@@ -187,7 +188,7 @@ export default function Orders() {
                                      <img src={item.imageUrl} alt="" className="w-full h-full object-cover group-hover/item:scale-110 transition-transform" />
                                   </div>
                                   <div>
-                                     <Link to={`/product/${item.productId}`} className="text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors">{item.title}</Link>
+                                     <Link to={productPath({ slug: item.slug, title: item.title })} className="text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors">{item.title}</Link>
                                      <p className="text-xs font-bold text-gray-400">Qty: {item.quantity} • {formatCurrency(item.price)}</p>
                                   </div>
                                </div>

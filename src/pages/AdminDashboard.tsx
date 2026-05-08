@@ -25,6 +25,7 @@ export default function AdminDashboard() {
   const [price, setPrice] = useState('');
   const [inventory, setInventory] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [compareAtPrice, setCompareAtPrice] = useState('');
   const [isSeeding, setIsSeeding] = useState(false);
   const [expandedOrderId, setExpandedOrderId] = useState<string | null>(null);
   const [txidDraft, setTxidDraft] = useState('');
@@ -50,6 +51,7 @@ export default function AdminDashboard() {
     title: '',
     description: '',
     price: '',
+    compareAtPrice: '',
     inventory: '',
     imageUrl: '',
   });
@@ -64,7 +66,8 @@ export default function AdminDashboard() {
         referenceSeedProducts.map(p => ({
           ...p,
           rating: 5,
-          review_count: Math.floor(Math.random() * 50) + 10
+          review_count: Math.floor(Math.random() * 50) + 10,
+          compare_at_price: p.compareAtPrice ?? null,
         }))
       );
       if (pError) throw pError;
@@ -90,7 +93,8 @@ export default function AdminDashboard() {
         referenceSeedProducts.map(p => ({
           ...p,
           rating: 5,
-          review_count: Math.floor(Math.random() * 50) + 10
+          review_count: Math.floor(Math.random() * 50) + 10,
+          compare_at_price: p.compareAtPrice ?? null,
         }))
       );
       if (iError) throw iError;
@@ -139,7 +143,7 @@ export default function AdminDashboard() {
       const { error } = await supabase.from('orders').update({ status }).eq('id', order.id);
       if (error) throw error;
 
-      postOrderStatusEmail(order.id, status).catch(() => {});
+      await postOrderStatusEmail(order.id, status);
 
       addToast(`Order ${order.id.substring(0, 8)} updated to ${status}`);
       fetchData();
@@ -222,7 +226,7 @@ export default function AdminDashboard() {
       if (error) throw error;
 
       if (orderDraft.status !== orderDetail.status) {
-        postOrderStatusEmail(orderDetail.id, orderDraft.status).catch(() => {});
+        await postOrderStatusEmail(orderDetail.id, orderDraft.status);
       }
 
       addToast('Order saved', 'success');
@@ -257,6 +261,10 @@ export default function AdminDashboard() {
       title: product.title || '',
       description: product.description || '',
       price: String(product.price ?? ''),
+      compareAtPrice:
+        product.compare_at_price != null && Number.isFinite(Number(product.compare_at_price))
+          ? String(product.compare_at_price)
+          : '',
       inventory: String(product.inventory ?? ''),
       imageUrl: product.images?.[0] || '',
     });
@@ -272,12 +280,21 @@ export default function AdminDashboard() {
     try {
       const priceNum = parseFloat(productDraft.price);
       const invNum = parseInt(productDraft.inventory, 10);
+      const compareRaw = productDraft.compareAtPrice.trim();
+      let compareAt: number | null = null;
+      if (compareRaw !== '') {
+        const c = parseFloat(compareRaw);
+        if (Number.isFinite(c) && Number.isFinite(priceNum) && c > priceNum) {
+          compareAt = c;
+        }
+      }
       const { error } = await supabase
         .from('products')
         .update({
           title: productDraft.title,
           description: productDraft.description,
           price: Number.isFinite(priceNum) ? priceNum : 0,
+          compare_at_price: compareAt,
           inventory: Number.isFinite(invNum) ? invNum : 0,
           images: productDraft.imageUrl ? [productDraft.imageUrl] : [],
         })
@@ -314,7 +331,7 @@ export default function AdminDashboard() {
             <pre className="bg-white border border-amber-200 rounded-lg p-3 overflow-x-auto text-xs font-mono whitespace-pre-wrap break-all">
 {`UPDATE public.users SET role = 'admin' WHERE id = '${user.id}';`}
             </pre>
-            <p className="mt-2 text-xs text-amber-800">Then apply migration <span className="font-mono">003_admin_rls_orders_products.sql</span> so admins can manage all orders and products.</p>
+            <p className="mt-2 text-xs text-amber-800">Apply migrations <span className="font-mono">003_admin_rls_orders_products.sql</span> and <span className="font-mono">004_products_compare_at_price.sql</span> in Supabase so admins can manage orders, products, and optional compare-at (RRP) pricing.</p>
           </div>
         )}
       </div>
@@ -324,11 +341,22 @@ export default function AdminDashboard() {
   const handleAddProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const priceVal = parseFloat(price);
+      const invVal = parseInt(inventory, 10);
+      const cRaw = compareAtPrice.trim();
+      let compare_at_price: number | null = null;
+      if (cRaw !== '') {
+        const c = parseFloat(cRaw);
+        if (Number.isFinite(c) && Number.isFinite(priceVal) && c > priceVal) {
+          compare_at_price = c;
+        }
+      }
       const newProduct = {
         title,
         description,
-        price: parseFloat(price),
-        inventory: parseInt(inventory),
+        price: priceVal,
+        compare_at_price,
+        inventory: invVal,
         images: imageUrl ? [imageUrl] : [],
         categories: [],
         specifications: [],
@@ -338,7 +366,7 @@ export default function AdminDashboard() {
       const { error } = await supabase.from('products').insert([newProduct]);
       if (error) throw error;
       
-      setTitle(''); setDescription(''); setPrice(''); setInventory(''); setImageUrl('');
+      setTitle(''); setDescription(''); setPrice(''); setCompareAtPrice(''); setInventory(''); setImageUrl('');
       addToast(`${title} added successfully`);
       fetchData();
     } catch (error) {
@@ -483,6 +511,7 @@ export default function AdminDashboard() {
                       <input required type="number" step="0.01" placeholder="Price £" value={price} onChange={e => setPrice(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
                       <input required type="number" placeholder="Inventory" value={inventory} onChange={e => setInventory(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
                    </div>
+                   <input type="number" step="0.01" placeholder="Compare-at / RRP £ (optional, must exceed price)" value={compareAtPrice} onChange={e => setCompareAtPrice(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
                    <input type="url" placeholder="Image URL (optional)" value={imageUrl} onChange={e => setImageUrl(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
                    <button type="submit" className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200">
                      List Product
@@ -504,8 +533,9 @@ export default function AdminDashboard() {
                          <textarea value={productDraft.description} onChange={e => setProductDraft(d => ({ ...d, description: e.target.value }))} rows={3} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm font-medium" placeholder="Description" />
                          <div className="grid grid-cols-2 gap-3">
                            <input type="number" step="0.01" value={productDraft.price} onChange={e => setProductDraft(d => ({ ...d, price: e.target.value }))} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm" placeholder="Price" />
-                           <input type="number" value={productDraft.inventory} onChange={e => setProductDraft(d => ({ ...d, inventory: e.target.value }))} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm" placeholder="Inventory" />
+                           <input type="number" step="0.01" value={productDraft.compareAtPrice} onChange={e => setProductDraft(d => ({ ...d, compareAtPrice: e.target.value }))} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm" placeholder="RRP (optional)" />
                          </div>
+                         <input type="number" value={productDraft.inventory} onChange={e => setProductDraft(d => ({ ...d, inventory: e.target.value }))} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm" placeholder="Inventory" />
                          <input type="url" value={productDraft.imageUrl} onChange={e => setProductDraft(d => ({ ...d, imageUrl: e.target.value }))} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-xs font-mono" placeholder="Image URL" />
                          <div className="flex gap-3">
                            <button type="button" onClick={saveProductEdit} disabled={isSavingProduct} className="flex-1 bg-blue-600 text-white py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-blue-700 disabled:opacity-60">{isSavingProduct ? 'Saving…' : 'Save'}</button>
@@ -520,7 +550,20 @@ export default function AdminDashboard() {
                              </div>
                              <div className="min-w-0">
                                 <p className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors truncate">{product.title}</p>
-                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{formatCurrency(product.price)} • {product.inventory} in stock</p>
+                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                                  {product.compare_at_price != null &&
+                                  Number(product.compare_at_price) > Number(product.price) ? (
+                                    <>
+                                      <span className="line-through text-gray-400 decoration-gray-400">
+                                        {formatCurrency(Number(product.compare_at_price))}
+                                      </span>
+                                      <span className="text-gray-700"> {formatCurrency(product.price)}</span>
+                                    </>
+                                  ) : (
+                                    formatCurrency(product.price)
+                                  )}
+                                  {' '}• {product.inventory} in stock
+                                </p>
                              </div>
                           </div>
                           <div className="flex items-center gap-1 shrink-0">

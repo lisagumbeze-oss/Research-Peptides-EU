@@ -35,7 +35,7 @@ export default function Login() {
         });
         if (loginError) throw loginError;
         if (data.user) {
-          navigate('/');
+          navigate('/profile');
         }
       }
     } catch (err: any) {
@@ -49,6 +49,9 @@ export default function Login() {
     try {
       await supabase.auth.signInWithOAuth({
         provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/profile`,
+        },
       });
     } catch (err: any) {
       setError(err.message || 'Google login failed');

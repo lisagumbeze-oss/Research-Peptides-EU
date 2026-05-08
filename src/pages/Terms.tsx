@@ -26,7 +26,7 @@ export default function Terms() {
               <div>
                 <h3 className="text-red-900 font-black uppercase tracking-tight m-0 mb-2">CRITICAL RESEARCH DISCLAIMER</h3>
                 <p className="text-red-800 text-sm leading-relaxed m-0">
-                  All products available on PeptiStore are strictly for <strong>Laboratory Research, Scientific, and Industrial use only</strong>. 
+                  All products available on Research Peptides UK are strictly for <strong>Laboratory Research, Scientific, and Industrial use only</strong>.
                   These products are NOT for human or veterinary use. They are not intended to diagnose, treat, cure, or prevent any disease. 
                   By purchasing, you acknowledge the inherent risks and certify that you are a qualified researcher or laboratory professional.
                 </p>
@@ -37,7 +37,7 @@ export default function Terms() {
           <section>
             <h2>1. Eligibility & Agreement</h2>
             <p>
-              By accessing PeptiStore, you represent and warrant that you are at least 18 years of age and possess the legal authority to enter into this agreement. 
+              By accessing Research Peptides UK, you represent and warrant that you are at least 18 years of age and possess the legal authority to enter into this agreement.
               The use of our products is restricted to permitted research applications under local laws and regulations.
             </p>
           </section>
@@ -57,7 +57,7 @@ export default function Terms() {
           <section>
             <h2>3. No Return Policy</h2>
             <p>
-              Due to the highly sensitive pharmaceutical nature of peptides and the requirement for strictly controlled temperature environments, <strong>PeptiStore maintains a strict NO RETURN policy</strong>. 
+              Due to the highly sensitive pharmaceutical nature of peptides and the requirement for strictly controlled temperature environments, <strong>Research Peptides UK maintains a strict NO RETURN policy</strong>.
               Once an item leaves our controlled logistics chain, we cannot guarantee its purity to subsequent researchers; therefore, all sales are final.
             </p>
           </section>
@@ -65,7 +65,7 @@ export default function Terms() {
           <section>
             <h2>4. Limitation of Liability</h2>
             <p>
-              PeptiStore, its directors, and employees shall not be liable for any incidental, consequential, or indirect damages arising from the use or inability to use our products. 
+              Research Peptides UK, its directors, and employees shall not be liable for any incidental, consequential, or indirect damages arising from the use or inability to use our products.
               Our total liability in any circumstance is capped at the purchase price of the specific product in question.
             </p>
           </section>
@@ -82,7 +82,7 @@ export default function Terms() {
               <FileText className="h-4 w-4" />
               Document Reference: PS-TERMS-2026
             </div>
-            <span>PeptiStore Operations</span>
+            <span>Research Peptides UK Operations</span>
           </div>
         </div>
       </div>

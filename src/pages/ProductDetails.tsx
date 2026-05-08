@@ -10,9 +10,11 @@ import { useToastStore } from '../store/useToastStore';
 import { motion } from 'motion/react';
 import { DetailedProductSkeleton } from '../components/Skeleton';
 import { ProductBadge } from '../components/products/ProductBadge';
+import { ProductImagePlaceholder } from '../components/products/ProductImagePlaceholder';
+import { productPath } from '../lib/productUrl';
 
 export default function ProductDetails() {
-  const { id } = useParams<{ id: string }>();
+  const { slug, id } = useParams<{ slug?: string; id?: string }>();
   const [product, setProduct] = useState<any>(null);
   const [reviews, setReviews] = useState<any[]>([]);
   const [recommended, setRecommended] = useState<any[]>([]);
@@ -33,11 +35,18 @@ export default function ProductDetails() {
 
   useEffect(() => {
     const fetchProductAndReviews = async () => {
-      if (!id) return;
+      if (!slug && !id) return;
       setLoading(true);
       try {
-        const { data: pData } = await supabase.from('products').select('*').eq('id', id).single();
+        const query = supabase.from('products').select('*');
+        const { data: pData } = slug
+          ? await query.eq('slug', slug).maybeSingle()
+          : await query.eq('id', id as string).maybeSingle();
         if (pData) {
+          const canonical = productPath(pData);
+          if (canonical !== window.location.pathname) {
+            navigate(canonical, { replace: true });
+          }
           setProduct(pData);
           if (pData.variants && pData.variants.length > 0) {
             setSelectedVariant(pData.variants[0]);
@@ -48,22 +57,29 @@ export default function ProductDetails() {
           const stored = localStorage.getItem('recentlyViewed');
           let prevIds = stored ? JSON.parse(stored) : [];
           // Keep unique last 10
-          prevIds = [id, ...prevIds.filter((pid: string) => pid !== id)].slice(0, 10);
+          prevIds = [pData.id, ...prevIds.filter((pid: string) => pid !== pData.id)].slice(0, 10);
           localStorage.setItem('recentlyViewed', JSON.stringify(prevIds));
 
           // Fetch details for recently viewed (excluding current)
-          const displayIds = prevIds.filter((pid: string) => pid !== id).slice(0, 4);
+          const displayIds = prevIds.filter((pid: string) => pid !== pData.id).slice(0, 4);
           if (displayIds.length > 0) {
             const { data: rvData } = await supabase.from('products').select('*').in('id', displayIds);
             if (rvData) setRecentlyViewed(rvData);
           }
         }
 
-        const { data: rData } = await supabase.from('reviews').select('*').eq('product_id', id);
+        const productId = pData?.id;
+        if (!productId) {
+          setReviews([]);
+          setRecommended([]);
+          return;
+        }
+
+        const { data: rData } = await supabase.from('reviews').select('*').eq('product_id', productId);
         if (rData) setReviews(rData);
 
         const { data: recData } = await supabase.from('products').select('*').limit(4);
-        if (recData) setRecommended(recData.filter(p => String(p.id) !== id).slice(0, 3));
+        if (recData) setRecommended(recData.filter(p => String(p.id) !== String(productId)).slice(0, 3));
 
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -73,7 +89,7 @@ export default function ProductDetails() {
     };
     fetchProductAndReviews();
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [slug, id, navigate]);
 
   const handleAddToCart = () => {
     if (product) {
@@ -101,11 +117,11 @@ export default function ProductDetails() {
 
   const submitReview = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user || !profile || !id) return;
+    if (!user || !profile || !product?.id) return;
 
     try {
       const newReview = {
-        product_id: id,
+        product_id: product.id,
         user_id: user.id,
         author_name: profile.display_name || user.email?.split('@')[0] || 'Anonymous',
         rating,
@@ -141,6 +157,17 @@ export default function ProductDetails() {
   );
 
   const currentPrice = selectedVariant ? selectedVariant.display_price : product.price;
+  const currentNum = Number(currentPrice) || 0;
+  const listCompare = Number(product.compare_at_price ?? product.compare_at);
+  const variantCompare = selectedVariant
+    ? Number(selectedVariant.original_price ?? selectedVariant.regular_price)
+    : NaN;
+  const compareWas =
+    Number.isFinite(listCompare) && listCompare > currentNum
+      ? listCompare
+      : Number.isFinite(variantCompare) && variantCompare > currentNum
+        ? variantCompare
+        : null;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -157,7 +184,7 @@ export default function ProductDetails() {
                 className="w-full h-full object-cover" 
               />
             ) : (
-              <div className="text-gray-300 font-bold uppercase italic tracking-tighter text-2xl">Peptistore</div>
+              <ProductImagePlaceholder productId={String(product.id)} title={product.title} className="h-full w-full min-h-[16rem]" />
             )}
             
             <div className="absolute top-6 left-6 flex flex-col gap-2">
@@ -174,10 +201,13 @@ export default function ProductDetails() {
               {product.images.map((img: string, i: number) => (
                 <button
                   key={i}
+                  type="button"
                   onClick={() => setActiveImage(i)}
                   className={`w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 border-2 transition-all ${
                     activeImage === i ? 'border-blue-600 shadow-md scale-105' : 'border-transparent hover:border-gray-200'
                   }`}
+                  aria-label={`Show product image ${i + 1} of ${product.images.length}`}
+                  aria-current={activeImage === i ? 'true' : undefined}
                 >
                   <img src={img} alt="" className="w-full h-full object-cover" />
                 </button>
@@ -191,21 +221,27 @@ export default function ProductDetails() {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.title}</h1>
             <div className="flex space-x-2 relative">
               <button 
+                type="button"
                 onClick={() => setShowShare(!showShare)}
                 className="p-2 rounded-full border border-gray-200 text-gray-400 hover:text-blue-600 hover:bg-blue-50"
+                aria-expanded={showShare}
+                aria-haspopup="true"
+                aria-label="Share product"
               >
-                <Share2 className="h-6 w-6" />
+                <Share2 className="h-6 w-6" aria-hidden />
               </button>
               {showShare && (
-                <div className="absolute right-0 top-12 bg-white border border-gray-200 shadow-lg rounded-md p-2 flex space-x-2 z-10">
-                  <button onClick={copyLink} className="p-2 text-gray-600 hover:bg-gray-100 rounded-md"><LinkIcon className="h-5 w-5" /></button>
+                <div className="absolute right-0 top-12 bg-white border border-gray-200 shadow-lg rounded-md p-2 flex space-x-2 z-10" role="menu">
+                  <button type="button" onClick={copyLink} className="p-2 text-gray-600 hover:bg-gray-100 rounded-md" aria-label="Copy link to clipboard"><LinkIcon className="h-5 w-5" aria-hidden /></button>
                 </div>
               )}
               <button 
+                type="button"
                 onClick={() => toggleWishlist(product.id, user?.id || '')}
                 className={`p-2 rounded-full border ${productIds.includes(product.id) ? 'border-red-200 bg-red-50 text-red-500' : 'border-gray-200 text-gray-400 hover:text-red-500 hover:bg-red-50'}`}
+                aria-label={productIds.includes(product.id) ? `Remove ${product.title} from wishlist` : `Add ${product.title} to wishlist`}
               >
-                <Heart className="h-6 w-6" fill={productIds.includes(product.id) ? "currentColor" : "none"} />
+                <Heart className="h-6 w-6" fill={productIds.includes(product.id) ? "currentColor" : "none"} aria-hidden />
               </button>
             </div>
           </div>
@@ -220,7 +256,16 @@ export default function ProductDetails() {
           </div>
           
           <div className="flex items-center gap-4 mb-6">
-            <div className="text-4xl font-black text-gray-900">{formatCurrency(currentPrice)}</div>
+            <div className="flex flex-col gap-0.5">
+              {compareWas != null && (
+                <span className="text-lg font-bold text-gray-400 line-through tabular-nums">
+                  {formatCurrency(compareWas)}
+                </span>
+              )}
+              <div className="text-4xl font-black text-gray-900 tabular-nums">
+                {formatCurrency(currentPrice)}
+              </div>
+            </div>
             <div className="flex items-center gap-1.5 px-3 py-1 bg-green-50 rounded-full border border-green-100">
                <ShieldCheck className="h-4 w-4 text-green-500" />
                <span className="text-[10px] font-black text-green-700 uppercase tracking-widest">Price Verified</span>
@@ -239,12 +284,14 @@ export default function ProductDetails() {
                   return (
                     <button
                       key={v.variation_id || i}
+                      type="button"
                       onClick={() => setSelectedVariant(v)}
                       className={`px-4 py-2 rounded-lg text-sm font-medium border-2 transition-all ${
                         selectedVariant?.variation_id === v.variation_id
                           ? 'border-blue-600 bg-blue-50 text-blue-700 shadow-sm'
                           : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
                       }`}
+                      aria-pressed={selectedVariant?.variation_id === v.variation_id}
                     >
                       {label}
                     </button>
@@ -291,12 +338,15 @@ export default function ProductDetails() {
                 return (
                   <button
                     key={tier.id}
+                    type="button"
                     onClick={() => setQuantity(tier.qty)}
                     className={`relative p-3 md:p-6 rounded-2xl md:rounded-[2rem] border-2 transition-all duration-300 text-center group ${
                       isSelected 
                         ? 'border-blue-600 bg-blue-50/50 shadow-xl shadow-blue-500/10 md:scale-[1.02]' 
                         : 'border-gray-100 bg-white hover:border-gray-300 hover:shadow-lg hover:shadow-gray-200/50'
                     }`}
+                    aria-pressed={isSelected}
+                    aria-label={`${tier.label}: ${tier.range}, ${formatCurrency(unitPrice)} per unit`}
                   >
                     {isSelected && (
                       <div className="absolute top-2 right-2 md:top-4 md:right-4 text-blue-600">
@@ -350,21 +400,23 @@ export default function ProductDetails() {
 
           <div className="flex items-center space-x-4">
             <div className="flex items-center border border-gray-300 rounded-xl overflow-hidden shadow-sm">
-              <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-4 py-3 text-gray-600 hover:bg-gray-100 transition-colors">-</button>
+              <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-4 py-3 text-gray-600 hover:bg-gray-100 transition-colors" aria-label="Decrease quantity">−</button>
               <input 
                 type="number" 
                 min="1"
                 value={quantity}
                 onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
                 className="w-16 px-2 py-3 font-bold text-gray-900 border-x border-gray-300 bg-white text-center focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                aria-label="Quantity"
               />
-              <button onClick={() => setQuantity(quantity + 1)} className="px-4 py-3 text-gray-600 hover:bg-gray-100 transition-colors">+</button>
+              <button type="button" onClick={() => setQuantity(quantity + 1)} className="px-4 py-3 text-gray-600 hover:bg-gray-100 transition-colors" aria-label="Increase quantity">+</button>
             </div>
             <button 
+              type="button"
               onClick={handleAddToCart}
               className="flex-1 bg-blue-600 text-white py-4 px-6 rounded-xl font-bold hover:bg-blue-700 flex items-center justify-center transition-all shadow-lg hover:shadow-xl active:scale-95"
             >
-                 <ShoppingCart className="mr-2 h-5 w-5" /> Add to Cart
+                 <ShoppingCart className="mr-2 h-5 w-5" aria-hidden /> Add to Cart
             </button>
           </div>
         </div>
@@ -432,11 +484,13 @@ export default function ProductDetails() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10">
             {recommended.map(rec => (
-              <Link key={rec.id} to={`/product/${rec.id}`} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-xl transition-all duration-500">
+              <Link key={rec.id} to={productPath(rec)} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-xl transition-all duration-500">
                 <div className="h-48 bg-gray-100 overflow-hidden relative">
                   {rec.images && rec.images.length > 0 ? (
                      <img src={rec.images[0]} alt={rec.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  ) : <div className="w-full h-full flex items-center justify-center text-gray-300 font-bold italic tracking-tighter">Peptistore</div>}
+                  ) : (
+                     <ProductImagePlaceholder productId={String(rec.id)} title={rec.title} className="h-full min-h-[12rem]" />
+                  )}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
                 </div>
                 <div className="p-6">
@@ -459,14 +513,13 @@ export default function ProductDetails() {
           <h2 className="text-gray-500 uppercase tracking-widest mb-8">Recently viewed</h2>
           <div className="flex gap-6 overflow-x-auto pb-6 no-scrollbar">
             {recentlyViewed.map(rv => (
-              <Link key={`rv-${rv.id}`} to={`/product/${rv.id}`} className="flex-shrink-0 w-48 group">
+              <Link key={`rv-${rv.id}`} to={productPath(rv)} className="flex-shrink-0 w-48 group">
                 <div className="h-48 rounded-2xl bg-gray-100 overflow-hidden border border-gray-50 group-hover:shadow-lg transition-all">
                   {rv.images?.[0] ? (
-                    <img src={rv.images[0]} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={rv.images[0]} alt={rv.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-200">No Image</div>
-                  )
-                }
+                    <ProductImagePlaceholder productId={String(rv.id)} title={rv.title} className="h-full min-h-[12rem] rounded-2xl" />
+                  )}
                 </div>
                 <h4 className="mt-3 group-hover:text-blue-600 line-clamp-1">{rv.title}</h4>
                 <p className={`text-gray-400 ${rv.variants && rv.variants.length > 1 ? 'text-[10px]' : 'text-xs'} font-medium mt-1`}>

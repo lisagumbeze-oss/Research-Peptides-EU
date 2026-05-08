@@ -4,6 +4,8 @@ import { X, ArrowRight, ArrowLeft, CheckCircle2, Sparkles, Target, Zap, Waves } 
 import { useWizardStore } from '../../store/useWizardStore';
 import { supabase } from '../../supabase';
 import { useNavigate } from 'react-router-dom';
+import { ProductImagePlaceholder } from '../products/ProductImagePlaceholder';
+import { productPath } from '../../lib/productUrl';
 
 interface WizardOption {
   id: string;
@@ -93,9 +95,9 @@ export default function SelectorWizard() {
     }
   };
 
-  const handleProductClick = (id: string) => {
+  const handleProductClick = (product: any) => {
     closeWizard();
-    navigate(`/product/${id}`);
+    navigate(productPath(product));
   };
 
   return (
@@ -204,11 +206,20 @@ export default function SelectorWizard() {
                       {recommendations.map((product) => (
                         <div
                           key={product.id}
-                          onClick={() => handleProductClick(product.id)}
+                          onClick={() => handleProductClick(product)}
                           className="flex items-center gap-4 p-4 rounded-3xl border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-all cursor-pointer group"
                         >
                           <div className="h-20 w-20 rounded-2xl overflow-hidden bg-gray-50 shrink-0">
-                            <img src={product.images?.[0]} alt="" className="h-full w-full object-cover group-hover:scale-110 transition-transform" />
+                            {product.images?.[0] ? (
+                            <img src={product.images[0]} alt="" className="h-full w-full object-cover group-hover:scale-110 transition-transform" />
+                            ) : (
+                              <ProductImagePlaceholder
+                                productId={String(product.id)}
+                                title={product.title}
+                                className="h-full w-full min-h-20"
+                                compact
+                              />
+                            )}
                           </div>
                           <div className="flex-grow">
                             <p className="text-[10px] font-black text-blue-600 uppercase mb-1">Recommended</p>

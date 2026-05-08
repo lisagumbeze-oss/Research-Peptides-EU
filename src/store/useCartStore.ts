@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { PRIMARY_PROMO_CODE, PROMO_DISCOUNT_PERCENT, isValidPromoCode } from '../lib/promoCodes';
 
 export interface CartItem {
   productId: string;
@@ -14,6 +15,8 @@ interface CartState {
   items: CartItem[];
   promoCode: string | null;
   discount: number; // Percentage or absolute? Let's use percentage for simplicity
+  hasHydrated: boolean;
+  setHasHydrated: (value: boolean) => void;
   addItem: (item: CartItem) => void;
   removeItem: (productId: string, specification?: string) => void;
   updateQuantity: (productId: string, quantity: number, specification?: string) => void;
@@ -34,6 +37,8 @@ export const useCartStore = create<CartState>()(
       items: [],
       promoCode: null,
       discount: 0,
+      hasHydrated: false,
+      setHasHydrated: (value) => set({ hasHydrated: value }),
       isOpen: false,
       openCart: () => set({ isOpen: true }),
       closeCart: () => set({ isOpen: false }),
@@ -75,8 +80,8 @@ export const useCartStore = create<CartState>()(
       },
       clearCart: () => set({ items: [], promoCode: null, discount: 0 }),
       applyPromoCode: (code: string) => {
-        if (code.toUpperCase() === 'PEPTIDE10') {
-          set({ promoCode: 'PEPTIDE10', discount: 10 });
+        if (isValidPromoCode(code)) {
+          set({ promoCode: PRIMARY_PROMO_CODE, discount: PROMO_DISCOUNT_PERCENT });
           return true;
         }
         return false;
@@ -94,6 +99,10 @@ export const useCartStore = create<CartState>()(
     {
       name: 'cart-storage',
       partialize: (state) => ({ items: state.items, promoCode: state.promoCode, discount: state.discount }), // Don't persist UI state like isOpen
+      onRehydrateStorage: () => (state) => {
+        state?.closeCart();
+        state?.setHasHydrated(true);
+      },
     }
   )
 );
