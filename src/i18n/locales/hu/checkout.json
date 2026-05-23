@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Biztonságos pénztár",
+    "title": "Fejezze be rendelését",
+    "description": "EU szállítás · ÁFA-kész számlázás · teljesítés Netherlandsből"
+  },
+  "steps": {
+    "shipping": "Szállítás",
+    "payment": "Fizetés",
+    "confirm": "Megerősítés"
+  },
+  "cart": {
+    "title": "Kosara",
+    "empty": "A kosara üres",
+    "emptyCta": "Katalógus böngészése",
+    "summary": "Rendelés összegzése",
+    "promo": "Promóciós kód",
+    "subtotal": "Részösszeg",
+    "discount": "Kedvezmény",
+    "shipping": "Szállítás",
+    "shippingAtCheckout": "A pénztárnál",
+    "total": "Összesen",
+    "proceed": "Tovább a pénztárhoz",
+    "vatNote": "Árak EUR-ban. ÁFA alkalmazása, ahol szükséges a pénztárnál az EU szállítási ország szerint."
+  }
+}

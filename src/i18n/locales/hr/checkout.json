@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Sigurna naplata",
+    "title": "Dovršite narudžbu",
+    "description": "EU dostava · fakturiranje s PDV-om · ispunjenje iz Nizozemske"
+  },
+  "steps": {
+    "shipping": "Dostava",
+    "payment": "Plaćanje",
+    "confirm": "Potvrdi"
+  },
+  "cart": {
+    "title": "Vaša košarica",
+    "empty": "Vaša košarica je prazna",
+    "emptyCta": "Pregledaj katalog",
+    "summary": "Sažetak narudžbe",
+    "promo": "Promotivni kod",
+    "subtotal": "Međuzbroj",
+    "discount": "Popust",
+    "shipping": "Dostava",
+    "shippingAtCheckout": "Pri naplati",
+    "total": "Ukupno",
+    "proceed": "Nastavi na naplatu",
+    "vatNote": "Cijene u EUR. PDV se primjenjuje gdje je potrebno pri naplati prema zemlji dostave u EU."
+  }
+}

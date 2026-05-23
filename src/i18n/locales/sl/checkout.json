@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Varna blagajna",
+    "title": "Dokončajte naročilo",
+    "description": "Dostava EU · fakturiranje z DDV · izpolnitev iz Netherlands"
+  },
+  "steps": {
+    "shipping": "Dostava",
+    "payment": "Plačilo",
+    "confirm": "Potrdi"
+  },
+  "cart": {
+    "title": "Vaša košarica",
+    "empty": "Vaša košarica je prazna",
+    "emptyCta": "Brskaj po katalogu",
+    "summary": "Povzetek naročila",
+    "promo": "Promocijska koda",
+    "subtotal": "Medseštevek",
+    "discount": "Popust",
+    "shipping": "Dostava",
+    "shippingAtCheckout": "Pri blagajni",
+    "total": "Skupaj",
+    "proceed": "Na blagajno",
+    "vatNote": "Cene v EUR. DDV se uporabi, kjer je zahtevan pri blagajni glede na državo dostave v EU."
+  }
+}

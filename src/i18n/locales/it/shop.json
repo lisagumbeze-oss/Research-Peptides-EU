@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Catalogo ricerca",
+    "title": "Negozio",
+    "titleHighlight": "peptidi",
+    "description": "Sfoglia composti da ricerca verificati con evasione UE, documentazione per lotto e specifiche trasparenti."
+  },
+  "results": "Visualizzazione di {{count}} su {{total}} prodotti",
+  "filters": {
+    "categories": "Categorie",
+    "maxPrice": "Prezzo massimo",
+    "clearAll": "Cancella tutti i filtri",
+    "clearShort": "Cancella filtri",
+    "filters": "Filtri",
+    "close": "Chiudi filtri",
+    "refine": "Affina risultati",
+    "showResults": "Mostra risultati"
+  },
+  "sort": {
+    "label": "Ordina prodotti",
+    "relevance": "Rilevanza",
+    "featured": "In evidenza",
+    "ratingDesc": "Migliori valutazioni",
+    "newest": "Più recenti",
+    "priceAsc": "Prezzo: dal più basso al più alto",
+    "priceDesc": "Prezzo: dal più alto al più basso"
+  },
+  "empty": {
+    "title": "Nessun prodotto corrisponde ai filtri",
+    "description": "Prova ad ampliare l'intervallo di prezzo o a cancellare le categorie selezionate."
+  }
+}

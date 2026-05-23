@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Forskningskatalog",
+    "title": "Butik",
+    "titleHighlight": "peptider",
+    "description": "Bläddra bland verifierade forskningsföreningar med EU-uppfyllelse, batchdokumentation och transparenta specifikationer."
+  },
+  "results": "Visar {{count}} av {{total}} produkter",
+  "filters": {
+    "categories": "Kategorier",
+    "maxPrice": "Maxpris",
+    "clearAll": "Rensa alla filter",
+    "clearShort": "Rensa filter",
+    "filters": "Filter",
+    "close": "Stäng filter",
+    "refine": "Förfina resultat",
+    "showResults": "Visa resultat"
+  },
+  "sort": {
+    "label": "Sortera produkter",
+    "relevance": "Relevans",
+    "featured": "Utvalda",
+    "ratingDesc": "Bäst betygsatta",
+    "newest": "Nyaste",
+    "priceAsc": "Pris: lägst till högst",
+    "priceDesc": "Pris: högst till lägst"
+  },
+  "empty": {
+    "title": "Inga produkter matchar dina filter",
+    "description": "Prova att bredda prisintervallet eller rensa kategorival."
+  }
+}

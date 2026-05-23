@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Kutatási katalógus",
+    "title": "Bolt",
+    "titleHighlight": "peptidek",
+    "description": "Böngésszen ellenőrzött kutatási vegyületeket EU teljesítéssel, tételdokumentációval és átlátható specifikációkkal."
+  },
+  "results": "{{count}} / {{total}} termék megjelenítve",
+  "filters": {
+    "categories": "Kategóriák",
+    "maxPrice": "Max. ár",
+    "clearAll": "Összes szűrő törlése",
+    "clearShort": "Szűrők törlése",
+    "filters": "Szűrők",
+    "close": "Szűrők bezárása",
+    "refine": "Eredmények finomítása",
+    "showResults": "Eredmények megjelenítése"
+  },
+  "sort": {
+    "label": "Termékek rendezése",
+    "relevance": "Relevancia",
+    "featured": "Kiemelt",
+    "ratingDesc": "Legjobban értékelt",
+    "newest": "Legújabb",
+    "priceAsc": "Ár: alacsonyról magasra",
+    "priceDesc": "Ár: magasról alacsonyra"
+  },
+  "empty": {
+    "title": "Egy termék sem felel meg a szűrőknek",
+    "description": "Próbálja szélesíteni az ártartományt vagy törölni a kategóriaválasztásokat."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistique",
+    "title": "Expédition & livraison",
+    "description": "Expédition prioritaire UE depuis les Pays-Bas avec suivi dans les États membres et options mondiales."
+  },
+  "features": {
+    "cutoffTitle": "Limite 12h00 CET",
+    "cutoffDesc": "Commandes avant midi CET en semaine expédiées le jour même.",
+    "trackedTitle": "Suivi sécurisé",
+    "trackedDesc": "Chaque envoi est entièrement suivi du laboratoire à votre site.",
+    "packagingTitle": "Emballage discret",
+    "packagingDesc": "Sous vide et expédié dans un emballage neutre pour laboratoires."
+  },
+  "regions": {
+    "title": "UE & international",
+    "euTitle": "Livraison Union européenne",
+    "euDesc": "Standard UE : 3–7 jours ouvrés. Livraison gratuite dès 500 € (sous-total).",
+    "worldTitle": "Logistique mondiale",
+    "worldDesc": "Hors UE : 5–14 jours selon douanes et transporteurs.",
+    "ukTitle": "Royaume-Uni",
+    "ukDesc": "Options UK au paiement si le Royaume-Uni est sélectionné."
+  },
+  "responsibility": {
+    "eyebrow": "Responsabilité chercheur",
+    "body": "L'acheteur doit respecter les lois d'importation locales. Droits de douane, TVA et taxes peuvent s'appliquer.",
+    "disclaimer": "Usage recherche uniquement. Non destiné à la consommation humaine ou vétérinaire."
+  }
+}

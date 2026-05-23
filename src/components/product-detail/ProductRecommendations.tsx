@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { formatCurrency } from '../../lib/utils';
 import { productPath } from '../../lib/productUrl';
 import { ProductImagePlaceholder } from '../products/ProductImagePlaceholder';
@@ -21,14 +22,16 @@ export function ProductRecommendations({
   onToggleWishlist,
   onAddToCart,
 }: ProductRecommendationsProps) {
+  const { t } = useTranslation('product');
+
   return (
     <Container className="pb-16 space-y-16">
       {recommended.length > 0 && (
         <section>
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-h2 font-display font-bold text-navy-950">Related research compounds</h2>
+            <h2 className="text-h2 font-display font-bold text-navy-950">{t('recommendations.relatedTitle')}</h2>
             <Link to="/shop" className="text-sm font-semibold text-brand-600 hover:text-brand-700">
-              View catalog →
+              {t('recommendations.viewCatalog')} →
             </Link>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -48,7 +51,7 @@ export function ProductRecommendations({
 
       {recentlyViewed.length > 0 && (
         <section className="pt-12 border-t border-brand-100">
-          <h2 className="text-caption text-brand-600 mb-6">Recently viewed</h2>
+          <h2 className="text-caption text-brand-600 mb-6">{t('recommendations.recentTitle')}</h2>
           <div className="flex gap-4 overflow-x-auto pb-2">
             {recentlyViewed.map((rv) => (
               <Link
@@ -62,6 +65,8 @@ export function ProductRecommendations({
                       src={rv.images[0]}
                       alt={rv.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <ProductImagePlaceholder

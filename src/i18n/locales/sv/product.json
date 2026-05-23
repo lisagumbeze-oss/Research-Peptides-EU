@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Produkten hittades inte",
+    "cta": "Tillbaka till butiken"
+  },
+  "reviews": {
+    "eyebrow": "Forskarsamfund",
+    "title": "Verifierade recensioner",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Kopiera länk",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Lägg i varukorg",
+    "inWishlist": "På önskelistan",
+    "saveWishlist": "Spara på önskelistan",
+    "share": "Dela",
+    "copyLink": "Kopiera länk",
+    "specifications": "Specifikationer",
+    "variantLabel": "Välj variant",
+    "quantity": "Antal",
+    "bulkStandard": "Standard",
+    "bulkSave10": "Spara 10 %",
+    "bulkBestValue": "Bästa värde",
+    "unitsRange12": "1–2 enheter",
+    "unitsRange35": "3–5 enheter",
+    "unitsRange6": "6+ enheter",
+    "euDispatch": "EU-distribution",
+    "euDispatchDetail": "Uppfyllelse från Netherlands · spårade transportörer",
+    "researchOnly": "Endast för forskning",
+    "researchOnlyDetail": "Ej för mänsklig eller veterinär konsumtion",
+    "coaAvailable": "COA-dokumentation tillgänglig på begäran"
+  },
+  "recommendations": {
+    "relatedTitle": "Relaterade forskningsföreningar",
+    "viewCatalog": "Visa katalog",
+    "recentTitle": "Nyligen visade"
+  },
+  "toast": {
+    "added": "{{title}} tillagd i varukorgen",
+    "bulk15": "Mängdrabatt (15 %) tillämpad på {{title}}",
+    "bulk10": "Mängdrabatt (10 %) tillämpad på {{title}}",
+    "linkCopied": "Länk kopierad till urklipp"
+  }
+}

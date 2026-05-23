@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Catálogo de investigação",
+    "title": "Loja",
+    "titleHighlight": "peptídeos",
+    "description": "Explore compostos de investigação verificados com cumprimento na UE, documentação por lote e especificações transparentes."
+  },
+  "results": "A mostrar {{count}} de {{total}} produtos",
+  "filters": {
+    "categories": "Categorias",
+    "maxPrice": "Preço máximo",
+    "clearAll": "Limpar todos os filtros",
+    "clearShort": "Limpar filtros",
+    "filters": "Filtros",
+    "close": "Fechar filtros",
+    "refine": "Refinar resultados",
+    "showResults": "Mostrar resultados"
+  },
+  "sort": {
+    "label": "Ordenar produtos",
+    "relevance": "Relevância",
+    "featured": "Em destaque",
+    "ratingDesc": "Melhor avaliados",
+    "newest": "Mais recentes",
+    "priceAsc": "Preço: do mais baixo ao mais alto",
+    "priceDesc": "Preço: do mais alto ao mais baixo"
+  },
+  "empty": {
+    "title": "Nenhum produto corresponde aos seus filtros",
+    "description": "Tente alargar a faixa de preços ou limpar as categorias selecionadas."
+  }
+}

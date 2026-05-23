@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistika",
+    "title": "Dostava i isporuka",
+    "description": "EU prioritetno ispunjenje iz Nizozemske s praćenom dostavom u državama članicama i globalnim opcijama."
+  },
+  "features": {
+    "cutoffTitle": "Rok narudžbe u 12:00 CET",
+    "cutoffDesc": "Narudžbe do podne po srednjoeuropskom vremenu, pon–pet, šalju se isti radni dan.",
+    "trackedTitle": "Praćena sigurnost",
+    "trackedDesc": "Svaka pošiljka je u potpunosti praćena od našeg laboratorija do vašeg objekta.",
+    "packagingTitle": "Diskretno pakiranje",
+    "packagingDesc": "Artikli su vakuumski zatvoreni i šalju se u običnom, neoznačenom pakiranju prikladnom za istraživačke objekte."
+  },
+  "regions": {
+    "title": "EU i međunarodni doseg",
+    "euTitle": "Dostava u Europskoj uniji",
+    "euDesc": "Standardna EU dostava: 3–7 radnih dana. Besplatna dostava za kvalificirane narudžbe iznad 500 € (međuzbroj).",
+    "worldTitle": "Svjetska logistika",
+    "worldDesc": "Destinacije izvan EU: 5–14 radnih dana ovisno o carini i regionalnim prijevoznicima.",
+    "ukTitle": "Ujedinjeno Kraljevstvo",
+    "ukDesc": "Praćene opcije za UK dostupne su pri naplati kada je odabrano Ujedinjeno Kraljevstvo kao destinacija."
+  },
+  "responsibility": {
+    "eyebrow": "Odgovornost istraživača",
+    "body": "Kupci su odgovorni osigurati usklađenost proizvoda s lokalnim zakonima o uvozu. Carine, PDV i regionalni porezi mogu se primijeniti i na teret su kupca ako nisu naplaćeni pri naplati.",
+    "disclaimer": "Samo za istraživanje. Nije za ljudsku ili veterinarsku upotrebu."
+  }
+}

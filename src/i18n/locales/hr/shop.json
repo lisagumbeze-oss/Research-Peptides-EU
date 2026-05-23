@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Istraživački katalog",
+    "title": "Trgovina",
+    "titleHighlight": "peptidi",
+    "description": "Pregledajte provjerene istraživačke spojeve s EU ispunjenjem, dokumentacijom po seriji i transparentnim specifikacijama."
+  },
+  "results": "Prikazano {{count}} od {{total}} proizvoda",
+  "filters": {
+    "categories": "Kategorije",
+    "maxPrice": "Maks. cijena",
+    "clearAll": "Očisti sve filtre",
+    "clearShort": "Očisti filtre",
+    "filters": "Filtri",
+    "close": "Zatvori filtre",
+    "refine": "Preciziraj rezultate",
+    "showResults": "Prikaži rezultate"
+  },
+  "sort": {
+    "label": "Sortiraj proizvode",
+    "relevance": "Relevantnost",
+    "featured": "Istaknuto",
+    "ratingDesc": "Najbolje ocijenjeno",
+    "newest": "Najnovije",
+    "priceAsc": "Cijena: od niže prema višoj",
+    "priceDesc": "Cijena: od više prema nižoj"
+  },
+  "empty": {
+    "title": "Nijedan proizvod ne odgovara filtrima",
+    "description": "Pokušajte proširiti raspon cijena ili očistiti odabrane kategorije."
+  }
+}

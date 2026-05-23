@@ -1,0 +1,40 @@
+{
+  "primary": {
+    "shop": "Kauppa",
+    "research": "Tutkimus",
+    "blog": "Blogi",
+    "contact": "Yhteystiedot"
+  },
+  "research": {
+    "peptideGuide": "Peptidiopas",
+    "peptideGuideDesc": "Protokollat, käsittely ja laboratorion parhaat käytännöt.",
+    "calculator": "Peptidilaskuri",
+    "calculatorDesc": "Uudelleenliuotus- ja annoslaskelmat tutkimukseen.",
+    "coaLibrary": "COA-kirjasto",
+    "coaLibraryDesc": "Eräkohtaiset analyysitodistukset ja puhtausdokumentaatio.",
+    "information": "Peptiditiedot",
+    "informationDesc": "Yhdisteprofiilit ja tutkimusviitteet.",
+    "researchHub": "Peptiditutkimus",
+    "researchHubDesc": "Uusimmat löydökset ja sovellusmuistiinpanot."
+  },
+  "footer": {
+    "inventory": "Varasto",
+    "support": "Tuki",
+    "legal": "Oikeudellinen",
+    "fullCatalog": "Koko luettelo",
+    "categories": "Kategoriat",
+    "advancedSearch": "Tarkennettu haku",
+    "wishlist": "Toivelista",
+    "faq": "Tutkijan UKK",
+    "euShipping": "EU-toimitus",
+    "about": "Tietoa meistä",
+    "terms": "Ehdot",
+    "privacy": "Tietosuoja ja GDPR",
+    "returns": "Palautukset"
+  },
+  "mega": {
+    "browseCatalog": "Selaa luetteloa",
+    "allCategories": "Kaikki kategoriat",
+    "featured": "Suositellut yhdisteet"
+  }
+}

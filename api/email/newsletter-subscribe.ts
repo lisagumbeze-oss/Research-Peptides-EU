@@ -5,7 +5,7 @@ import {
 import { sendTransactionalEmail } from '../lib/resendSend.js';
 
 function getAdminRecipient() {
-  return process.env.EMAIL_ADMIN_TO || process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.uk';
+  return process.env.EMAIL_ADMIN_TO || process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.eu';
 }
 
 function isValidEmail(email: string) {

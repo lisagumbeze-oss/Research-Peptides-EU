@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Catalogue recherche",
+    "title": "Boutique",
+    "titleHighlight": "peptides",
+    "description": "Composés de recherche vérifiés avec expédition UE, documentation de lots et spécifications transparentes."
+  },
+  "results": "{{count}} sur {{total}} produits",
+  "filters": {
+    "categories": "Catégories",
+    "maxPrice": "Prix max.",
+    "clearAll": "Effacer les filtres",
+    "filters": "Filtres",
+    "close": "Fermer les filtres"
+  },
+  "sort": {
+    "label": "Trier les produits",
+    "relevance": "Pertinence",
+    "featured": "En vedette",
+    "ratingDesc": "Mieux notés",
+    "newest": "Plus récents",
+    "priceAsc": "Prix : croissant",
+    "priceDesc": "Prix : décroissant"
+  },
+  "empty": {
+    "title": "Aucun produit ne correspond aux filtres",
+    "description": "Élargissez la fourchette de prix ou effacez les catégories."
+  }
+}

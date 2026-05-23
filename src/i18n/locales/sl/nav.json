@@ -1,0 +1,40 @@
+{
+  "primary": {
+    "shop": "Trgovina",
+    "research": "Raziskovanje",
+    "blog": "Blog",
+    "contact": "Kontakt"
+  },
+  "research": {
+    "peptideGuide": "Vodnik po peptidih",
+    "peptideGuideDesc": "Protokoli, rokovanje in najboljše laboratorijske prakse.",
+    "calculator": "Kalkulator peptidov",
+    "calculatorDesc": "Izračuni rekonstitucije in odmerjanja za raziskave.",
+    "coaLibrary": "Knjižnica COA",
+    "coaLibraryDesc": "Certifikati analize serij in dokumentacija o čistosti.",
+    "information": "Informacije o peptidih",
+    "informationDesc": "Profili spojin in raziskovalne reference.",
+    "researchHub": "Raziskovanje peptidov",
+    "researchHubDesc": "Najnovejša odkritja in aplikacijske opombe."
+  },
+  "footer": {
+    "inventory": "Zaloga",
+    "support": "Podpora",
+    "legal": "Pravno",
+    "fullCatalog": "Celoten katalog",
+    "categories": "Kategorije",
+    "advancedSearch": "Napredno iskanje",
+    "wishlist": "Seznam želja",
+    "faq": "FAQ za raziskovalce",
+    "euShipping": "Dostava EU",
+    "about": "O nas",
+    "terms": "Pogoji",
+    "privacy": "Zasebnost in GDPR",
+    "returns": "Vračila"
+  },
+  "mega": {
+    "browseCatalog": "Brskaj po katalogu",
+    "allCategories": "Vse kategorije",
+    "featured": "Izpostavljene spojine"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistika",
+    "title": "Doprava a doručení",
+    "description": "Prioritní plnění v EU z Nizozemska se sledovaným doručením v členských státech a celosvětovými možnostmi."
+  },
+  "features": {
+    "cutoffTitle": "Uzávěrka objednávek ve 12:00 CET",
+    "cutoffDesc": "Objednávky do poledne středoevropského času, po–pá, odesíláme tentýž pracovní den.",
+    "trackedTitle": "Sledovaná bezpečnost",
+    "trackedDesc": "Každá zásilka je plně sledována z naší laboratoře do vašeho zařízení.",
+    "packagingTitle": "Diskrétní balení",
+    "packagingDesc": "Položky jsou vakuově uzavřeny a odesílány v neutrálním, neoznačeném balení vhodném pro výzkumná zařízení."
+  },
+  "regions": {
+    "title": "Dosah v EU i mezinárodně",
+    "euTitle": "Doručení v Evropské unii",
+    "euDesc": "Standardní doprava v EU: 3–7 pracovních dnů. Doprava zdarma u kvalifikovaných objednávek nad 500 € (mezisoučet).",
+    "worldTitle": "Celosvětová logistika",
+    "worldDesc": "Destinace mimo EU: 5–14 pracovních dnů podle celních a regionálních dopravců.",
+    "ukTitle": "Spojené království",
+    "ukDesc": "Sledované možnosti pro UK zůstávají k dispozici při pokladně, pokud je jako destinace vybráno Spojené království."
+  },
+  "responsibility": {
+    "eyebrow": "Odpovědnost výzkumníka",
+    "body": "Kupující odpovídají za soulad produktů s místními importními předpisy. Mohou platit cla, DPH a regionální daně — jsou na kupujícím, pokud nebyly vybrány při pokladně.",
+    "disclaimer": "Pouze pro výzkum. Není určeno k lidské ani veterinární spotřebě."
+  }
+}

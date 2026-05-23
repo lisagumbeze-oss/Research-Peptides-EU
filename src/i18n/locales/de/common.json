@@ -14,5 +14,12 @@
   "close": "Schließen",
   "viewAll": "Alle anzeigen",
   "learnMore": "Mehr erfahren",
-  "researchUseOnly": "Nur für Laborforschung — nicht für den menschlichen oder tierärztlichen Gebrauch."
+  "researchUseOnly": "Nur für Laborforschung — nicht für den menschlichen oder tierärztlichen Gebrauch.",
+  "salesNotification": {
+    "purchased": "Jemand in {{location}} hat gekauft",
+    "justNow": "Gerade eben",
+    "minutesAgo_one": "vor {{count}} Minute",
+    "minutesAgo_other": "vor {{count}} Minuten",
+    "dismiss": "Benachrichtigung schließen"
+  }
 }

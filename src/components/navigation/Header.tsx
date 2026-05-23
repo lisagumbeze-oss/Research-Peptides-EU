@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { LocaleLink } from '../../i18n/LocaleLink';
 import { stripLocaleFromPath } from '../../i18n/routing';
 import { Heart, Search, ShoppingCart } from 'lucide-react';
-import logo from '../../assets/logo.webp';
+import logo from '../../assets/brandLogo';
 import { useAuthStore } from '../../store/useAuthStore';
 import { useCartStore } from '../../store/useCartStore';
 import { useSearchStore } from '../../store/useSearchStore';
@@ -63,7 +63,7 @@ export default function Header({
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 relative transition-all duration-300',
+        'relative w-full transition-all duration-300',
         scrolled
           ? 'bg-white/90 backdrop-blur-xl border-b border-brand-100/80 shadow-card'
           : 'bg-white/70 backdrop-blur-md border-b border-transparent',
@@ -77,7 +77,15 @@ export default function Header({
             className="shrink-0 flex items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
             aria-label="Research Peptides EU home"
           >
-            <img src={logo} alt="" className="h-9 md:h-10 w-auto" />
+            <img
+              src={logo}
+              alt=""
+              className="h-10 md:h-11 w-auto"
+              width={44}
+              height={44}
+              fetchPriority="high"
+              decoding="async"
+            />
           </LocaleLink>
 
           <nav className="hidden lg:flex items-center gap-1" aria-label="Primary">

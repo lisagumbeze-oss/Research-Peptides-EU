@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistyka",
+    "title": "Wysyłka i dostawa",
+    "description": "Realizacja priorytetowa w UE z Holandii z śledzoną dostawą w państwach członkowskich i opcjami worldwide."
+  },
+  "features": {
+    "cutoffTitle": "Zamówienia do 12:00 CET",
+    "cutoffDesc": "Zamówienia złożone przed południem czasu środkowoeuropejskiego, pon.–pt., wysyłamy tego samego dnia roboczego.",
+    "trackedTitle": "Śledzone zabezpieczenie",
+    "trackedDesc": "Każda przesyłka jest w pełni śledzona z naszego laboratorium do Twojej placówki.",
+    "packagingTitle": "Dyskretne opakowanie",
+    "packagingDesc": "Produkty są pakowane próżniowo i wysyłane w neutralnym, nieoznakowanym opakowaniu odpowiednim dla placówek badawczych."
+  },
+  "regions": {
+    "title": "Zasięg UE i międzynarodowy",
+    "euTitle": "Dostawa w Unii Europejskiej",
+    "euDesc": "Standardowa wysyłka UE: 3–7 dni roboczych. Darmowa wysyłka przy kwalifikujących się zamówieniach powyżej 500 € (suma częściowa).",
+    "worldTitle": "Logistyka worldwide",
+    "worldDesc": "Destynacje poza UE: 5–14 dni roboczych w zależności od cła i regionalnych przewoźników.",
+    "ukTitle": "Zjednoczone Królestwo",
+    "ukDesc": "Opcje ze śledzeniem do UK pozostają dostępne przy kasie, gdy jako destynację wybrano Zjednoczone Królestwo."
+  },
+  "responsibility": {
+    "eyebrow": "Odpowiedzialność badacza",
+    "body": "Kupujący odpowiadają za zgodność produktów z lokalnymi przepisami importowymi. Mogą obowiązywać cła, VAT i podatki regionalne — leżą po stronie nabywcy, jeśli nie pobrano ich przy kasie.",
+    "disclaimer": "Tylko do badań. Nie do spożycia przez ludzi ani zwierzęta."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistik",
+    "title": "Frakt och leverans",
+    "description": "EU-prioriterad uppfyllelse från Netherlands med spårad leverans i medlemsstater och worldwide-alternativ."
+  },
+  "features": {
+    "cutoffTitle": "Beställningsstopp kl. 12:00 CET",
+    "cutoffDesc": "Beställningar före middag centraleuropeisk tid, mån–fre, skickas samma arbetsdag.",
+    "trackedTitle": "Spårad säkerhet",
+    "trackedDesc": "Varje försändelse spåras fullt ut från vårt laboratorium till din anläggning.",
+    "packagingTitle": "Diskret förpackning",
+    "packagingDesc": "Artiklar vakuumförsluts och skickas i neutral, omarkerad förpackning lämplig för forskningsanläggningar."
+  },
+  "regions": {
+    "title": "EU och internationell räckvidd",
+    "euTitle": "Leverans inom Europeiska unionen",
+    "euDesc": "Standard EU-frakt: 3–7 arbetsdagar. Fri frakt vid kvalificerade beställningar över 500 € (delsumma).",
+    "worldTitle": "Worldwide-logistik",
+    "worldDesc": "Destinationer utanför EU: 5–14 arbetsdagar beroende på tull och regionala transportörer.",
+    "ukTitle": "United Kingdom",
+    "ukDesc": "Spårade UK-alternativ finns kvar vid kassan när United Kingdom väljs som destination."
+  },
+  "responsibility": {
+    "eyebrow": "Forskaransvar",
+    "body": "Köpare ansvarar för att produkter följer lokala importlagar. Tull, moms och regionala skatter kan tillämpas och är köparens ansvar om de inte tas ut vid kassan.",
+    "disclaimer": "Endast för forskning. Ej för mänsklig eller veterinär konsumtion."
+  }
+}

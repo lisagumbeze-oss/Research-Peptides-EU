@@ -1,0 +1,25 @@
+{
+  "brand": "Research Peptides EU",
+  "loading": "Se încarcă…",
+  "search": "Caută",
+  "cart": "Coș",
+  "wishlist": "Lista de dorințe",
+  "account": "Cont",
+  "orders": "Comenzile mele",
+  "login": "Autentificare",
+  "logout": "Deconectare",
+  "home": "Acasă",
+  "shop": "Magazin",
+  "languageActive": "Activ",
+  "close": "Închide",
+  "viewAll": "Vezi tot",
+  "learnMore": "Află mai multe",
+  "researchUseOnly": "Doar pentru cercetare de laborator — nu pentru uz uman sau veterinar.",
+  "salesNotification": {
+    "purchased": "Someone in {{location}} purchased",
+    "justNow": "Just now",
+    "minutesAgo_one": "{{count}} minute ago",
+    "minutesAgo_other": "{{count}} minutes ago",
+    "dismiss": "Dismiss notification"
+  }
+}

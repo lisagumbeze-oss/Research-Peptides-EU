@@ -34,13 +34,13 @@ export default function COALibrary() {
     <div className="bg-white min-h-screen pt-12 pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 text-brand-600 rounded-full text-xs font-black uppercase tracking-widest mb-6">
             <FileCheck2 className="h-4 w-4" />
             Verification Portal
           </div>
           <h1>COA Library</h1>
           <p className="text-gray-500 mt-4 font-medium italic max-w-3xl mx-auto">
-            Search batch-level Certificate of Analysis references for Research Peptides UK catalog lines.
+            Search batch-level Certificate of Analysis references for Research Peptides EU catalog lines.
           </p>
         </motion.div>
 
@@ -52,7 +52,7 @@ export default function COALibrary() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by product, batch, or lab..."
-              className="w-full pl-12 pr-4 py-4 rounded-2xl border border-gray-200 bg-gray-50 font-medium outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+              className="w-full pl-12 pr-4 py-4 rounded-2xl border border-gray-200 bg-gray-50 font-medium outline-none focus:bg-white focus:ring-2 focus:ring-brand-400/30"
             />
           </div>
         </section>
@@ -88,10 +88,10 @@ export default function COALibrary() {
         </section>
 
         <section className="mt-8 bg-slate-950 text-white rounded-3xl p-6 md:p-8 flex items-start gap-3">
-          <ShieldCheck className="h-5 w-5 text-blue-400 mt-0.5" />
+          <ShieldCheck className="h-5 w-5 text-brand-400 mt-0.5" />
           <p className="text-sm text-gray-300 leading-relaxed">
             This library is provided for research documentation visibility. If you need a full report pack for a specific batch,
-            request it via <span className="font-bold text-blue-300">info@researchpeptide.uk</span>.
+            request it via <span className="font-bold text-brand-300">info@researchpeptide.eu</span>.
           </p>
         </section>
       </div>

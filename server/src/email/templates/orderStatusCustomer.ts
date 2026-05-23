@@ -17,8 +17,8 @@ export function renderOrderStatusCustomerEmail(payload: OrderEmailPayload): Emai
     <p style="margin:0 0 12px;font-size:14px;color:#334155;">Hi ${payload.customerName || 'Researcher'},</p>
     <p style="margin:0 0 18px;font-size:14px;color:#334155;line-height:1.7;">${message}</p>
     <div style="padding:16px;border:1px solid #dbeafe;background:#eff6ff;border-radius:12px;margin-bottom:18px;">
-      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2563eb;font-weight:800;">Order ID</p>
-      <p style="margin:0;font-size:18px;color:#1e3a8a;font-weight:800;">${payload.orderId}</p>
+      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2db5a3;font-weight:800;">Order ID</p>
+      <p style="margin:0;font-size:18px;color:#1a365d;font-weight:800;">${payload.orderId}</p>
     </div>
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
       <tr>
@@ -27,7 +27,7 @@ export function renderOrderStatusCustomerEmail(payload: OrderEmailPayload): Emai
       </tr>
       <tr>
         <td style="font-size:13px;color:#64748b;padding:4px 0;">Total</td>
-        <td style="font-size:13px;color:#1d4ed8;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
+        <td style="font-size:13px;color:#249688;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
     </table>`;
 

@@ -5,12 +5,14 @@ import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { ShoppingBag } from 'lucide-react';
 import { useCartStore } from '../store/useCartStore';
 import { CartPageSkeleton } from '../components/Skeleton';
-import { Container, Button } from '../design-system';
+import { Container, Button, Reveal } from '../design-system';
 import { CatalogPageHeader } from '../components/catalog/CatalogPageHeader';
 import { CartLineItem } from '../components/cart/CartLineItem';
 import { OrderSummaryPanel } from '../components/cart/OrderSummaryPanel';
+import { usePageSeo } from '../seo/SeoProvider';
 
 export default function Cart() {
+  usePageSeo({ canonicalPath: '/cart', noindex: true });
   const { t } = useTranslation('checkout');
   const {
     items,
@@ -57,12 +59,14 @@ export default function Cart() {
           description={t('header.description')}
         />
         <Container className="py-20 text-center" role="status" aria-live="polite">
-          <ShoppingBag className="h-14 w-14 text-brand-200 mx-auto mb-4" aria-hidden />
-          <h2 className="font-display font-bold text-2xl text-navy-950 mb-3">{t('cart.empty')}</h2>
-          <p className="text-steel-600 mb-8 max-w-md mx-auto">{t('hero.subtitle', { ns: 'home' })}</p>
-          <LocaleLink to="/shop">
-            <Button size="lg">{t('cart.emptyCta')}</Button>
-          </LocaleLink>
+          <Reveal className="max-w-md mx-auto">
+            <ShoppingBag className="h-14 w-14 text-brand-200 mx-auto mb-4" aria-hidden />
+            <h2 className="font-display font-bold text-2xl text-navy-950 mb-3">{t('cart.empty')}</h2>
+            <p className="text-steel-600 mb-8">{t('hero.subtitle', { ns: 'home' })}</p>
+            <LocaleLink to="/shop">
+              <Button size="lg">{t('cart.emptyCta')}</Button>
+            </LocaleLink>
+          </Reveal>
         </Container>
       </div>
     );

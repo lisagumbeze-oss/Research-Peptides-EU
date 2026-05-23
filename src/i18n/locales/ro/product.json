@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Produs negăsit",
+    "cta": "Înapoi la magazin"
+  },
+  "reviews": {
+    "eyebrow": "Comunitatea cercetătorilor",
+    "title": "Recenzii verificate",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Copiază linkul",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Adaugă în coș",
+    "inWishlist": "În lista de dorințe",
+    "saveWishlist": "Salvează în lista de dorințe",
+    "share": "Distribuie",
+    "copyLink": "Copiază linkul",
+    "specifications": "Specificații",
+    "variantLabel": "Selectează varianta",
+    "quantity": "Cantitate",
+    "bulkStandard": "Standard",
+    "bulkSave10": "Economisește 10%",
+    "bulkBestValue": "Cea mai bună valoare",
+    "unitsRange12": "1–2 unități",
+    "unitsRange35": "3–5 unități",
+    "unitsRange6": "6+ unități",
+    "euDispatch": "Expediere UE",
+    "euDispatchDetail": "Procesare din Olanda · curieri cu urmărire",
+    "researchOnly": "Doar pentru cercetare",
+    "researchOnlyDetail": "Nu pentru consum uman sau veterinar",
+    "coaAvailable": "Documentație COA disponibilă la cerere"
+  },
+  "recommendations": {
+    "relatedTitle": "Compuși de cercetare similari",
+    "viewCatalog": "Vezi catalogul",
+    "recentTitle": "Vizualizate recent"
+  },
+  "toast": {
+    "added": "{{title}} adăugat în coș",
+    "bulk15": "Reducere cantitate (15%) aplicată la {{title}}",
+    "bulk10": "Reducere cantitate (10%) aplicată la {{title}}",
+    "linkCopied": "Link copiat în clipboard"
+  }
+}

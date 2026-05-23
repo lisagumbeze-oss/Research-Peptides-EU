@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistika",
+    "title": "Dostava in pošiljanje",
+    "description": "Prednostna izpolnitev v EU iz Netherlands s sledeno dostavo v državah članicah in worldwide možnostmi."
+  },
+  "features": {
+    "cutoffTitle": "Rok naročila ob 12:00 CET",
+    "cutoffDesc": "Naročila do poldne po srednjeevropskem času, pon–pet, pošljemo isti delovni dan.",
+    "trackedTitle": "Sledena varnost",
+    "trackedDesc": "Vsaka pošiljka je v celoti sledena od našega laboratorija do vašega objekta.",
+    "packagingTitle": "Diskretno pakiranje",
+    "packagingDesc": "Izdelki so vakuumsko zaprti in poslani v preprostem, neoznačenem pakiranju, primernem za raziskovalne objekte."
+  },
+  "regions": {
+    "title": "Doseg EU in mednarodno",
+    "euTitle": "Dostava v Evropski uniji",
+    "euDesc": "Standardna dostava EU: 3–7 delovnih dni. Brezplačna dostava pri upravičenih naročilih nad 500 € (medseštevek).",
+    "worldTitle": "Worldwide logistika",
+    "worldDesc": "Destinacije zunaj EU: 5–14 delovnih dni glede na carino in regionalne prevoznike.",
+    "ukTitle": "United Kingdom",
+    "ukDesc": "Sledene možnosti za UK ostanejo na voljo pri blagajni, ko je kot destinacija izbrano United Kingdom."
+  },
+  "responsibility": {
+    "eyebrow": "Odgovornost raziskovalca",
+    "body": "Kupci so odgovorni za skladnost izdelkov z lokalnimi uvoznimi predpisi. Carine, DDV in regionalni davki lahko veljajo — odgovornost kupca, če niso pobrani pri blagajni.",
+    "disclaimer": "Samo za raziskave. Ni za človeško ali veterinarsko uživanje."
+  }
+}

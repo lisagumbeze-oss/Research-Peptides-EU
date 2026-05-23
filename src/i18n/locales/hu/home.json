@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Netherlands · európai kutatási szabványok",
+    "title": "Precíziós peptidek",
+    "titleHighlight": "Európai laboratóriumok.",
+    "subtitle": "A Research Peptides EU intézményi szintű vegyületeket szállít harmadik fél általi analitikus ellenőrzéssel, gyógyszerészeti kezeléssel és megbízható EU disztribúcióval.",
+    "ctaShop": "Katalógus böngészése",
+    "ctaWizard": "Vegyületválasztó",
+    "trustPurity": "Ellenőrzött tisztaság 99,8%+",
+    "trustShipping": "EU-s hűtőlánc-kiszállítás",
+    "trustCoa": "COA minden tételhez"
+  },
+  "featured": {
+    "eyebrow": "Katalógus kiemelések",
+    "title": "Kiemelt kutatási vegyületek",
+    "subtitle": "Tételenként ellenőrzött peptidek és kutatási vegyszerek, készen az EU laboratóriumi kiszállításra."
+  },
+  "whyEu": {
+    "eyebrow": "Miért választanak minket az EU kutatók",
+    "title": "Európai laboratóriumi szabványokra építve"
+  },
+  "categories": {
+    "eyebrow": "Böngészés alkalmazás szerint",
+    "title": "Kutatási kategóriák",
+    "viewAll": "Összes kategória megtekintése"
+  },
+  "trust": {
+    "eyebrow": "Minőségbiztosítás",
+    "title": "Dokumentálható ellenőrzés",
+    "coaCta": "COA könyvtár felfedezése"
+  },
+  "experience": {
+    "eyebrow": "Kutatói élmény",
+    "title": "Támogatás minden szakaszban",
+    "faqCta": "Kutatói GYIK olvasása"
+  },
+  "cta": {
+    "title": "Készen áll felszerelni laboratóriumát?",
+    "subtitle": "Böngéssze az EU katalógust, vagy használja a vegyületválasztót kutatási vonala szűkítéséhez.",
+    "button": "Kutatási katalógus bolt"
+  }
+}

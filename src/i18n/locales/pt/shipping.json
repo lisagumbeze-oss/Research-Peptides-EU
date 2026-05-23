@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logística",
+    "title": "Envio e entrega",
+    "description": "Cumprimento prioritário na UE a partir dos Países Baixos com entrega rastreada nos Estados-Membros e opções internacionais."
+  },
+  "features": {
+    "cutoffTitle": "Encerramento às 12:00 CET",
+    "cutoffDesc": "Pedidos efetuados antes do meio-dia (hora da Europa Central), de segunda a sexta, são expedidos no mesmo dia útil.",
+    "trackedTitle": "Segurança com rastreio",
+    "trackedDesc": "Cada envio é totalmente rastreado do nosso laboratório até à sua instalação.",
+    "packagingTitle": "Embalagem discreta",
+    "packagingDesc": "Os artigos são selados a vácuo e enviados em embalagem simples e sem marcas, adequada a instalações de investigação."
+  },
+  "regions": {
+    "title": "Alcance na UE e internacional",
+    "euTitle": "Entrega na União Europeia",
+    "euDesc": "Envio padrão na UE: 3–7 dias úteis. Envio gratuito em pedidos elegíveis superiores a 500 € (subtotal).",
+    "worldTitle": "Logística mundial",
+    "worldDesc": "Destinos fora da UE: 5–14 dias úteis consoante alfândegas e transportadoras regionais.",
+    "ukTitle": "Reino Unido",
+    "ukDesc": "Opções com rastreio para o Reino Unido permanecem disponíveis no checkout quando o Reino Unido é selecionado como destino."
+  },
+  "responsibility": {
+    "eyebrow": "Responsabilidade do investigador",
+    "body": "Os compradores são responsáveis por garantir que os produtos cumprem as leis de importação locais. Podem aplicar-se direitos aduaneiros, IVA e impostos regionais; são da responsabilidade do comprador quando não cobrados no checkout.",
+    "disclaimer": "Apenas para investigação. Não para consumo humano ou veterinário."
+  }
+}

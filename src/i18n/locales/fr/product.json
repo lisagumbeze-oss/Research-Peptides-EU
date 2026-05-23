@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Produit introuvable",
+    "cta": "Retour à la boutique"
+  },
+  "reviews": {
+    "eyebrow": "Communauté de chercheurs",
+    "title": "Avis vérifiés",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Copier le lien",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Ajouter au panier",
+    "inWishlist": "Dans la liste de souhaits",
+    "saveWishlist": "Enregistrer dans la liste de souhaits",
+    "share": "Partager",
+    "copyLink": "Copier le lien",
+    "specifications": "Spécifications",
+    "variantLabel": "Choisir la variante",
+    "quantity": "Quantité",
+    "bulkStandard": "Standard",
+    "bulkSave10": "Économisez 10 %",
+    "bulkBestValue": "Meilleur rapport qualité-prix",
+    "unitsRange12": "1–2 unités",
+    "unitsRange35": "3–5 unités",
+    "unitsRange6": "6+ unités",
+    "euDispatch": "Expédition UE",
+    "euDispatchDetail": "Préparation aux Pays-Bas · transporteurs suivis",
+    "researchOnly": "Usage recherche uniquement",
+    "researchOnlyDetail": "Ne pas destiner à la consommation humaine ou vétérinaire",
+    "coaAvailable": "Documentation COA disponible sur demande"
+  },
+  "recommendations": {
+    "relatedTitle": "Composés de recherche associés",
+    "viewCatalog": "Voir le catalogue",
+    "recentTitle": "Consultés récemment"
+  },
+  "toast": {
+    "added": "{{title}} ajouté au panier",
+    "bulk15": "Remise volume (15 %) appliquée à {{title}}",
+    "bulk10": "Remise volume (10 %) appliquée à {{title}}",
+    "linkCopied": "Lien copié dans le presse-papiers"
+  }
+}

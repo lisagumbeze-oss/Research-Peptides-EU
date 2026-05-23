@@ -1,0 +1,25 @@
+{
+  "brand": "Research Peptides EU",
+  "loading": "Načítava sa…",
+  "search": "Hľadať",
+  "cart": "Košík",
+  "wishlist": "Zoznam prianí",
+  "account": "Účet",
+  "orders": "Moje objednávky",
+  "login": "Prihlásiť sa",
+  "logout": "Odhlásiť sa",
+  "home": "Domov",
+  "shop": "Obchod",
+  "languageActive": "Aktívne",
+  "close": "Zavrieť",
+  "viewAll": "Zobraziť všetko",
+  "learnMore": "Zistiť viac",
+  "researchUseOnly": "Iba pre laboratórny výskum — nie na ľudské ani veterinárne použitie.",
+  "salesNotification": {
+    "purchased": "Someone in {{location}} purchased",
+    "justNow": "Just now",
+    "minutesAgo_one": "{{count}} minute ago",
+    "minutesAgo_other": "{{count}} minutes ago",
+    "dismiss": "Dismiss notification"
+  }
+}

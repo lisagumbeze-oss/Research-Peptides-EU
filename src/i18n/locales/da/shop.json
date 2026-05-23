@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Forskningskatalog",
+    "title": "Butik",
+    "titleHighlight": "peptider",
+    "description": "Gennemse verificerede forskningsforbindelser med EU-opfyldelse, batchdokumentation og gennemsigtige specifikationer."
+  },
+  "results": "Viser {{count}} af {{total}} produkter",
+  "filters": {
+    "categories": "Kategorier",
+    "maxPrice": "Maks. pris",
+    "clearAll": "Ryd alle filtre",
+    "clearShort": "Ryd filtre",
+    "filters": "Filtre",
+    "close": "Luk filtre",
+    "refine": "Forfin resultater",
+    "showResults": "Vis resultater"
+  },
+  "sort": {
+    "label": "Sortér produkter",
+    "relevance": "Relevans",
+    "featured": "Fremhævet",
+    "ratingDesc": "Bedst bedømt",
+    "newest": "Nyeste",
+    "priceAsc": "Pris: lav til høj",
+    "priceDesc": "Pris: høj til lav"
+  },
+  "empty": {
+    "title": "Ingen produkter matcher dine filtre",
+    "description": "Prøv at udvide prisintervallet eller rydde kategorivalg."
+  }
+}

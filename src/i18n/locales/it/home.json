@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Paesi Bassi · standard europei di ricerca",
+    "title": "Peptidi di precisione per",
+    "titleHighlight": "Laboratori europei.",
+    "subtitle": "Research Peptides EU fornisce composti di grado istituzionale con verifica analitica di terze parti, manipolazione farmaceutica e distribuzione UE affidabile.",
+    "ctaShop": "Sfoglia catalogo",
+    "ctaWizard": "Selettore composti",
+    "trustPurity": "Purezza verificata oltre il 99,8%",
+    "trustShipping": "Spedizione a catena del freddo in tutta l'UE",
+    "trustCoa": "COA su ogni lotto"
+  },
+  "featured": {
+    "eyebrow": "In evidenza nel catalogo",
+    "title": "Composti da ricerca in evidenza",
+    "subtitle": "Peptidi e prodotti chimici da ricerca verificati per lotto, pronti per la spedizione ai laboratori UE."
+  },
+  "whyEu": {
+    "eyebrow": "Perché i ricercatori UE ci scelgono",
+    "title": "Progettato per gli standard di laboratorio europei"
+  },
+  "categories": {
+    "eyebrow": "Sfoglia per applicazione",
+    "title": "Categorie di ricerca",
+    "viewAll": "Vedi tutte le categorie"
+  },
+  "trust": {
+    "eyebrow": "Garanzia di qualità",
+    "title": "Verifica documentabile",
+    "coaCta": "Esplora libreria COA"
+  },
+  "experience": {
+    "eyebrow": "Esperienza del ricercatore",
+    "title": "Supporto in ogni fase",
+    "faqCta": "Leggi FAQ ricercatori"
+  },
+  "cta": {
+    "title": "Pronto ad equipaggiare il tuo laboratorio?",
+    "subtitle": "Sfoglia il catalogo UE o usa il selettore di composti per restringere la tua linea di ricerca.",
+    "button": "Catalogo ricerca"
+  }
+}

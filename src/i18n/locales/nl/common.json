@@ -14,5 +14,12 @@
   "close": "Sluiten",
   "viewAll": "Alles bekijken",
   "learnMore": "Meer info",
-  "researchUseOnly": "Alleen voor laboratoriumonderzoek — niet voor menselijk of veterinair gebruik."
+  "researchUseOnly": "Alleen voor laboratoriumonderzoek — niet voor menselijk of veterinair gebruik.",
+  "salesNotification": {
+    "purchased": "Iemand in {{location}} heeft gekocht",
+    "justNow": "Zojuist",
+    "minutesAgo_one": "{{count}} minuut geleden",
+    "minutesAgo_other": "{{count}} minuten geleden",
+    "dismiss": "Melding sluiten"
+  }
 }

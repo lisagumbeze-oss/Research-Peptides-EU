@@ -1,9 +1,12 @@
+import { useTranslation } from 'react-i18next';
 import { Mail, Shield, Calendar, MapPin, CreditCard } from 'lucide-react';
+import { formatLocaleDate } from '../lib/formatLocaleDate';
 import { motion } from 'motion/react';
 import { AccountShell } from '../components/account/AccountShell';
 import { useAuthStore } from '../store/useAuthStore';
 
 export default function Profile() {
+  const { i18n } = useTranslation();
   const { profile } = useAuthStore();
 
   return (
@@ -32,7 +35,7 @@ export default function Profile() {
                 <p className="text-caption text-brand-600">Member since</p>
                 <p className="font-semibold text-navy-950">
                   {profile?.created_at
-                    ? new Date(profile.created_at).toLocaleDateString('en-GB', {
+                    ? formatLocaleDate(profile.created_at, i18n.language, {
                         month: 'long',
                         year: 'numeric',
                       })

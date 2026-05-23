@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "A termék nem található",
+    "cta": "Vissza a boltba"
+  },
+  "reviews": {
+    "eyebrow": "Kutatói közösség",
+    "title": "Ellenőrzött értékelések",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Link másolása",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Kosárba",
+    "inWishlist": "Kívánságlistán",
+    "saveWishlist": "Mentés kívánságlistára",
+    "share": "Megosztás",
+    "copyLink": "Link másolása",
+    "specifications": "Specifikációk",
+    "variantLabel": "Változat kiválasztása",
+    "quantity": "Mennyiség",
+    "bulkStandard": "Standard",
+    "bulkSave10": "10% megtakarítás",
+    "bulkBestValue": "Legjobb ár-érték arány",
+    "unitsRange12": "1–2 egység",
+    "unitsRange35": "3–5 egység",
+    "unitsRange6": "6+ egység",
+    "euDispatch": "EU kiszállítás",
+    "euDispatchDetail": "Teljesítés Netherlandsből · nyomon követett fuvarozók",
+    "researchOnly": "Csak kutatási célra",
+    "researchOnlyDetail": "Nem emberi vagy állatorvosi fogyasztásra",
+    "coaAvailable": "COA dokumentáció kérésre elérhető"
+  },
+  "recommendations": {
+    "relatedTitle": "Kapcsolódó kutatási vegyületek",
+    "viewCatalog": "Katalógus megtekintése",
+    "recentTitle": "Nemrég megtekintett"
+  },
+  "toast": {
+    "added": "{{title}} hozzáadva a kosárhoz",
+    "bulk15": "Mennyiségi kedvezmény (15%) alkalmazva: {{title}}",
+    "bulk10": "Mennyiségi kedvezmény (10%) alkalmazva: {{title}}",
+    "linkCopied": "Link a vágólapra másolva"
+  }
+}

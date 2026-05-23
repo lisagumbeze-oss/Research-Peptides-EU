@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Nie znaleziono produktu",
+    "cta": "Wróć do sklepu"
+  },
+  "reviews": {
+    "eyebrow": "Społeczność badaczy",
+    "title": "Zweryfikowane opinie",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Kopiuj link",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Dodaj do koszyka",
+    "inWishlist": "Na liście życzeń",
+    "saveWishlist": "Zapisz na liście życzeń",
+    "share": "Udostępnij",
+    "copyLink": "Kopiuj link",
+    "specifications": "Specyfikacje",
+    "variantLabel": "Wybierz wariant",
+    "quantity": "Ilość",
+    "bulkStandard": "Standard",
+    "bulkSave10": "Oszczędź 10%",
+    "bulkBestValue": "Najlepsza wartość",
+    "unitsRange12": "1–2 jednostki",
+    "unitsRange35": "3–5 jednostek",
+    "unitsRange6": "6+ jednostek",
+    "euDispatch": "Wysyłka UE",
+    "euDispatchDetail": "Realizacja z Holandii · przewoźnicy ze śledzeniem",
+    "researchOnly": "Tylko do badań",
+    "researchOnlyDetail": "Nie do spożycia przez ludzi ani zwierzęta",
+    "coaAvailable": "Dokumentacja COA dostępna na żądanie"
+  },
+  "recommendations": {
+    "relatedTitle": "Powiązane związki badawcze",
+    "viewCatalog": "Zobacz katalog",
+    "recentTitle": "Ostatnio oglądane"
+  },
+  "toast": {
+    "added": "{{title}} dodano do koszyka",
+    "bulk15": "Rabat ilościowy (15%) zastosowany do {{title}}",
+    "bulk10": "Rabat ilościowy (10%) zastosowany do {{title}}",
+    "linkCopied": "Link skopiowany do schowka"
+  }
+}

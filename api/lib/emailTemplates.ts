@@ -38,9 +38,9 @@ function renderBrandLayout(params: { title: string; preheader: string; bodyHtml:
       <td align="center">
         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#ffffff;border-radius:18px;overflow:hidden;border:1px solid #e2e8f0;">
           <tr>
-            <td style="background:linear-gradient(120deg,#0f172a,#1d4ed8);padding:24px;">
+            <td style="background:linear-gradient(120deg,#0f2744,#2db5a3 55%,#1a365d);padding:24px;">
               <h1 style="margin:0;font-size:20px;line-height:1.2;color:#ffffff;font-weight:800;">${safeHtml(brandName)}</h1>
-              <p style="margin:6px 0 0;color:#bfdbfe;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;">Research Operations</p>
+              <p style="margin:6px 0 0;color:#c8f2eb;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;">EU Research Operations · Netherlands</p>
             </td>
           </tr>
           <tr>
@@ -122,8 +122,8 @@ export function renderOrderCreatedCustomerEmail(payload: OrderEmailPayload): Ema
       We will notify you immediately when your status changes.
     </p>
     <div style="padding:16px;border:1px solid #dbeafe;background:#eff6ff;border-radius:12px;margin-bottom:18px;">
-      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2563eb;font-weight:800;">Order ID</p>
-      <p style="margin:0;font-size:18px;color:#1e3a8a;font-weight:800;">${safeHtml(payload.orderId)}</p>
+      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2db5a3;font-weight:800;">Order ID</p>
+      <p style="margin:0;font-size:18px;color:#1a365d;font-weight:800;">${safeHtml(payload.orderId)}</p>
     </div>
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom:18px;">
       ${itemRows}
@@ -152,7 +152,7 @@ export function renderOrderCreatedCustomerEmail(payload: OrderEmailPayload): Ema
       </tr>
       <tr>
         <td style="font-size:15px;color:#0f172a;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">Total</td>
-        <td style="font-size:15px;color:#1d4ed8;text-align:right;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">${formatCurrency(payload.totalAmount)}</td>
+        <td style="font-size:15px;color:#249688;text-align:right;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
     </table>`;
 
@@ -219,7 +219,7 @@ export function renderOrderCreatedAdminEmail(payload: OrderEmailPayload): EmailR
       </tr>
       <tr>
         <td style="font-size:13px;color:#64748b;padding:4px 0;">Total</td>
-        <td style="font-size:13px;color:#1d4ed8;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
+        <td style="font-size:13px;color:#249688;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
     </table>`;
 
@@ -252,8 +252,8 @@ export function renderOrderStatusCustomerEmail(payload: OrderEmailPayload): Emai
     <p style="margin:0 0 12px;font-size:14px;color:#334155;">Hi ${safeHtml(payload.customerName || 'Researcher')},</p>
     <p style="margin:0 0 18px;font-size:14px;color:#334155;line-height:1.7;">${safeHtml(message)}</p>
     <div style="padding:16px;border:1px solid #dbeafe;background:#eff6ff;border-radius:12px;margin-bottom:18px;">
-      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2563eb;font-weight:800;">Order ID</p>
-      <p style="margin:0;font-size:18px;color:#1e3a8a;font-weight:800;">${safeHtml(payload.orderId)}</p>
+      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2db5a3;font-weight:800;">Order ID</p>
+      <p style="margin:0;font-size:18px;color:#1a365d;font-weight:800;">${safeHtml(payload.orderId)}</p>
     </div>
     <div style="margin-bottom:18px;padding:14px;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;">
       <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#475569;font-weight:800;">Shipping Details</p>
@@ -279,7 +279,7 @@ export function renderOrderStatusCustomerEmail(payload: OrderEmailPayload): Emai
       </tr>
       <tr>
         <td style="font-size:13px;color:#64748b;padding:4px 0;">Total</td>
-        <td style="font-size:13px;color:#1d4ed8;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
+        <td style="font-size:13px;color:#249688;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
     </table>`;
 
@@ -341,8 +341,8 @@ export function renderContactSubmittedCustomerEmail(payload: ContactEmailPayload
       We received your message and our team will reply as soon as possible.
     </p>
     <div style="padding:16px;border:1px solid #dbeafe;background:#eff6ff;border-radius:12px;">
-      <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2563eb;font-weight:800;">Subject</p>
-      <p style="margin:0;font-size:14px;color:#1e3a8a;font-weight:700;">${safeHtml(payload.subject)}</p>
+      <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2db5a3;font-weight:800;">Subject</p>
+      <p style="margin:0;font-size:14px;color:#1a365d;font-weight:700;">${safeHtml(payload.subject)}</p>
     </div>`;
 
   const html = renderBrandLayout({
@@ -396,8 +396,8 @@ export function renderNewsletterSubscribeCustomerEmail(
       You will receive updates on supply chains, stability reports, and newly synthesized compounds.
     </p>
     <div style="padding:16px;border:1px solid #dbeafe;background:#eff6ff;border-radius:12px;">
-      <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2563eb;font-weight:800;">Subscribed Email</p>
-      <p style="margin:0;font-size:14px;color:#1e3a8a;font-weight:700;">${safeHtml(payload.email)}</p>
+      <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2db5a3;font-weight:800;">Subscribed Email</p>
+      <p style="margin:0;font-size:14px;color:#1a365d;font-weight:700;">${safeHtml(payload.email)}</p>
     </div>`;
 
   const html = renderBrandLayout({

@@ -1,42 +1,39 @@
 import type { LocaleCode } from './locales';
+import { supportedLocales } from './locales';
 
-import enCommon from './locales/en/common.json';
-import enNav from './locales/en/nav.json';
-import enHome from './locales/en/home.json';
-import enCheckout from './locales/en/checkout.json';
+const modules = import.meta.glob('./locales/*/*.json', { eager: true }) as Record<
+  string,
+  Record<string, unknown>
+>;
 
-import nlCommon from './locales/nl/common.json';
-import nlNav from './locales/nl/nav.json';
-import nlHome from './locales/nl/home.json';
-import nlCheckout from './locales/nl/checkout.json';
+type NamespaceBundle = Record<string, object>;
 
-import deCommon from './locales/de/common.json';
-import deNav from './locales/de/nav.json';
-import deHome from './locales/de/home.json';
-import deCheckout from './locales/de/checkout.json';
+/** All locale JSON under src/i18n/locales/{lng}/{ns}.json */
+export function buildI18nResources(): Record<string, NamespaceBundle> {
+  const resources: Record<string, NamespaceBundle> = {};
 
-import frCommon from './locales/fr/common.json';
-import frNav from './locales/fr/nav.json';
-import frHome from './locales/fr/home.json';
-import frCheckout from './locales/fr/checkout.json';
+  for (const path of Object.keys(modules)) {
+    const match = path.match(/\.\/locales\/([^/]+)\/([^/]+)\.json$/);
+    if (!match) continue;
+    const [, lng, ns] = match;
+    const data = modules[path];
+    const payload = (data && 'default' in data ? data.default : data) as object;
+    if (!resources[lng]) resources[lng] = {};
+    resources[lng][ns] = payload;
+  }
 
-const bundle = (common: object, nav: object, home: object, checkout: object) => ({
-  common,
-  nav,
-  home,
-  checkout,
-});
-
-const fullBundles: Partial<Record<LocaleCode, ReturnType<typeof bundle>>> = {
-  en: bundle(enCommon, enNav, enHome, enCheckout),
-  nl: bundle(nlCommon, nlNav, nlHome, nlCheckout),
-  de: bundle(deCommon, deNav, deHome, deCheckout),
-  fr: bundle(frCommon, frNav, frHome, frCheckout),
-};
-
-/** Locales with dedicated JSON; all others fall back to English via i18next. */
-export const translatedLocales: LocaleCode[] = ['en', 'nl', 'de', 'fr'];
-
-export function buildI18nResources(): Record<string, ReturnType<typeof bundle>> {
-  return { ...fullBundles } as Record<string, ReturnType<typeof bundle>>;
+  return resources;
 }
+
+export const translatedLocales: LocaleCode[] = supportedLocales.map((l) => l.code);
+
+export const i18nNamespaces = [
+  'common',
+  'nav',
+  'home',
+  'checkout',
+  'shop',
+  'shipping',
+  'legal',
+  'product',
+] as const;

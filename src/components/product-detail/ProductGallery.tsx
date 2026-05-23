@@ -32,6 +32,9 @@ export function ProductGallery({
             animate={{ opacity: 1 }}
             transition={{ duration: 0.25 }}
             className="w-full h-full object-cover"
+            loading={activeIndex === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            fetchPriority={activeIndex === 0 ? 'high' : 'low'}
           />
         ) : (
           <ProductImagePlaceholder productId={productId} title={title} className="h-full w-full min-h-[16rem]" />
@@ -58,7 +61,13 @@ export function ProductGallery({
               aria-label={`Show image ${i + 1} of ${images.length}`}
               aria-current={activeIndex === i}
             >
-              <img src={img} alt="" className="w-full h-full object-cover" />
+              <img
+                src={img}
+                alt=""
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
             </button>
           ))}
         </div>

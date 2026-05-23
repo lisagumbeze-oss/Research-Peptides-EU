@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistics",
+    "title": "Shipping & delivery",
+    "description": "EU-first fulfillment from the Netherlands with tracked delivery across member states and worldwide options."
+  },
+  "features": {
+    "cutoffTitle": "12:00 CET cutoff",
+    "cutoffDesc": "Orders placed before noon Central European Time, Monday–Friday, are dispatched the same business day.",
+    "trackedTitle": "Tracked security",
+    "trackedDesc": "Every shipment is fully tracked from our laboratory to your facility.",
+    "packagingTitle": "Discreet packaging",
+    "packagingDesc": "Items are vacuum-sealed and shipped in plain, unmarked packaging suitable for research facilities."
+  },
+  "regions": {
+    "title": "EU & international reach",
+    "euTitle": "European Union delivery",
+    "euDesc": "Standard EU shipping: 3–7 business days. Free shipping on qualifying orders over €500 (subtotal).",
+    "worldTitle": "Worldwide logistics",
+    "worldDesc": "Non-EU destinations: 5–14 business days depending on customs and regional carriers.",
+    "ukTitle": "United Kingdom",
+    "ukDesc": "Tracked UK options remain available at checkout when United Kingdom is selected as the destination."
+  },
+  "responsibility": {
+    "eyebrow": "Researcher responsibility",
+    "body": "Buyers are responsible for ensuring products comply with local import laws. Customs duties, VAT, and regional taxes may apply and are the purchaser's responsibility where not collected at checkout.",
+    "disclaimer": "Research-use only. Not for human or veterinary consumption."
+  }
+}

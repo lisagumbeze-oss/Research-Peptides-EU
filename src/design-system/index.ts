@@ -8,3 +8,5 @@ export { Section, type SectionProps } from './components/Section';
 export { Container, type ContainerProps } from './components/Container';
 export { GlassPanel, type GlassPanelProps } from './components/GlassPanel';
 export { GlowPanel, type GlowPanelProps } from './components/GlowPanel';
+export { ScientificBackdrop, type ScientificBackdropProps } from './components/ScientificBackdrop';
+export { Reveal, type RevealProps } from './components/Reveal';

@@ -14,5 +14,12 @@
   "close": "Fermer",
   "viewAll": "Tout voir",
   "learnMore": "En savoir plus",
-  "researchUseOnly": "Usage en laboratoire uniquement — pas d'usage humain ou vétérinaire."
+  "researchUseOnly": "Usage en laboratoire uniquement — pas d'usage humain ou vétérinaire.",
+  "salesNotification": {
+    "purchased": "Quelqu'un à {{location}} a acheté",
+    "justNow": "À l'instant",
+    "minutesAgo_one": "Il y a {{count}} minute",
+    "minutesAgo_other": "Il y a {{count}} minutes",
+    "dismiss": "Fermer la notification"
+  }
 }

@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Forschungskatalog",
+    "title": "Shop",
+    "titleHighlight": "Peptide",
+    "description": "Verifizierte Forschungsverbindungen mit EU-Versand, Chargendokumentation und transparenten Spezifikationen."
+  },
+  "results": "{{count}} von {{total}} Produkten",
+  "filters": {
+    "categories": "Kategorien",
+    "maxPrice": "Max. Preis",
+    "clearAll": "Alle Filter löschen",
+    "filters": "Filter",
+    "close": "Filter schließen"
+  },
+  "sort": {
+    "label": "Produkte sortieren",
+    "relevance": "Relevanz",
+    "featured": "Empfohlen",
+    "ratingDesc": "Bestbewertet",
+    "newest": "Neueste",
+    "priceAsc": "Preis: aufsteigend",
+    "priceDesc": "Preis: absteigend"
+  },
+  "empty": {
+    "title": "Keine Produkte entsprechen den Filtern",
+    "description": "Erweitern Sie die Preisspanne oder löschen Sie Kategorien."
+  }
+}

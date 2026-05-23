@@ -13,7 +13,7 @@ const badgeConfigs = {
   elite: {
     label: 'Elite Seller',
     icon: Award,
-    classes: 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-400/20'
+    classes: 'bg-gradient-to-r from-brand-400 to-brand-900 text-white border-brand-300/30'
   },
   bestseller: {
     label: 'Bestseller',
@@ -38,7 +38,7 @@ const badgeConfigs = {
   verified: {
     label: 'Purity Tested',
     icon: Beaker,
-    classes: 'bg-blue-50 text-blue-600 border-blue-100'
+    classes: 'bg-brand-50 text-brand-700 border-brand-100'
   }
 };
 

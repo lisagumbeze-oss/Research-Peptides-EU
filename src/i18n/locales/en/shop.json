@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Research catalog",
+    "title": "Shop",
+    "titleHighlight": "peptides",
+    "description": "Browse verified research compounds with EU fulfillment, batch documentation, and transparent specifications."
+  },
+  "results": "Showing {{count}} of {{total}} products",
+  "filters": {
+    "categories": "Categories",
+    "maxPrice": "Max price",
+    "clearAll": "Clear all filters",
+    "clearShort": "Clear filters",
+    "filters": "Filters",
+    "close": "Close filters",
+    "refine": "Refine results",
+    "showResults": "Show results"
+  },
+  "sort": {
+    "label": "Sort products",
+    "relevance": "Relevance",
+    "featured": "Featured",
+    "ratingDesc": "Best rated",
+    "newest": "Newest",
+    "priceAsc": "Price: low to high",
+    "priceDesc": "Price: high to low"
+  },
+  "empty": {
+    "title": "No products match your filters",
+    "description": "Try widening the price range or clearing category selections."
+  }
+}

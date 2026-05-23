@@ -1,0 +1,40 @@
+{
+  "primary": {
+    "shop": "Bolt",
+    "research": "Kutatás",
+    "blog": "Blog",
+    "contact": "Kapcsolat"
+  },
+  "research": {
+    "peptideGuide": "Peptid útmutató",
+    "peptideGuideDesc": "Protokollok, kezelés és laboratóriumi legjobb gyakorlatok.",
+    "calculator": "Peptid kalkulátor",
+    "calculatorDesc": "Újraoldás és adagolási számítások kutatáshoz.",
+    "coaLibrary": "COA könyvtár",
+    "coaLibraryDesc": "Tételenkénti analízis tanúsítványok és tisztasági dokumentáció.",
+    "information": "Peptid információ",
+    "informationDesc": "Vegyületprofilok és kutatási hivatkozások.",
+    "researchHub": "Peptid kutatás",
+    "researchHubDesc": "Legújabb eredmények és alkalmazási megjegyzések."
+  },
+  "footer": {
+    "inventory": "Készlet",
+    "support": "Támogatás",
+    "legal": "Jogi",
+    "fullCatalog": "Teljes katalógus",
+    "categories": "Kategóriák",
+    "advancedSearch": "Részletes keresés",
+    "wishlist": "Kívánságlista",
+    "faq": "Kutatói GYIK",
+    "euShipping": "EU szállítás",
+    "about": "Rólunk",
+    "terms": "Feltételek",
+    "privacy": "Adatvédelem és GDPR",
+    "returns": "Visszaküldések"
+  },
+  "mega": {
+    "browseCatalog": "Katalógus böngészése",
+    "allCategories": "Összes kategória",
+    "featured": "Kiemelt vegyületek"
+  }
+}

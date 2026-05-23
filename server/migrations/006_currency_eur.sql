@@ -1,5 +1,14 @@
 -- Canonical currency: EUR for Research Peptides EU storefront (Supabase public.products / public.orders)
--- Apply in Supabase SQL editor (or your migration runner for the Supabase Postgres instance).
+--
+-- PREREQUISITE: Run 000_storefront_schema.sql first if you see:
+--   ERROR: relation "public.products" does not exist
+--
+-- Fresh EU project order in Supabase SQL editor:
+--   1) 000_storefront_schema.sql
+--   2) 002_email_events.sql
+--   3) 003_admin_rls_orders_products.sql
+--   4) 006_currency_eur.sql (safe on fresh DB; GBP conversion only affects legacy rows)
+--   5) npm run db:seed:supabase
 
 ALTER TABLE public.products
   ADD COLUMN IF NOT EXISTS currency CHAR(3) NOT NULL DEFAULT 'EUR';

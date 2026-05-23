@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistik",
+    "title": "Forsendelse og levering",
+    "description": "EU-prioriteret opfyldelse fra Netherlands med sporet levering i medlemsstater og worldwide-muligheder."
+  },
+  "features": {
+    "cutoffTitle": "Bestillingsfrist kl. 12:00 CET",
+    "cutoffDesc": "Ordrer afgivet før middag centraleuropæisk tid, man–fre, afsendes samme hverdag.",
+    "trackedTitle": "Sporet sikkerhed",
+    "trackedDesc": "Hver forsendelse spores fuldt ud fra vores laboratorium til din facilitet.",
+    "packagingTitle": "Diskret emballage",
+    "packagingDesc": "Varer vakuumforsegles og sendes i neutral, umarkeret emballage egnet til forskningsfaciliteter."
+  },
+  "regions": {
+    "title": "EU og international rækkevidde",
+    "euTitle": "Levering i Den Europæiske Union",
+    "euDesc": "Standard EU-forsendelse: 3–7 hverdage. Gratis forsendelse ved kvalificerede ordrer over 500 € (subtotal).",
+    "worldTitle": "Worldwide-logistik",
+    "worldDesc": "Destinationer uden for EU: 5–14 hverdage afhængigt af told og regionale transportører.",
+    "ukTitle": "United Kingdom",
+    "ukDesc": "Sporede UK-muligheder er stadig tilgængelige ved betaling, når United Kingdom vælges som destination."
+  },
+  "responsibility": {
+    "eyebrow": "Forskeransvar",
+    "body": "Købere er ansvarlige for, at produkter overholder lokale importlove. Told, moms og regionale afgifter kan gælde og er køberens ansvar, hvis de ikke opkræves ved betaling.",
+    "disclaimer": "Kun til forskning. Ikke til menneskelig eller veterinær forbrug."
+  }
+}

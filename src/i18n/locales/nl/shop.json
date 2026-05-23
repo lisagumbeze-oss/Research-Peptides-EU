@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Onderzoekscatalogus",
+    "title": "Shop",
+    "titleHighlight": "peptiden",
+    "description": "Blader door geverifieerde onderzoeksverbindingen met EU-levering, batchdocumentatie en transparante specificaties."
+  },
+  "results": "{{count}} van {{total}} producten",
+  "filters": {
+    "categories": "Categorieën",
+    "maxPrice": "Max. prijs",
+    "clearAll": "Alle filters wissen",
+    "filters": "Filters",
+    "close": "Filters sluiten"
+  },
+  "sort": {
+    "label": "Producten sorteren",
+    "relevance": "Relevantie",
+    "featured": "Uitgelicht",
+    "ratingDesc": "Best beoordeeld",
+    "newest": "Nieuwste",
+    "priceAsc": "Prijs: laag naar hoog",
+    "priceDesc": "Prijs: hoog naar laag"
+  },
+  "empty": {
+    "title": "Geen producten voldoen aan uw filters",
+    "description": "Verbreed het prijsbereik of wis categorieën."
+  }
+}

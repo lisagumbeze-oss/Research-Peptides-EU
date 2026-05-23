@@ -1,0 +1,40 @@
+{
+  "primary": {
+    "shop": "Magazin",
+    "research": "Cercetare",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "research": {
+    "peptideGuide": "Ghid peptide",
+    "peptideGuideDesc": "Protocoale, manipulare și bune practici de laborator.",
+    "calculator": "Calculator peptide",
+    "calculatorDesc": "Calcule de reconstituire și dozare pentru cercetare.",
+    "coaLibrary": "Bibliotecă COA",
+    "coaLibraryDesc": "Certificate de analiză pe lot și documentație privind puritatea.",
+    "information": "Informații despre peptide",
+    "informationDesc": "Profiluri de compuși și referințe de cercetare.",
+    "researchHub": "Cercetare peptide",
+    "researchHubDesc": "Cele mai recente descoperiri și note de aplicare."
+  },
+  "footer": {
+    "inventory": "Stoc",
+    "support": "Suport",
+    "legal": "Legal",
+    "fullCatalog": "Catalog complet",
+    "categories": "Categorii",
+    "advancedSearch": "Căutare avansată",
+    "wishlist": "Lista de dorințe",
+    "faq": "FAQ cercetător",
+    "euShipping": "Livrare UE",
+    "about": "Despre noi",
+    "terms": "Termeni",
+    "privacy": "Confidențialitate și GDPR",
+    "returns": "Returnări"
+  },
+  "mega": {
+    "browseCatalog": "Răsfoiește catalogul",
+    "allCategories": "Toate categoriile",
+    "featured": "Compuși recomandați"
+  }
+}

@@ -25,7 +25,7 @@ export function CartLineItem({ item, compact = false, onUpdateQuantity, onRemove
   return (
     <div
       className={cn(
-        'flex gap-4 bg-white border border-brand-100 rounded-2xl transition-shadow hover:shadow-card',
+        'flex gap-4 bg-white/90 backdrop-blur-sm border border-brand-100/80 rounded-2xl transition-shadow hover:shadow-elevated',
         compact ? 'p-3' : 'p-4 md:p-5',
       )}
     >

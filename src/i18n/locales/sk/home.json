@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Netherlands · európske výskumné štandardy",
+    "title": "Precízne peptidy pre",
+    "titleHighlight": "Európske laboratóriá.",
+    "subtitle": "Research Peptides EU dodáva zlúčeniny inštitucionálnej úrovne s analytickou verifikáciou treťou stranou, farmaceutickou manipuláciou a spoľahlivou distribúciou v EÚ.",
+    "ctaShop": "Prehliadať katalóg",
+    "ctaWizard": "Výber zlúčenín",
+    "trustPurity": "Overená čistota 99,8 %+",
+    "trustShipping": "Odoslanie chladiaceho reťazca v celej EÚ",
+    "trustCoa": "COA pri každej šarži"
+  },
+  "featured": {
+    "eyebrow": "Vybrané z katalógu",
+    "title": "Odporúčané výskumné zlúčeniny",
+    "subtitle": "Peptidy a výskumné chemikálie overené po šaržiach, pripravené na odoslanie do laboratórií v EÚ."
+  },
+  "whyEu": {
+    "eyebrow": "Prečo si nás volia výskumníci z EÚ",
+    "title": "Vytvorené pre európske laboratórne štandardy"
+  },
+  "categories": {
+    "eyebrow": "Prehliadať podľa použitia",
+    "title": "Výskumné kategórie",
+    "viewAll": "Zobraziť všetky kategórie"
+  },
+  "trust": {
+    "eyebrow": "Zabezpečenie kvality",
+    "title": "Overenie, ktoré môžete zdokumentovať",
+    "coaCta": "Preskúmať knižnicu COA"
+  },
+  "experience": {
+    "eyebrow": "Skúsenosť výskumníka",
+    "title": "Podpora v každej fáze",
+    "faqCta": "Prečítať FAQ pre výskumníkov"
+  },
+  "cta": {
+    "title": "Pripravení vybaviť laboratórium?",
+    "subtitle": "Prezrite si katalóg EÚ alebo použite výber zlúčenín na zúženie výskumnej línie.",
+    "button": "Výskumný katalóg obchodu"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Το προϊόν δεν βρέθηκε",
+    "cta": "Επιστροφή στο κατάστημα"
+  },
+  "reviews": {
+    "eyebrow": "Κοινότητα ερευνητών",
+    "title": "Επαληθευμένες κριτικές",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Αντιγραφή συνδέσμου",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Προσθήκη στο καλάθι",
+    "inWishlist": "Στη λίστα επιθυμιών",
+    "saveWishlist": "Αποθήκευση στη λίστα επιθυμιών",
+    "share": "Κοινοποίηση",
+    "copyLink": "Αντιγραφή συνδέσμου",
+    "specifications": "Προδιαγραφές",
+    "variantLabel": "Επιλογή παραλλαγής",
+    "quantity": "Ποσότητα",
+    "bulkStandard": "Τυπικό",
+    "bulkSave10": "Εξοικονομήστε 10%",
+    "bulkBestValue": "Καλύτερη αξία",
+    "unitsRange12": "1–2 μονάδες",
+    "unitsRange35": "3–5 μονάδες",
+    "unitsRange6": "6+ μονάδες",
+    "euDispatch": "Αποστολή ΕΕ",
+    "euDispatchDetail": "Εκπλήρωση από Netherlands · μεταφορείς με παρακολούθηση",
+    "researchOnly": "Μόνο για έρευνα",
+    "researchOnlyDetail": "Όχι για ανθρώπινη ή κτηνιατρική κατανάλωση",
+    "coaAvailable": "Τεκμηρίωση COA διαθέσιμη κατόπιν αιτήματος"
+  },
+  "recommendations": {
+    "relatedTitle": "Σχετικές ενώσεις έρευνας",
+    "viewCatalog": "Προβολή καταλόγου",
+    "recentTitle": "Πρόσφατα προβληθέντα"
+  },
+  "toast": {
+    "added": "{{title}} προστέθηκε στο καλάθι",
+    "bulk15": "Έκπτωση ποσότητας (15%) εφαρμόστηκε στο {{title}}",
+    "bulk10": "Έκπτωση ποσότητας (10%) εφαρμόστηκε στο {{title}}",
+    "linkCopied": "Ο σύνδεσμος αντιγράφηκε στο πρόχειρο"
+  }
+}

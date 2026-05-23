@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Product niet gevonden",
+    "cta": "Terug naar de shop"
+  },
+  "reviews": {
+    "eyebrow": "Onderzoekersgemeenschap",
+    "title": "Geverifieerde beoordelingen",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Link kopiëren",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "In winkelwagen",
+    "inWishlist": "Op verlanglijst",
+    "saveWishlist": "Opslaan op verlanglijst",
+    "share": "Delen",
+    "copyLink": "Link kopiëren",
+    "specifications": "Specificaties",
+    "variantLabel": "Variant kiezen",
+    "quantity": "Aantal",
+    "bulkStandard": "Standaard",
+    "bulkSave10": "Bespaar 10%",
+    "bulkBestValue": "Beste waarde",
+    "unitsRange12": "1–2 eenheden",
+    "unitsRange35": "3–5 eenheden",
+    "unitsRange6": "6+ eenheden",
+    "euDispatch": "EU-verzending",
+    "euDispatchDetail": "Afhandeling vanuit Nederland · traceerbare vervoerders",
+    "researchOnly": "Alleen voor onderzoek",
+    "researchOnlyDetail": "Niet voor menselijke of veterinaire consumptie",
+    "coaAvailable": "COA-documentatie op aanvraag beschikbaar"
+  },
+  "recommendations": {
+    "relatedTitle": "Gerelateerde onderzoeksverbindingen",
+    "viewCatalog": "Catalogus bekijken",
+    "recentTitle": "Recent bekeken"
+  },
+  "toast": {
+    "added": "{{title}} toegevoegd aan winkelwagen",
+    "bulk15": "Bulkkorting (15%) toegepast op {{title}}",
+    "bulk10": "Bulkkorting (10%) toegepast op {{title}}",
+    "linkCopied": "Link gekopieerd naar klembord"
+  }
+}

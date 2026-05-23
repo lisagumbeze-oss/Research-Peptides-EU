@@ -1,14 +1,14 @@
 const GRADIENTS = [
-  'bg-gradient-to-br from-slate-200 via-slate-50 to-blue-100',
+  'bg-gradient-to-br from-slate-200 via-slate-50 to-brand-100',
   'bg-gradient-to-br from-amber-100 via-orange-50 to-rose-100',
-  'bg-gradient-to-br from-emerald-100 via-teal-50 to-cyan-100',
-  'bg-gradient-to-br from-violet-100 via-indigo-50 to-blue-100',
+  'bg-gradient-to-br from-emerald-100 via-brand-50 to-brand-100',
+  'bg-gradient-to-br from-brand-100 via-mist-50 to-brand-200',
   'bg-gradient-to-br from-stone-200 via-neutral-100 to-zinc-100',
-  'bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100',
-  'bg-gradient-to-br from-fuchsia-100 via-purple-50 to-blue-50',
+  'bg-gradient-to-br from-brand-50 via-mist-50 to-brand-100',
+  'bg-gradient-to-br from-teal-100 via-brand-50 to-navy-900/10',
   'bg-gradient-to-br from-lime-100 via-green-50 to-emerald-100',
   'bg-gradient-to-br from-rose-100 via-pink-50 to-orange-50',
-  'bg-gradient-to-br from-cyan-100 via-blue-50 to-indigo-100',
+  'bg-gradient-to-br from-cyan-100 via-brand-50 to-brand-200',
 ] as const;
 
 function hashToIndex(seed: string, mod: number): number {

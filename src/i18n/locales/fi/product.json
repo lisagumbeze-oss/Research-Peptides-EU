@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Tuotetta ei löytynyt",
+    "cta": "Palaa kauppaan"
+  },
+  "reviews": {
+    "eyebrow": "Tutkijayhteisö",
+    "title": "Varmennetut arvostelut",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Kopioi linkki",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Lisää ostoskoriin",
+    "inWishlist": "Toivelistalla",
+    "saveWishlist": "Tallenna toivelistalle",
+    "share": "Jaa",
+    "copyLink": "Kopioi linkki",
+    "specifications": "Tekniset tiedot",
+    "variantLabel": "Valitse variantti",
+    "quantity": "Määrä",
+    "bulkStandard": "Vakio",
+    "bulkSave10": "Säästä 10 %",
+    "bulkBestValue": "Paras arvo",
+    "unitsRange12": "1–2 yksikköä",
+    "unitsRange35": "3–5 yksikköä",
+    "unitsRange6": "6+ yksikköä",
+    "euDispatch": "EU-lähetys",
+    "euDispatchDetail": "Täyttö Netherlandsista · seurattavat kuljetukset",
+    "researchOnly": "Vain tutkimuskäyttöön",
+    "researchOnlyDetail": "Ei ihmis- tai eläinten kulutukseen",
+    "coaAvailable": "COA-dokumentaatio saatavilla pyynnöstä"
+  },
+  "recommendations": {
+    "relatedTitle": "Liittyvät tutkimusyhdisteet",
+    "viewCatalog": "Näytä luettelo",
+    "recentTitle": "Viimeksi katsotut"
+  },
+  "toast": {
+    "added": "{{title}} lisätty ostoskoriin",
+    "bulk15": "Määräalennus (15 %) käytetty tuotteeseen {{title}}",
+    "bulk10": "Määräalennus (10 %) käytetty tuotteeseen {{title}}",
+    "linkCopied": "Linkki kopioitu leikepöydälle"
+  }
+}

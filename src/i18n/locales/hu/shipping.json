@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logisztika",
+    "title": "Szállítás és kézbesítés",
+    "description": "EU-prioritású teljesítés Netherlandsből nyomon követett kézbesítéssel tagállamokban és worldwide opciókkal."
+  },
+  "features": {
+    "cutoffTitle": "Rendelési határidő 12:00 CET",
+    "cutoffDesc": "A délig (közép-európai idő) leadott rendelések hétköznap aznap kerülnek feladásra.",
+    "trackedTitle": "Nyomon követett biztonság",
+    "trackedDesc": "Minden szállítmány teljes mértékben nyomon követhető laboratóriumunktól az Ön létesítményéig.",
+    "packagingTitle": "Diszkrét csomagolás",
+    "packagingDesc": "A tételek vákuumcsomagolva, egyszerű, jelölés nélküli csomagolásban érkeznek, kutatóintézetekhez alkalmasan."
+  },
+  "regions": {
+    "title": "EU és nemzetközi elérés",
+    "euTitle": "Szállítás az Európai Unióban",
+    "euDesc": "Standard EU szállítás: 3–7 munkanap. Ingyenes szállítás jogosult rendelésekhez 500 € felett (részösszeg).",
+    "worldTitle": "Worldwide logisztika",
+    "worldDesc": "EU-n kívüli célok: 5–14 munkanap a vám és regionális fuvarozók függvényében.",
+    "ukTitle": "United Kingdom",
+    "ukDesc": "Nyomon követett UK opciók elérhetők a pénztárnál, ha United Kingdom a célország."
+  },
+  "responsibility": {
+    "eyebrow": "Kutatói felelősség",
+    "body": "A vásárlók felelősek a helyi importszabályoknak való megfelelésért. Vám, ÁFA és regionális adók alkalmazhatók — a vásárló felelőssége, ha nem kerülnek beszedésre a pénztárnál.",
+    "disclaimer": "Csak kutatási célra. Nem emberi vagy állatorvosi fogyasztásra."
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Produkt nenalezen",
+    "cta": "Zpět do obchodu"
+  },
+  "reviews": {
+    "eyebrow": "Komunita výzkumníků",
+    "title": "Ověřené recenze",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Kopírovat odkaz",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Přidat do košíku",
+    "inWishlist": "Na seznamu přání",
+    "saveWishlist": "Uložit na seznam přání",
+    "share": "Sdílet",
+    "copyLink": "Kopírovat odkaz",
+    "specifications": "Specifikace",
+    "variantLabel": "Vybrat variantu",
+    "quantity": "Množství",
+    "bulkStandard": "Standardní",
+    "bulkSave10": "Ušetřete 10 %",
+    "bulkBestValue": "Nejlepší hodnota",
+    "unitsRange12": "1–2 jednotky",
+    "unitsRange35": "3–5 jednotek",
+    "unitsRange6": "6+ jednotek",
+    "euDispatch": "Odeslání z EU",
+    "euDispatchDetail": "Plnění z Nizozemska · sledovaní dopravci",
+    "researchOnly": "Pouze pro výzkum",
+    "researchOnlyDetail": "Není určeno k lidské ani veterinární spotřebě",
+    "coaAvailable": "Dokumentace COA k dispozici na vyžádání"
+  },
+  "recommendations": {
+    "relatedTitle": "Související výzkumné sloučeniny",
+    "viewCatalog": "Zobrazit katalog",
+    "recentTitle": "Nedávno zobrazené"
+  },
+  "toast": {
+    "added": "{{title}} přidáno do košíku",
+    "bulk15": "Hromadná sleva (15 %) uplatněna na {{title}}",
+    "bulk10": "Hromadná sleva (10 %) uplatněna na {{title}}",
+    "linkCopied": "Odkaz zkopírován do schránky"
+  }
+}

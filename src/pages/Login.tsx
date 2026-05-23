@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../supabase';
 import { LogIn, Mail, Lock, Loader2 } from 'lucide-react';
 import { Button, Container, GlassPanel } from '../design-system';
-import logo from '../assets/logo.webp';
+import logo from '../assets/brandLogo';
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -59,7 +59,7 @@ export default function Login() {
       <Container size="narrow" className="relative z-10 w-full max-w-md">
         <GlassPanel variant="dark" padding="lg" className="shadow-glow">
           <div className="text-center mb-8">
-            <img src={logo} alt="" className="h-10 w-auto mx-auto mb-6 brightness-0 invert" />
+            <img src={logo} alt="" className="h-12 w-auto mx-auto mb-6 drop-shadow-[0_4px_20px_rgba(45,181,163,0.4)]" width={52} height={52} />
             <h1 className="font-display font-bold text-2xl text-white mb-2">
               {isSignUp ? 'Create researcher account' : 'Welcome back'}
             </h1>

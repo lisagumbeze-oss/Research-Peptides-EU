@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Tutkimusluettelo",
+    "title": "Kauppa",
+    "titleHighlight": "peptidit",
+    "description": "Selaa varmennettuja tutkimusyhdisteitä EU-toimituksella, erädokumentaatiolla ja läpinäkyvillä spesifikaatioilla."
+  },
+  "results": "Näytetään {{count}} / {{total}} tuotetta",
+  "filters": {
+    "categories": "Kategoriat",
+    "maxPrice": "Enimmäishinta",
+    "clearAll": "Tyhjennä kaikki suodattimet",
+    "clearShort": "Tyhjennä suodattimet",
+    "filters": "Suodattimet",
+    "close": "Sulje suodattimet",
+    "refine": "Tarkenna tuloksia",
+    "showResults": "Näytä tulokset"
+  },
+  "sort": {
+    "label": "Lajittele tuotteet",
+    "relevance": "Osuvuus",
+    "featured": "Suositellut",
+    "ratingDesc": "Parhaiten arvioidut",
+    "newest": "Uusimmat",
+    "priceAsc": "Hinta: alhaisimmasta korkeimpaan",
+    "priceDesc": "Hinta: korkeimmasta alimpaan"
+  },
+  "empty": {
+    "title": "Yksikään tuote ei vastaa suodattimia",
+    "description": "Kokeile laajentaa hintaväliä tai tyhjentää valitut kategoriat."
+  }
+}

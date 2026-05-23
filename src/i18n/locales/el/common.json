@@ -1,0 +1,25 @@
+{
+  "brand": "Research Peptides EU",
+  "loading": "Φόρτωση…",
+  "search": "Αναζήτηση",
+  "cart": "Καλάθι",
+  "wishlist": "Λίστα επιθυμιών",
+  "account": "Λογαριασμός",
+  "orders": "Οι παραγγελίες μου",
+  "login": "Σύνδεση",
+  "logout": "Αποσύνδεση",
+  "home": "Αρχική",
+  "shop": "Κατάστημα",
+  "languageActive": "Ενεργό",
+  "close": "Κλείσιμο",
+  "viewAll": "Προβολή όλων",
+  "learnMore": "Μάθετε περισσότερα",
+  "researchUseOnly": "Μόνο για εργαστηριακή έρευνα — όχι για ανθρώπινη ή κτηνιατρική χρήση.",
+  "salesNotification": {
+    "purchased": "Someone in {{location}} purchased",
+    "justNow": "Just now",
+    "minutesAgo_one": "{{count}} minute ago",
+    "minutesAgo_other": "{{count}} minutes ago",
+    "dismiss": "Dismiss notification"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Product not found",
+    "cta": "Return to shop"
+  },
+  "reviews": {
+    "eyebrow": "Researcher community",
+    "title": "Verified reviews",
+    "ratingLabel": "4.9 / 5.0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Copy link",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Add to cart",
+    "inWishlist": "In wishlist",
+    "saveWishlist": "Save to wishlist",
+    "share": "Share",
+    "copyLink": "Copy link",
+    "specifications": "Specifications",
+    "variantLabel": "Select variant",
+    "quantity": "Quantity",
+    "bulkStandard": "Standard",
+    "bulkSave10": "Save 10%",
+    "bulkBestValue": "Best value",
+    "unitsRange12": "1–2 units",
+    "unitsRange35": "3–5 units",
+    "unitsRange6": "6+ units",
+    "euDispatch": "EU dispatch",
+    "euDispatchDetail": "Netherlands fulfillment · tracked carriers",
+    "researchOnly": "Research use only",
+    "researchOnlyDetail": "Not for human or veterinary consumption",
+    "coaAvailable": "COA documentation available on request"
+  },
+  "recommendations": {
+    "relatedTitle": "Related research compounds",
+    "viewCatalog": "View catalog",
+    "recentTitle": "Recently viewed"
+  },
+  "toast": {
+    "added": "{{title}} added to cart",
+    "bulk15": "Bulk discount (15%) applied to {{title}}",
+    "bulk10": "Bulk discount (10%) applied to {{title}}",
+    "linkCopied": "Link copied to clipboard"
+  }
+}

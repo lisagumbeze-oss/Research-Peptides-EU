@@ -14,5 +14,12 @@
   "close": "Close",
   "viewAll": "View all",
   "learnMore": "Learn more",
-  "researchUseOnly": "For laboratory research only — not for human or veterinary use."
+  "researchUseOnly": "For laboratory research only — not for human or veterinary use.",
+  "salesNotification": {
+    "purchased": "Someone in {{location}} purchased",
+    "justNow": "Just now",
+    "minutesAgo_one": "{{count}} minute ago",
+    "minutesAgo_other": "{{count}} minutes ago",
+    "dismiss": "Dismiss notification"
+  }
 }

@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Netherlands · europæiske forskningsstandarder",
+    "title": "Præcisionspeptider til",
+    "titleHighlight": "Europæiske laboratorier.",
+    "subtitle": "Research Peptides EU leverer forbindelser i institutionskvalitet med tredjeparts analytisk verifikation, farmaceutisk håndtering og pålidelig EU-distribution.",
+    "ctaShop": "Gennemse katalog",
+    "ctaWizard": "Forbindelsesvælger",
+    "trustPurity": "Verificeret renhed på 99,8 %+",
+    "trustShipping": "EU-dækkende kølekædeafsendelse",
+    "trustCoa": "COA for hver batch"
+  },
+  "featured": {
+    "eyebrow": "Kataloghøjdepunkter",
+    "title": "Fremhævede forskningsforbindelser",
+    "subtitle": "Batch-verificerede peptider og forskningskemikalier klar til EU-laboratorieafsendelse."
+  },
+  "whyEu": {
+    "eyebrow": "Hvorfor EU-forskere vælger os",
+    "title": "Bygget til europæiske laboratoriestandarder"
+  },
+  "categories": {
+    "eyebrow": "Gennemse efter anvendelse",
+    "title": "Forskningskategorier",
+    "viewAll": "Se alle kategorier"
+  },
+  "trust": {
+    "eyebrow": "Kvalitetssikring",
+    "title": "Verifikation du kan dokumentere",
+    "coaCta": "Udforsk COA-bibliotek"
+  },
+  "experience": {
+    "eyebrow": "Forskeroplevelse",
+    "title": "Support på hvert trin",
+    "faqCta": "Læs forsker-FAQ"
+  },
+  "cta": {
+    "title": "Klar til at udstyre dit laboratorium?",
+    "subtitle": "Gennemse EU-kataloget eller brug forbindelsesvælgeren til at indsnævre din forskningslinje.",
+    "button": "Forskningskatalog i butik"
+  }
+}

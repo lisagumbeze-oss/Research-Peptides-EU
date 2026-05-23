@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Holandia · europejskie standardy badawcze",
+    "title": "Precyzyjne peptydy dla",
+    "titleHighlight": "Europejskie laboratoria.",
+    "subtitle": "Research Peptides EU dostarcza związki klasy instytucjonalnej z analityczną weryfikacją przez strony trzecie, farmaceutyczną obsługą i zaufaną dystrybucją w UE.",
+    "ctaShop": "Przeglądaj katalog",
+    "ctaWizard": "Selektor związków",
+    "trustPurity": "Zweryfikowana czystość 99,8%+",
+    "trustShipping": "Wysyłka w łańcuchu chłodniczym w całej UE",
+    "trustCoa": "COA dla każdej partii"
+  },
+  "featured": {
+    "eyebrow": "Wyróżnione w katalogu",
+    "title": "Polecane związki badawcze",
+    "subtitle": "Peptydy i chemikalia badawcze zweryfikowane partiami, gotowe do wysyłki do laboratoriów UE."
+  },
+  "whyEu": {
+    "eyebrow": "Dlaczego badacze z UE nas wybierają",
+    "title": "Zgodne z europejskimi standardami laboratoryjnymi"
+  },
+  "categories": {
+    "eyebrow": "Przeglądaj według zastosowania",
+    "title": "Kategorie badań",
+    "viewAll": "Zobacz wszystkie kategorie"
+  },
+  "trust": {
+    "eyebrow": "Zapewnienie jakości",
+    "title": "Weryfikacja, którą możesz udokumentować",
+    "coaCta": "Przeglądaj bibliotekę COA"
+  },
+  "experience": {
+    "eyebrow": "Doświadczenie badacza",
+    "title": "Wsparcie na każdym etapie",
+    "faqCta": "Przeczytaj FAQ badacza"
+  },
+  "cta": {
+    "title": "Gotowy wyposażyć laboratorium?",
+    "subtitle": "Przeglądaj katalog UE lub użyj selektora związków, aby zawęzić linię badań.",
+    "button": "Sklep — katalog badawczy"
+  }
+}

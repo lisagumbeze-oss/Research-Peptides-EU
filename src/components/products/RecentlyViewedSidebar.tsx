@@ -43,7 +43,7 @@ export default function RecentlyViewedSidebar() {
       {/* Toggle Button */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-2 rounded-l-xl shadow-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-all text-gray-500 hover:text-blue-600"
+        className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-2 rounded-l-xl shadow-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-all text-gray-500 hover:text-brand-600"
       >
         {isExpanded ? <ChevronRight className="h-5 w-5" /> : <History className="h-5 w-5" />}
       </button>
@@ -63,7 +63,7 @@ export default function RecentlyViewedSidebar() {
                 to={productPath(product)}
                 className="relative group"
               >
-                <div className="h-12 w-12 rounded-full overflow-hidden border-2 border-transparent group-hover:border-blue-500 transition-all shadow-md">
+                <div className="h-12 w-12 rounded-full overflow-hidden border-2 border-transparent group-hover:border-brand-500 transition-all shadow-md">
                   {product.images?.[0] ? (
                   <img src={product.images[0]} alt="" className="h-full w-full object-cover group-hover:scale-110 transition-transform" />
                   ) : (

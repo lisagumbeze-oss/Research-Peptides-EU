@@ -18,7 +18,7 @@ export default function PeptideCalculator() {
     <div className="bg-white min-h-screen pt-12 pb-24">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 text-brand-600 rounded-full text-xs font-black uppercase tracking-widest mb-6">
             <Calculator className="h-4 w-4" />
             Lab Utility
           </div>
@@ -41,7 +41,7 @@ export default function PeptideCalculator() {
                 step={0.1}
                 value={massMg}
                 onChange={(e) => setMassMg(Number(e.target.value) || 0)}
-                className="w-full p-4 rounded-2xl border border-gray-200 bg-white font-bold text-gray-900 outline-none focus:ring-2 focus:ring-blue-500/20"
+                className="w-full p-4 rounded-2xl border border-gray-200 bg-white font-bold text-gray-900 outline-none focus:ring-2 focus:ring-brand-400/30"
               />
             </div>
             <div>
@@ -55,7 +55,7 @@ export default function PeptideCalculator() {
                 step={0.1}
                 value={diluentMl}
                 onChange={(e) => setDiluentMl(Number(e.target.value) || 0)}
-                className="w-full p-4 rounded-2xl border border-gray-200 bg-white font-bold text-gray-900 outline-none focus:ring-2 focus:ring-blue-500/20"
+                className="w-full p-4 rounded-2xl border border-gray-200 bg-white font-bold text-gray-900 outline-none focus:ring-2 focus:ring-brand-400/30"
               />
             </div>
             <div>
@@ -69,24 +69,24 @@ export default function PeptideCalculator() {
                 step={1}
                 value={targetDoseMcg}
                 onChange={(e) => setTargetDoseMcg(Number(e.target.value) || 0)}
-                className="w-full p-4 rounded-2xl border border-gray-200 bg-white font-bold text-gray-900 outline-none focus:ring-2 focus:ring-blue-500/20"
+                className="w-full p-4 rounded-2xl border border-gray-200 bg-white font-bold text-gray-900 outline-none focus:ring-2 focus:ring-brand-400/30"
               />
             </div>
           </section>
 
           <section className="bg-slate-950 text-white rounded-3xl p-8">
             <h2 className="text-xl font-black mb-6 flex items-center gap-2">
-              <Sigma className="h-5 w-5 text-blue-400" />
+              <Sigma className="h-5 w-5 text-brand-400" />
               Results
             </h2>
             <div className="space-y-4 text-sm">
               <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
                 <p className="text-gray-300 text-xs uppercase tracking-widest font-black mb-1">Concentration</p>
-                <p className="text-2xl font-black text-blue-300">{round(concentrationMcgPerMl)} mcg/mL</p>
+                <p className="text-2xl font-black text-brand-300">{round(concentrationMcgPerMl)} mcg/mL</p>
               </div>
               <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
                 <p className="text-gray-300 text-xs uppercase tracking-widest font-black mb-1">Volume per target dose</p>
-                <p className="text-2xl font-black text-blue-300">{round(requiredVolumeMl)} mL</p>
+                <p className="text-2xl font-black text-brand-300">{round(requiredVolumeMl)} mL</p>
               </div>
               <p className="text-gray-400 leading-relaxed">
                 For laboratory planning only. Confirm final concentration and dose volumes against method-specific requirements before experimental use.

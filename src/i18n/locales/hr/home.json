@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Nizozemska · europski istraživački standardi",
+    "title": "Precizni peptidi za",
+    "titleHighlight": "Europski laboratoriji.",
+    "subtitle": "Research Peptides EU opskrbljuje spojeve institucionalne razine s analitičkom provjerom treće strane, farmaceutskim rukovanjem i pouzdanom EU distribucijom.",
+    "ctaShop": "Pregledaj katalog",
+    "ctaWizard": "Birač spojeva",
+    "trustPurity": "Provjerena čistoća 99,8 %+",
+    "trustShipping": "EU otprema hladnog lanca",
+    "trustCoa": "COA za svaku seriju"
+  },
+  "featured": {
+    "eyebrow": "Istaknuto u katalogu",
+    "title": "Istaknuti istraživački spojevi",
+    "subtitle": "Peptidi i kemikalije za istraživanje provjereni po seriji, spremni za otpremu u EU laboratorije."
+  },
+  "whyEu": {
+    "eyebrow": "Zašto nas biraju EU istraživači",
+    "title": "Izgrađeno za europske laboratorijske standarde"
+  },
+  "categories": {
+    "eyebrow": "Pregledaj po primjeni",
+    "title": "Kategorije istraživanja",
+    "viewAll": "Prikaži sve kategorije"
+  },
+  "trust": {
+    "eyebrow": "Osiguranje kvalitete",
+    "title": "Provjera koju možete dokumentirati",
+    "coaCta": "Istražite COA knjižnicu"
+  },
+  "experience": {
+    "eyebrow": "Iskustvo istraživača",
+    "title": "Podrška u svakoj fazi",
+    "faqCta": "Pročitajte FAQ za istraživače"
+  },
+  "cta": {
+    "title": "Spremni opremiti laboratorij?",
+    "subtitle": "Pregledajte EU katalog ili upotrijebite birač spojeva za sužavanje istraživačke linije.",
+    "button": "Istraživački katalog trgovine"
+  }
+}

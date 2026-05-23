@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Bezpečná pokladňa",
+    "title": "Dokončite objednávku",
+    "description": "Doprava EÚ · fakturácia s DPH · plnenie z Netherlands"
+  },
+  "steps": {
+    "shipping": "Doprava",
+    "payment": "Platba",
+    "confirm": "Potvrdiť"
+  },
+  "cart": {
+    "title": "Váš košík",
+    "empty": "Váš košík je prázdny",
+    "emptyCta": "Prehliadať katalóg",
+    "summary": "Súhrn objednávky",
+    "promo": "Promo kód",
+    "subtotal": "Medzisúčet",
+    "discount": "Zľava",
+    "shipping": "Doprava",
+    "shippingAtCheckout": "Pri pokladni",
+    "total": "Celkom",
+    "proceed": "Prejsť k pokladni",
+    "vatNote": "Ceny v EUR. DPH sa uplatní tam, kde je vyžadovaná pri pokladni podľa krajiny doručenia v EÚ."
+  }
+}

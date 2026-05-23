@@ -1,0 +1,152 @@
+{
+  "cookie": {
+    "title": "Cookies & privacy",
+    "description": "We use essential cookies to run the store and optional analytics to improve the EU researcher experience. You can change your choice anytime in our privacy policy.",
+    "acceptAll": "Accept all",
+    "essentialOnly": "Essential only",
+    "privacyLink": "Privacy policy"
+  },
+  "faq": {
+    "eyebrow": "Support",
+    "title": "Researcher FAQ",
+    "subtitle": "Standard protocols and common inquiries for European laboratory teams.",
+    "ctaTitle": "Still have technical questions?",
+    "ctaBody": "Our EU support team is available for order and documentation questions.",
+    "ctaButton": "Contact support",
+    "groups": {
+      "product": {
+        "title": "Product & safety",
+        "items": [
+          {
+            "q": "Are these products safe for human or animal consumption?",
+            "a": "No. All products sold by Research Peptides EU are strictly for laboratory research and scientific application only. They are not for human or veterinary use."
+          },
+          {
+            "q": "How do you verify the purity of your peptides?",
+            "a": "We subject every batch to HPLC and mass spectrometry. Purity levels are verified at 99.8% or higher before EU distribution."
+          },
+          {
+            "q": "How should I store compounds upon arrival?",
+            "a": "Lyophilized peptides are stable for short shipping durations at ambient temperature. For long-term stability, store at −20 °C or −80 °C."
+          }
+        ]
+      },
+      "logistics": {
+        "title": "Logistics & shipping",
+        "items": [
+          {
+            "q": "How long does EU shipping take?",
+            "a": "Standard EU delivery is typically 3–7 business days. Netherlands fulfillment with tracked carriers."
+          },
+          {
+            "q": "Is packaging discreet?",
+            "a": "Yes. Orders ship in plain, unmarked packaging suitable for research facilities."
+          },
+          {
+            "q": "Do you ship outside the EU?",
+            "a": "Yes. Non-EU delivery typically takes 5–14 business days depending on customs."
+          }
+        ]
+      },
+      "payments": {
+        "title": "Payments & policy",
+        "items": [
+          {
+            "q": "Which payment methods do you accept?",
+            "a": "We accept cryptocurrency (BTC, ETH, USDT) with a 5% discount, bank transfer, and card orders reviewed manually."
+          },
+          {
+            "q": "What is your return policy?",
+            "a": "To maintain cold-chain integrity and research standards, we do not accept returns. All sales are final unless required by applicable EU consumer law."
+          }
+        ]
+      }
+    }
+  },
+  "privacy": {
+    "eyebrow": "Privacy & GDPR",
+    "title": "Privacy policy",
+    "subtitle": "Compliant with EU GDPR and Dutch AVG requirements.",
+    "sections": [
+      {
+        "heading": "Data overview",
+        "body": "Research Peptides EU is committed to protecting the privacy of researchers and institutional buyers. This policy explains how we collect, use, and safeguard personal data when you use our EU storefront."
+      },
+      {
+        "heading": "Information we collect",
+        "body": "We may process identity data, contact details, order and payment references, and technical data such as IP address and browser type."
+      },
+      {
+        "heading": "How we use your data",
+        "body": "Data is used to fulfil orders, provide support, prevent fraud, comply with legal obligations, and improve our services. We do not sell personal data."
+      },
+      {
+        "heading": "Legal basis (GDPR)",
+        "body": "Processing is based on contract performance, legitimate interests, legal obligation, and consent where required (e.g. marketing cookies)."
+      },
+      {
+        "heading": "Retention",
+        "body": "Order and tax records are retained as required by EU and Dutch law (typically up to 7 years). Marketing data is kept until you withdraw consent."
+      },
+      {
+        "heading": "Your rights",
+        "body": "You may request access, rectification, erasure, restriction, portability, or object to processing. Contact us at the address below."
+      }
+    ],
+    "ref": "GDPR-REF: RPEU-PRV-2026"
+  },
+  "terms": {
+    "eyebrow": "Legal",
+    "title": "Terms & conditions",
+    "subtitle": "EU research supply terms for institutional and laboratory buyers.",
+    "sections": [
+      {
+        "heading": "Research use only",
+        "body": "All products are strictly for laboratory research, scientific, and industrial use. Not for human or veterinary consumption."
+      },
+      {
+        "heading": "Eligibility",
+        "body": "You must be at least 18 years old and authorised to purchase on behalf of your institution or laboratory."
+      },
+      {
+        "heading": "Orders & pricing",
+        "body": "Prices are displayed in EUR. We reserve the right to correct errors. Orders are confirmed when payment is accepted or processing begins."
+      },
+      {
+        "heading": "Returns",
+        "body": "Due to temperature-sensitive goods, we maintain a strict no-return policy except where mandatory under applicable EU law."
+      },
+      {
+        "heading": "Limitation of liability",
+        "body": "Research Peptides EU is not liable for indirect or consequential damages arising from product use in research contexts."
+      }
+    ],
+    "footer": "Research Peptides EU Operations"
+  },
+  "about": {
+    "eyebrow": "About us",
+    "title": "About Research Peptides EU",
+    "subtitle": "European research-grade compounds with verified documentation and Netherlands-based fulfillment.",
+    "missionTitle": "Our mission",
+    "missionBody": "We focus on consistency, batch documentation, and researcher confidence across EU laboratory workflows.",
+    "qualityTitle": "Quality focus",
+    "qualityBody": "Batch-level verification and COA references are central to our catalog.",
+    "researchTitle": "Research-only positioning",
+    "researchBody": "All compounds are offered for laboratory and scientific research only — not for human or veterinary use."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Contact our EU team",
+    "subtitle": "Orders, documentation, and institutional inquiries.",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "locationLabel": "Headquarters",
+    "locationValue": "Netherlands · European Union"
+  },
+  "refund": {
+    "eyebrow": "Returns",
+    "title": "Refund & returns",
+    "subtitle": "EU policy for temperature-sensitive research compounds.",
+    "body": "Contact the Research Peptides EU support desk with your order ID. Due to cold-chain requirements, returns are generally not accepted unless required by law."
+  }
+}

@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
+import { usePreloadImage } from '../../hooks/usePreloadImage';
 import { ArrowRight, FlaskConical, ShieldCheck, Sparkles, Truck } from 'lucide-react';
 import { motion } from 'motion/react';
 import { LocaleLink } from '../../i18n/LocaleLink';
-import { Button, Container, GlassPanel } from '../../design-system';
+import { Button, Container, GlassPanel, ScientificBackdrop } from '../../design-system';
 import { useWizardStore } from '../../store/useWizardStore';
 import heroBg from '../../assets/hero_bg.png';
 import vialsHero from '../../assets/vials_hero.png';
@@ -10,6 +11,7 @@ import vialsHero from '../../assets/vials_hero.png';
 export function HeroSection() {
   const { t } = useTranslation('home');
   const openWizard = useWizardStore((s) => s.openWizard);
+  usePreloadImage(vialsHero);
 
   const trustPills = [
     { icon: ShieldCheck, label: t('hero.trustPurity') },
@@ -20,10 +22,17 @@ export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-navy-950">
       <div className="absolute inset-0" aria-hidden>
-        <img src={heroBg} alt="" className="h-full w-full object-cover opacity-35" />
+        <img
+          src={heroBg}
+          alt=""
+          className="hidden md:block h-full w-full object-cover opacity-35"
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/70 to-navy-950/50" />
-        <div className="absolute inset-0 bg-scientific-grid opacity-25" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-glow" />
+        <ScientificBackdrop variant="dark" className="opacity-90" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-glow pointer-events-none" aria-hidden />
       </div>
 
       <Container className="relative z-10 py-16 md:py-24 lg:py-28">
@@ -46,7 +55,7 @@ export function HeroSection() {
                 className="text-display text-white mb-6"
               >
                 {t('hero.title')}{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-brand-400">
+                <span className="text-gradient-brand">
                   {t('hero.titleHighlight')}
                 </span>
               </motion.h1>
@@ -98,7 +107,7 @@ export function HeroSection() {
 
             <div className="relative flex items-center justify-center p-8 lg:p-12 min-h-[280px] lg:min-h-0">
               <motion.div
-                className="absolute w-64 h-64 rounded-full bg-brand-500/20 blur-3xl"
+                className="absolute w-64 h-64 rounded-full bg-brand-400/25 blur-3xl"
                 animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.6, 0.4] }}
                 transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
                 aria-hidden
@@ -106,10 +115,15 @@ export function HeroSection() {
               <motion.img
                 src={vialsHero}
                 alt="Premium research peptide vials"
+                width={512}
+                height={512}
                 initial={{ opacity: 0, x: 32 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.25 }}
-                className="relative z-10 w-full max-w-md object-contain drop-shadow-[0_24px_48px_rgba(67,87,214,0.35)]"
+                className="relative z-10 w-full max-w-md aspect-square object-contain drop-shadow-[0_24px_48px_rgba(67,87,214,0.35)]"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
               />
             </div>
           </div>

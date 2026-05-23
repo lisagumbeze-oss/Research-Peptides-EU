@@ -1,4 +1,6 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   CheckCircle2,
   Heart,
@@ -43,12 +45,6 @@ type ProductPurchasePanelProps = {
   onCopyLink: () => void;
 };
 
-const bundleTiers = [
-  { id: 'standard', qty: 1, range: '1–2 units', label: 'Standard', discount: 0 },
-  { id: 'save', qty: 3, range: '3–5 units', label: 'Save 10%', discount: 0.1 },
-  { id: 'value', qty: 5, range: '6+ units', label: 'Best value', discount: 0.15 },
-] as const;
-
 export function ProductPurchasePanel({
   title,
   description,
@@ -69,7 +65,46 @@ export function ProductPurchasePanel({
   onToggleShare,
   onCopyLink,
 }: ProductPurchasePanelProps) {
+  const { t } = useTranslation('product');
   const basePrice = Number(currentPrice) || 0;
+
+  const bundleTiers = useMemo(
+    () =>
+      [
+        {
+          id: 'standard',
+          qty: 1,
+          range: t('purchase.unitsRange12'),
+          label: t('purchase.bulkStandard'),
+          discount: 0,
+        },
+        {
+          id: 'save',
+          qty: 3,
+          range: t('purchase.unitsRange35'),
+          label: t('purchase.bulkSave10'),
+          discount: 0.1,
+        },
+        {
+          id: 'value',
+          qty: 5,
+          range: t('purchase.unitsRange6'),
+          label: t('purchase.bulkBestValue'),
+          discount: 0.15,
+        },
+      ] as const,
+    [t],
+  );
+
+  const trustBadges = useMemo(
+    () =>
+      [
+        { icon: ShieldCheck, label: t('purchase.hplcTested') },
+        { icon: Truck, label: t('purchase.euDispatch') },
+        { icon: Zap, label: t('purchase.coldChain') },
+      ] as const,
+    [t],
+  );
 
   return (
     <div className="lg:sticky lg:top-24 space-y-6">
@@ -81,7 +116,7 @@ export function ProductPurchasePanel({
             onClick={onToggleShare}
             className="p-2.5 rounded-xl border border-brand-100 text-steel-600 hover:bg-brand-50 hover:text-brand-600"
             aria-expanded={showShare}
-            aria-label="Share product"
+            aria-label={t('purchase.shareProduct')}
           >
             <Share2 className="h-5 w-5" />
           </button>
@@ -94,7 +129,7 @@ export function ProductPurchasePanel({
                 type="button"
                 onClick={onCopyLink}
                 className="p-2 rounded-lg hover:bg-brand-50 text-steel-600"
-                aria-label="Copy link"
+                aria-label={t('purchase.copyLinkAria')}
               >
                 <LinkIcon className="h-5 w-5" />
               </button>
@@ -109,7 +144,7 @@ export function ProductPurchasePanel({
                 ? 'border-error/30 bg-red-50 text-error'
                 : 'border-brand-100 text-steel-600 hover:bg-brand-50',
             )}
-            aria-label={inWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+            aria-label={inWishlist ? t('purchase.removeWishlist') : t('purchase.addWishlist')}
           >
             <Heart className="h-5 w-5" fill={inWishlist ? 'currentColor' : 'none'} />
           </button>
@@ -125,7 +160,7 @@ export function ProductPurchasePanel({
             />
           ))}
         </div>
-        <span className="text-sm text-steel-600">({reviewCount} reviews)</span>
+        <span className="text-sm text-steel-600">{t('purchase.reviewsCount', { count: reviewCount })}</span>
       </div>
 
       <div className="flex flex-wrap items-end gap-4">
@@ -139,7 +174,7 @@ export function ProductPurchasePanel({
             {formatCurrency(basePrice)}
           </span>
         </div>
-        <Badge variant="purity">Price verified</Badge>
+        <Badge variant="purity">{t('purchase.priceVerified')}</Badge>
       </div>
 
       {description ? (
@@ -148,10 +183,13 @@ export function ProductPurchasePanel({
 
       {variants.length > 0 && (
         <div className="p-4 rounded-2xl bg-mist-50 border border-brand-100">
-          <h3 className="text-caption text-brand-600 mb-3">Specification</h3>
+          <h3 className="text-caption text-brand-600 mb-3">{t('purchase.specification')}</h3>
           <div className="flex flex-wrap gap-2">
             {variants.map((v, i) => {
-              const label = v.attributes?.attribute_pa_peptides || v.display_name || `Variant ${i + 1}`;
+              const label =
+                v.attributes?.attribute_pa_peptides ||
+                v.display_name ||
+                t('purchase.variantFallback', { index: i + 1 });
               const selected = selectedVariant?.variation_id === v.variation_id;
               return (
                 <button
@@ -176,7 +214,7 @@ export function ProductPurchasePanel({
 
       {specifications.length > 0 && (
         <div>
-          <h3 className="text-caption text-brand-600 mb-3">Product profile</h3>
+          <h3 className="text-caption text-brand-600 mb-3">{t('purchase.productProfile')}</h3>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {specifications.map((spec, i) => (
               <li
@@ -194,7 +232,7 @@ export function ProductPurchasePanel({
       <div>
         <div className="flex items-center gap-2 mb-4">
           <ProductBadge type="verified" size="sm" />
-          <span className="text-caption text-silver-400">Research bundle</span>
+          <span className="text-caption text-silver-400">{t('purchase.researchBundle')}</span>
         </div>
         <div className="grid grid-cols-3 gap-2">
           {bundleTiers.map((tier) => {
@@ -231,11 +269,7 @@ export function ProductPurchasePanel({
       </div>
 
       <div className="grid grid-cols-3 gap-2">
-        {[
-          { icon: ShieldCheck, label: 'HPLC tested' },
-          { icon: Truck, label: 'EU dispatch' },
-          { icon: Zap, label: 'Cold-chain' },
-        ].map(({ icon: Icon, label }) => (
+        {trustBadges.map(({ icon: Icon, label }) => (
           <div
             key={label}
             className="flex flex-col items-center p-3 rounded-2xl bg-brand-50/80 border border-brand-100 text-center"
@@ -252,7 +286,7 @@ export function ProductPurchasePanel({
             type="button"
             onClick={() => onQuantityChange(Math.max(1, quantity - 1))}
             className="px-4 py-3 text-steel-600 hover:bg-brand-50"
-            aria-label="Decrease quantity"
+            aria-label={t('purchase.decreaseQty')}
           >
             −
           </button>
@@ -262,29 +296,29 @@ export function ProductPurchasePanel({
             value={quantity}
             onChange={(e) => onQuantityChange(Math.max(1, parseInt(e.target.value, 10) || 1))}
             className="w-14 text-center font-bold text-navy-950 border-x border-brand-100 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-            aria-label="Quantity"
+            aria-label={t('purchase.quantity')}
           />
           <button
             type="button"
             onClick={() => onQuantityChange(quantity + 1)}
             className="px-4 py-3 text-steel-600 hover:bg-brand-50"
-            aria-label="Increase quantity"
+            aria-label={t('purchase.increaseQty')}
           >
             +
           </button>
         </div>
         <Button size="lg" fullWidth onClick={onAddToCart} className="gap-2 flex-1">
           <ShoppingCart className="h-5 w-5" />
-          Add to cart
+          {t('purchase.addToCart')}
         </Button>
       </div>
 
       <p className="text-xs text-silver-400 text-center">
         <Link to="/coas" className="text-brand-600 hover:underline font-medium">
-          View COA library
+          {t('purchase.viewCoaLibrary')}
         </Link>
         {' · '}
-        For laboratory research only
+        {t('purchase.laboratoryOnly')}
       </p>
     </div>
   );

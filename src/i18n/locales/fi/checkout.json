@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Turvallinen kassa",
+    "title": "Viimeistele tilaus",
+    "description": "EU-toimitus · ALV-laskutus · täyttö Netherlandsista"
+  },
+  "steps": {
+    "shipping": "Toimitus",
+    "payment": "Maksu",
+    "confirm": "Vahvista"
+  },
+  "cart": {
+    "title": "Ostoskorisi",
+    "empty": "Ostoskorisi on tyhjä",
+    "emptyCta": "Selaa luetteloa",
+    "summary": "Tilauksen yhteenveto",
+    "promo": "Kampanjakoodi",
+    "subtotal": "Välisumma",
+    "discount": "Alennus",
+    "shipping": "Toimitus",
+    "shippingAtCheckout": "Kassalla",
+    "total": "Yhteensä",
+    "proceed": "Siirry kassalle",
+    "vatNote": "Hinnat EUR. ALV sovelletaan tarvittaessa kassalla EU-toimitusmaasi mukaan."
+  }
+}

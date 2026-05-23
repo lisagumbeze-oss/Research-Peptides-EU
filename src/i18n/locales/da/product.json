@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Produkt ikke fundet",
+    "cta": "Tilbage til butik"
+  },
+  "reviews": {
+    "eyebrow": "Forskerfællesskab",
+    "title": "Verificerede anmeldelser",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Kopiér link",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Tilføj til kurv",
+    "inWishlist": "På ønskeliste",
+    "saveWishlist": "Gem på ønskeliste",
+    "share": "Del",
+    "copyLink": "Kopiér link",
+    "specifications": "Specifikationer",
+    "variantLabel": "Vælg variant",
+    "quantity": "Antal",
+    "bulkStandard": "Standard",
+    "bulkSave10": "Spar 10 %",
+    "bulkBestValue": "Bedste værdi",
+    "unitsRange12": "1–2 enheder",
+    "unitsRange35": "3–5 enheder",
+    "unitsRange6": "6+ enheder",
+    "euDispatch": "EU-afsendelse",
+    "euDispatchDetail": "Opfyldelse fra Netherlands · sporede transportører",
+    "researchOnly": "Kun til forskning",
+    "researchOnlyDetail": "Ikke til menneskelig eller veterinær forbrug",
+    "coaAvailable": "COA-dokumentation tilgængelig på anmodning"
+  },
+  "recommendations": {
+    "relatedTitle": "Relaterede forskningsforbindelser",
+    "viewCatalog": "Se katalog",
+    "recentTitle": "Senest set"
+  },
+  "toast": {
+    "added": "{{title}} tilføjet til kurv",
+    "bulk15": "Mængderabat (15 %) anvendt på {{title}}",
+    "bulk10": "Mængderabat (10 %) anvendt på {{title}}",
+    "linkCopied": "Link kopieret til udklipsholder"
+  }
+}

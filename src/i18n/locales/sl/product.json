@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Izdelek ni najden",
+    "cta": "Nazaj v trgovino"
+  },
+  "reviews": {
+    "eyebrow": "Skupnost raziskovalcev",
+    "title": "Preverjene ocene",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Kopiraj povezavo",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Dodaj v košarico",
+    "inWishlist": "Na seznamu želja",
+    "saveWishlist": "Shrani na seznam želja",
+    "share": "Deli",
+    "copyLink": "Kopiraj povezavo",
+    "specifications": "Specifikacije",
+    "variantLabel": "Izberi varianto",
+    "quantity": "Količina",
+    "bulkStandard": "Standardno",
+    "bulkSave10": "Prihranite 10 %",
+    "bulkBestValue": "Najboljša vrednost",
+    "unitsRange12": "1–2 enoti",
+    "unitsRange35": "3–5 enot",
+    "unitsRange6": "6+ enot",
+    "euDispatch": "Pošiljanje EU",
+    "euDispatchDetail": "Izpolnitev iz Netherlands · sledeni prevozniki",
+    "researchOnly": "Samo za raziskave",
+    "researchOnlyDetail": "Ni za človeško ali veterinarsko uživanje",
+    "coaAvailable": "Dokumentacija COA na voljo na zahtevo"
+  },
+  "recommendations": {
+    "relatedTitle": "Sorodne raziskovalne spojine",
+    "viewCatalog": "Prikaži katalog",
+    "recentTitle": "Nedavno ogledano"
+  },
+  "toast": {
+    "added": "{{title}} dodano v košarico",
+    "bulk15": "Količinski popust (15 %) uporabljen za {{title}}",
+    "bulk10": "Količinski popust (10 %) uporabljen za {{title}}",
+    "linkCopied": "Povezava kopirana v odložišče"
+  }
+}

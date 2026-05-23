@@ -1,0 +1,25 @@
+{
+  "brand": "Research Peptides EU",
+  "loading": "Laddar…",
+  "search": "Sök",
+  "cart": "Varukorg",
+  "wishlist": "Önskelista",
+  "account": "Konto",
+  "orders": "Mina beställningar",
+  "login": "Logga in",
+  "logout": "Logga ut",
+  "home": "Hem",
+  "shop": "Butik",
+  "languageActive": "Aktiv",
+  "close": "Stäng",
+  "viewAll": "Visa alla",
+  "learnMore": "Läs mer",
+  "researchUseOnly": "Endast för laboratorieforskning — inte för mänsklig eller veterinär användning.",
+  "salesNotification": {
+    "purchased": "Someone in {{location}} purchased",
+    "justNow": "Just now",
+    "minutesAgo_one": "{{count}} minute ago",
+    "minutesAgo_other": "{{count}} minutes ago",
+    "dismiss": "Dismiss notification"
+  }
+}

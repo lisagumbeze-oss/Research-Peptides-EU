@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { LocaleLink } from '../../i18n/LocaleLink';
 import { MapPin, ShieldCheck, Truck } from 'lucide-react';
-import logo from '../../assets/logo.webp';
-import { Container } from '../../design-system';
+import logo from '../../assets/brandLogo';
+import { Container, ScientificBackdrop } from '../../design-system';
 import { footerInventory, footerLegal, footerSupport } from '../../navigation/config';
 import { brandName } from '../../design-system/tokens';
+import { SUPPORT_EMAIL } from '../../config/brand';
 
 type SiteFooterProps = {
   newsletterEmail: string;
@@ -27,14 +28,13 @@ export default function SiteFooter({
 
   return (
     <footer className="bg-navy-950 text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-glow opacity-60 pointer-events-none" aria-hidden />
-      <div className="absolute inset-0 bg-scientific-grid opacity-20 pointer-events-none" aria-hidden />
+      <ScientificBackdrop variant="dark" glow />
 
       <Container className="relative z-10 section-md">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           <div className="md:col-span-4">
             <LocaleLink to="/" className="inline-flex items-center gap-3 mb-6 rounded-lg">
-              <img src={logo} alt="" className="h-10 w-auto brightness-0 invert" />
+              <img src={logo} alt="" className="h-11 w-auto drop-shadow-[0_2px_12px_rgba(45,181,163,0.35)]" width={48} height={48} />
             </LocaleLink>
             <p className="text-sm text-silver-400 leading-relaxed max-w-sm">
               {brandName} delivers research-grade peptide compounds to European laboratories with
@@ -55,8 +55,8 @@ export default function SiteFooter({
               </span>
             </div>
             <address className="not-italic text-silver-400 text-sm leading-relaxed mt-8 max-w-sm">
-              <a href="mailto:info@researchpeptide.uk" className="hover:text-white transition-colors">
-                info@researchpeptide.uk
+              <a href={`mailto:${SUPPORT_EMAIL}`} className="hover:text-white transition-colors">
+                {SUPPORT_EMAIL}
               </a>
             </address>
           </div>

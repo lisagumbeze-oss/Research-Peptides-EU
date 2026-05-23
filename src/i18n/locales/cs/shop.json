@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Výzkumný katalog",
+    "title": "Obchod",
+    "titleHighlight": "peptidy",
+    "description": "Prohlédněte ověřené výzkumné sloučeniny s plněním v EU, dokumentací šarží a transparentními specifikacemi."
+  },
+  "results": "Zobrazeno {{count}} z {{total}} produktů",
+  "filters": {
+    "categories": "Kategorie",
+    "maxPrice": "Max. cena",
+    "clearAll": "Vymazat všechny filtry",
+    "clearShort": "Vymazat filtry",
+    "filters": "Filtry",
+    "close": "Zavřít filtry",
+    "refine": "Upřesnit výsledky",
+    "showResults": "Zobrazit výsledky"
+  },
+  "sort": {
+    "label": "Seřadit produkty",
+    "relevance": "Relevance",
+    "featured": "Doporučené",
+    "ratingDesc": "Nejlépe hodnocené",
+    "newest": "Nejnovější",
+    "priceAsc": "Cena: od nejnižší",
+    "priceDesc": "Cena: od nejvyšší"
+  },
+  "empty": {
+    "title": "Žádné produkty neodpovídají filtrům",
+    "description": "Zkuste rozšířit cenové rozpětí nebo vymazat vybrané kategorie."
+  }
+}

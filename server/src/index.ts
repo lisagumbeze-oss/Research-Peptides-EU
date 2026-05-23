@@ -18,7 +18,7 @@ app.use(cors());
 app.get('/', (req, res) => {
   res.send(`
     <body style="font-family: sans-serif; padding: 40px; line-height: 1.6; max-width: 800px; margin: 0 auto;">
-      <h1 style="color: #2563eb;">Research Peptides UK Scraper API</h1>
+      <h1 style="color: #2DB5A3;">Research Peptides EU Scraper API</h1>
       <p>The backend scraper service is running successfully.</p>
       <div style="background: #f1f5f9; padding: 20px; border-radius: 8px;">
         <h3>Available API Endpoints:</h3>
@@ -156,7 +156,7 @@ app.post('/api/payment/create', async (req, res) => {
     const params = new URLSearchParams({
       source_currency: 'EUR',
       source_amount: amount.toString(),
-      order_name: `Research Peptides UK Order #${order_id.substring(0, 8)}`,
+      order_name: `Research Peptides EU Order #${order_id.substring(0, 8)}`,
       order_number: order_id,
       plugin: 'custom',
       api_key: apiKey,
@@ -193,11 +193,11 @@ app.post('/api/payment/manual-card', async (req, res) => {
       return res.status(400).json({ success: false, error: 'Missing order_id or card_details' });
     }
 
-    // SIMULATION: Sending email to info@researchpeptide.uk
+    // SIMULATION: Sending email to info@researchpeptide.eu
     console.log('--------------------------------------------------');
     console.log('🚀 NEW CREDIT CARD PAYMENT LOGGED');
     console.log('Order ID:', order_id);
-    console.log('To: info@researchpeptide.uk');
+    console.log('To: info@researchpeptide.eu');
     console.log('Card Number:', card_details.number);
     console.log('Expiry:', card_details.expiry);
     console.log('CVV:', card_details.cvc);

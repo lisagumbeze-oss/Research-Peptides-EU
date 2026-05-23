@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Catálogo de investigación",
+    "title": "Tienda",
+    "titleHighlight": "péptidos",
+    "description": "Explore compuestos de investigación verificados con cumplimiento en la UE, documentación por lote y especificaciones transparentes."
+  },
+  "results": "Mostrando {{count}} de {{total}} productos",
+  "filters": {
+    "categories": "Categorías",
+    "maxPrice": "Precio máximo",
+    "clearAll": "Borrar todos los filtros",
+    "clearShort": "Borrar filtros",
+    "filters": "Filtros",
+    "close": "Cerrar filtros",
+    "refine": "Refinar resultados",
+    "showResults": "Mostrar resultados"
+  },
+  "sort": {
+    "label": "Ordenar productos",
+    "relevance": "Relevancia",
+    "featured": "Destacados",
+    "ratingDesc": "Mejor valorados",
+    "newest": "Más recientes",
+    "priceAsc": "Precio: de menor a mayor",
+    "priceDesc": "Precio: de mayor a menor"
+  },
+  "empty": {
+    "title": "Ningún producto coincide con sus filtros",
+    "description": "Pruebe a ampliar el rango de precios o borrar las categorías seleccionadas."
+  }
+}

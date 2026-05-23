@@ -1,0 +1,40 @@
+{
+  "primary": {
+    "shop": "Butik",
+    "research": "Forskning",
+    "blog": "Blog",
+    "contact": "Kontakt"
+  },
+  "research": {
+    "peptideGuide": "Peptid-guide",
+    "peptideGuideDesc": "Protokoller, håndtering og bedste laboratoriepraksis.",
+    "calculator": "Peptid-beregner",
+    "calculatorDesc": "Rekonstitutions- og dosisberegninger til forskning.",
+    "coaLibrary": "COA-bibliotek",
+    "coaLibraryDesc": "Batch-analysecertifikater og renhedsdokumentation.",
+    "information": "Peptid-information",
+    "informationDesc": "Forbindelsesprofiler og forskningsreferencer.",
+    "researchHub": "Peptidforskning",
+    "researchHubDesc": "Seneste resultater og anvendelsesnoter."
+  },
+  "footer": {
+    "inventory": "Lager",
+    "support": "Support",
+    "legal": "Juridisk",
+    "fullCatalog": "Fuldt katalog",
+    "categories": "Kategorier",
+    "advancedSearch": "Avanceret søgning",
+    "wishlist": "Ønskeliste",
+    "faq": "Forsker-FAQ",
+    "euShipping": "EU-forsendelse",
+    "about": "Om os",
+    "terms": "Vilkår",
+    "privacy": "Privatliv og GDPR",
+    "returns": "Returneringer"
+  },
+  "mega": {
+    "browseCatalog": "Gennemse katalog",
+    "allCategories": "Alle kategorier",
+    "featured": "Fremhævede forbindelser"
+  }
+}

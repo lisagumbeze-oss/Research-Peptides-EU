@@ -90,7 +90,7 @@ export default function Omnisearch() {
                 ref={inputRef}
                 type="text"
                 placeholder="Search compounds, peptides, or categories..."
-                className="w-full bg-gray-50 dark:bg-gray-800/50 rounded-2xl pl-14 pr-14 py-4 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-gray-900 dark:text-white"
+                className="w-full bg-gray-50 dark:bg-gray-800/50 rounded-2xl pl-14 pr-14 py-4 text-lg font-medium focus:outline-none focus:ring-2 focus:ring-brand-400 transition-all text-gray-900 dark:text-white"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
@@ -107,7 +107,7 @@ export default function Omnisearch() {
             <div className="max-h-[60vh] overflow-y-auto p-4 custom-scrollbar">
               {loading ? (
                 <div className="flex flex-col items-center justify-center py-12 space-y-4">
-                  <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
+                  <Loader2 className="h-10 w-10 text-brand-500 animate-spin" />
                   <p className="text-gray-500 dark:text-gray-400 font-medium">Scanning research database...</p>
                 </div>
               ) : results.length > 0 ? (
@@ -118,7 +118,7 @@ export default function Omnisearch() {
                   {results.map((product) => (
                     <div
                       key={product.id}
-                      className="group flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all cursor-pointer border border-transparent hover:border-blue-100 dark:hover:border-blue-900/50"
+                      className="group flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all cursor-pointer border border-transparent hover:border-brand-100 dark:hover:border-brand-900/50"
                       onClick={() => handleProductClick(product)}
                     >
                       <div className="h-16 w-16 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0">
@@ -144,7 +144,7 @@ export default function Omnisearch() {
                         <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-1">
                           {product.description}
                         </p>
-                        <p className="text-sm font-black text-blue-600 dark:text-blue-400 mt-1">
+                        <p className="text-sm font-black text-brand-600 dark:text-brand-400 mt-1">
                           {formatCurrency(product.price)}
                         </p>
                       </div>
@@ -159,7 +159,7 @@ export default function Omnisearch() {
                             imageUrl: product.images?.[0] || ''
                           });
                         }}
-                        className="p-3 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-400 hover:bg-blue-600 hover:text-white transition-all transform active:scale-90"
+                        className="p-3 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-400 hover:bg-brand-600 hover:text-white transition-all transform active:scale-90"
                       >
                         <ShoppingCart className="h-5 w-5" />
                       </button>
@@ -167,7 +167,7 @@ export default function Omnisearch() {
                   ))}
                   <button 
                     onClick={() => { navigate(`/search?q=${query}`); closeSearch(); }}
-                    className="w-full mt-4 p-4 flex items-center justify-center gap-2 text-sm font-bold text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-2xl transition-all"
+                    className="w-full mt-4 p-4 flex items-center justify-center gap-2 text-sm font-bold text-brand-600 hover:bg-brand-50 dark:hover:bg-brand-900/20 rounded-2xl transition-all"
                   >
                     View all results <ArrowRight className="h-4 w-4" />
                   </button>
@@ -190,7 +190,7 @@ export default function Omnisearch() {
                       <button
                         key={item}
                         onClick={() => setQuery(item)}
-                        className="px-4 py-2 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-xl text-sm font-medium hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-900/30 dark:hover:text-blue-400 transition-all border border-transparent hover:border-blue-100"
+                        className="px-4 py-2 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-xl text-sm font-medium hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-brand-900/30 dark:hover:text-brand-400 transition-all border border-transparent hover:border-brand-100"
                       >
                         {item}
                       </button>

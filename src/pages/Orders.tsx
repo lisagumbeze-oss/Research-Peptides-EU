@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { formatLocaleDate } from '../lib/formatLocaleDate';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
@@ -17,6 +19,7 @@ import { AccountShell } from '../components/account/AccountShell';
 import { Button } from '../design-system';
 
 export default function Orders() {
+  const { i18n } = useTranslation();
   const { user } = useAuthStore();
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -93,7 +96,7 @@ export default function Orders() {
                   <div>
                     <p className="text-caption text-brand-600">Placed</p>
                     <p className="text-sm font-semibold text-navy-950">
-                      {new Date(order.created_at).toLocaleDateString('en-GB', {
+                      {formatLocaleDate(order.created_at, i18n.language, {
                         day: 'numeric',
                         month: 'short',
                         year: 'numeric',

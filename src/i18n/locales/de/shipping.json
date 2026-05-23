@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistik",
+    "title": "Versand & Lieferung",
+    "description": "EU-orientierte Abwicklung aus den Niederlanden mit Sendungsverfolgung in Mitgliedstaaten und weltweit."
+  },
+  "features": {
+    "cutoffTitle": "12:00 MEZ Annahmeschluss",
+    "cutoffDesc": "Bestellungen vor 12:00 MEZ an Werktagen werden am selben Tag versendet.",
+    "trackedTitle": "Sendungsverfolgung",
+    "trackedDesc": "Jede Sendung ist vom Labor bis zur Einrichtung nachverfolgbar.",
+    "packagingTitle": "Diskrete Verpackung",
+    "packagingDesc": "Vakuumversiegelt und neutral verpackt für Forschungseinrichtungen."
+  },
+  "regions": {
+    "title": "EU & international",
+    "euTitle": "Lieferung in der EU",
+    "euDesc": "Standard EU: 3–7 Werktage. Kostenloser Versand ab €500 (Zwischensumme).",
+    "worldTitle": "Weltweite Logistik",
+    "worldDesc": "Außerhalb der EU: 5–14 Werktage je nach Zoll und Spediteur.",
+    "ukTitle": "Vereinigtes Königreich",
+    "ukDesc": "UK-Optionen an der Kasse, wenn das Vereinigte Königreich gewählt ist."
+  },
+  "responsibility": {
+    "eyebrow": "Verantwortung des Forschers",
+    "body": "Käufer sind für die Einhaltung lokaler Importvorschriften verantwortlich. Zoll, MwSt. und Steuern können anfallen.",
+    "disclaimer": "Nur für Forschungszwecke. Nicht für den menschlichen oder tierärztlichen Gebrauch."
+  }
+}

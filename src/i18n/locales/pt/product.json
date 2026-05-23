@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Produto não encontrado",
+    "cta": "Voltar à loja"
+  },
+  "reviews": {
+    "eyebrow": "Comunidade de investigadores",
+    "title": "Avaliações verificadas",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Copiar ligação",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Adicionar ao carrinho",
+    "inWishlist": "Na lista de desejos",
+    "saveWishlist": "Guardar na lista de desejos",
+    "share": "Partilhar",
+    "copyLink": "Copiar ligação",
+    "specifications": "Especificações",
+    "variantLabel": "Selecionar variante",
+    "quantity": "Quantidade",
+    "bulkStandard": "Padrão",
+    "bulkSave10": "Poupe 10%",
+    "bulkBestValue": "Melhor relação qualidade-preço",
+    "unitsRange12": "1–2 unidades",
+    "unitsRange35": "3–5 unidades",
+    "unitsRange6": "6+ unidades",
+    "euDispatch": "Expedição UE",
+    "euDispatchDetail": "Cumprimento nos Países Baixos · transportadoras com rastreio",
+    "researchOnly": "Apenas para investigação",
+    "researchOnlyDetail": "Não para consumo humano ou veterinário",
+    "coaAvailable": "Documentação COA disponível mediante pedido"
+  },
+  "recommendations": {
+    "relatedTitle": "Compostos de investigação relacionados",
+    "viewCatalog": "Ver catálogo",
+    "recentTitle": "Vistos recentemente"
+  },
+  "toast": {
+    "added": "{{title}} adicionado ao carrinho",
+    "bulk15": "Desconto por volume (15%) aplicado a {{title}}",
+    "bulk10": "Desconto por volume (10%) aplicado a {{title}}",
+    "linkCopied": "Ligação copiada para a área de transferência"
+  }
+}

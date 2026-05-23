@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShoppingBag, X } from 'lucide-react';
 import { useCartStore } from '../../store/useCartStore';
@@ -120,18 +120,18 @@ export default function CartDrawer() {
                   <span className="tabular-nums">{formatCurrency(getTotal())}</span>
                 </div>
                 <p className="text-xs text-steel-600">Shipping &amp; VAT calculated at checkout.</p>
-                <Link to="/checkout" onClick={closeCart}>
+                <LocaleLink to="/checkout" onClick={closeCart}>
                   <Button fullWidth size="lg">
                     Checkout securely
                   </Button>
-                </Link>
-                <Link
+                </LocaleLink>
+                <LocaleLink
                   to="/cart"
                   onClick={closeCart}
                   className="block text-center text-sm font-semibold text-brand-600 hover:text-brand-700"
                 >
                   View full cart
-                </Link>
+                </LocaleLink>
               </div>
             )}
           </motion.div>

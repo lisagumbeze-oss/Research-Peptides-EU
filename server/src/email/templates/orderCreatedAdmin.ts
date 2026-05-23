@@ -34,7 +34,7 @@ export function renderOrderCreatedAdminEmail(payload: OrderEmailPayload): EmailR
       </tr>
       <tr>
         <td style="font-size:13px;color:#64748b;padding:4px 0;">Total</td>
-        <td style="font-size:13px;color:#1d4ed8;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
+        <td style="font-size:13px;color:#249688;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
     </table>`;
 

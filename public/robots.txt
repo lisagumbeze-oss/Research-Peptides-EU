@@ -1,7 +1,13 @@
 User-agent: *
 Allow: /
+Disallow: /*/admin
+Disallow: /*/checkout
+Disallow: /*/cart
+Disallow: /*/login
+Disallow: /*/profile
+Disallow: /*/orders
+Disallow: /*/wishlist
 
-# Explicitly allow common AI/chat crawlers
 User-agent: GPTBot
 Allow: /
 
@@ -11,4 +17,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://www.researchpeptide.uk/sitemap.xml
+Sitemap: https://researchpeptide.eu/sitemap.xml

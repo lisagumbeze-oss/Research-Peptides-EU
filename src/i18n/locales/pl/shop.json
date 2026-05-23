@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Katalog badawczy",
+    "title": "Sklep",
+    "titleHighlight": "peptydy",
+    "description": "Przeglądaj zweryfikowane związki badawcze z realizacją w UE, dokumentacją partii i przejrzystymi specyfikacjami."
+  },
+  "results": "Wyświetlanie {{count}} z {{total}} produktów",
+  "filters": {
+    "categories": "Kategorie",
+    "maxPrice": "Cena maks.",
+    "clearAll": "Wyczyść wszystkie filtry",
+    "clearShort": "Wyczyść filtry",
+    "filters": "Filtry",
+    "close": "Zamknij filtry",
+    "refine": "Zawęź wyniki",
+    "showResults": "Pokaż wyniki"
+  },
+  "sort": {
+    "label": "Sortuj produkty",
+    "relevance": "Trafność",
+    "featured": "Polecane",
+    "ratingDesc": "Najlepiej oceniane",
+    "newest": "Najnowsze",
+    "priceAsc": "Cena: od najniższej",
+    "priceDesc": "Cena: od najwyższej"
+  },
+  "empty": {
+    "title": "Brak produktów pasujących do filtrów",
+    "description": "Spróbuj poszerzyć zakres cen lub wyczyścić wybrane kategorie."
+  }
+}

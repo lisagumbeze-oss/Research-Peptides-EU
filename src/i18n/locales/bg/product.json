@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Продуктът не е намерен",
+    "cta": "Обратно към магазина"
+  },
+  "reviews": {
+    "eyebrow": "Общност на изследователи",
+    "title": "Проверени отзиви",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Копирай връзката",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Добави в количката",
+    "inWishlist": "В списъка с желания",
+    "saveWishlist": "Запази в списъка с желания",
+    "share": "Сподели",
+    "copyLink": "Копирай връзката",
+    "specifications": "Спецификации",
+    "variantLabel": "Избери вариант",
+    "quantity": "Количество",
+    "bulkStandard": "Стандарт",
+    "bulkSave10": "Спестете 10%",
+    "bulkBestValue": "Най-добра стойност",
+    "unitsRange12": "1–2 единици",
+    "unitsRange35": "3–5 единици",
+    "unitsRange6": "6+ единици",
+    "euDispatch": "Изпращане от ЕС",
+    "euDispatchDetail": "Изпълнение от Netherlands · куриери с проследяване",
+    "researchOnly": "Само за изследвания",
+    "researchOnlyDetail": "Не за човешка или ветеринарна консумация",
+    "coaAvailable": "COA документация налична при заявка"
+  },
+  "recommendations": {
+    "relatedTitle": "Свързани изследователски съединения",
+    "viewCatalog": "Виж каталога",
+    "recentTitle": "Наскоро прегледани"
+  },
+  "toast": {
+    "added": "{{title}} добавен в количката",
+    "bulk15": "Отстъпка за количество (15%) приложена към {{title}}",
+    "bulk10": "Отстъпка за количество (10%) приложена към {{title}}",
+    "linkCopied": "Връзката е копирана в клипборда"
+  }
+}

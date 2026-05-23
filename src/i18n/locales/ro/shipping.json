@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistică",
+    "title": "Livrare și expediere",
+    "description": "Procesare prioritară UE din Olanda cu livrare urmărită în statele membre și opțiuni worldwide."
+  },
+  "features": {
+    "cutoffTitle": "Termen comandă 12:00 CET",
+    "cutoffDesc": "Comenzile plasate înainte de prânz (ora Europei Centrale), luni–vineri, sunt expediate în aceeași zi lucrătoare.",
+    "trackedTitle": "Securitate cu urmărire",
+    "trackedDesc": "Fiecare expediere este urmărită complet de la laboratorul nostru la instalația dvs.",
+    "packagingTitle": "Ambalare discretă",
+    "packagingDesc": "Articolele sunt sigilate în vid și expediate în ambalaje simple, fără marcaje, potrivite pentru facilități de cercetare."
+  },
+  "regions": {
+    "title": "Acoperire UE și internațională",
+    "euTitle": "Livrare în Uniunea Europeană",
+    "euDesc": "Livrare standard UE: 3–7 zile lucrătoare. Livrare gratuită pentru comenzi eligibile peste 500 € (subtotal).",
+    "worldTitle": "Logistică worldwide",
+    "worldDesc": "Destinații non-UE: 5–14 zile lucrătoare în funcție de vamă și curieri regionali.",
+    "ukTitle": "Regatul Unit",
+    "ukDesc": "Opțiunile cu urmărire pentru UK rămân disponibile la finalizare când Regatul Unit este selectat ca destinație."
+  },
+  "responsibility": {
+    "eyebrow": "Responsabilitatea cercetătorului",
+    "body": "Cumpărătorii sunt responsabili să se asigure că produsele respectă legile locale de import. Pot fi aplicate taxe vamale, TVA și impozite regionale — responsabilitatea cumpărătorului dacă nu sunt încasate la finalizare.",
+    "disclaimer": "Doar pentru cercetare. Nu pentru consum uman sau veterinar."
+  }
+}

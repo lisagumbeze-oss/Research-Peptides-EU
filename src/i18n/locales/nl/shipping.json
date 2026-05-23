@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistiek",
+    "title": "Verzending & levering",
+    "description": "EU-gerichte fulfilment vanuit Nederland met traceerbare levering in lidstaten en wereldwijde opties."
+  },
+  "features": {
+    "cutoffTitle": "12:00 CET deadline",
+    "cutoffDesc": "Bestellingen vóór 12:00 uur CET op werkdagen worden dezelfde dag verzonden.",
+    "trackedTitle": "Traceerbare zending",
+    "trackedDesc": "Elke zending is volledig traceerbaar van laboratorium tot faciliteit.",
+    "packagingTitle": "Discrete verpakking",
+    "packagingDesc": "Vacuümverzegeld en verzonden in neutrale verpakking voor onderzoeksfaciliteiten."
+  },
+  "regions": {
+    "title": "EU & internationaal",
+    "euTitle": "Levering binnen de EU",
+    "euDesc": "Standaard EU: 3–7 werkdagen. Gratis verzending bij bestellingen boven €500 (subtotaal).",
+    "worldTitle": "Wereldwijde logistiek",
+    "worldDesc": "Buiten de EU: 5–14 werkdagen afhankelijk van douane en vervoerders.",
+    "ukTitle": "Verenigd Koninkrijk",
+    "ukDesc": "Traceerbare UK-opties bij checkout wanneer het VK als bestemming is gekozen."
+  },
+  "responsibility": {
+    "eyebrow": "Verantwoordelijkheid onderzoeker",
+    "body": "Kopers zijn verantwoordelijk voor naleving van lokale importwetgeving. Douane, btw en belastingen kunnen van toepassing zijn.",
+    "disclaimer": "Alleen voor onderzoek. Niet voor menselijk of veterinair gebruik."
+  }
+}

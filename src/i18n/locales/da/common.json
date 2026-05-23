@@ -1,0 +1,25 @@
+{
+  "brand": "Research Peptides EU",
+  "loading": "Indlæser…",
+  "search": "Søg",
+  "cart": "Kurv",
+  "wishlist": "Ønskeliste",
+  "account": "Konto",
+  "orders": "Mine ordrer",
+  "login": "Log ind",
+  "logout": "Log ud",
+  "home": "Hjem",
+  "shop": "Butik",
+  "languageActive": "Aktiv",
+  "close": "Luk",
+  "viewAll": "Se alle",
+  "learnMore": "Læs mere",
+  "researchUseOnly": "Kun til laboratorieforskning — ikke til menneskelig eller veterinær brug.",
+  "salesNotification": {
+    "purchased": "Someone in {{location}} purchased",
+    "justNow": "Just now",
+    "minutesAgo_one": "{{count}} minute ago",
+    "minutesAgo_other": "{{count}} minutes ago",
+    "dismiss": "Dismiss notification"
+  }
+}

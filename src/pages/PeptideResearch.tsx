@@ -41,7 +41,7 @@ export default function PeptideResearch() {
     <div className="bg-white min-h-screen pt-12 pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 text-brand-600 rounded-full text-xs font-black uppercase tracking-widest mb-6">
             <Microscope className="h-4 w-4" />
             Evidence Summaries
           </div>
@@ -68,7 +68,7 @@ export default function PeptideResearch() {
               className="bg-gray-50 border border-gray-100 rounded-3xl p-7"
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">{card.category}</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-brand-600">{card.category}</span>
                 <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">{card.readTime}</span>
               </div>
               <h3 className="text-xl font-black tracking-tight mb-3">{card.title}</h3>

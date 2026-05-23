@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Produkt nicht gefunden",
+    "cta": "Zurück zum Shop"
+  },
+  "reviews": {
+    "eyebrow": "Forschergemeinschaft",
+    "title": "Verifizierte Bewertungen",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Link kopieren",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "In den Warenkorb",
+    "inWishlist": "Auf der Wunschliste",
+    "saveWishlist": "Auf Wunschliste speichern",
+    "share": "Teilen",
+    "copyLink": "Link kopieren",
+    "specifications": "Spezifikationen",
+    "variantLabel": "Variante wählen",
+    "quantity": "Menge",
+    "bulkStandard": "Standard",
+    "bulkSave10": "10 % sparen",
+    "bulkBestValue": "Bestes Preis-Leistungs-Verhältnis",
+    "unitsRange12": "1–2 Einheiten",
+    "unitsRange35": "3–5 Einheiten",
+    "unitsRange6": "6+ Einheiten",
+    "euDispatch": "EU-Versand",
+    "euDispatchDetail": "Abwicklung aus den Niederlanden · Sendungsverfolgung",
+    "researchOnly": "Nur für die Forschung",
+    "researchOnlyDetail": "Nicht für den menschlichen oder tierärztlichen Verzehr",
+    "coaAvailable": "COA-Dokumentation auf Anfrage erhältlich"
+  },
+  "recommendations": {
+    "relatedTitle": "Verwandte Forschungsverbindungen",
+    "viewCatalog": "Katalog ansehen",
+    "recentTitle": "Zuletzt angesehen"
+  },
+  "toast": {
+    "added": "{{title}} in den Warenkorb gelegt",
+    "bulk15": "Mengenrabatt (15 %) auf {{title}} angewendet",
+    "bulk10": "Mengenrabatt (10 %) auf {{title}} angewendet",
+    "linkCopied": "Link in die Zwischenablage kopiert"
+  }
+}

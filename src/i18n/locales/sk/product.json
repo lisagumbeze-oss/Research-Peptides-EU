@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Produkt sa nenašiel",
+    "cta": "Späť do obchodu"
+  },
+  "reviews": {
+    "eyebrow": "Komunita výskumníkov",
+    "title": "Overené recenzie",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Kopírovať odkaz",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Pridať do košíka",
+    "inWishlist": "Na zozname prianí",
+    "saveWishlist": "Uložiť na zoznam prianí",
+    "share": "Zdieľať",
+    "copyLink": "Kopírovať odkaz",
+    "specifications": "Špecifikácie",
+    "variantLabel": "Vybrať variant",
+    "quantity": "Množstvo",
+    "bulkStandard": "Štandard",
+    "bulkSave10": "Ušetrite 10 %",
+    "bulkBestValue": "Najlepšia hodnota",
+    "unitsRange12": "1–2 jednotky",
+    "unitsRange35": "3–5 jednotiek",
+    "unitsRange6": "6+ jednotiek",
+    "euDispatch": "Odoslanie z EÚ",
+    "euDispatchDetail": "Plnenie z Netherlands · sledovaní dopravcovia",
+    "researchOnly": "Iba na výskum",
+    "researchOnlyDetail": "Nie je určené na ľudskú ani veterinárnu spotrebu",
+    "coaAvailable": "Dokumentácia COA k dispozícii na požiadanie"
+  },
+  "recommendations": {
+    "relatedTitle": "Súvisiace výskumné zlúčeniny",
+    "viewCatalog": "Zobraziť katalóg",
+    "recentTitle": "Nedávno zobrazené"
+  },
+  "toast": {
+    "added": "{{title}} pridané do košíka",
+    "bulk15": "Hromadná zľava (15 %) uplatnená na {{title}}",
+    "bulk10": "Hromadná zľava (10 %) uplatnená na {{title}}",
+    "linkCopied": "Odkaz skopírovaný do schránky"
+  }
+}

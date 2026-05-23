@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Säker kassa",
+    "title": "Slutför din beställning",
+    "description": "EU-frakt · momsredo fakturering · uppfyllelse från Netherlands"
+  },
+  "steps": {
+    "shipping": "Frakt",
+    "payment": "Betalning",
+    "confirm": "Bekräfta"
+  },
+  "cart": {
+    "title": "Din varukorg",
+    "empty": "Din varukorg är tom",
+    "emptyCta": "Bläddra i katalogen",
+    "summary": "Ordersammanfattning",
+    "promo": "Rabattkod",
+    "subtotal": "Delsumma",
+    "discount": "Rabatt",
+    "shipping": "Frakt",
+    "shippingAtCheckout": "Vid kassan",
+    "total": "Totalt",
+    "proceed": "Gå till kassan",
+    "vatNote": "Priser i EUR. Moms tillämpas där det krävs vid kassan baserat på ditt EU-leveransland."
+  }
+}

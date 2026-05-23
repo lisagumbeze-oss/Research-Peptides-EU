@@ -1,0 +1,25 @@
+{
+  "brand": "Research Peptides EU",
+  "loading": "Ladataan…",
+  "search": "Haku",
+  "cart": "Ostoskori",
+  "wishlist": "Toivelista",
+  "account": "Tili",
+  "orders": "Omat tilaukset",
+  "login": "Kirjaudu sisään",
+  "logout": "Kirjaudu ulos",
+  "home": "Etusivu",
+  "shop": "Kauppa",
+  "languageActive": "Aktiivinen",
+  "close": "Sulje",
+  "viewAll": "Näytä kaikki",
+  "learnMore": "Lue lisää",
+  "researchUseOnly": "Vain laboratoriotutkimukseen — ei ihmis- tai eläinlääketieteelliseen käyttöön.",
+  "salesNotification": {
+    "purchased": "Someone in {{location}} purchased",
+    "justNow": "Just now",
+    "minutesAgo_one": "{{count}} minute ago",
+    "minutesAgo_other": "{{count}} minutes ago",
+    "dismiss": "Dismiss notification"
+  }
+}

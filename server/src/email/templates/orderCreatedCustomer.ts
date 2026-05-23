@@ -19,8 +19,8 @@ export function renderOrderCreatedCustomerEmail(payload: OrderEmailPayload): Ema
       We will notify you immediately when your status changes.
     </p>
     <div style="padding:16px;border:1px solid #dbeafe;background:#eff6ff;border-radius:12px;margin-bottom:18px;">
-      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2563eb;font-weight:800;">Order ID</p>
-      <p style="margin:0;font-size:18px;color:#1e3a8a;font-weight:800;">${payload.orderId}</p>
+      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2db5a3;font-weight:800;">Order ID</p>
+      <p style="margin:0;font-size:18px;color:#1a365d;font-weight:800;">${payload.orderId}</p>
     </div>
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom:18px;">
       ${itemRows}
@@ -36,7 +36,7 @@ export function renderOrderCreatedCustomerEmail(payload: OrderEmailPayload): Ema
       </tr>
       <tr>
         <td style="font-size:15px;color:#0f172a;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">Total</td>
-        <td style="font-size:15px;color:#1d4ed8;text-align:right;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">${formatCurrency(payload.totalAmount)}</td>
+        <td style="font-size:15px;color:#249688;text-align:right;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
     </table>`;
 

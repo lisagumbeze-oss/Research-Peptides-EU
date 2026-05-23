@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Sikker betaling",
+    "title": "Fuldfør din ordre",
+    "description": "EU-forsendelse · moms-klar fakturering · opfyldelse fra Netherlands"
+  },
+  "steps": {
+    "shipping": "Forsendelse",
+    "payment": "Betaling",
+    "confirm": "Bekræft"
+  },
+  "cart": {
+    "title": "Din kurv",
+    "empty": "Din kurv er tom",
+    "emptyCta": "Gennemse katalog",
+    "summary": "Ordreoversigt",
+    "promo": "Rabatkode",
+    "subtotal": "Subtotal",
+    "discount": "Rabat",
+    "shipping": "Forsendelse",
+    "shippingAtCheckout": "Ved betaling",
+    "total": "I alt",
+    "proceed": "Gå til betaling",
+    "vatNote": "Priser i EUR. Moms anvendes hvor påkrævet ved betaling baseret på dit EU-leveringsland."
+  }
+}

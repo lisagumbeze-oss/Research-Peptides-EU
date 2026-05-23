@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Proizvod nije pronađen",
+    "cta": "Povratak u trgovinu"
+  },
+  "reviews": {
+    "eyebrow": "Zajednica istraživača",
+    "title": "Provjerene recenzije",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Kopiraj poveznicu",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Dodaj u košaricu",
+    "inWishlist": "Na listi želja",
+    "saveWishlist": "Spremi na listu želja",
+    "share": "Podijeli",
+    "copyLink": "Kopiraj poveznicu",
+    "specifications": "Specifikacije",
+    "variantLabel": "Odaberi varijantu",
+    "quantity": "Količina",
+    "bulkStandard": "Standardno",
+    "bulkSave10": "Uštedite 10 %",
+    "bulkBestValue": "Najbolja vrijednost",
+    "unitsRange12": "1–2 jedinice",
+    "unitsRange35": "3–5 jedinica",
+    "unitsRange6": "6+ jedinica",
+    "euDispatch": "EU otprema",
+    "euDispatchDetail": "Ispunjenje iz Nizozemske · praćeni prijevoznici",
+    "researchOnly": "Samo za istraživanje",
+    "researchOnlyDetail": "Nije za ljudsku ili veterinarsku upotrebu",
+    "coaAvailable": "COA dokumentacija dostupna na zahtjev"
+  },
+  "recommendations": {
+    "relatedTitle": "Povezani istraživački spojevi",
+    "viewCatalog": "Prikaži katalog",
+    "recentTitle": "Nedavno pregledano"
+  },
+  "toast": {
+    "added": "{{title}} dodano u košaricu",
+    "bulk15": "Popust na količinu (15 %) primijenjen na {{title}}",
+    "bulk10": "Popust na količinu (10 %) primijenjen na {{title}}",
+    "linkCopied": "Poveznica kopirana u međuspremnik"
+  }
+}

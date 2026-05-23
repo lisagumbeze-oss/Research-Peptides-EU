@@ -1,0 +1,40 @@
+{
+  "primary": {
+    "shop": "Obchod",
+    "research": "Výskum",
+    "blog": "Blog",
+    "contact": "Kontakt"
+  },
+  "research": {
+    "peptideGuide": "Sprievodca peptidmi",
+    "peptideGuideDesc": "Protokoly, manipulácia a osvedčené laboratórne postupy.",
+    "calculator": "Kalkulačka peptidov",
+    "calculatorDesc": "Výpočty rekonštitúcie a dávkovania pre výskum.",
+    "coaLibrary": "Knižnica COA",
+    "coaLibraryDesc": "Certifikáty analýzy šarží a dokumentácia čistoty.",
+    "information": "Informácie o peptidoch",
+    "informationDesc": "Profily zlúčenín a výskumné referencie.",
+    "researchHub": "Výskum peptidov",
+    "researchHubDesc": "Najnovšie poznatky a aplikačné poznámky."
+  },
+  "footer": {
+    "inventory": "Sklad",
+    "support": "Podpora",
+    "legal": "Právne informácie",
+    "fullCatalog": "Celý katalóg",
+    "categories": "Kategórie",
+    "advancedSearch": "Pokročilé vyhľadávanie",
+    "wishlist": "Zoznam prianí",
+    "faq": "FAQ pre výskumníkov",
+    "euShipping": "Doprava v EÚ",
+    "about": "O nás",
+    "terms": "Podmienky",
+    "privacy": "Súkromie a GDPR",
+    "returns": "Vrátenia tovaru"
+  },
+  "mega": {
+    "browseCatalog": "Prehliadať katalóg",
+    "allCategories": "Všetky kategórie",
+    "featured": "Odporúčané zlúčeniny"
+  }
+}

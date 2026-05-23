@@ -1,0 +1,152 @@
+{
+  "cookie": {
+    "title": "Cookies & privacy",
+    "description": "We gebruiken essentiële cookies om de winkel te laten werken en optionele analytics om de EU-onderzoekservaring te verbeteren. U kunt uw keuze op elk moment wijzigen in ons privacybeleid.",
+    "acceptAll": "Alles accepteren",
+    "essentialOnly": "Alleen essentieel",
+    "privacyLink": "Privacybeleid"
+  },
+  "faq": {
+    "eyebrow": "Support",
+    "title": "FAQ voor onderzoekers",
+    "subtitle": "Standaardprotocollen en veelgestelde vragen voor Europese laboratoriumteams.",
+    "ctaTitle": "Nog technische vragen?",
+    "ctaBody": "Ons EU-supportteam helpt bij vragen over bestellingen en documentatie.",
+    "ctaButton": "Contact opnemen",
+    "groups": {
+      "product": {
+        "title": "Product & veiligheid",
+        "items": [
+          {
+            "q": "Zijn deze producten veilig voor menselijke of dierlijke consumptie?",
+            "a": "Nee. Alle producten van Research Peptides EU zijn uitsluitend bestemd voor laboratoriumonderzoek en wetenschappelijke toepassing. Ze zijn niet bedoeld voor menselijk of veterinair gebruik."
+          },
+          {
+            "q": "Hoe verifiëren jullie de zuiverheid van jullie peptiden?",
+            "a": "Elke batch ondergaat HPLC en massaspectrometrie. Zuiverheidsniveaus worden geverifieerd op 99,8% of hoger vóór EU-distributie."
+          },
+          {
+            "q": "Hoe moet ik verbindingen bewaren na ontvangst?",
+            "a": "Gevriesdroogde peptiden zijn korte verzendtijden stabiel bij kamertemperatuur. Voor langetermijnstabiliteit: bewaren bij −20 °C of −80 °C."
+          }
+        ]
+      },
+      "logistics": {
+        "title": "Logistiek & verzending",
+        "items": [
+          {
+            "q": "Hoe lang duurt EU-verzending?",
+            "a": "Standaard EU-levering duurt doorgaans 3–7 werkdagen. Afhandeling vanuit Nederland met traceerbare vervoerders."
+          },
+          {
+            "q": "Is de verpakking discreet?",
+            "a": "Ja. Bestellingen worden verzonden in neutrale, ongemarkeerde verpakking geschikt voor onderzoeksfaciliteiten."
+          },
+          {
+            "q": "Verzenden jullie buiten de EU?",
+            "a": "Ja. Levering buiten de EU duurt doorgaans 5–14 werkdagen, afhankelijk van douane."
+          }
+        ]
+      },
+      "payments": {
+        "title": "Betalingen & beleid",
+        "items": [
+          {
+            "q": "Welke betaalmethoden accepteren jullie?",
+            "a": "We accepteren cryptocurrency (BTC, ETH, USDT) met 5% korting, bankoverschrijving en kaartbestellingen die handmatig worden beoordeeld."
+          },
+          {
+            "q": "Wat is jullie retourbeleid?",
+            "a": "Om de integriteit van de koude keten en onderzoeksstandaarden te waarborgen, accepteren we geen retouren. Alle verkopen zijn definitief, tenzij vereist door toepasselijk EU-consumentenrecht."
+          }
+        ]
+      }
+    }
+  },
+  "privacy": {
+    "eyebrow": "Privacy & AVG",
+    "title": "Privacybeleid",
+    "subtitle": "In overeenstemming met de EU-AVG (GDPR) en Nederlandse AVG-vereisten.",
+    "sections": [
+      {
+        "heading": "Gegevensoverzicht",
+        "body": "Research Peptides EU zet zich in voor de bescherming van de privacy van onderzoekers en institutionele kopers. Dit beleid legt uit hoe wij persoonsgegevens verzamelen, gebruiken en beveiligen wanneer u onze EU-webwinkel gebruikt."
+      },
+      {
+        "heading": "Gegevens die wij verzamelen",
+        "body": "Wij kunnen identiteitsgegevens, contactgegevens, bestel- en betalingsreferenties en technische gegevens zoals IP-adres en browsertype verwerken."
+      },
+      {
+        "heading": "Hoe wij uw gegevens gebruiken",
+        "body": "Gegevens worden gebruikt om bestellingen uit te voeren, support te bieden, fraude te voorkomen, aan wettelijke verplichtingen te voldoen en onze diensten te verbeteren. Wij verkopen geen persoonsgegevens."
+      },
+      {
+        "heading": "Rechtsgrond (AVG/GDPR)",
+        "body": "Verwerking is gebaseerd op uitvoering van een overeenkomst, gerechtvaardigde belangen, wettelijke verplichting en toestemming waar vereist (bijv. marketingcookies)."
+      },
+      {
+        "heading": "Bewaartermijn",
+        "body": "Bestel- en belastingadministratie wordt bewaard zoals vereist door EU- en Nederlands recht (doorgaans tot 7 jaar). Marketinggegevens worden bewaard tot u uw toestemming intrekt."
+      },
+      {
+        "heading": "Uw rechten",
+        "body": "U kunt inzage, rectificatie, wissing, beperking, overdraagbaarheid verzoeken of bezwaar maken tegen verwerking. Neem contact met ons op via het onderstaande adres."
+      }
+    ],
+    "ref": "GDPR-REF: RPEU-PRV-2026"
+  },
+  "terms": {
+    "eyebrow": "Juridisch",
+    "title": "Algemene voorwaarden",
+    "subtitle": "EU-voorwaarden voor onderzoeksleveringen aan institutionele en laboratoriumkopers.",
+    "sections": [
+      {
+        "heading": "Alleen voor onderzoek",
+        "body": "Alle producten zijn uitsluitend bestemd voor laboratoriumonderzoek, wetenschappelijk en industrieel gebruik. Niet voor menselijke of veterinair gebruik."
+      },
+      {
+        "heading": "Geschiktheid",
+        "body": "U moet minimaal 18 jaar oud zijn en bevoegd om namens uw instelling of laboratorium te kopen."
+      },
+      {
+        "heading": "Bestellingen & prijzen",
+        "body": "Prijzen worden weergegeven in EUR. Wij behouden ons het recht voor om fouten te corrigeren. Bestellingen worden bevestigd wanneer betaling is geaccepteerd of verwerking begint."
+      },
+      {
+        "heading": "Retouren",
+        "body": "Vanwege temperatuurgevoelige goederen hanteren wij een strikt geen-retourbeleid, behalve waar dit verplicht is onder toepasselijk EU-recht."
+      },
+      {
+        "heading": "Beperking van aansprakelijkheid",
+        "body": "Research Peptides EU is niet aansprakelijk voor indirecte of gevolgschade voortvloeiend uit productgebruik in onderzoekscontexten."
+      }
+    ],
+    "footer": "Research Peptides EU Operations"
+  },
+  "about": {
+    "eyebrow": "Over ons",
+    "title": "Over Research Peptides EU",
+    "subtitle": "Europese onderzoekskwaliteitsverbindingen met geverifieerde documentatie en afhandeling vanuit Nederland.",
+    "missionTitle": "Onze missie",
+    "missionBody": "Wij richten ons op consistentie, batchdocumentatie en vertrouwen van onderzoekers in EU-laboratoriumworkflows.",
+    "qualityTitle": "Kwaliteitsfocus",
+    "qualityBody": "Batchverificatie en COA-referenties staan centraal in onze catalogus.",
+    "researchTitle": "Alleen voor onderzoek",
+    "researchBody": "Alle verbindingen worden aangeboden voor laboratorium- en wetenschappelijk onderzoek — niet voor menselijk of veterinair gebruik."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Contact met ons EU-team",
+    "subtitle": "Bestellingen, documentatie en institutionele vragen.",
+    "emailLabel": "E-mail",
+    "phoneLabel": "Telefoon",
+    "locationLabel": "Hoofdkantoor",
+    "locationValue": "Nederland · Europese Unie"
+  },
+  "refund": {
+    "eyebrow": "Retouren",
+    "title": "Terugbetaling & retouren",
+    "subtitle": "EU-beleid voor temperatuurgevoelige onderzoeksverbindingen.",
+    "body": "Neem contact op met de Research Peptides EU-supportdesk met uw bestelnummer. Vanwege koude-ketenvereisten worden retouren over het algemeen niet geaccepteerd, tenzij wettelijk verplicht."
+  }
+}

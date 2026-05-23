@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Finalizare securizată",
+    "title": "Finalizează comanda",
+    "description": "Livrare UE · facturare TVA · procesare din Olanda"
+  },
+  "steps": {
+    "shipping": "Livrare",
+    "payment": "Plată",
+    "confirm": "Confirmă"
+  },
+  "cart": {
+    "title": "Coșul tău",
+    "empty": "Coșul tău este gol",
+    "emptyCta": "Răsfoiește catalogul",
+    "summary": "Rezumat comandă",
+    "promo": "Cod promoțional",
+    "subtotal": "Subtotal",
+    "discount": "Reducere",
+    "shipping": "Livrare",
+    "shippingAtCheckout": "La finalizare",
+    "total": "Total",
+    "proceed": "Mergi la finalizare",
+    "vatNote": "Prețuri în EUR. TVA aplicat unde este necesar la finalizare în funcție de țara de livrare UE."
+  }
+}

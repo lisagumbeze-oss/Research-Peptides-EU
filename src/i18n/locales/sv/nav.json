@@ -1,0 +1,40 @@
+{
+  "primary": {
+    "shop": "Butik",
+    "research": "Forskning",
+    "blog": "Blogg",
+    "contact": "Kontakt"
+  },
+  "research": {
+    "peptideGuide": "Peptidguide",
+    "peptideGuideDesc": "Protokoll, hantering och bästa laboratoriepraxis.",
+    "calculator": "Peptidkalkylator",
+    "calculatorDesc": "Rekonstitutions- och dosberäkningar för forskning.",
+    "coaLibrary": "COA-bibliotek",
+    "coaLibraryDesc": "Batch-analyscertifikat och renhetsdokumentation.",
+    "information": "Peptidinformation",
+    "informationDesc": "Föreningprofiler och forskningsreferenser.",
+    "researchHub": "Peptidforskning",
+    "researchHubDesc": "Senaste resultat och applikationsanteckningar."
+  },
+  "footer": {
+    "inventory": "Lager",
+    "support": "Support",
+    "legal": "Juridiskt",
+    "fullCatalog": "Fullständig katalog",
+    "categories": "Kategorier",
+    "advancedSearch": "Avancerad sökning",
+    "wishlist": "Önskelista",
+    "faq": "Forskar-FAQ",
+    "euShipping": "EU-frakt",
+    "about": "Om oss",
+    "terms": "Villkor",
+    "privacy": "Integritet och GDPR",
+    "returns": "Returer"
+  },
+  "mega": {
+    "browseCatalog": "Bläddra i katalogen",
+    "allCategories": "Alla kategorier",
+    "featured": "Utvalda föreningar"
+  }
+}

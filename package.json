@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite --port=5173 --host=0.0.0.0",
-    "build": "vite build",
+    "build": "vite build && npm run sitemap:generate",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
@@ -18,7 +18,14 @@
     "db:seed:supabase": "tsx scripts/supabase-seed-catalog.ts",
     "db:seed:supabase:wipe": "tsx scripts/supabase-seed-catalog.ts --wipe",
     "db:migrate:eur": "tsx scripts/supabase-migrate-gbp-to-eur.ts --dry-run",
-    "db:migrate:eur:apply": "tsx scripts/supabase-migrate-gbp-to-eur.ts --apply"
+    "db:migrate:eur:apply": "tsx scripts/supabase-migrate-gbp-to-eur.ts --apply",
+    "sitemap:generate": "tsx scripts/generate-sitemap.ts",
+    "db:copy:catalog": "tsx scripts/supabase-copy-catalog.ts --dry-run",
+    "db:copy:catalog:apply": "tsx scripts/supabase-copy-catalog.ts --apply",
+    "i18n:generate": "tsx scripts/generate-i18n-locales.ts",
+    "logo:optimize": "node scripts/optimize-brand-logo.mjs",
+    "qa:currency": "tsx scripts/qa-currency-check.ts",
+    "qa:phase10": "node scripts/qa-phase10-browser.mjs"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",
@@ -47,6 +54,8 @@
     "@types/node": "^22.14.0",
     "@vercel/node": "^5.7.15",
     "autoprefixer": "^10.4.21",
+    "playwright": "^1.60.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",

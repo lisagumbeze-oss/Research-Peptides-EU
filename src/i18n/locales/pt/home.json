@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Países Baixos · padrões europeus de investigação",
+    "title": "Peptídeos de precisão para",
+    "titleHighlight": "Laboratórios europeus.",
+    "subtitle": "A Research Peptides EU fornece compostos de grau institucional com verificação analítica de terceiros, manuseamento farmacêutico e distribuição fiável na UE.",
+    "ctaShop": "Explorar catálogo",
+    "ctaWizard": "Seletor de compostos",
+    "trustPurity": "Pureza verificada de 99,8%+",
+    "trustShipping": "Expedição em cadeia de frio em toda a UE",
+    "trustCoa": "COA em cada lote"
+  },
+  "featured": {
+    "eyebrow": "Destaques do catálogo",
+    "title": "Compostos de investigação em destaque",
+    "subtitle": "Peptídeos e produtos químicos de investigação verificados por lote, prontos para envio a laboratórios da UE."
+  },
+  "whyEu": {
+    "eyebrow": "Porque os investigadores da UE nos escolhem",
+    "title": "Concebido para padrões de laboratório europeus"
+  },
+  "categories": {
+    "eyebrow": "Explorar por aplicação",
+    "title": "Categorias de investigação",
+    "viewAll": "Ver todas as categorias"
+  },
+  "trust": {
+    "eyebrow": "Garantia de qualidade",
+    "title": "Verificação que pode documentar",
+    "coaCta": "Explorar biblioteca COA"
+  },
+  "experience": {
+    "eyebrow": "Experiência do investigador",
+    "title": "Apoio em todas as fases",
+    "faqCta": "Ler FAQ para investigadores"
+  },
+  "cta": {
+    "title": "Pronto para equipar o seu laboratório?",
+    "subtitle": "Explore o catálogo da UE ou use o seletor de compostos para restringir a sua linha de investigação.",
+    "button": "Loja de catálogo de investigação"
+  }
+}

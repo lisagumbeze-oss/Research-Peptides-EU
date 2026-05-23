@@ -12,8 +12,10 @@ import {
 } from '../data/seedCatalog';
 import { useToastStore } from '../store/useToastStore';
 import { postOrderStatusEmail } from '../lib/transactionalEmailApi';
+import { usePageSeo } from '../seo/SeoProvider';
 
 export default function AdminDashboard() {
+  usePageSeo({ title: 'Admin | Research Peptides EU', noindex: true });
   const { profile, user } = useAuthStore();
   const [products, setProducts] = useState<any[]>([]);
   const [orders, setOrders] = useState<any[]>([]);
@@ -315,7 +317,7 @@ export default function AdminDashboard() {
     return (
       <div className="max-w-xl mx-auto px-4 py-16 text-center space-y-4">
         <p className="text-red-600 font-bold uppercase tracking-widest">Access denied</p>
-        <p className="text-gray-600 text-sm">Only accounts with <span className="font-mono">role = &apos;admin&apos;</span> in the <span className="font-mono">users</span> table can open this page.</p>
+        <p className="text-steel-600 text-sm">Only accounts with <span className="font-mono">role = &apos;admin&apos;</span> in the <span className="font-mono">users</span> table can open this page.</p>
         {hint && user?.id && (
           <div className="text-left bg-amber-50 border border-amber-200 rounded-2xl p-5 text-sm text-amber-950">
             <p className="font-bold mb-2">Your email is listed in VITE_ADMIN_EMAILS but the database role is still not admin.</p>
@@ -384,11 +386,11 @@ export default function AdminDashboard() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
         <div>
           <h1>Command Center</h1>
-          <p className="text-gray-500 font-medium">Manage your elite research inventory and logistics.</p>
+          <p className="text-steel-600 font-medium">Manage your elite research inventory and logistics.</p>
         </div>
         
         {/* Tab Navigation */}
-        <div className="flex bg-gray-100 p-1 rounded-[1.2rem] border border-gray-200">
+        <div className="flex bg-brand-50 p-1 rounded-[1.2rem] border border-brand-100">
            {[
              { id: 'overview', icon: LayoutDashboard, label: 'Overview' },
              { id: 'products', icon: ShoppingBag, label: 'Products' },
@@ -400,8 +402,8 @@ export default function AdminDashboard() {
                onClick={() => setActiveTab(tab.id as any)}
                className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                  activeTab === tab.id 
-                 ? 'bg-white text-blue-600 shadow-sm' 
-                 : 'text-gray-500 hover:text-gray-900'
+                 ? 'bg-white text-brand-600 shadow-sm' 
+                 : 'text-steel-600 hover:text-navy-950'
                }`}
              >
                <tab.icon className="h-4 w-4" />
@@ -426,48 +428,48 @@ export default function AdminDashboard() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
                   { label: 'Total Revenue', value: formatCurrency(stats.totalRevenue), icon: TrendingUp, color: 'text-green-600', bg: 'bg-green-50' },
-                  { label: 'Active Orders', value: stats.activeOrders, icon: Clock, color: 'text-blue-600', bg: 'bg-blue-50' },
+                  { label: 'Active Orders', value: stats.activeOrders, icon: Clock, color: 'text-brand-600', bg: 'bg-brand-50' },
                   { label: 'Low Stock', value: stats.lowStock, icon: AlertTriangle, color: 'text-orange-600', bg: 'bg-orange-50' },
                   { label: 'Inventory Items', value: stats.totalProducts, icon: ShoppingBag, color: 'text-purple-600', bg: 'bg-purple-50' }
                 ].map((stat, i) => (
-                  <div key={i} className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 relative overflow-hidden group">
+                  <div key={i} className="bg-white p-8 rounded-3xl shadow-sm border border-brand-100 relative overflow-hidden group">
                     <div className={`absolute top-0 right-0 w-24 h-24 ${stat.bg} -mr-8 -mt-8 rounded-full transition-transform group-hover:scale-110 opacity-50`} />
                     <stat.icon className={`h-8 w-8 ${stat.color} mb-4 relative z-10`} />
-                    <p className="text-gray-500 text-xs font-bold uppercase tracking-widest relative z-10">{stat.label}</p>
-                    <p className="text-3xl font-black text-gray-900 mt-1 relative z-10">{stat.value}</p>
+                    <p className="text-steel-600 text-xs font-bold uppercase tracking-widest relative z-10">{stat.label}</p>
+                    <p className="text-3xl font-black text-navy-950 mt-1 relative z-10">{stat.value}</p>
                   </div>
                 ))}
               </div>
 
               {/* Recent Activity */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                 <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm">
+                 <div className="bg-white p-8 rounded-[2rem] border border-brand-100 shadow-sm">
                    <h3 className="text-xl font-bold mb-6">Recent Orders</h3>
                    <div className="space-y-4">
                      {orders.slice(0, 5).map(order => (
-                       <div key={order.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-colors">
+                       <div key={order.id} className="flex items-center justify-between p-4 bg-mist-50 rounded-2xl hover:bg-brand-50 transition-colors">
                          <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-gray-200">
-                               <Package className="h-5 w-5 text-gray-400" />
+                            <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-brand-100">
+                               <Package className="h-5 w-5 text-silver-400" />
                             </div>
                             <div>
-                               <p className="text-sm font-bold text-gray-900">Order #{order.id.substring(0, 8)}</p>
-                               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">{new Date(order.created_at).toLocaleDateString()}</p>
+                               <p className="text-sm font-bold text-navy-950">Order #{order.id.substring(0, 8)}</p>
+                               <p className="text-[10px] font-bold text-silver-400 uppercase tracking-tight">{new Date(order.created_at).toLocaleDateString()}</p>
                             </div>
                          </div>
                          <div className="text-right">
-                            <p className="text-sm font-black text-blue-600">{formatCurrency(order.total_amount)}</p>
-                            <span className="text-[10px] font-bold uppercase text-gray-400 tracking-widest">{order.status}</span>
+                            <p className="text-sm font-black text-brand-600">{formatCurrency(order.total_amount)}</p>
+                            <span className="text-[10px] font-bold uppercase text-silver-400 tracking-widest">{order.status}</span>
                          </div>
                        </div>
                      ))}
                    </div>
                  </div>
                  
-                 <div className="bg-gray-900 text-white p-8 rounded-[2rem] shadow-xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-blue-600/10" />
+                 <div className="bg-navy-950 text-white p-8 rounded-[2rem] shadow-xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-brand-500/10" />
                     <h3 className="text-xl font-bold mb-4 relative z-10">System Status</h3>
-                    <p className="text-gray-400 text-sm mb-8 relative z-10">Logistics network and database synchronization status.</p>
+                    <p className="text-silver-400 text-sm mb-8 relative z-10">Logistics network and database synchronization status.</p>
                     <div className="space-y-6 relative z-10">
                        <div className="flex items-center gap-4">
                           <CheckCircle2 className="h-6 w-6 text-green-500" />
@@ -494,63 +496,63 @@ export default function AdminDashboard() {
               animate={{ opacity: 1, y: 0 }}
               className="grid grid-cols-1 lg:grid-cols-3 gap-8"
             >
-              <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm h-fit">
-                <h2 className="mb-6 text-gray-900">Add Inventory</h2>
+              <div className="bg-white p-8 rounded-[2rem] border border-brand-100 shadow-sm h-fit">
+                <h2 className="mb-6 text-navy-950">Add Inventory</h2>
                 <form onSubmit={handleAddProduct} className="space-y-5">
                    {/* Form fields same as before but styled better */}
-                   <input required type="text" placeholder="Product Title" value={title} onChange={e => setTitle(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
-                   <textarea required rows={4} placeholder="Description" value={description} onChange={e => setDescription(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
+                   <input required type="text" placeholder="Product Title" value={title} onChange={e => setTitle(e.target.value)} className="w-full p-4 bg-mist-50 border border-brand-100 rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-medium" />
+                   <textarea required rows={4} placeholder="Description" value={description} onChange={e => setDescription(e.target.value)} className="w-full p-4 bg-mist-50 border border-brand-100 rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-medium" />
                    <div className="grid grid-cols-2 gap-4">
-                      <input required type="number" step="0.01" placeholder="Price €" value={price} onChange={e => setPrice(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
-                      <input required type="number" placeholder="Inventory" value={inventory} onChange={e => setInventory(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
+                      <input required type="number" step="0.01" placeholder="Price €" value={price} onChange={e => setPrice(e.target.value)} className="w-full p-4 bg-mist-50 border border-brand-100 rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-medium" />
+                      <input required type="number" placeholder="Inventory" value={inventory} onChange={e => setInventory(e.target.value)} className="w-full p-4 bg-mist-50 border border-brand-100 rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-medium" />
                    </div>
-                   <input type="number" step="0.01" placeholder="Compare-at / RRP € (optional, must exceed price)" value={compareAtPrice} onChange={e => setCompareAtPrice(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
-                   <input type="url" placeholder="Image URL (optional)" value={imageUrl} onChange={e => setImageUrl(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
-                   <button type="submit" className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200">
+                   <input type="number" step="0.01" placeholder="Compare-at / RRP € (optional, must exceed price)" value={compareAtPrice} onChange={e => setCompareAtPrice(e.target.value)} className="w-full p-4 bg-mist-50 border border-brand-100 rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-medium" />
+                   <input type="url" placeholder="Image URL (optional)" value={imageUrl} onChange={e => setImageUrl(e.target.value)} className="w-full p-4 bg-mist-50 border border-brand-100 rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-medium" />
+                   <button type="submit" className="w-full bg-brand-500 text-white py-4 rounded-2xl font-black text-lg hover:bg-brand-600 transition-all shadow-lg hover:shadow-glow">
                      List Product
                    </button>
                 </form>
               </div>
 
-              <div className="lg:col-span-2 bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden">
-                <div className="p-8 border-b border-gray-100 flex justify-between items-center">
+              <div className="lg:col-span-2 bg-white rounded-[2rem] border border-brand-100 shadow-sm overflow-hidden">
+                <div className="p-8 border-b border-brand-100 flex justify-between items-center">
                    <h3 className="text-2xl font-black">Live Inventory</h3>
-                   <span className="bg-blue-50 text-blue-600 px-4 py-1.5 rounded-full text-xs font-black uppercase">{products.length} Items</span>
+                   <span className="bg-brand-50 text-brand-600 px-4 py-1.5 rounded-full text-xs font-black uppercase">{products.length} Items</span>
                 </div>
                 <div className="divide-y divide-gray-50 max-h-[700px] overflow-y-auto">
                    {products.map(product => (
                      editingProductId === product.id ? (
-                       <div key={product.id} className="p-6 space-y-4 bg-slate-50 border-b border-gray-100">
-                         <p className="text-xs font-black uppercase tracking-widest text-gray-400">Edit product</p>
-                         <input value={productDraft.title} onChange={e => setProductDraft(d => ({ ...d, title: e.target.value }))} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm font-medium" placeholder="Title" />
-                         <textarea value={productDraft.description} onChange={e => setProductDraft(d => ({ ...d, description: e.target.value }))} rows={3} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm font-medium" placeholder="Description" />
+                       <div key={product.id} className="p-6 space-y-4 bg-slate-50 border-b border-brand-100">
+                         <p className="text-xs font-black uppercase tracking-widest text-silver-400">Edit product</p>
+                         <input value={productDraft.title} onChange={e => setProductDraft(d => ({ ...d, title: e.target.value }))} className="w-full p-3 bg-white border border-brand-100 rounded-xl text-sm font-medium" placeholder="Title" />
+                         <textarea value={productDraft.description} onChange={e => setProductDraft(d => ({ ...d, description: e.target.value }))} rows={3} className="w-full p-3 bg-white border border-brand-100 rounded-xl text-sm font-medium" placeholder="Description" />
                          <div className="grid grid-cols-2 gap-3">
-                           <input type="number" step="0.01" value={productDraft.price} onChange={e => setProductDraft(d => ({ ...d, price: e.target.value }))} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm" placeholder="Price" />
-                           <input type="number" step="0.01" value={productDraft.compareAtPrice} onChange={e => setProductDraft(d => ({ ...d, compareAtPrice: e.target.value }))} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm" placeholder="RRP (optional)" />
+                           <input type="number" step="0.01" value={productDraft.price} onChange={e => setProductDraft(d => ({ ...d, price: e.target.value }))} className="w-full p-3 bg-white border border-brand-100 rounded-xl text-sm" placeholder="Price" />
+                           <input type="number" step="0.01" value={productDraft.compareAtPrice} onChange={e => setProductDraft(d => ({ ...d, compareAtPrice: e.target.value }))} className="w-full p-3 bg-white border border-brand-100 rounded-xl text-sm" placeholder="RRP (optional)" />
                          </div>
-                         <input type="number" value={productDraft.inventory} onChange={e => setProductDraft(d => ({ ...d, inventory: e.target.value }))} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm" placeholder="Inventory" />
-                         <input type="url" value={productDraft.imageUrl} onChange={e => setProductDraft(d => ({ ...d, imageUrl: e.target.value }))} className="w-full p-3 bg-white border border-gray-200 rounded-xl text-xs font-mono" placeholder="Image URL" />
+                         <input type="number" value={productDraft.inventory} onChange={e => setProductDraft(d => ({ ...d, inventory: e.target.value }))} className="w-full p-3 bg-white border border-brand-100 rounded-xl text-sm" placeholder="Inventory" />
+                         <input type="url" value={productDraft.imageUrl} onChange={e => setProductDraft(d => ({ ...d, imageUrl: e.target.value }))} className="w-full p-3 bg-white border border-brand-100 rounded-xl text-xs font-mono" placeholder="Image URL" />
                          <div className="flex gap-3">
-                           <button type="button" onClick={saveProductEdit} disabled={isSavingProduct} className="flex-1 bg-blue-600 text-white py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-blue-700 disabled:opacity-60">{isSavingProduct ? 'Saving…' : 'Save'}</button>
-                           <button type="button" onClick={cancelEditProduct} disabled={isSavingProduct} className="px-6 py-3 rounded-xl border border-gray-200 text-xs font-black uppercase tracking-widest hover:bg-gray-100">Cancel</button>
+                           <button type="button" onClick={saveProductEdit} disabled={isSavingProduct} className="flex-1 bg-brand-500 text-white py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-brand-600 disabled:opacity-60">{isSavingProduct ? 'Saving…' : 'Save'}</button>
+                           <button type="button" onClick={cancelEditProduct} disabled={isSavingProduct} className="px-6 py-3 rounded-xl border border-brand-100 text-xs font-black uppercase tracking-widest hover:bg-brand-50">Cancel</button>
                          </div>
                        </div>
                      ) : (
-                       <div key={product.id} className="p-6 flex items-center justify-between group hover:bg-gray-50 transition-colors">
+                       <div key={product.id} className="p-6 flex items-center justify-between group hover:bg-mist-50 transition-colors">
                           <div className="flex items-center gap-6 min-w-0 flex-1">
-                             <div className="w-16 h-16 bg-gray-100 rounded-2xl overflow-hidden border border-gray-100 shrink-0">
+                             <div className="w-16 h-16 bg-brand-50 rounded-2xl overflow-hidden border border-brand-100 shrink-0">
                                 <img src={product.images?.[0]} className="w-full h-full object-cover" alt="" />
                              </div>
                              <div className="min-w-0">
-                                <p className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors truncate">{product.title}</p>
-                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                                <p className="font-bold text-navy-950 group-hover:text-brand-600 transition-colors truncate">{product.title}</p>
+                                <p className="text-xs font-bold text-silver-400 uppercase tracking-widest">
                                   {product.compare_at_price != null &&
                                   Number(product.compare_at_price) > Number(product.price) ? (
                                     <>
-                                      <span className="line-through text-gray-400 decoration-gray-400">
+                                      <span className="line-through text-silver-400 decoration-gray-400">
                                         {formatCurrency(Number(product.compare_at_price))}
                                       </span>
-                                      <span className="text-gray-700"> {formatCurrency(product.price)}</span>
+                                      <span className="text-navy-800"> {formatCurrency(product.price)}</span>
                                     </>
                                   ) : (
                                     formatCurrency(product.price)
@@ -563,7 +565,7 @@ export default function AdminDashboard() {
                             <button
                               type="button"
                               onClick={() => startEditProduct(product)}
-                              className="p-3 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+                              className="p-3 text-steel-600 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all"
                               title="Edit product"
                             >
                                <Pencil className="h-5 w-5" />
@@ -590,15 +592,15 @@ export default function AdminDashboard() {
               key="orders"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden"
+              className="bg-white rounded-[2rem] border border-brand-100 shadow-sm overflow-hidden"
             >
-               <div className="p-8 border-b border-gray-100">
+               <div className="p-8 border-b border-brand-100">
                   <h3 className="text-2xl font-black">Order Logistics</h3>
                </div>
                <div className="overflow-x-auto">
                  <table className="w-full text-left">
                    <thead>
-                     <tr className="bg-gray-50 border-b border-gray-100 italic text-gray-400 text-xs font-bold uppercase tracking-widest">
+                     <tr className="bg-mist-50 border-b border-brand-100 italic text-silver-400 text-xs font-bold uppercase tracking-widest">
                        <th className="px-8 py-5">Order ID</th>
                        <th className="px-8 py-5">Customer</th>
                        <th className="px-8 py-5">Amount</th>
@@ -610,22 +612,22 @@ export default function AdminDashboard() {
                    <tbody className="divide-y divide-gray-100">
                     {orders.map(order => (
                       <React.Fragment key={order.id}>
-                        <tr className="group hover:bg-gray-50 transition-colors">
-                          <td className="px-8 py-6 font-mono text-sm text-gray-500">#{order.id.substring(0, 8)}</td>
+                        <tr className="group hover:bg-mist-50 transition-colors">
+                          <td className="px-8 py-6 font-mono text-sm text-steel-600">#{order.id.substring(0, 8)}</td>
                           <td className="px-8 py-6">
-                             <p className="font-bold text-sm text-gray-900">{order.user_id?.substring(0, 8) || 'Guest'}</p>
-                             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">{new Date(order.created_at).toLocaleDateString()}</p>
+                             <p className="font-bold text-sm text-navy-950">{order.user_id?.substring(0, 8) || 'Guest'}</p>
+                             <p className="text-[10px] font-bold text-silver-400 uppercase tracking-tight">{new Date(order.created_at).toLocaleDateString()}</p>
                           </td>
-                          <td className="px-8 py-6 font-black text-blue-600">{formatCurrency(order.total_amount)}</td>
+                          <td className="px-8 py-6 font-black text-brand-600">{formatCurrency(order.total_amount)}</td>
                           <td className="px-8 py-6">
                              <select 
                                 value={order.status}
                                 onChange={(e) => updateOrderStatus(order, e.target.value)}
                                 className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider outline-none cursor-pointer border-0
                                   ${order.status === 'delivered' ? 'bg-green-100 text-green-700' : 
-                                    order.status === 'shipped' ? 'bg-blue-100 text-blue-700' : 
+                                    order.status === 'shipped' ? 'bg-brand-100 text-brand-700' : 
                                     order.status === 'paid' ? 'bg-purple-100 text-purple-700' : 
-                                    order.status === 'processing' ? 'bg-indigo-100 text-indigo-700' :
+                                    order.status === 'processing' ? 'bg-brand-100 text-brand-700' :
                                     'bg-yellow-100 text-yellow-700'}`}
                              >
                                 <option value="pending">Pending</option>
@@ -636,13 +638,13 @@ export default function AdminDashboard() {
                                 <option value="canceled">Canceled</option>
                              </select>
                           </td>
-                          <td className="px-8 py-6 font-mono text-[10px] text-gray-400 truncate max-w-[150px]">{order.crypto_tx_hash || 'N/A'}</td>
+                          <td className="px-8 py-6 font-mono text-[10px] text-silver-400 truncate max-w-[150px]">{order.crypto_tx_hash || 'N/A'}</td>
                           <td className="px-8 py-6 text-right">
                              <div className="flex items-center justify-end gap-1">
                                <button
                                  type="button"
                                  onClick={() => openOrderDetail(order)}
-                                 className="px-3 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-gray-900 text-white hover:bg-black transition-colors"
+                                 className="px-3 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-navy-950 text-white hover:bg-black transition-colors"
                                >
                                  View / edit
                                </button>
@@ -657,7 +659,7 @@ export default function AdminDashboard() {
                                <button
                                  type="button"
                                  onClick={() => openOrderActions(order)}
-                                 className="p-2 text-gray-400 hover:text-gray-900 rounded-xl transition-colors"
+                                 className="p-2 text-silver-400 hover:text-navy-950 rounded-xl transition-colors"
                                  title="Quick TXID"
                                >
                                  <Plus className={`h-5 w-5 transition-transform ${expandedOrderId === order.id ? 'rotate-45' : ''}`} />
@@ -666,22 +668,22 @@ export default function AdminDashboard() {
                           </td>
                         </tr>
                         {expandedOrderId === order.id && (
-                          <tr className="bg-gray-50/70">
+                          <tr className="bg-mist-50/70">
                             <td colSpan={6} className="px-8 py-5">
                               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
                                 <div className="md:col-span-2">
-                                  <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">Crypto TXID / Hash</label>
+                                  <label className="block text-[10px] font-black uppercase tracking-widest text-silver-400 mb-2">Crypto TXID / Hash</label>
                                   <input
                                     value={txidDraft}
                                     onChange={(e) => setTxidDraft(e.target.value)}
                                     placeholder="Paste transaction hash"
-                                    className="w-full p-3 bg-white border border-gray-200 rounded-xl text-xs font-mono outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full p-3 bg-white border border-brand-100 rounded-xl text-xs font-mono outline-none focus:ring-2 focus:ring-brand-400"
                                   />
                                 </div>
                                 <button
                                   onClick={() => saveOrderMeta(order.id)}
                                   disabled={isSavingOrder}
-                                  className="bg-blue-600 text-white px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-blue-700 disabled:opacity-60"
+                                  className="bg-brand-500 text-white px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-brand-600 disabled:opacity-60"
                                 >
                                   {isSavingOrder ? 'Saving...' : 'Save TXID'}
                                 </button>
@@ -704,11 +706,11 @@ export default function AdminDashboard() {
                animate={{ opacity: 1, y: 0 }}
                className="max-w-2xl mx-auto space-y-8"
              >
-                <div className="bg-gray-900 text-white p-12 rounded-[3rem] shadow-2xl relative overflow-hidden">
+                <div className="bg-navy-950 text-white p-12 rounded-[3rem] shadow-2xl relative overflow-hidden">
                    <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/10 -mr-32 -mt-32 rounded-full blur-[100px]" />
                    <div className="relative z-10">
                       <h2 className="text-3xl font-black mb-4">System Maintenance</h2>
-                      <p className="text-gray-400 mb-12">Critical tools for database synchronization and catalog initialization. Use with extreme caution.</p>
+                      <p className="text-silver-400 mb-12">Critical tools for database synchronization and catalog initialization. Use with extreme caution.</p>
                       
                       <div className="space-y-4">
                          <button
@@ -718,9 +720,9 @@ export default function AdminDashboard() {
                          >
                             <div className="text-left">
                                <p className="text-lg">Sync Missing Reference Items</p>
-                               <p className="text-xs text-gray-500 font-medium">Adds new products from the master seed file.</p>
+                               <p className="text-xs text-steel-600 font-medium">Adds new products from the master seed file.</p>
                             </div>
-                            <TrendingUp className="h-6 w-6 text-blue-500 group-hover:translate-x-2 transition-transform" />
+                            <TrendingUp className="h-6 w-6 text-brand-500 group-hover:translate-x-2 transition-transform" />
                          </button>
                          
                          <button
@@ -744,41 +746,41 @@ export default function AdminDashboard() {
 
       {orderDetail && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white rounded-[1.75rem] shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col border border-gray-100">
-            <div className="flex items-start justify-between gap-4 p-6 border-b border-gray-100">
+          <div className="bg-white rounded-[1.75rem] shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col border border-brand-100">
+            <div className="flex items-start justify-between gap-4 p-6 border-b border-brand-100">
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Order</p>
-                <h2 className="text-xl font-black text-gray-900 font-mono">#{orderDetail.id}</h2>
-                <p className="text-xs text-gray-500 mt-1">Placed {orderDetail.created_at ? new Date(orderDetail.created_at).toLocaleString() : '—'}</p>
-                <p className="text-xs text-gray-500 font-mono mt-1">Customer user_id: {orderDetail.user_id || 'Guest checkout'}</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-silver-400">Order</p>
+                <h2 className="text-xl font-black text-navy-950 font-mono">#{orderDetail.id}</h2>
+                <p className="text-xs text-steel-600 mt-1">Placed {orderDetail.created_at ? new Date(orderDetail.created_at).toLocaleString() : '—'}</p>
+                <p className="text-xs text-steel-600 font-mono mt-1">Customer user_id: {orderDetail.user_id || 'Guest checkout'}</p>
               </div>
-              <button type="button" onClick={() => setOrderDetail(null)} className="p-2 rounded-xl hover:bg-gray-100 text-gray-500" aria-label="Close">
+              <button type="button" onClick={() => setOrderDetail(null)} className="p-2 rounded-xl hover:bg-brand-50 text-steel-600" aria-label="Close">
                 <X className="h-6 w-6" />
               </button>
             </div>
             <div className="overflow-y-auto p-6 space-y-6">
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3">Line items</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-silver-400 mb-3">Line items</p>
                 <ul className="space-y-2 text-sm">
                   {Array.isArray(orderDetail.items) && orderDetail.items.length > 0 ? (
                     orderDetail.items.map((line: any, idx: number) => (
-                      <li key={idx} className="flex justify-between gap-4 bg-gray-50 rounded-xl px-4 py-3 border border-gray-100">
-                        <span className="font-medium text-gray-900">{line.title || line.name || 'Item'}{line.specification ? ` — ${line.specification}` : line.variantLabel ? ` — ${line.variantLabel}` : ''}</span>
-                        <span className="text-gray-600 shrink-0">× {line.quantity ?? line.qty ?? 1}</span>
+                      <li key={idx} className="flex justify-between gap-4 bg-mist-50 rounded-xl px-4 py-3 border border-brand-100">
+                        <span className="font-medium text-navy-950">{line.title || line.name || 'Item'}{line.specification ? ` — ${line.specification}` : line.variantLabel ? ` — ${line.variantLabel}` : ''}</span>
+                        <span className="text-steel-600 shrink-0">× {line.quantity ?? line.qty ?? 1}</span>
                       </li>
                     ))
                   ) : (
-                    <li className="text-gray-400 text-sm">No structured line items saved for this order.</li>
+                    <li className="text-silver-400 text-sm">No structured line items saved for this order.</li>
                   )}
                 </ul>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2">
-                  <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">Status</label>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-silver-400 mb-2">Status</label>
                   <select
                     value={orderDraft.status}
                     onChange={e => setOrderDraft(d => ({ ...d, status: e.target.value }))}
-                    className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 bg-mist-50 border border-brand-100 rounded-xl text-sm font-bold outline-none focus:ring-2 focus:ring-brand-400"
                   >
                     <option value="pending">Pending</option>
                     <option value="processing">Processing</option>
@@ -789,43 +791,43 @@ export default function AdminDashboard() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">Total amount</label>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-silver-400 mb-2">Total amount</label>
                   <input
                     type="number"
                     step="0.01"
                     value={orderDraft.total_amount}
                     onChange={e => setOrderDraft(d => ({ ...d, total_amount: e.target.value }))}
-                    className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm font-mono"
+                    className="w-full p-3 bg-mist-50 border border-brand-100 rounded-xl text-sm font-mono"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">Crypto TXID / hash</label>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-silver-400 mb-2">Crypto TXID / hash</label>
                   <input
                     value={orderDraft.crypto_tx_hash}
                     onChange={e => setOrderDraft(d => ({ ...d, crypto_tx_hash: e.target.value }))}
-                    className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-xs font-mono outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 bg-mist-50 border border-brand-100 rounded-xl text-xs font-mono outline-none focus:ring-2 focus:ring-brand-400"
                   />
                 </div>
               </div>
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3">Shipping & contact</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-silver-400 mb-3">Shipping & contact</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input value={orderDraft.fullName} onChange={e => setOrderDraft(d => ({ ...d, fullName: e.target.value }))} placeholder="Full name" className="p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" />
-                  <input type="email" value={orderDraft.email} onChange={e => setOrderDraft(d => ({ ...d, email: e.target.value }))} placeholder="Email" className="p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" />
-                  <input value={orderDraft.phone} onChange={e => setOrderDraft(d => ({ ...d, phone: e.target.value }))} placeholder="Phone" className="p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" />
-                  <input value={orderDraft.country} onChange={e => setOrderDraft(d => ({ ...d, country: e.target.value }))} placeholder="Country" className="p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" />
-                  <input value={orderDraft.city} onChange={e => setOrderDraft(d => ({ ...d, city: e.target.value }))} placeholder="City" className="p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" />
-                  <input value={orderDraft.postalCode} onChange={e => setOrderDraft(d => ({ ...d, postalCode: e.target.value }))} placeholder="Postal code" className="p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" />
-                  <textarea value={orderDraft.address} onChange={e => setOrderDraft(d => ({ ...d, address: e.target.value }))} placeholder="Address" rows={2} className="sm:col-span-2 p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" />
+                  <input value={orderDraft.fullName} onChange={e => setOrderDraft(d => ({ ...d, fullName: e.target.value }))} placeholder="Full name" className="p-3 bg-mist-50 border border-brand-100 rounded-xl text-sm" />
+                  <input type="email" value={orderDraft.email} onChange={e => setOrderDraft(d => ({ ...d, email: e.target.value }))} placeholder="Email" className="p-3 bg-mist-50 border border-brand-100 rounded-xl text-sm" />
+                  <input value={orderDraft.phone} onChange={e => setOrderDraft(d => ({ ...d, phone: e.target.value }))} placeholder="Phone" className="p-3 bg-mist-50 border border-brand-100 rounded-xl text-sm" />
+                  <input value={orderDraft.country} onChange={e => setOrderDraft(d => ({ ...d, country: e.target.value }))} placeholder="Country" className="p-3 bg-mist-50 border border-brand-100 rounded-xl text-sm" />
+                  <input value={orderDraft.city} onChange={e => setOrderDraft(d => ({ ...d, city: e.target.value }))} placeholder="City" className="p-3 bg-mist-50 border border-brand-100 rounded-xl text-sm" />
+                  <input value={orderDraft.postalCode} onChange={e => setOrderDraft(d => ({ ...d, postalCode: e.target.value }))} placeholder="Postal code" className="p-3 bg-mist-50 border border-brand-100 rounded-xl text-sm" />
+                  <textarea value={orderDraft.address} onChange={e => setOrderDraft(d => ({ ...d, address: e.target.value }))} placeholder="Address" rows={2} className="sm:col-span-2 p-3 bg-mist-50 border border-brand-100 rounded-xl text-sm" />
                 </div>
               </div>
             </div>
-            <div className="p-6 border-t border-gray-100 flex flex-col sm:flex-row gap-3">
+            <div className="p-6 border-t border-brand-100 flex flex-col sm:flex-row gap-3">
               <button
                 type="button"
                 onClick={saveOrderDetail}
                 disabled={isSavingOrderDetail}
-                className="flex-1 bg-blue-600 text-white py-4 rounded-2xl text-sm font-black uppercase tracking-widest hover:bg-blue-700 disabled:opacity-60"
+                className="flex-1 bg-brand-500 text-white py-4 rounded-2xl text-sm font-black uppercase tracking-widest hover:bg-brand-600 disabled:opacity-60"
               >
                 {isSavingOrderDetail ? 'Saving…' : 'Save changes'}
               </button>
@@ -836,7 +838,7 @@ export default function AdminDashboard() {
               >
                 Delete order
               </button>
-              <button type="button" onClick={() => setOrderDetail(null)} className="sm:w-auto px-6 py-4 rounded-2xl border border-gray-200 text-sm font-bold text-gray-600 hover:bg-gray-50">
+              <button type="button" onClick={() => setOrderDetail(null)} className="sm:w-auto px-6 py-4 rounded-2xl border border-brand-200 text-sm font-bold text-steel-600 hover:bg-mist-50">
                 Close
               </button>
             </div>

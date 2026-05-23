@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { LocaleProvider } from '../i18n/LocaleProvider';
 import { useAuthStore } from '../store/useAuthStore';
 import { useSearchStore } from '../store/useSearchStore';
 import { supabase } from '../supabase';
@@ -19,6 +18,8 @@ import SalesNotification from './SalesNotification';
 import CartDrawer from './cart/CartDrawer';
 import Omnisearch from './search/Omnisearch';
 import TawkToChat from './chat/TawkToChat';
+import { CookieConsent } from './gdpr/CookieConsent';
+import { PageLoader } from './PageLoader';
 import { postNewsletterSubscribe } from '../lib/transactionalEmailApi';
 
 function LayoutShell() {
@@ -97,14 +98,15 @@ function LayoutShell() {
         Skip to main content
       </a>
 
-      <LiveTicker />
-
-      <Header
-        onLogin={handleLogin}
-        onLogout={handleLogout}
-        mobileMenuOpen={mobileNavOpen}
-        onMobileMenuOpen={() => setMobileNavOpen((o) => !o)}
-      />
+      <div className="sticky top-0 z-50 isolate">
+        <LiveTicker />
+        <Header
+          onLogin={handleLogin}
+          onLogout={handleLogout}
+          mobileMenuOpen={mobileNavOpen}
+          onMobileMenuOpen={() => setMobileNavOpen((o) => !o)}
+        />
+      </div>
 
       <MobileNav
         open={mobileNavOpen}
@@ -117,17 +119,19 @@ function LayoutShell() {
       />
 
       <main id="main-content" className="flex-grow pb-20 md:pb-0 relative" tabIndex={-1}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={location.pathname}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-          >
-            <Outlet />
-          </motion.div>
-        </AnimatePresence>
+        <Suspense fallback={<PageLoader />}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
+        </Suspense>
       </main>
 
       <SiteFooter
@@ -148,7 +152,7 @@ function LayoutShell() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 bg-brand-500 hover:bg-brand-600 text-white rounded-full p-3 shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
+            className="fixed bottom-24 md:bottom-8 left-4 md:left-8 z-50 bg-brand-500 hover:bg-brand-600 text-white rounded-full p-3 shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
             aria-label="Back to top"
           >
             <ArrowUp className="h-5 w-5" aria-hidden />
@@ -163,15 +167,12 @@ function LayoutShell() {
       <SelectorWizard />
       <RecentlyViewedSidebar />
       <ToastContainer />
+      <CookieConsent />
       <TawkToChat />
     </div>
   );
 }
 
 export default function Layout() {
-  return (
-    <LocaleProvider>
-      <LayoutShell />
-    </LocaleProvider>
-  );
+  return <LayoutShell />;
 }

@@ -6,42 +6,43 @@
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  /* Brand — logo indigo scale */
-  --color-brand-50: #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-300: #93a5fd;
-  --color-brand-400: #5b7fff;
-  --color-brand-500: #4357d6;
-  --color-brand-600: #3545b8;
-  --color-brand-700: #2d3a9e;
-  --color-brand-800: #252f7a;
-  --color-brand-900: #1a2258;
+  /* Brand — logo teal → navy gradient */
+  --color-brand-50: #ecfbf8;
+  --color-brand-100: #c8f2eb;
+  --color-brand-200: #8fe3d5;
+  --color-brand-300: #52d4c3;
+  --color-brand-400: #2db5a3;
+  --color-brand-500: #249688;
+  --color-brand-600: #1d7a73;
+  --color-brand-700: #176861;
+  --color-brand-800: #145650;
+  --color-brand-900: #1a365d;
 
   /* Clinical neutrals */
-  --color-navy-950: #0a0f1e;
-  --color-slate-850: #141b2d;
-  --color-mist-50: #f6f5ff;
-  --color-silver-400: #a7b9c8;
-  --color-steel-600: #496961;
+  --color-navy-950: #0f2744;
+  --color-navy-900: #1a365d;
+  --color-slate-850: #152238;
+  --color-mist-50: #f4faf9;
+  --color-silver-400: #8fa8b8;
+  --color-steel-600: #4a6170;
 
   /* Semantic */
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
-  --color-purity: #22d3ee;
+  --color-purity: #2db5a3;
 
   /* Legacy aliases (deprecated — migrate to brand-*) */
-  --color-brand-blue: #4357d6;
-  --color-brand-dark: #2d3a9e;
-  --color-brand-accent: #5b7fff;
+  --color-brand-blue: #2db5a3;
+  --color-brand-dark: #1a365d;
+  --color-brand-accent: #52d4c3;
   --color-brand-emerald: #10b981;
   --color-brand-amber: #f59e0b;
 
   /* Shadows */
-  --shadow-card: 0 4px 24px rgba(10, 15, 30, 0.08);
-  --shadow-elevated: 0 12px 48px rgba(67, 87, 214, 0.15);
-  --shadow-glow: 0 0 40px rgba(67, 87, 214, 0.25);
+  --shadow-card: 0 4px 24px rgba(15, 39, 68, 0.08);
+  --shadow-elevated: 0 12px 48px rgba(45, 181, 163, 0.18);
+  --shadow-glow: 0 0 40px rgba(45, 181, 163, 0.28);
 }
 
 @layer base {
@@ -87,7 +88,6 @@
 }
 
 @layer components {
-  /* Type scale */
   .text-display {
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     @apply font-display font-bold leading-[1.05] tracking-tight;
@@ -111,7 +111,6 @@
     @apply text-xs font-semibold uppercase tracking-[0.12em] text-silver-400;
   }
 
-  /* Section rhythm */
   .section-sm {
     @apply py-16;
   }
@@ -124,20 +123,23 @@
     @apply py-32;
   }
 
-  /* Gradients */
+  /* Logo-aligned gradients */
   .bg-gradient-hero {
-    background: linear-gradient(135deg, #0a0f1e 0%, #1a2258 50%, #4357d6 100%);
+    background: linear-gradient(135deg, #0f2744 0%, #1a365d 45%, #1d7a73 100%);
   }
 
   .bg-gradient-cta {
-    background: linear-gradient(90deg, #4357d6, #5b7fff);
+    background: linear-gradient(90deg, #2db5a3 0%, #1a365d 100%);
+  }
+
+  .bg-gradient-brand {
+    background: linear-gradient(90deg, #2db5a3 0%, #3dc9b6 50%, #1a365d 100%);
   }
 
   .bg-gradient-glow {
-    background: radial-gradient(ellipse at 50% 0%, rgba(67, 87, 214, 0.35), transparent 70%);
+    background: radial-gradient(ellipse at 50% 0%, rgba(45, 181, 163, 0.32), transparent 70%);
   }
 
-  /* Shadows */
   .shadow-card {
     box-shadow: var(--shadow-card);
   }
@@ -150,19 +152,23 @@
     box-shadow: var(--shadow-glow);
   }
 
-  /* Hero (legacy class — updated typography) */
   .hero-heading {
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     font-family: var(--font-display);
     @apply font-bold leading-[1.05] tracking-tight;
   }
 
-  /* Scientific grid overlay utility */
   .bg-scientific-grid {
     background-image:
-      linear-gradient(rgba(67, 87, 214, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(67, 87, 214, 0.06) 1px, transparent 1px);
+      linear-gradient(rgba(45, 181, 163, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(45, 181, 163, 0.07) 1px, transparent 1px);
     background-size: 48px 48px;
+  }
+
+  /* Hex-node molecule motif — pairs with .bg-scientific-grid */
+  .bg-scientific-molecule {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%232DB5A3' stroke-width='1' stroke-opacity='0.35'%3E%3Ccircle cx='30' cy='30' r='3' fill='%232DB5A3' fill-opacity='0.2'/%3E%3Ccircle cx='90' cy='30' r='3' fill='%232DB5A3' fill-opacity='0.2'/%3E%3Ccircle cx='60' cy='60' r='3' fill='%232DB5A3' fill-opacity='0.25'/%3E%3Ccircle cx='30' cy='90' r='3' fill='%232DB5A3' fill-opacity='0.2'/%3E%3Ccircle cx='90' cy='90' r='3' fill='%232DB5A3' fill-opacity='0.2'/%3E%3Cline x1='30' y1='30' x2='60' y2='60'/%3E%3Cline x1='90' y1='30' x2='60' y2='60'/%3E%3Cline x1='30' y1='90' x2='60' y2='60'/%3E%3Cline x1='90' y1='90' x2='60' y2='60'/%3E%3Cline x1='30' y1='30' x2='90' y2='30'/%3E%3Cline x1='30' y1='90' x2='90' y2='90'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 120px 120px;
   }
 }
 
@@ -173,5 +179,23 @@
 
   .font-mono {
     font-family: var(--font-mono);
+  }
+
+  .text-gradient-brand {
+    background: linear-gradient(90deg, #52d4c3 0%, #2db5a3 40%, #1a365d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  #tawk-bubble-container,
+  .tawk-min-container,
+  .tawk-button,
+  .tawk-branding,
+  .tawk-branding-small {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 }

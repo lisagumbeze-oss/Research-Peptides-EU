@@ -13,26 +13,28 @@ import { PRIMARY_PROMO_CODE, PROMO_DISCOUNT_PERCENT, isValidPromoCode } from '..
 import { Container } from '../design-system';
 import { CatalogPageHeader } from '../components/catalog/CatalogPageHeader';
 import { CheckoutProgress } from '../components/checkout/CheckoutProgress';
+import { usePageSeo } from '../seo/SeoProvider';
 
-/** Shipping rates in EUR (converted from legacy GBP at 1.17, May 2026). */
+/** Shipping rates in EUR (Netherlands fulfilment · May 2026). */
 const SHIPPING_METHODS = {
-  UK: [
-    { id: 'rm24', name: 'Royal Mail 24', subtext: '1-2 Working Days', price: 5.27 },
-    { id: 'rm_special', name: 'Royal Mail Special', subtext: '1 Working Day', price: 8.78 },
-    { id: 'dpd_uk', name: 'DPD UK', subtext: '1-2 Working Days', price: 8.07 },
-    { id: 'dpd_uk_sat', name: 'DPD UK (*Saturday Delivery)', subtext: 'Weekend Delivery', price: 11.12 },
-  ],
   EUROPE: [
-    { id: 'intl_eu', name: 'Europe Shipping', subtext: '3-7 Working Days', price: 18.14 },
+    { id: 'intl_eu', name: 'EU Standard (PostNL / DPD)', subtext: '3–7 business days', price: 18.14 },
+    { id: 'eu_express', name: 'EU Express', subtext: '2–4 business days', price: 28.5 },
+  ],
+  UK: [
+    { id: 'rm24', name: 'Royal Mail 24', subtext: '1–2 working days', price: 5.27 },
+    { id: 'rm_special', name: 'Royal Mail Special', subtext: '1 working day', price: 8.78 },
+    { id: 'dpd_uk', name: 'DPD UK', subtext: '1–2 working days', price: 8.07 },
   ],
   INTL: [
-    { id: 'intl_row', name: 'International Shipping', subtext: '5-10 Working Days', price: 29.84 },
+    { id: 'intl_row', name: 'International', subtext: '5–14 business days', price: 29.84 },
   ],
 };
 
 const EUROPEAN_COUNTRIES = Array.from(new Set(europeanLocations.map(l => l.country)));
 
 export default function Checkout() {
+  usePageSeo({ canonicalPath: '/checkout', noindex: true });
   const { t } = useTranslation('checkout');
   const { items, getTotal, getSubtotal, clearCart, hasHydrated } = useCartStore();
   const { user } = useAuthStore();
@@ -75,17 +77,19 @@ export default function Checkout() {
     }
   }, [user]);
 
+  React.useEffect(() => {
+    if (!hasHydrated) return;
+    if (items.length === 0 && !placedOrderId) {
+      navigate('/cart');
+    }
+  }, [hasHydrated, items.length, placedOrderId, navigate]);
+
   if (!hasHydrated) {
     return <CheckoutSkeleton />;
   }
 
-  if (items.length === 0) {
-    if (placedOrderId) {
-      // Keep on screen if we just finished
-    } else {
-      navigate('/cart');
-      return null;
-    }
+  if (items.length === 0 && !placedOrderId) {
+    return <CheckoutSkeleton />;
   }
 
   // Get available methods based on country and total
@@ -94,11 +98,11 @@ export default function Checkout() {
     let baseMethods = [];
     let threshold = 500;
 
-    if (shipping.country === 'United Kingdom') {
-      baseMethods = SHIPPING_METHODS.UK;
-      threshold = 500;
-    } else if (EUROPEAN_COUNTRIES.includes(shipping.country)) {
+    if (EUROPEAN_COUNTRIES.includes(shipping.country)) {
       baseMethods = SHIPPING_METHODS.EUROPE;
+      threshold = 500;
+    } else if (shipping.country === 'United Kingdom') {
+      baseMethods = SHIPPING_METHODS.UK;
       threshold = 500;
     } else {
       baseMethods = SHIPPING_METHODS.INTL;
@@ -446,9 +450,9 @@ export default function Checkout() {
                 {paymentMethod === 'card' && (
                   <fieldset className="space-y-6 border-0 min-w-0 p-0">
                     <legend className="sr-only">Card payment callback note</legend>
-                    <div className="bg-brand-50 p-4 rounded-2xl border border-blue-100 flex gap-3">
+                    <div className="bg-brand-50 p-4 rounded-2xl border border-brand-100 flex gap-3">
                       <AlertCircle className="w-5 h-5 text-brand-600 shrink-0" aria-hidden />
-                      <p className="text-xs font-bold text-blue-900 leading-relaxed">
+                      <p className="text-xs font-bold text-navy-900 leading-relaxed">
                         Card payments are processed manually. Add a billing callback note (best call time / reference) and place the order.
                         Status updates to <span className="underline">Processing</span> immediately.
                       </p>
@@ -502,7 +506,7 @@ export default function Checkout() {
                   </div>
                 )}
 
-                <button type="button" onClick={handleOrderSubmit} disabled={isSubmitting} className="w-full bg-brand-500 text-white py-6 rounded-2xl font-black text-xl hover:bg-brand-600 transition-all shadow-xl shadow-blue-200 flex items-center justify-center gap-3">
+                <button type="button" onClick={handleOrderSubmit} disabled={isSubmitting} className="w-full bg-brand-500 text-white py-6 rounded-2xl font-black text-xl hover:bg-brand-600 transition-all shadow-xl shadow-glow flex items-center justify-center gap-3">
                   {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin" aria-hidden /> : 'Complete Secure Purchase'}
                 </button>
               </div>
@@ -534,7 +538,7 @@ export default function Checkout() {
                       View My History
                     </button>
                   ) : (
-                    <div className="p-4 bg-brand-50 rounded-2xl text-blue-900 text-[10px] font-bold max-w-xs mx-auto border border-blue-100">
+                    <div className="p-4 bg-brand-50 rounded-2xl text-navy-900 text-[10px] font-bold max-w-xs mx-auto border border-brand-100">
                       Please save your Order ID above. Since you checked out as a guest, this is your primary reference for correspondence.
                     </div>
                   )}

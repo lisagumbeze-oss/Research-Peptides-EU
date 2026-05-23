@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Checkout sicuro",
+    "title": "Completa il tuo ordine",
+    "description": "Spedizione UE · fatturazione IVA · evasione dai Paesi Bassi"
+  },
+  "steps": {
+    "shipping": "Spedizione",
+    "payment": "Pagamento",
+    "confirm": "Conferma"
+  },
+  "cart": {
+    "title": "Il tuo carrello",
+    "empty": "Il tuo carrello è vuoto",
+    "emptyCta": "Sfoglia catalogo",
+    "summary": "Riepilogo ordine",
+    "promo": "Codice promozionale",
+    "subtotal": "Subtotale",
+    "discount": "Sconto",
+    "shipping": "Spedizione",
+    "shippingAtCheckout": "Al checkout",
+    "total": "Totale",
+    "proceed": "Procedi al checkout",
+    "vatNote": "Prezzi in EUR. IVA applicata ove richiesto al checkout in base al paese di spedizione UE."
+  }
+}

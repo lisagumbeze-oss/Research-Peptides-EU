@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistica",
+    "title": "Spedizione e consegna",
+    "description": "Evasione prioritaria UE dai Paesi Bassi con consegna tracciata negli Stati membri e opzioni worldwide."
+  },
+  "features": {
+    "cutoffTitle": "Termine ordine ore 12:00 CET",
+    "cutoffDesc": "Gli ordini effettuati prima di mezzogiorno (ora dell'Europa centrale), dal lunedì al venerdì, vengono spediti lo stesso giorno lavorativo.",
+    "trackedTitle": "Sicurezza tracciata",
+    "trackedDesc": "Ogni spedizione è completamente tracciata dal nostro laboratorio alla tua struttura.",
+    "packagingTitle": "Imballaggio discreto",
+    "packagingDesc": "Gli articoli sono sottovuoto e spediti in imballaggi neutri e senza marchio, adatti alle strutture di ricerca."
+  },
+  "regions": {
+    "title": "Copertura UE e internazionale",
+    "euTitle": "Consegna nell'Unione Europea",
+    "euDesc": "Spedizione standard UE: 3–7 giorni lavorativi. Spedizione gratuita per ordini idonei oltre 500 € (subtotale).",
+    "worldTitle": "Logistica mondiale",
+    "worldDesc": "Destinazioni extra-UE: 5–14 giorni lavorativi in base a dogana e corrieri regionali.",
+    "ukTitle": "Regno Unito",
+    "ukDesc": "Le opzioni tracciate per il Regno Unito restano disponibili al checkout quando si seleziona il Regno Unito come destinazione."
+  },
+  "responsibility": {
+    "eyebrow": "Responsabilità del ricercatore",
+    "body": "Gli acquirenti sono responsabili della conformità ai regolamenti di importazione locali. Dazi, IVA e imposte regionali possono applicarsi e sono a carico dell'acquirente se non riscossi al checkout.",
+    "disclaimer": "Solo per ricerca. Non per consumo umano o veterinario."
+  }
+}

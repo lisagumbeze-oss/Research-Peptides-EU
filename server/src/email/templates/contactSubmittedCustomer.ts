@@ -8,8 +8,8 @@ export function renderContactSubmittedCustomerEmail(payload: ContactEmailPayload
       We received your message and our team will reply as soon as possible.
     </p>
     <div style="padding:16px;border:1px solid #dbeafe;background:#eff6ff;border-radius:12px;">
-      <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2563eb;font-weight:800;">Subject</p>
-      <p style="margin:0;font-size:14px;color:#1e3a8a;font-weight:700;">${payload.subject}</p>
+      <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#2db5a3;font-weight:800;">Subject</p>
+      <p style="margin:0;font-size:14px;color:#1a365d;font-weight:700;">${payload.subject}</p>
     </div>`;
 
   const html = renderBrandLayout({

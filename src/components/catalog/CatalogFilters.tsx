@@ -1,9 +1,10 @@
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { X, Filter } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { formatCurrency } from '../../lib/utils';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
-import { Button } from '../../design-system';
+import { Button, GlassPanel } from '../../design-system';
 import type { CategoryOption } from './types';
 import { cn } from '../../lib/utils';
 
@@ -37,10 +38,11 @@ function FiltersPanel({
 }: Omit<CatalogFiltersProps, 'showMobile' | 'onCloseMobile' | 'onOpenMobile' | 'className' | 'mode'> & {
   idPrefix?: string;
 }) {
+  const { t } = useTranslation('shop');
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-caption text-brand-600 mb-4">Categories</h3>
+        <h3 className="text-caption text-brand-600 mb-4">{t('filters.categories')}</h3>
         <ul className="space-y-2 max-h-64 overflow-y-auto pr-1">
           {categories.map((cat) => (
             <li key={cat.slug}>
@@ -70,7 +72,7 @@ function FiltersPanel({
 
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-caption text-brand-600">Max price</h3>
+          <h3 className="text-caption text-brand-600">{t('filters.maxPrice')}</h3>
           <span className="text-sm font-semibold text-brand-600 tabular-nums">
             {formatCurrency(priceRange)}
           </span>
@@ -93,13 +95,14 @@ function FiltersPanel({
 
       <Button variant="outline" fullWidth onClick={onClear} className="gap-2 text-steel-600">
         <X className="h-4 w-4" />
-        Clear filters
+        {t('filters.clearShort')}
       </Button>
     </div>
   );
 }
 
 export function CatalogFilters(props: CatalogFiltersProps) {
+  const { t } = useTranslation('shop');
   const { showMobile, onCloseMobile, onOpenMobile, className, mode = 'sidebar' } = props;
 
   const mobileRef = useRef<HTMLDivElement>(null);
@@ -115,7 +118,7 @@ export function CatalogFilters(props: CatalogFiltersProps) {
         aria-controls="catalog-mobile-filters"
       >
         <Filter className="h-4 w-4" aria-hidden />
-        Filters
+        {t('filters.filters')}
       </button>
     );
   }
@@ -123,14 +126,12 @@ export function CatalogFilters(props: CatalogFiltersProps) {
   if (mode === 'sidebar') {
     return (
       <aside
-        className={cn(
-          'hidden lg:block space-y-6 sticky top-24 self-start',
-          'bg-white rounded-2xl border border-brand-100 p-6 shadow-card',
-          className,
-        )}
+        className={cn('hidden lg:block sticky top-24 self-start', className)}
       >
-        <h2 className="font-display font-bold text-navy-950">Refine results</h2>
-        <FiltersPanel {...props} idPrefix="desktop-" />
+        <GlassPanel variant="light" padding="md" className="space-y-6 shadow-glow">
+          <h2 className="font-display font-bold text-navy-950">{t('filters.refine')}</h2>
+          <FiltersPanel {...props} idPrefix="desktop-" />
+        </GlassPanel>
       </aside>
     );
   }
@@ -161,12 +162,12 @@ export function CatalogFilters(props: CatalogFiltersProps) {
               transition={{ type: 'spring', stiffness: 380, damping: 36 }}
             >
               <div className="flex justify-between items-center mb-6">
-                <h2 className="font-display font-bold text-lg">Filters</h2>
+                <h2 className="font-display font-bold text-lg">{t('filters.filters')}</h2>
                 <button
                   type="button"
                   onClick={onCloseMobile}
                   className="p-2 rounded-lg hover:bg-brand-50"
-                  aria-label="Close filters"
+                  aria-label={t('filters.close')}
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -175,7 +176,7 @@ export function CatalogFilters(props: CatalogFiltersProps) {
                 <FiltersPanel {...props} idPrefix="mobile-" />
               </div>
               <Button className="mt-6 w-full" onClick={onCloseMobile}>
-                Show results
+                {t('filters.showResults')}
               </Button>
             </motion.div>
           </>

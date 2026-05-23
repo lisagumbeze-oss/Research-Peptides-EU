@@ -1,0 +1,25 @@
+{
+  "brand": "Research Peptides EU",
+  "loading": "Caricamento…",
+  "search": "Cerca",
+  "cart": "Carrello",
+  "wishlist": "Lista desideri",
+  "account": "Account",
+  "orders": "I miei ordini",
+  "login": "Accedi",
+  "logout": "Esci",
+  "home": "Home",
+  "shop": "Negozio",
+  "languageActive": "Attivo",
+  "close": "Chiudi",
+  "viewAll": "Vedi tutto",
+  "learnMore": "Scopri di più",
+  "researchUseOnly": "Solo per ricerca di laboratorio — non per uso umano o veterinario.",
+  "salesNotification": {
+    "purchased": "Someone in {{location}} purchased",
+    "justNow": "Just now",
+    "minutesAgo_one": "{{count}} minute ago",
+    "minutesAgo_other": "{{count}} minutes ago",
+    "dismiss": "Dismiss notification"
+  }
+}

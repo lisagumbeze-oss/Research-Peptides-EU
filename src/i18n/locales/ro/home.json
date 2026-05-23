@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Olanda · standarde europene de cercetare",
+    "title": "Peptide de precizie pentru",
+    "titleHighlight": "Laboratoare europene.",
+    "subtitle": "Research Peptides EU furnizează compuși de grad instituțional cu verificare analitică terță, manipulare farmaceutică și distribuție UE de încredere.",
+    "ctaShop": "Răsfoiește catalogul",
+    "ctaWizard": "Selector compuși",
+    "trustPurity": "Puritate verificată 99,8%+",
+    "trustShipping": "Expediere lanț rece la nivel UE",
+    "trustCoa": "COA pentru fiecare lot"
+  },
+  "featured": {
+    "eyebrow": "Repere din catalog",
+    "title": "Compuși de cercetare recomandați",
+    "subtitle": "Peptide și produse chimice de cercetare verificate pe lot, pregătite pentru expediere către laboratoare UE."
+  },
+  "whyEu": {
+    "eyebrow": "De ce ne aleg cercetătorii din UE",
+    "title": "Conceput pentru standardele de laborator europene"
+  },
+  "categories": {
+    "eyebrow": "Răsfoiește după aplicație",
+    "title": "Categorii de cercetare",
+    "viewAll": "Vezi toate categoriile"
+  },
+  "trust": {
+    "eyebrow": "Asigurarea calității",
+    "title": "Verificare pe care o puteți documenta",
+    "coaCta": "Explorează biblioteca COA"
+  },
+  "experience": {
+    "eyebrow": "Experiența cercetătorului",
+    "title": "Suport la fiecare etapă",
+    "faqCta": "Citește FAQ cercetător"
+  },
+  "cta": {
+    "title": "Gata să îți echipezi laboratorul?",
+    "subtitle": "Răsfoiți catalogul UE sau folosiți selectorul de compuși pentru a restrânge linia de cercetare.",
+    "button": "Magazin catalog cercetare"
+  }
+}

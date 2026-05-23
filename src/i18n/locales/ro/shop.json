@@ -1,0 +1,32 @@
+{
+  "header": {
+    "eyebrow": "Catalog cercetare",
+    "title": "Magazin",
+    "titleHighlight": "peptide",
+    "description": "Răsfoiți compuși de cercetare verificați cu livrare UE, documentație pe lot și specificații transparente."
+  },
+  "results": "Se afișează {{count}} din {{total}} produse",
+  "filters": {
+    "categories": "Categorii",
+    "maxPrice": "Preț maxim",
+    "clearAll": "Șterge toate filtrele",
+    "clearShort": "Șterge filtrele",
+    "filters": "Filtre",
+    "close": "Închide filtrele",
+    "refine": "Rafinează rezultatele",
+    "showResults": "Afișează rezultatele"
+  },
+  "sort": {
+    "label": "Sortează produsele",
+    "relevance": "Relevanță",
+    "featured": "Recomandate",
+    "ratingDesc": "Cele mai bine evaluate",
+    "newest": "Cele mai noi",
+    "priceAsc": "Preț: de la mic la mare",
+    "priceDesc": "Preț: de la mare la mic"
+  },
+  "empty": {
+    "title": "Niciun produs nu corespunde filtrelor",
+    "description": "Încercați să extindeți intervalul de preț sau să ștergeți categoriile selectate."
+  }
+}

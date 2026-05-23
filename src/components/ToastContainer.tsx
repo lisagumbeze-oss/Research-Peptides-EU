@@ -19,13 +19,13 @@ export default function ToastContainer() {
               flex items-center p-4 rounded-2xl shadow-2xl border backdrop-blur-md
               ${toast.type === 'success' ? 'bg-white/90 border-green-100 text-green-900' : ''}
               ${toast.type === 'error' ? 'bg-white/90 border-red-100 text-red-900' : ''}
-              ${toast.type === 'info' ? 'bg-white/90 border-blue-100 text-blue-900' : ''}
+              ${toast.type === 'info' ? 'bg-white/90 border-brand-100 text-navy-900' : ''}
             `}
           >
             <div className="flex-shrink-0 mr-3">
               {toast.type === 'success' && <CheckCircle className="h-6 w-6 text-green-500" />}
               {toast.type === 'error' && <XCircle className="h-6 w-6 text-red-500" />}
-              {toast.type === 'info' && <Info className="h-6 w-6 text-blue-500" />}
+              {toast.type === 'info' && <Info className="h-6 w-6 text-brand-500" />}
             </div>
             <p className="text-sm font-bold flex-grow">{toast.message}</p>
             <button 

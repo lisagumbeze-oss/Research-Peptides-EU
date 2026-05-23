@@ -1,39 +1,41 @@
 /**
- * Research Peptides EU — design tokens (logo-derived + biotech system)
+ * Research Peptides EU — design tokens (teal → navy logo gradient)
  */
 
 export const brandColors = {
-  50: '#EEF2FF',
-  100: '#E0E7FF',
-  200: '#C7D2FE',
-  300: '#93A5FD',
-  400: '#5B7FFF',
-  500: '#4357D6',
-  600: '#3545B8',
-  700: '#2D3A9E',
-  800: '#252F7A',
-  900: '#1A2258',
+  50: '#ECFBF8',
+  100: '#C8F2EB',
+  200: '#8FE3D5',
+  300: '#52D4C3',
+  400: '#2DB5A3',
+  500: '#249688',
+  600: '#1D7A73',
+  700: '#176861',
+  800: '#145650',
+  900: '#1A365D',
 } as const;
 
 export const neutralColors = {
-  navy950: '#0A0F1E',
-  slate850: '#141B2D',
-  mist50: '#F6F5FF',
-  silver400: '#A7B9C8',
-  steel600: '#496961',
+  navy950: '#0F2744',
+  navy900: '#1A365D',
+  slate850: '#152238',
+  mist50: '#F4FAF9',
+  silver400: '#8FA8B8',
+  steel600: '#4A6170',
 } as const;
 
 export const semanticColors = {
   success: '#10B981',
   warning: '#F59E0B',
   error: '#EF4444',
-  purity: '#22D3EE',
+  purity: '#2DB5A3',
 } as const;
 
 export const gradients = {
-  hero: 'linear-gradient(135deg, #0A0F1E 0%, #1A2258 50%, #4357D6 100%)',
-  cta: 'linear-gradient(90deg, #4357D6, #5B7FFF)',
-  glow: 'radial-gradient(ellipse at 50% 0%, rgba(67, 87, 214, 0.35), transparent 70%)',
+  hero: 'linear-gradient(135deg, #0F2744 0%, #1A365D 45%, #1D7A73 100%)',
+  cta: 'linear-gradient(90deg, #2DB5A3, #1A365D)',
+  brand: 'linear-gradient(90deg, #2DB5A3, #3DC9B6, #1A365D)',
+  glow: 'radial-gradient(ellipse at 50% 0%, rgba(45, 181, 163, 0.32), transparent 70%)',
 } as const;
 
 export const fonts = {
@@ -58,9 +60,9 @@ export const radii = {
 } as const;
 
 export const shadows = {
-  card: '0 4px 24px rgba(10, 15, 30, 0.08)',
-  elevated: '0 12px 48px rgba(67, 87, 214, 0.15)',
-  glow: '0 0 40px rgba(67, 87, 214, 0.25)',
+  card: '0 4px 24px rgba(15, 39, 68, 0.08)',
+  elevated: '0 12px 48px rgba(45, 181, 163, 0.18)',
+  glow: '0 0 40px rgba(45, 181, 163, 0.28)',
 } as const;
 
 export const motionDuration = {

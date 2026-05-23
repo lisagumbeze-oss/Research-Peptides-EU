@@ -1,0 +1,59 @@
+{
+  "notFound": {
+    "title": "Prodotto non trovato",
+    "cta": "Torna al negozio"
+  },
+  "reviews": {
+    "eyebrow": "Comunità di ricercatori",
+    "title": "Recensioni verificate",
+    "ratingLabel": "4,9 / 5,0"
+  },
+  "purchase": {
+    "reviewsCount": "({{count}} reviews)",
+    "priceVerified": "Price verified",
+    "specification": "Specification",
+    "productProfile": "Product profile",
+    "researchBundle": "Research bundle",
+    "hplcTested": "HPLC tested",
+    "coldChain": "Cold-chain",
+    "viewCoaLibrary": "View COA library",
+    "laboratoryOnly": "For laboratory research only",
+    "shareProduct": "Share product",
+    "copyLinkAria": "Copia link",
+    "removeWishlist": "Remove from wishlist",
+    "addWishlist": "Add to wishlist",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "variantFallback": "Variant {{index}}",
+    "addToCart": "Aggiungi al carrello",
+    "inWishlist": "Nella lista desideri",
+    "saveWishlist": "Salva nella lista desideri",
+    "share": "Condividi",
+    "copyLink": "Copia link",
+    "specifications": "Specifiche",
+    "variantLabel": "Seleziona variante",
+    "quantity": "Quantità",
+    "bulkStandard": "Standard",
+    "bulkSave10": "Risparmia il 10%",
+    "bulkBestValue": "Miglior rapporto qualità-prezzo",
+    "unitsRange12": "1–2 unità",
+    "unitsRange35": "3–5 unità",
+    "unitsRange6": "6+ unità",
+    "euDispatch": "Spedizione UE",
+    "euDispatchDetail": "Evasione Paesi Bassi · corrieri tracciati",
+    "researchOnly": "Solo uso in ricerca",
+    "researchOnlyDetail": "Non per consumo umano o veterinario",
+    "coaAvailable": "Documentazione COA disponibile su richiesta"
+  },
+  "recommendations": {
+    "relatedTitle": "Composti da ricerca correlati",
+    "viewCatalog": "Vedi catalogo",
+    "recentTitle": "Visti di recente"
+  },
+  "toast": {
+    "added": "{{title}} aggiunto al carrello",
+    "bulk15": "Sconto quantità (15%) applicato a {{title}}",
+    "bulk10": "Sconto quantità (10%) applicato a {{title}}",
+    "linkCopied": "Link copiato negli appunti"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "brand": "Research Peptides EU",
+  "loading": "Betöltés…",
+  "search": "Keresés",
+  "cart": "Kosár",
+  "wishlist": "Kívánságlista",
+  "account": "Fiók",
+  "orders": "Rendeléseim",
+  "login": "Bejelentkezés",
+  "logout": "Kijelentkezés",
+  "home": "Kezdőlap",
+  "shop": "Bolt",
+  "languageActive": "Aktív",
+  "close": "Bezárás",
+  "viewAll": "Összes megtekintése",
+  "learnMore": "További információ",
+  "researchUseOnly": "Csak laboratóriumi kutatásra — nem emberi vagy állatorvosi felhasználásra.",
+  "salesNotification": {
+    "purchased": "Someone in {{location}} purchased",
+    "justNow": "Just now",
+    "minutesAgo_one": "{{count}} minute ago",
+    "minutesAgo_other": "{{count}} minutes ago",
+    "dismiss": "Dismiss notification"
+  }
+}

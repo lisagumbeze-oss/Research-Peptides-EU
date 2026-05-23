@@ -10,7 +10,7 @@ export function CtaSection() {
   return (
     <section className="section-md">
       <Container>
-        <GlowPanel glow="brand" className="p-10 md:p-14 text-center">
+        <GlowPanel glow="brand" scientific className="p-10 md:p-14 text-center">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}

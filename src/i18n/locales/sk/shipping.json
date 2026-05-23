@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistika",
+    "title": "Doprava a doručenie",
+    "description": "Prioritné plnenie v EÚ z Netherlands so sledovaným doručením v členských štátoch a celosvetovými možnosťami."
+  },
+  "features": {
+    "cutoffTitle": "Uzávierka objednávok o 12:00 CET",
+    "cutoffDesc": "Objednávky do poludnia stredoeurópskeho času, po–pi, odosielame v ten istý pracovný deň.",
+    "trackedTitle": "Sledovaná bezpečnosť",
+    "trackedDesc": "Každá zásielka je plne sledovaná z nášho laboratória do vášho zariadenia.",
+    "packagingTitle": "Diskrétne balenie",
+    "packagingDesc": "Položky sú vakuovo uzavreté a odosielané v neutrálnom, neoznačenom balení vhodnom pre výskumné zariadenia."
+  },
+  "regions": {
+    "title": "Dosah v EÚ aj medzinárodne",
+    "euTitle": "Doručenie v Európskej únii",
+    "euDesc": "Štandardná doprava v EÚ: 3–7 pracovných dní. Doprava zdarma pri kvalifikovaných objednávkach nad 500 € (medzisúčet).",
+    "worldTitle": "Celosvetová logistika",
+    "worldDesc": "Destinácie mimo EÚ: 5–14 pracovných dní podľa colných a regionálnych dopravcov.",
+    "ukTitle": "United Kingdom",
+    "ukDesc": "Sledované možnosti pre UK zostávajú k dispozícii pri pokladni, ak je ako destinácia vybrané United Kingdom."
+  },
+  "responsibility": {
+    "eyebrow": "Zodpovednosť výskumníka",
+    "body": "Kupujúci zodpovedajú za súlad produktov s miestnymi importnými predpismi. Môžu platiť clá, DPH a regionálne dane — sú na kupujúcom, ak neboli vybrané pri pokladni.",
+    "disclaimer": "Iba na výskum. Nie je určené na ľudskú ani veterinárnu spotrebu."
+  }
+}

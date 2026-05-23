@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, ArrowRight, ArrowLeft, CheckCircle2, Sparkles, Target, Zap, Waves } from 'lucide-react';
 import { useWizardStore } from '../../store/useWizardStore';
 import { supabase } from '../../supabase';
-import { useNavigate } from 'react-router-dom';
+import { useLocaleNavigate } from '../../i18n/useLocaleNavigate';
 import { ProductImagePlaceholder } from '../products/ProductImagePlaceholder';
 import { productPath } from '../../lib/productUrl';
 
@@ -49,7 +49,7 @@ export default function SelectorWizard() {
   const [selections, setSelections] = useState<Record<string, string>>({});
   const [recommendations, setRecommendations] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useLocaleNavigate();
 
   useEffect(() => {
     if (isOpen) {
@@ -136,14 +136,14 @@ export default function SelectorWizard() {
               {currentStep < STEPS.length ? (
                 <div className="space-y-8">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">
+                    <span className="text-[10px] font-black text-brand-600 uppercase tracking-widest">
                       Step {currentStep + 1} of {STEPS.length}
                     </span>
                     <div className="flex gap-1">
                       {STEPS.map((_, i) => (
                         <div 
                           key={i} 
-                          className={`h-1 w-6 rounded-full ${i <= currentStep ? 'bg-blue-600' : 'bg-gray-100 dark:bg-gray-800'}`} 
+                          className={`h-1 w-6 rounded-full ${i <= currentStep ? 'bg-brand-600' : 'bg-gray-100 dark:bg-gray-800'}`} 
                         />
                       ))}
                     </div>
@@ -158,15 +158,15 @@ export default function SelectorWizard() {
                       <button
                         key={option.id}
                         onClick={() => handleSelect(STEPS[currentStep].id, option.id)}
-                        className="group p-6 rounded-3xl border-2 border-gray-100 dark:border-gray-800 hover:border-blue-600 dark:hover:border-blue-600 hover:bg-blue-50/30 transition-all text-left flex items-start gap-4"
+                        className="group p-6 rounded-3xl border-2 border-gray-100 dark:border-gray-800 hover:border-brand-500 dark:hover:border-brand-500 hover:bg-brand-50/30 transition-all text-left flex items-start gap-4"
                       >
                         {option.icon && (
-                          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-2xl group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-colors">
-                            <option.icon className="h-6 w-6 text-gray-400 group-hover:text-blue-600" />
+                          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-2xl group-hover:bg-brand-100 dark:group-hover:bg-brand-900/50 transition-colors">
+                            <option.icon className="h-6 w-6 text-gray-400 group-hover:text-brand-600" />
                           </div>
                         )}
                         <div>
-                          <p className="font-bold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                          <p className="font-bold text-gray-900 dark:text-white group-hover:text-brand-600 transition-colors">
                             {option.label}
                           </p>
                           {option.description && (
@@ -198,7 +198,7 @@ export default function SelectorWizard() {
 
                   {loading ? (
                     <div className="flex flex-col items-center py-12">
-                      <div className="h-8 w-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4" />
+                      <div className="h-8 w-8 border-4 border-brand-500 border-t-transparent rounded-full animate-spin mb-4" />
                       <p className="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Filtering Global Catalog...</p>
                     </div>
                   ) : (
@@ -222,11 +222,11 @@ export default function SelectorWizard() {
                             )}
                           </div>
                           <div className="flex-grow">
-                            <p className="text-[10px] font-black text-blue-600 uppercase mb-1">Recommended</p>
+                            <p className="text-[10px] font-black text-brand-600 uppercase mb-1">Recommended</p>
                             <h4 className="font-bold text-gray-900 dark:text-white">{product.title}</h4>
                             <p className="text-sm text-gray-500 line-clamp-1">{product.description}</p>
                           </div>
-                          <ArrowRight className="h-5 w-5 text-gray-300 group-hover:text-blue-600 transition-colors" />
+                          <ArrowRight className="h-5 w-5 text-gray-300 group-hover:text-brand-600 transition-colors" />
                         </div>
                       ))}
                     </div>

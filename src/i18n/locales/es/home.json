@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Países Bajos · estándares europeos de investigación",
+    "title": "Péptidos de precisión para",
+    "titleHighlight": "Laboratorios europeos.",
+    "subtitle": "Research Peptides EU suministra compuestos de grado institucional con verificación analítica de terceros, manipulación farmacéutica y distribución fiable en la UE.",
+    "ctaShop": "Explorar catálogo",
+    "ctaWizard": "Selector de compuestos",
+    "trustPurity": "Pureza verificada del 99,8 %+",
+    "trustShipping": "Envío en cadena de frío en toda la UE",
+    "trustCoa": "COA en cada lote"
+  },
+  "featured": {
+    "eyebrow": "Destacados del catálogo",
+    "title": "Compuestos de investigación destacados",
+    "subtitle": "Péptidos y productos químicos de investigación verificados por lote, listos para envío a laboratorios de la UE."
+  },
+  "whyEu": {
+    "eyebrow": "Por qué nos eligen los investigadores de la UE",
+    "title": "Diseñado para estándares de laboratorio europeos"
+  },
+  "categories": {
+    "eyebrow": "Explorar por aplicación",
+    "title": "Categorías de investigación",
+    "viewAll": "Ver todas las categorías"
+  },
+  "trust": {
+    "eyebrow": "Garantía de calidad",
+    "title": "Verificación que puede documentar",
+    "coaCta": "Explorar biblioteca COA"
+  },
+  "experience": {
+    "eyebrow": "Experiencia del investigador",
+    "title": "Soporte en cada etapa",
+    "faqCta": "Leer FAQ para investigadores"
+  },
+  "cta": {
+    "title": "¿Listo para equipar su laboratorio?",
+    "subtitle": "Explore el catálogo de la UE o use el selector de compuestos para acotar su línea de investigación.",
+    "button": "Tienda de catálogo de investigación"
+  }
+}

@@ -1,4 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { usePageSeo } from '../seo/SeoProvider';
+import { breadcrumbJsonLd, itemListJsonLd } from '../seo/structuredData';
+import type { LocaleCode } from '../i18n/locales';
 import { supabase } from '../supabase';
 import { sortProducts, type CatalogSortKey } from '../lib/productSort';
 import { catalogPriceSliderMax, productEffectiveMaxPrice } from '../lib/catalogPriceSlider';
@@ -19,6 +23,8 @@ import type { CategoryOption } from '../components/catalog/types';
 import type { CatalogProduct } from '../components/products/ProductCard';
 
 export default function Shop() {
+  const { t, i18n } = useTranslation('shop');
+  const locale = i18n.language as LocaleCode;
   const [allProducts, setAllProducts] = useState<CatalogProduct[]>([]);
   const [categories, setCategories] = useState<CategoryOption[]>([]);
   const [loading, setLoading] = useState(true);
@@ -55,6 +61,27 @@ export default function Shop() {
 
   const priceSliderMax = useMemo(() => catalogPriceSliderMax(allProducts), [allProducts]);
   const priceSliderStep = priceSliderMax > 2000 ? 50 : 10;
+
+  const shopSeo = useMemo(() => {
+    if (allProducts.length === 0) return null;
+    return {
+      title: undefined,
+      description: t('header.description'),
+      canonicalPath: '/shop',
+      jsonLd: [
+        breadcrumbJsonLd(
+          [
+            { name: 'Home', path: '/' },
+            { name: 'Shop', path: '/shop' },
+          ],
+          locale,
+        ),
+        itemListJsonLd(allProducts, locale),
+      ],
+    };
+  }, [allProducts, locale, t]);
+
+  usePageSeo(shopSeo);
 
   const filteredProducts = useMemo(() => {
     let result = [...allProducts];
@@ -98,21 +125,21 @@ export default function Shop() {
   return (
     <div className="min-h-screen bg-mist-50">
       <CatalogPageHeader
-        eyebrow="Research catalog"
+        eyebrow={t('header.eyebrow')}
         title={
           <>
-            Shop <span className="text-brand-400">peptides</span>
+            {t('header.title')}{' '}
+            <span className="text-brand-400">{t('header.titleHighlight')}</span>
           </>
         }
-        description="Browse verified research compounds with EU fulfillment, batch documentation, and transparent specifications."
+        description={t('header.description')}
       />
       <CatalogTrustBar />
 
       <Container className="py-10 md:py-12">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <p className="text-sm text-steel-600">
-            Showing <span className="font-semibold text-navy-950">{filteredProducts.length}</span> of{' '}
-            <span className="font-semibold text-navy-950">{allProducts.length}</span> products
+            {t('results', { count: filteredProducts.length, total: allProducts.length })}
           </p>
           <div className="flex items-center gap-3">
             <CatalogFilters {...filterProps} mode="trigger" />
@@ -128,9 +155,10 @@ export default function Shop() {
 
             {!loading && filteredProducts.length === 0 ? (
               <CatalogEmptyState
-                title="No products match your filters"
-                description="Try widening the price range or clearing category selections."
+                title={t('empty.title')}
+                description={t('empty.description')}
                 onClear={clearFilters}
+                clearLabel={t('filters.clearAll')}
               />
             ) : (
               <ProductGrid

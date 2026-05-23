@@ -1,0 +1,29 @@
+{
+  "header": {
+    "eyebrow": "Logistiikka",
+    "title": "Toimitus ja kuljetus",
+    "description": "EU-prioriteettitäyttö Netherlandsista seurattavalla toimituksella jäsenvaltioissa ja worldwide-vaihtoehdoilla."
+  },
+  "features": {
+    "cutoffTitle": "Tilaus katkeaa klo 12:00 CET",
+    "cutoffDesc": "Tilaukset ennen keskipäivää keski-eurooppalaista aikaa ma–pe lähetetään samana arkipäivänä.",
+    "trackedTitle": "Seurattu turvallisuus",
+    "trackedDesc": "Jokainen lähetys seurataan täysin laboratoriostamme laitokseesi.",
+    "packagingTitle": "Huomaamaton pakkaus",
+    "packagingDesc": "Tuotteet vakuumipakataan ja lähetetään yksinkertaisessa, merkitsemättömässä pakkauksessa tutkimuslaitoksille."
+  },
+  "regions": {
+    "title": "EU ja kansainvälinen ulottuvuus",
+    "euTitle": "Toimitus Euroopan unionissa",
+    "euDesc": "Vakio EU-toimitus: 3–7 arkipäivää. Ilmainen toimitus kelpuutetuissa tilauksissa yli 500 € (välisumma).",
+    "worldTitle": "Worldwide-logistiikka",
+    "worldDesc": "EU:n ulkopuoliset kohteet: 5–14 arkipäivää tullin ja alueellisten kuljettajien mukaan.",
+    "ukTitle": "United Kingdom",
+    "ukDesc": "Seuratut UK-vaihtoehdot ovat käytettävissä kassalla, kun United Kingdom valitaan määränpääksi."
+  },
+  "responsibility": {
+    "eyebrow": "Tutkijan vastuu",
+    "body": "Ostajat vastaavat siitä, että tuotteet noudattavat paikallisia tuontisääntöjä. Tullit, ALV ja alueelliset verot voivat kohdistua ostajaan, jos niitä ei peritä kassalla.",
+    "disclaimer": "Vain tutkimuskäyttöön. Ei ihmis- tai eläinten kulutukseen."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "brand": "Research Peptides EU",
+  "loading": "Učitavanje…",
+  "search": "Pretraži",
+  "cart": "Košarica",
+  "wishlist": "Lista želja",
+  "account": "Račun",
+  "orders": "Moje narudžbe",
+  "login": "Prijava",
+  "logout": "Odjava",
+  "home": "Početna",
+  "shop": "Trgovina",
+  "languageActive": "Aktivno",
+  "close": "Zatvori",
+  "viewAll": "Prikaži sve",
+  "learnMore": "Saznajte više",
+  "researchUseOnly": "Samo za laboratorijsko istraživanje — nije za ljudsku ili veterinarsku upotrebu.",
+  "salesNotification": {
+    "purchased": "Someone in {{location}} purchased",
+    "justNow": "Just now",
+    "minutesAgo_one": "{{count}} minute ago",
+    "minutesAgo_other": "{{count}} minutes ago",
+    "dismiss": "Dismiss notification"
+  }
+}

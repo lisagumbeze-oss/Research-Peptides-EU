@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Tag, X, ShieldCheck, Truck } from 'lucide-react';
-import { Button } from '../../design-system';
+import { Button, GlassPanel } from '../../design-system';
 import { formatCurrency } from '../../lib/utils';
 import { PRIMARY_PROMO_CODE } from '../../lib/promoCodes';
 
@@ -40,10 +40,10 @@ export function OrderSummaryPanel({
   const discountAmount = (subtotal * discount) / 100;
 
   return (
-    <div
-      className={`bg-white p-6 md:p-8 rounded-3xl border border-brand-100 shadow-card h-fit ${
-        sticky ? 'lg:sticky lg:top-24' : ''
-      }`}
+    <GlassPanel
+      variant="light"
+      padding="md"
+      className={`shadow-glow h-fit ${sticky ? 'lg:sticky lg:top-24' : ''}`}
     >
       <h2 className="font-display font-bold text-lg text-navy-950 mb-6">{t('cart.summary')}</h2>
 
@@ -122,6 +122,6 @@ export function OrderSummaryPanel({
           EU dispatch
         </span>
       </div>
-    </div>
+    </GlassPanel>
   );
 }

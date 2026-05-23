@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
+import { useTranslation } from 'react-i18next';
 import { Star } from 'lucide-react';
 import { supabase } from '../supabase';
 import { useCartStore } from '../store/useCartStore';
@@ -8,12 +10,16 @@ import { useWishlistStore } from '../store/useWishlistStore';
 import { useToastStore } from '../store/useToastStore';
 import { DetailedProductSkeleton } from '../components/Skeleton';
 import { productPath } from '../lib/productUrl';
-import { Container } from '../design-system';
+import { Container, Reveal } from '../design-system';
 import { ProductGallery } from '../components/product-detail/ProductGallery';
 import { ProductPurchasePanel } from '../components/product-detail/ProductPurchasePanel';
 import { ProductRecommendations } from '../components/product-detail/ProductRecommendations';
 import { useProductCatalogActions } from '../hooks/useProductCatalogActions';
 import type { CatalogProduct } from '../components/products/ProductCard';
+import { usePageSeo } from '../seo/SeoProvider';
+import { breadcrumbJsonLd, productJsonLd } from '../seo/structuredData';
+import type { LocaleCode } from '../i18n/locales';
+import { localizedProductDescription, localizedProductTitle } from '../lib/localizedProduct';
 
 const STATIC_REVIEWS = [
   {
@@ -33,6 +39,8 @@ const STATIC_REVIEWS = [
 ];
 
 export default function ProductDetails() {
+  const { t, i18n } = useTranslation('product');
+  const locale = i18n.language as LocaleCode;
   const { slug, id } = useParams<{ slug?: string; id?: string }>();
   const [product, setProduct] = useState<any>(null);
   const [reviews, setReviews] = useState<any[]>([]);
@@ -48,9 +56,43 @@ export default function ProductDetails() {
   const { user } = useAuthStore();
   const { productIds, toggleWishlist } = useWishlistStore();
   const addToast = useToastStore((state) => state.addToast);
-  const navigate = useNavigate();
+  const navigate = useLocaleNavigate();
   const { isInWishlist, handleToggleWishlist, handleAddToCart: addRelatedToCart } =
     useProductCatalogActions();
+
+  const displayTitle = product ? localizedProductTitle(product, locale) : '';
+  const displayDescription = product ? localizedProductDescription(product, locale) : '';
+
+  const seoConfig = useMemo(() => {
+    if (!product) return null;
+    const title = localizedProductTitle(product, locale);
+    const canonicalPath = productPath(product);
+    const plainDescription = String(localizedProductDescription(product, locale) || '')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 160);
+    return {
+      title: `${title} | Research Peptides EU`,
+      description: plainDescription || `Research-grade ${title} — EUR pricing, EU dispatch.`,
+      canonicalPath,
+      ogType: 'product' as const,
+      ogImage: product.images?.[0] || undefined,
+      jsonLd: [
+        productJsonLd(product, locale),
+        breadcrumbJsonLd(
+          [
+            { name: 'Home', path: '/' },
+            { name: 'Shop', path: '/shop' },
+            { name: title, path: canonicalPath },
+          ],
+          locale,
+        ),
+      ],
+    };
+  }, [product, locale]);
+
+  usePageSeo(seoConfig);
 
   useEffect(() => {
     const fetchProductAndReviews = async () => {
@@ -128,15 +170,16 @@ export default function ProductDetails() {
         : undefined,
     });
 
-    if (quantity >= 5) addToast(`Bulk discount (15%) applied to ${product.title}`);
-    else if (quantity >= 3) addToast(`Bulk discount (10%) applied to ${product.title}`);
-    else addToast(`${product.title} added to cart`);
+    const title = localizedProductTitle(product, locale);
+    if (quantity >= 5) addToast(t('toast.bulk15', { title }));
+    else if (quantity >= 3) addToast(t('toast.bulk10', { title }));
+    else addToast(t('toast.added', { title }));
   };
 
   const copyLink = () => {
     navigator.clipboard.writeText(window.location.href);
     setShowShare(false);
-    addToast('Link copied to clipboard');
+    addToast(t('toast.linkCopied'));
   };
 
   if (loading) {
@@ -150,9 +193,9 @@ export default function ProductDetails() {
   if (!product) {
     return (
       <Container className="py-20 text-center">
-        <h2 className="font-display font-bold text-2xl text-navy-950 mb-4">Product not found</h2>
+        <h2 className="font-display font-bold text-2xl text-navy-950 mb-4">{t('notFound.title')}</h2>
         <Link to="/shop" className="text-brand-600 font-semibold hover:underline">
-          Return to shop
+          {t('notFound.cta')}
         </Link>
       </Container>
     );
@@ -179,7 +222,7 @@ export default function ProductDetails() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 mb-16">
           <ProductGallery
             productId={String(product.id)}
-            title={product.title}
+            title={displayTitle}
             images={images}
             activeIndex={activeImage}
             onSelectImage={setActiveImage}
@@ -187,8 +230,8 @@ export default function ProductDetails() {
           />
 
           <ProductPurchasePanel
-            title={product.title}
-            description={product.description}
+            title={displayTitle}
+            description={displayDescription}
             currentPrice={currentPrice}
             compareWas={compareWas}
             reviewCount={reviews.length}
@@ -208,14 +251,14 @@ export default function ProductDetails() {
           />
         </div>
 
-        <section className="rounded-3xl bg-white border border-brand-100 p-8 md:p-12 shadow-card mb-16">
+        <Reveal as="section" className="rounded-3xl bg-white/90 backdrop-blur-sm border border-brand-100 p-8 md:p-12 shadow-card mb-16">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
             <div>
-              <p className="text-caption text-brand-600 mb-2">Researcher community</p>
-              <h2 className="text-h2 font-display font-bold text-navy-950">Verified reviews</h2>
+              <p className="text-caption text-brand-600 mb-2">{t('reviews.eyebrow')}</p>
+              <h2 className="text-h2 font-display font-bold text-navy-950">{t('reviews.title')}</h2>
             </div>
             <div className="flex items-center gap-3 p-4 rounded-2xl bg-mist-50 border border-brand-50">
-              <span className="text-sm font-bold text-navy-950">4.9 / 5.0</span>
+              <span className="text-sm font-bold text-navy-950">{t('reviews.ratingLabel')}</span>
               <div className="flex text-warning">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-current" />
@@ -241,7 +284,7 @@ export default function ProductDetails() {
               </blockquote>
             ))}
           </div>
-        </section>
+        </Reveal>
       </Container>
 
       <ProductRecommendations

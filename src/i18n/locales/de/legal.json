@@ -1,0 +1,152 @@
+{
+  "cookie": {
+    "title": "Cookies & Datenschutz",
+    "description": "Wir verwenden essenzielle Cookies für den Betrieb des Shops und optionale Analysen zur Verbesserung der EU-Forschungserfahrung. Ihre Auswahl können Sie jederzeit in unserer Datenschutzerklärung ändern.",
+    "acceptAll": "Alle akzeptieren",
+    "essentialOnly": "Nur essenziell",
+    "privacyLink": "Datenschutzerklärung"
+  },
+  "faq": {
+    "eyebrow": "Support",
+    "title": "FAQ für Forscher",
+    "subtitle": "Standardprotokolle und häufige Anfragen für europäische Laboratorien.",
+    "ctaTitle": "Noch technische Fragen?",
+    "ctaBody": "Unser EU-Support-Team hilft bei Fragen zu Bestellungen und Dokumentation.",
+    "ctaButton": "Support kontaktieren",
+    "groups": {
+      "product": {
+        "title": "Produkt & Sicherheit",
+        "items": [
+          {
+            "q": "Sind diese Produkte für den menschlichen oder tierischen Verzehr geeignet?",
+            "a": "Nein. Alle von Research Peptides EU verkauften Produkte sind ausschließlich für Laborforschung und wissenschaftliche Anwendung bestimmt. Sie sind nicht für den menschlichen oder tierärztlichen Gebrauch."
+          },
+          {
+            "q": "Wie verifizieren Sie die Reinheit Ihrer Peptide?",
+            "a": "Jede Charge wird HPLC und Massenspektrometrie unterzogen. Reinheitsgrade werden vor der EU-Verteilung mit 99,8 % oder höher verifiziert."
+          },
+          {
+            "q": "Wie soll ich Verbindungen nach Erhalt lagern?",
+            "a": "Gefriergetrocknete Peptide sind bei kurzen Versandzeiten bei Raumtemperatur stabil. Für Langzeitstabilität bei −20 °C oder −80 °C lagern."
+          }
+        ]
+      },
+      "logistics": {
+        "title": "Logistik & Versand",
+        "items": [
+          {
+            "q": "Wie lange dauert der EU-Versand?",
+            "a": "Standardlieferung in der EU dauert in der Regel 3–7 Werktage. Abwicklung aus den Niederlanden mit nachverfolgbaren Versanddienstleistern."
+          },
+          {
+            "q": "Ist die Verpackung diskret?",
+            "a": "Ja. Bestellungen werden in neutraler, unmarkierter Verpackung versendet, geeignet für Forschungseinrichtungen."
+          },
+          {
+            "q": "Versenden Sie außerhalb der EU?",
+            "a": "Ja. Lieferungen außerhalb der EU dauern in der Regel 5–14 Werktage, abhängig vom Zoll."
+          }
+        ]
+      },
+      "payments": {
+        "title": "Zahlungen & Richtlinien",
+        "items": [
+          {
+            "q": "Welche Zahlungsmethoden akzeptieren Sie?",
+            "a": "Wir akzeptieren Kryptowährungen (BTC, ETH, USDT) mit 5 % Rabatt, Banküberweisung und Kartenzahlungen, die manuell geprüft werden."
+          },
+          {
+            "q": "Wie lautet Ihre Rückgaberichtlinie?",
+            "a": "Zur Wahrung der Kühlkettenintegrität und Forschungsstandards akzeptieren wir keine Rücksendungen. Alle Verkäufe sind endgültig, sofern nicht durch anwendbares EU-Verbraucherrecht vorgeschrieben."
+          }
+        ]
+      }
+    }
+  },
+  "privacy": {
+    "eyebrow": "Datenschutz & DSGVO",
+    "title": "Datenschutzerklärung",
+    "subtitle": "Konform mit der EU-DSGVO und niederländischen AVG-Anforderungen.",
+    "sections": [
+      {
+        "heading": "Datenübersicht",
+        "body": "Research Peptides EU verpflichtet sich zum Schutz der Privatsphäre von Forschern und institutionellen Käufern. Diese Richtlinie erläutert, wie wir personenbezogene Daten erfassen, verwenden und schützen, wenn Sie unseren EU-Shop nutzen."
+      },
+      {
+        "heading": "Erhobene Informationen",
+        "body": "Wir können Identitätsdaten, Kontaktdaten, Bestell- und Zahlungsreferenzen sowie technische Daten wie IP-Adresse und Browsertyp verarbeiten."
+      },
+      {
+        "heading": "Verwendung Ihrer Daten",
+        "body": "Daten werden zur Auftragsabwicklung, Support, Betrugsprävention, Erfüllung gesetzlicher Pflichten und Verbesserung unserer Dienste verwendet. Wir verkaufen keine personenbezogenen Daten."
+      },
+      {
+        "heading": "Rechtsgrundlage (DSGVO)",
+        "body": "Die Verarbeitung basiert auf Vertragserfüllung, berechtigten Interessen, gesetzlicher Verpflichtung und Einwilligung, wo erforderlich (z. B. Marketing-Cookies)."
+      },
+      {
+        "heading": "Aufbewahrung",
+        "body": "Bestell- und Steuerunterlagen werden gemäß EU- und niederländischem Recht aufbewahrt (in der Regel bis zu 7 Jahre). Marketingdaten werden bis zum Widerruf Ihrer Einwilligung gespeichert."
+      },
+      {
+        "heading": "Ihre Rechte",
+        "body": "Sie können Auskunft, Berichtigung, Löschung, Einschränkung, Übertragbarkeit verlangen oder der Verarbeitung widersprechen. Kontaktieren Sie uns unter der unten angegebenen Adresse."
+      }
+    ],
+    "ref": "GDPR-REF: RPEU-PRV-2026"
+  },
+  "terms": {
+    "eyebrow": "Rechtliches",
+    "title": "Allgemeine Geschäftsbedingungen",
+    "subtitle": "EU-Bedingungen für Forschungslieferungen an institutionelle und Laboratoriums-Käufer.",
+    "sections": [
+      {
+        "heading": "Nur für Forschung",
+        "body": "Alle Produkte sind ausschließlich für Laborforschung, wissenschaftliche und industrielle Nutzung bestimmt. Nicht für den menschlichen oder tierärztlichen Verzehr."
+      },
+      {
+        "heading": "Berechtigung",
+        "body": "Sie müssen mindestens 18 Jahre alt sein und berechtigt sein, im Namen Ihrer Institution oder Ihres Labors zu kaufen."
+      },
+      {
+        "heading": "Bestellungen & Preise",
+        "body": "Preise werden in EUR angezeigt. Wir behalten uns das Recht vor, Fehler zu korrigieren. Bestellungen werden bestätigt, wenn die Zahlung angenommen oder die Bearbeitung beginnt."
+      },
+      {
+        "heading": "Rücksendungen",
+        "body": "Aufgrund temperaturempfindlicher Waren gilt eine strenge Keine-Rückgabe-Richtlinie, außer wo dies nach anwendbarem EU-Recht zwingend ist."
+      },
+      {
+        "heading": "Haftungsbeschränkung",
+        "body": "Research Peptides EU haftet nicht für indirekte oder Folgeschäden aus der Produktnutzung in Forschungskontexten."
+      }
+    ],
+    "footer": "Research Peptides EU Operations"
+  },
+  "about": {
+    "eyebrow": "Über uns",
+    "title": "Über Research Peptides EU",
+    "subtitle": "Europäische Forschungsqualitätsverbindungen mit verifizierter Dokumentation und Abwicklung aus den Niederlanden.",
+    "missionTitle": "Unsere Mission",
+    "missionBody": "Wir konzentrieren uns auf Konsistenz, Chargendokumentation und Forschervertrauen in EU-Laborarbeitsabläufen.",
+    "qualityTitle": "Qualitätsfokus",
+    "qualityBody": "Chargenverifizierung und COA-Referenzen stehen im Mittelpunkt unseres Katalogs.",
+    "researchTitle": "Nur für Forschung",
+    "researchBody": "Alle Verbindungen werden ausschließlich für Labor- und wissenschaftliche Forschung angeboten — nicht für den menschlichen oder tierärztlichen Gebrauch."
+  },
+  "contact": {
+    "eyebrow": "Kontakt",
+    "title": "Kontakt zu unserem EU-Team",
+    "subtitle": "Bestellungen, Dokumentation und institutionelle Anfragen.",
+    "emailLabel": "E-Mail",
+    "phoneLabel": "Telefon",
+    "locationLabel": "Hauptsitz",
+    "locationValue": "Niederlande · Europäische Union"
+  },
+  "refund": {
+    "eyebrow": "Rücksendungen",
+    "title": "Erstattung & Rücksendungen",
+    "subtitle": "EU-Richtlinie für temperaturempfindliche Forschungsverbindungen.",
+    "body": "Kontaktieren Sie den Research Peptides EU-Support mit Ihrer Bestellnummer. Aufgrund der Kühlkettenanforderungen werden Rücksendungen in der Regel nicht akzeptiert, sofern nicht gesetzlich vorgeschrieben."
+  }
+}

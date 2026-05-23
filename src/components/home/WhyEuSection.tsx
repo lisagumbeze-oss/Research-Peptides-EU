@@ -1,6 +1,6 @@
 import { Activity, Award, FlaskConical, Microscope } from 'lucide-react';
 import { motion } from 'motion/react';
-import { Card, Container, Section } from '../../design-system';
+import { Card, Container, ScientificBackdrop, Section } from '../../design-system';
 import { SectionHeading } from './SectionHeading';
 import { staggerContainerVariants, staggerItem } from '../../design-system/motion';
 
@@ -29,8 +29,9 @@ const pillars = [
 
 export function WhyEuSection() {
   return (
-    <Section size="lg" tone="light">
-      <Container>
+    <Section size="lg" tone="light" className="relative overflow-hidden">
+      <ScientificBackdrop variant="light" glow={false} className="opacity-70" />
+      <Container className="relative z-10">
         <SectionHeading
           eyebrow="Why Research Peptides EU"
           title={

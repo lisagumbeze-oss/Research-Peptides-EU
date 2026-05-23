@@ -26,7 +26,7 @@ export default function Blog() {
     <div className="bg-white min-h-screen">
       {/* Blog Hero */}
       <section className="bg-gray-50 border-b border-gray-100 pt-24 pb-20 relative overflow-hidden">
-         <div className="absolute top-0 right-0 w-[40%] h-full bg-blue-600/5 -skew-x-12 translate-x-1/2" />
+         <div className="absolute top-0 right-0 w-[40%] h-full bg-brand-500/5 -skew-x-12 translate-x-1/2" />
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-3xl">
                <motion.div
@@ -34,11 +34,11 @@ export default function Blog() {
                  animate={{ opacity: 1, x: 0 }}
                  className="flex items-center gap-2 mb-6"
                >
-                  <Sparkles className="h-4 w-4 text-blue-600" />
-                  <span className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">Research Peptides UK Journals</span>
+                  <Sparkles className="h-4 w-4 text-brand-600" />
+                  <span className="text-xs font-black uppercase tracking-[0.3em] text-brand-600">Research Peptides EU Journals</span>
                </motion.div>
                <h1 className="mb-8">
-                  Scientific <br /><span className="text-blue-600">Insights</span> & Research.
+                  Scientific <br /><span className="text-brand-600">Insights</span> & Research.
                </h1>
                <p className="text-xl text-gray-500 font-medium leading-relaxed max-w-xl">
                   Deep dives into peptide synthesis, biological activity, and global research trends. 
@@ -80,7 +80,7 @@ export default function Blog() {
                    {post.image_url ? (
                      <img src={post.image_url} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
                    ) : (
-                     <div className="w-full h-full flex items-center justify-center bg-blue-50 text-blue-200">
+                     <div className="w-full h-full flex items-center justify-center bg-brand-50 text-brand-200">
                         <BookOpen className="h-12 w-12" />
                      </div>
                    )}
@@ -95,7 +95,7 @@ export default function Blog() {
                      <span className="flex items-center gap-2"><User className="h-3 w-3" /> Editorial Team</span>
                    </div>
                    
-                   <h2 className="text-2xl font-black text-gray-900 mb-4 line-clamp-2 leading-tight group-hover:text-blue-600 transition-colors">
+                   <h2 className="text-2xl font-black text-gray-900 mb-4 line-clamp-2 leading-tight group-hover:text-brand-600 transition-colors">
                      {post.title}
                    </h2>
                    
@@ -106,7 +106,7 @@ export default function Blog() {
                    <div className="mt-auto">
                      <Link 
                        to={`/blog/${post.id}`} 
-                       className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600 group-hover:gap-4 transition-all"
+                       className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-brand-600 group-hover:gap-4 transition-all"
                      >
                        Explore Article <ArrowRight className="h-3 w-3" />
                      </Link>

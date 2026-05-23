@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Netherlands · evropski raziskovalni standardi",
+    "title": "Natančni peptidi za",
+    "titleHighlight": "Evropski laboratoriji.",
+    "subtitle": "Research Peptides EU dobavlja spojine institucionalne ravni s analitično preverjanjem tretje osebe, farmacevtskim rokovanjem in zanesljivo distribucijo v EU.",
+    "ctaShop": "Brskaj po katalogu",
+    "ctaWizard": "Izbirnik spojin",
+    "trustPurity": "Preverjena čistost 99,8 %+",
+    "trustShipping": "Pošiljanje hladne verige v celotni EU",
+    "trustCoa": "COA za vsako serijo"
+  },
+  "featured": {
+    "eyebrow": "Izpostavljeno v katalogu",
+    "title": "Izpostavljene raziskovalne spojine",
+    "subtitle": "Serijsko preverjeni peptidi in raziskovalne kemikalije, pripravljeni za pošiljanje v laboratorije EU."
+  },
+  "whyEu": {
+    "eyebrow": "Zakaj nas izberejo raziskovalci EU",
+    "title": "Zgrajeno za evropske laboratorijske standarde"
+  },
+  "categories": {
+    "eyebrow": "Brskaj po aplikaciji",
+    "title": "Raziskovalne kategorije",
+    "viewAll": "Prikaži vse kategorije"
+  },
+  "trust": {
+    "eyebrow": "Zagotavljanje kakovosti",
+    "title": "Preverjanje, ki ga lahko dokumentirate",
+    "coaCta": "Raziščite knjižnico COA"
+  },
+  "experience": {
+    "eyebrow": "Izkušnja raziskovalca",
+    "title": "Podpora na vsaki stopnji",
+    "faqCta": "Preberite FAQ za raziskovalce"
+  },
+  "cta": {
+    "title": "Pripravljeni opremiti laboratorij?",
+    "subtitle": "Prebrskajte katalog EU ali uporabite izbirnik spojin za zoženje raziskovalne linije.",
+    "button": "Trgovina raziskovalnega kataloga"
+  }
+}

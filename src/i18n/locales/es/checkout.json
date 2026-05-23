@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Pago seguro",
+    "title": "Complete su pedido",
+    "description": "Envío UE · facturación con IVA · cumplimiento desde Países Bajos"
+  },
+  "steps": {
+    "shipping": "Envío",
+    "payment": "Pago",
+    "confirm": "Confirmar"
+  },
+  "cart": {
+    "title": "Su carrito",
+    "empty": "Su carrito está vacío",
+    "emptyCta": "Explorar catálogo",
+    "summary": "Resumen del pedido",
+    "promo": "Código promocional",
+    "subtotal": "Subtotal",
+    "discount": "Descuento",
+    "shipping": "Envío",
+    "shippingAtCheckout": "En el pago",
+    "total": "Total",
+    "proceed": "Ir al pago",
+    "vatNote": "Precios en EUR. IVA aplicado cuando corresponda en el pago según su país de envío en la UE."
+  }
+}

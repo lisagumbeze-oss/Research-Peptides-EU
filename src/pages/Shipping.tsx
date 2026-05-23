@@ -1,36 +1,29 @@
 import { Truck, ShieldCheck, Globe, Clock, PackageCheck, AlertTriangle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'motion/react';
 import { Container } from '../design-system';
 import { CatalogPageHeader } from '../components/catalog/CatalogPageHeader';
 
 export default function Shipping() {
+  const { t } = useTranslation('shipping');
+
+  const features = [
+    { icon: Clock, title: t('features.cutoffTitle'), desc: t('features.cutoffDesc') },
+    { icon: ShieldCheck, title: t('features.trackedTitle'), desc: t('features.trackedDesc') },
+    { icon: PackageCheck, title: t('features.packagingTitle'), desc: t('features.packagingDesc') },
+  ];
+
   return (
     <div className="min-h-screen bg-mist-50">
       <CatalogPageHeader
-        eyebrow="Logistics"
-        title="Shipping & delivery"
-        description="EU-first fulfillment from the Netherlands with tracked delivery across member states and worldwide options."
+        eyebrow={t('header.eyebrow')}
+        title={t('header.title')}
+        description={t('header.description')}
       />
 
       <Container className="py-12 md:py-16 max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {[
-            {
-              icon: Clock,
-              title: '12:00 CET cutoff',
-              desc: 'Orders placed before noon Central European Time, Monday–Friday, are dispatched the same business day.',
-            },
-            {
-              icon: ShieldCheck,
-              title: 'Tracked security',
-              desc: 'Every shipment is fully tracked from our laboratory to your facility.',
-            },
-            {
-              icon: PackageCheck,
-              title: 'Discreet packaging',
-              desc: 'Items are vacuum-sealed and shipped in plain, unmarked packaging suitable for research facilities.',
-            },
-          ].map((feature, i) => (
+          {features.map((feature, i) => (
             <motion.div
               key={feature.title}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -53,17 +46,15 @@ export default function Shipping() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500/20 rounded-full blur-[100px]" aria-hidden />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">EU & international reach</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">{t('regions.title')}</h2>
                 <div className="space-y-6">
                   <div className="flex gap-4">
                     <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center shrink-0">
                       <span className="font-bold text-brand-400 text-xs">EU</span>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-lg">European Union delivery</h4>
-                      <p className="text-silver-400 text-sm">
-                        Standard EU shipping: 3–7 business days. Free shipping on qualifying orders over €500 (subtotal).
-                      </p>
+                      <h4 className="font-semibold text-lg">{t('regions.euTitle')}</h4>
+                      <p className="text-silver-400 text-sm">{t('regions.euDesc')}</p>
                     </div>
                   </div>
                   <div className="flex gap-4">
@@ -71,10 +62,8 @@ export default function Shipping() {
                       <Globe className="h-5 w-5 text-brand-400" aria-hidden />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-lg">Worldwide logistics</h4>
-                      <p className="text-silver-400 text-sm">
-                        Non-EU destinations: 5–14 business days depending on customs and regional carriers.
-                      </p>
+                      <h4 className="font-semibold text-lg">{t('regions.worldTitle')}</h4>
+                      <p className="text-silver-400 text-sm">{t('regions.worldDesc')}</p>
                     </div>
                   </div>
                   <div className="flex gap-4">
@@ -82,37 +71,25 @@ export default function Shipping() {
                       <Truck className="h-5 w-5 text-brand-400" aria-hidden />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-lg">United Kingdom</h4>
-                      <p className="text-silver-400 text-sm">
-                        Tracked UK options remain available at checkout when United Kingdom is selected as the destination.
-                      </p>
+                      <h4 className="font-semibold text-lg">{t('regions.ukTitle')}</h4>
+                      <p className="text-silver-400 text-sm">{t('regions.ukDesc')}</p>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl">
                 <h4 className="text-brand-400 font-semibold uppercase tracking-wider text-xs mb-4">
-                  Researcher responsibility
+                  {t('responsibility.eyebrow')}
                 </h4>
-                <p className="text-sm text-silver-300 leading-relaxed mb-4">
-                  Buyers are responsible for ensuring products comply with local import laws. Customs duties, VAT, and
-                  regional taxes may apply and are the purchaser&apos;s responsibility where not collected at checkout.
-                </p>
-                <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wider text-amber-400">
-                  <AlertTriangle className="h-4 w-4" aria-hidden />
-                  Customs compliance required
+                <p className="text-sm text-silver-300 leading-relaxed mb-4">{t('responsibility.body')}</p>
+                <div className="flex items-start gap-3 p-4 bg-amber-500/10 border border-amber-500/20 rounded-2xl">
+                  <AlertTriangle className="h-5 w-5 text-amber-400 shrink-0 mt-0.5" aria-hidden />
+                  <p className="text-xs text-amber-100/90 leading-relaxed font-medium">
+                    {t('responsibility.disclaimer')}
+                  </p>
                 </div>
               </div>
             </div>
-          </section>
-
-          <section className="max-w-none">
-            <h2 className="text-2xl font-bold text-navy-950 mb-4">Delivery insurance & protocols</h2>
-            <p className="text-steel-600 leading-relaxed">
-              In the rare event of a verified tracked loss in transit, Research Peptides EU may offer a one-time
-              reshipment when the delivery address was accurate and complete. Contact our logistics team if your order
-              exceeds the estimated delivery window by more than 48 hours.
-            </p>
           </section>
         </div>
       </Container>

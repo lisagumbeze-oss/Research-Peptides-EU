@@ -73,6 +73,8 @@ export function ProductCard({
             alt={product.title}
             loading="lazy"
             decoding="async"
+            width={400}
+            height={500}
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (

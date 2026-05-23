@@ -1,0 +1,40 @@
+{
+  "primary": {
+    "shop": "Sklep",
+    "research": "Badania",
+    "blog": "Blog",
+    "contact": "Kontakt"
+  },
+  "research": {
+    "peptideGuide": "Przewodnik po peptydach",
+    "peptideGuideDesc": "Protokoły, obchodzenie się i najlepsze praktyki laboratoryjne.",
+    "calculator": "Kalkulator peptydów",
+    "calculatorDesc": "Obliczenia rekonstytucji i dawkowania do badań.",
+    "coaLibrary": "Biblioteka COA",
+    "coaLibraryDesc": "Certyfikaty analizy partii i dokumentacja czystości.",
+    "information": "Informacje o peptydach",
+    "informationDesc": "Profile związków i odniesienia badawcze.",
+    "researchHub": "Badania peptydów",
+    "researchHubDesc": "Najnowsze odkrycia i notatki aplikacyjne."
+  },
+  "footer": {
+    "inventory": "Magazyn",
+    "support": "Wsparcie",
+    "legal": "Informacje prawne",
+    "fullCatalog": "Pełny katalog",
+    "categories": "Kategorie",
+    "advancedSearch": "Wyszukiwanie zaawansowane",
+    "wishlist": "Lista życzeń",
+    "faq": "FAQ badacza",
+    "euShipping": "Wysyłka UE",
+    "about": "O nas",
+    "terms": "Regulamin",
+    "privacy": "Prywatność i RODO",
+    "returns": "Zwroty"
+  },
+  "mega": {
+    "browseCatalog": "Przeglądaj katalog",
+    "allCategories": "Wszystkie kategorie",
+    "featured": "Polecane związki"
+  }
+}

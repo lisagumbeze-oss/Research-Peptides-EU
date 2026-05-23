@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import { cn } from '../../lib/utils';
 
-export type CardVariant = 'default' | 'product' | 'feature' | 'trust';
+export type CardVariant = 'default' | 'product' | 'feature' | 'trust' | 'glass';
 
 export type CardProps = HTMLAttributes<HTMLDivElement> & {
   variant?: CardVariant;
@@ -15,10 +15,12 @@ const variantClasses: Record<CardVariant, string> = {
   feature:
     'bg-mist-50 border border-brand-100 rounded-2xl p-6 shadow-card',
   trust: 'bg-white border border-silver-400/40 rounded-2xl p-6 text-navy-950',
+  glass:
+    'bg-white/75 backdrop-blur-xl border border-brand-100/70 shadow-card rounded-2xl saturate-150',
 };
 
 const interactiveClasses =
-  'motion-safe:transition-all motion-safe:duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-elevated motion-safe:hover:border-brand-300/50 cursor-pointer';
+  'motion-safe:transition-all motion-safe:duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-elevated motion-safe:hover:shadow-glow motion-safe:hover:border-brand-300/50 cursor-pointer';
 
 export function Card({
   variant = 'default',
