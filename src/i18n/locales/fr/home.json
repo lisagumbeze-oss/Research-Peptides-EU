@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Pays-Bas · Normes de recherche européennes",
+    "title": "Peptides de précision pour",
+    "titleHighlight": "les laboratoires européens.",
+    "subtitle": "Research Peptides EU fournit des composés de qualité institutionnelle avec vérification analytique tierce, manipulation pharmaceutique et distribution UE fiable.",
+    "ctaShop": "Voir le catalogue",
+    "ctaWizard": "Sélecteur de composés",
+    "trustPurity": "Pureté vérifiée 99,8 %+",
+    "trustShipping": "Expédition chaîne du froid UE",
+    "trustCoa": "COA pour chaque lot"
+  },
+  "featured": {
+    "eyebrow": "Points forts du catalogue",
+    "title": "Composés de recherche en vedette",
+    "subtitle": "Peptides et produits chimiques vérifiés par lot, prêts pour l'expédition laboratoire UE."
+  },
+  "whyEu": {
+    "eyebrow": "Pourquoi les chercheurs UE nous choisissent",
+    "title": "Conçu pour les normes des laboratoires européens"
+  },
+  "categories": {
+    "eyebrow": "Parcourir par application",
+    "title": "Catégories de recherche",
+    "viewAll": "Toutes les catégories"
+  },
+  "trust": {
+    "eyebrow": "Assurance qualité",
+    "title": "Une vérification documentable",
+    "coaCta": "Explorer la bibliothèque COA"
+  },
+  "experience": {
+    "eyebrow": "Expérience chercheur",
+    "title": "Accompagnement à chaque étape",
+    "faqCta": "Lire la FAQ chercheurs"
+  },
+  "cta": {
+    "title": "Prêt à équiper votre laboratoire ?",
+    "subtitle": "Parcourez le catalogue UE ou utilisez le sélecteur pour affiner votre ligne de recherche.",
+    "button": "Acheter le catalogue recherche"
+  }
+}

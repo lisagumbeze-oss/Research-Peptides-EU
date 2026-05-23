@@ -1,0 +1,40 @@
+{
+  "primary": {
+    "shop": "Boutique",
+    "research": "Recherche",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "research": {
+    "peptideGuide": "Guide des peptides",
+    "peptideGuideDesc": "Protocoles, manipulation et bonnes pratiques de laboratoire.",
+    "calculator": "Calculateur de peptides",
+    "calculatorDesc": "Calculs de reconstitution et de dosage pour la recherche.",
+    "coaLibrary": "Bibliothèque COA",
+    "coaLibraryDesc": "Certificats d'analyse et documentation de pureté.",
+    "information": "Informations peptides",
+    "informationDesc": "Profils de composés et références de recherche.",
+    "researchHub": "Recherche peptides",
+    "researchHubDesc": "Dernières découvertes et notes d'application."
+  },
+  "footer": {
+    "inventory": "Catalogue",
+    "support": "Assistance",
+    "legal": "Mentions légales",
+    "fullCatalog": "Catalogue complet",
+    "categories": "Catégories",
+    "advancedSearch": "Recherche avancée",
+    "wishlist": "Liste de souhaits",
+    "faq": "FAQ chercheurs",
+    "euShipping": "Livraison UE",
+    "about": "À propos",
+    "terms": "Conditions",
+    "privacy": "Confidentialité & RGPD",
+    "returns": "Retours"
+  },
+  "mega": {
+    "browseCatalog": "Parcourir le catalogue",
+    "allCategories": "Toutes les catégories",
+    "featured": "Composés en vedette"
+  }
+}

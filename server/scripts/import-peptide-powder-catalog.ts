@@ -75,7 +75,7 @@ async function resolveUsdToGbpRate(): Promise<number> {
   }
   try {
     const fx = new CurrencyService();
-    const rate = await fx.getRate('USD', 'GBP');
+    const rate = await fx.getRate('USD', 'EUR');
     if (rate > 0.5 && rate < 1.35) return rate;
   } catch {
     /* use fallback */

@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Paiement sécurisé",
+    "title": "Finaliser votre commande",
+    "description": "Livraison UE · facturation TVA · expédition depuis les Pays-Bas"
+  },
+  "steps": {
+    "shipping": "Livraison",
+    "payment": "Paiement",
+    "confirm": "Confirmation"
+  },
+  "cart": {
+    "title": "Votre panier",
+    "empty": "Votre panier est vide",
+    "emptyCta": "Voir le catalogue",
+    "summary": "Récapitulatif",
+    "promo": "Code promo",
+    "subtotal": "Sous-total",
+    "discount": "Remise",
+    "shipping": "Livraison",
+    "shippingAtCheckout": "Au paiement",
+    "total": "Total",
+    "proceed": "Passer au paiement",
+    "vatNote": "Prix en EUR. TVA appliquée selon le pays de livraison UE."
+  }
+}

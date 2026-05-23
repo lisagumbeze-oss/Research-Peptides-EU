@@ -39,7 +39,7 @@ function siteOriginFromRequest(req: any): string {
   const host = req?.headers?.['x-forwarded-host'] || req?.headers?.host;
   const proto = req?.headers?.['x-forwarded-proto'] || 'https';
   if (host) return `${proto}://${host}`;
-  return 'https://researchpeptide.uk';
+  return 'https://researchpeptide.eu';
 }
 
 async function fetchProducts(): Promise<ProductRow[]> {
@@ -88,9 +88,9 @@ function buildFeedXml(origin: string, products: ProductRow[]): string {
         `<link>${xmlEscape(link)}</link>`,
         image ? `<g:image_link>${xmlEscape(image)}</g:image_link>` : '',
         `<g:availability>${xmlEscape(availability)}</g:availability>`,
-        `<g:price>${xmlEscape(price.toFixed(2))} GBP</g:price>`,
+        `<g:price>${xmlEscape(price.toFixed(2))} EUR</g:price>`,
         `<g:condition>new</g:condition>`,
-        `<g:brand>Research Peptides UK</g:brand>`,
+        `<g:brand>Research Peptides EU</g:brand>`,
         `<g:product_type>${xmlEscape(productType)}</g:product_type>`,
         `<pubDate>${xmlEscape(updated)}</pubDate>`,
         '</item>',
@@ -103,9 +103,9 @@ function buildFeedXml(origin: string, products: ProductRow[]): string {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
   <channel>
-    <title>Research Peptides UK Product Feed</title>
+    <title>Research Peptides EU Product Feed</title>
     <link>${xmlEscape(origin)}</link>
-    <description>Live product feed for Research Peptides UK catalog.</description>
+    <description>Live product feed for Research Peptides EU catalog (EUR).</description>
     <lastBuildDate>${xmlEscape(now)}</lastBuildDate>
     ${items}
   </channel>

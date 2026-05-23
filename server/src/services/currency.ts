@@ -13,7 +13,7 @@ export class CurrencyService {
   private apiKey = process.env.FX_API_KEY;
   private apiUrl = `https://v6.exchangerate-api.com/v6/${this.apiKey}/latest`;
 
-  async getRate(baseCurrency: string, targetCurrency = 'GBP'): Promise<number> {
+  async getRate(baseCurrency: string, targetCurrency = 'EUR'): Promise<number> {
     if (baseCurrency === targetCurrency) return 1.0;
 
     // 1. Check cache for recent rate (under 6 hours old)
@@ -75,8 +75,13 @@ export class CurrencyService {
     }
   }
 
-  async convertToGbp(amount: number, fromCurrency: string): Promise<number> {
-    const rate = await this.getRate(fromCurrency, 'GBP');
+  async convertToEur(amount: number, fromCurrency: string): Promise<number> {
+    const rate = await this.getRate(fromCurrency, 'EUR');
     return parseFloat((amount * rate).toFixed(2));
+  }
+
+  /** @deprecated Use convertToEur — legacy name kept for import scripts. */
+  async convertToGbp(amount: number, fromCurrency: string): Promise<number> {
+    return this.convertToEur(amount, fromCurrency);
   }
 }

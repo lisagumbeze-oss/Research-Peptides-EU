@@ -1,0 +1,40 @@
+{
+  "primary": {
+    "shop": "Shop",
+    "research": "Forschung",
+    "blog": "Blog",
+    "contact": "Kontakt"
+  },
+  "research": {
+    "peptideGuide": "Peptid-Leitfaden",
+    "peptideGuideDesc": "Protokolle, Handhabung und Laborpraxis.",
+    "calculator": "Peptid-Rechner",
+    "calculatorDesc": "Rekonstitutions- und Dosierungsberechnungen.",
+    "coaLibrary": "COA-Bibliothek",
+    "coaLibraryDesc": "Chargenanalysen und Reinheitsnachweise.",
+    "information": "Peptid-Informationen",
+    "informationDesc": "Substanzprofile und Forschungsreferenzen.",
+    "researchHub": "Peptid-Forschung",
+    "researchHubDesc": "Aktuelle Erkenntnisse und Anwendungshinweise."
+  },
+  "footer": {
+    "inventory": "Sortiment",
+    "support": "Support",
+    "legal": "Rechtliches",
+    "fullCatalog": "Gesamtkatalog",
+    "categories": "Kategorien",
+    "advancedSearch": "Erweiterte Suche",
+    "wishlist": "Wunschliste",
+    "faq": "FAQ für Forscher",
+    "euShipping": "EU-Versand",
+    "about": "Über uns",
+    "terms": "AGB",
+    "privacy": "Datenschutz & DSGVO",
+    "returns": "Rückgabe"
+  },
+  "mega": {
+    "browseCatalog": "Katalog durchsuchen",
+    "allCategories": "Alle Kategorien",
+    "featured": "Empfohlene Verbindungen"
+  }
+}

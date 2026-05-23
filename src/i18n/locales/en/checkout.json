@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Secure checkout",
+    "title": "Complete your order",
+    "description": "EU shipping · VAT-ready invoicing · Netherlands fulfillment"
+  },
+  "steps": {
+    "shipping": "Shipping",
+    "payment": "Payment",
+    "confirm": "Confirm"
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty",
+    "emptyCta": "Browse catalog",
+    "summary": "Order summary",
+    "promo": "Promo code",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "shipping": "Shipping",
+    "shippingAtCheckout": "At checkout",
+    "total": "Total",
+    "proceed": "Proceed to checkout",
+    "vatNote": "Prices in EUR. VAT (BTW) applied where required at checkout based on your EU shipping country."
+  }
+}

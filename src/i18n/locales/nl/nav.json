@@ -1,0 +1,40 @@
+{
+  "primary": {
+    "shop": "Shop",
+    "research": "Onderzoek",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "research": {
+    "peptideGuide": "Peptidegids",
+    "peptideGuideDesc": "Protocollen, hantering en laboratoriumpraktijken.",
+    "calculator": "Peptidecalculator",
+    "calculatorDesc": "Reconstitutie- en doseringsberekeningen voor onderzoek.",
+    "coaLibrary": "COA-bibliotheek",
+    "coaLibraryDesc": "Batchanalyses en zuiverheidsdocumentatie.",
+    "information": "Peptide-informatie",
+    "informationDesc": "Profielen en onderzoeksreferenties.",
+    "researchHub": "Peptide-onderzoek",
+    "researchHubDesc": "Nieuwste bevindingen en toepassingsnotities."
+  },
+  "footer": {
+    "inventory": "Assortiment",
+    "support": "Support",
+    "legal": "Juridisch",
+    "fullCatalog": "Volledige catalogus",
+    "categories": "Categorieën",
+    "advancedSearch": "Geavanceerd zoeken",
+    "wishlist": "Verlanglijst",
+    "faq": "FAQ voor onderzoekers",
+    "euShipping": "EU-verzending",
+    "about": "Over ons",
+    "terms": "Voorwaarden",
+    "privacy": "Privacy & AVG",
+    "returns": "Retourneren"
+  },
+  "mega": {
+    "browseCatalog": "Catalogus bekijken",
+    "allCategories": "Alle categorieën",
+    "featured": "Uitgelichte verbindingen"
+  }
+}

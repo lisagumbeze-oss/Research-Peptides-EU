@@ -1,36 +1,177 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", system-ui, sans-serif;
-  
-  --color-brand-blue: #2563eb;
-  --color-brand-dark: #1e3a8a;
-  --color-brand-accent: #3b82f6;
-  
+  /* Typography */
+  --font-display: "Sora", system-ui, sans-serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Brand — logo indigo scale */
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #93a5fd;
+  --color-brand-400: #5b7fff;
+  --color-brand-500: #4357d6;
+  --color-brand-600: #3545b8;
+  --color-brand-700: #2d3a9e;
+  --color-brand-800: #252f7a;
+  --color-brand-900: #1a2258;
+
+  /* Clinical neutrals */
+  --color-navy-950: #0a0f1e;
+  --color-slate-850: #141b2d;
+  --color-mist-50: #f6f5ff;
+  --color-silver-400: #a7b9c8;
+  --color-steel-600: #496961;
+
+  /* Semantic */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-purity: #22d3ee;
+
+  /* Legacy aliases (deprecated — migrate to brand-*) */
+  --color-brand-blue: #4357d6;
+  --color-brand-dark: #2d3a9e;
+  --color-brand-accent: #5b7fff;
   --color-brand-emerald: #10b981;
   --color-brand-amber: #f59e0b;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(10, 15, 30, 0.08);
+  --shadow-elevated: 0 12px 48px rgba(67, 87, 214, 0.15);
+  --shadow-glow: 0 0 40px rgba(67, 87, 214, 0.25);
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
-    @apply font-sans antialiased bg-gray-50 text-gray-900;
+    @apply font-sans antialiased bg-mist-50 text-navy-950;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    @apply tracking-tight text-navy-950;
   }
 
   h1 {
-    @apply text-3xl md:text-5xl font-black tracking-tight leading-[1.1] text-gray-900;
+    font-size: clamp(2rem, 4vw, 3rem);
+    @apply font-bold leading-[1.1];
   }
 
   h2 {
-    @apply text-2xl md:text-3xl font-black tracking-normal text-gray-900;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    @apply font-semibold;
   }
 
   h3 {
-    @apply text-lg md:text-xl font-bold text-gray-800;
+    @apply text-lg md:text-xl font-semibold;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-400 ring-offset-2 ring-offset-mist-50;
   }
 }
 
 @layer components {
+  /* Type scale */
+  .text-display {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    @apply font-display font-bold leading-[1.05] tracking-tight;
+  }
+
+  .text-h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    @apply font-display font-bold leading-[1.1];
+  }
+
+  .text-h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    @apply font-display font-semibold;
+  }
+
+  .text-body-lg {
+    @apply text-lg leading-relaxed text-steel-600;
+  }
+
+  .text-caption {
+    @apply text-xs font-semibold uppercase tracking-[0.12em] text-silver-400;
+  }
+
+  /* Section rhythm */
+  .section-sm {
+    @apply py-16;
+  }
+
+  .section-md {
+    @apply py-24;
+  }
+
+  .section-lg {
+    @apply py-32;
+  }
+
+  /* Gradients */
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, #0a0f1e 0%, #1a2258 50%, #4357d6 100%);
+  }
+
+  .bg-gradient-cta {
+    background: linear-gradient(90deg, #4357d6, #5b7fff);
+  }
+
+  .bg-gradient-glow {
+    background: radial-gradient(ellipse at 50% 0%, rgba(67, 87, 214, 0.35), transparent 70%);
+  }
+
+  /* Shadows */
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Hero (legacy class — updated typography) */
   .hero-heading {
-    @apply text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-family: var(--font-display);
+    @apply font-bold leading-[1.05] tracking-tight;
+  }
+
+  /* Scientific grid overlay utility */
+  .bg-scientific-grid {
+    background-image:
+      linear-gradient(rgba(67, 87, 214, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(67, 87, 214, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
   }
 }

@@ -6,13 +6,13 @@ const safe = (value: string) =>
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 
-export function formatCurrency(value: number) {
-  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(value || 0);
+export function formatCurrency(value: number, locale = 'en-IE', currency = 'EUR') {
+  return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(value || 0);
 }
 
 export function renderBrandLayout(params: { title: string; preheader: string; bodyHtml: string }) {
-  const brandName = process.env.EMAIL_BRAND_NAME || 'Research Peptides UK';
-  const supportAddress = process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.uk';
+  const brandName = process.env.EMAIL_BRAND_NAME || 'Research Peptides EU';
+  const supportAddress = process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.eu';
 
   return `<!doctype html>
 <html lang="en">

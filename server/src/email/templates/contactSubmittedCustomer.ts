@@ -14,7 +14,7 @@ export function renderContactSubmittedCustomerEmail(payload: ContactEmailPayload
 
   const html = renderBrandLayout({
     title: 'We Received Your Message',
-    preheader: `Thanks for contacting ${process.env.EMAIL_BRAND_NAME || 'Research Peptides UK'}`,
+    preheader: `Thanks for contacting ${process.env.EMAIL_BRAND_NAME || 'Research Peptides EU'}`,
     bodyHtml
   });
 

@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Sicherer Checkout",
+    "title": "Bestellung abschließen",
+    "description": "EU-Versand · MwSt.-fähig · Abwicklung aus den Niederlanden"
+  },
+  "steps": {
+    "shipping": "Versand",
+    "payment": "Zahlung",
+    "confirm": "Bestätigen"
+  },
+  "cart": {
+    "title": "Ihr Warenkorb",
+    "empty": "Ihr Warenkorb ist leer",
+    "emptyCta": "Katalog ansehen",
+    "summary": "Bestellübersicht",
+    "promo": "Aktionscode",
+    "subtotal": "Zwischensumme",
+    "discount": "Rabatt",
+    "shipping": "Versand",
+    "shippingAtCheckout": "Beim Checkout",
+    "total": "Gesamt",
+    "proceed": "Zur Kasse",
+    "vatNote": "Preise in EUR. MwSt. wird je nach EU-Versandland berechnet."
+  }
+}

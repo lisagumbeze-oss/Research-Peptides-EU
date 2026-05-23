@@ -3,11 +3,11 @@ import { motion } from 'motion/react';
 import { AlertCircle, TrendingUp, Zap, Globe } from 'lucide-react';
 
 const TICKER_ITEMS = [
-  { icon: AlertCircle, text: "LOW STOCK: BPC-157 5mg Vials - Only 12 remaining", color: "text-orange-500" },
-  { icon: Globe, text: "RECENT SHIPMENT: 25x Semaglutide units dispatched to London, UK", color: "text-blue-500" },
-  { icon: Zap, text: "PRICE MATCH: Verified 99.8% Purity tracking against European labs", color: "text-green-500" },
-  { icon: TrendingUp, text: "TRENDING: Increased research demand for GLP-1 agonists this week", color: "text-indigo-500" },
-  { icon: AlertCircle, text: "RESTOCK ALERT: TB-500 10mg Lyophilized powder now available", color: "text-purple-500" },
+  { icon: AlertCircle, text: "LOW STOCK: BPC-157 5mg — limited EU batch availability", color: "text-warning" },
+  { icon: Globe, text: "EU DISPATCH: Semaglutide research units shipped to Amsterdam, NL", color: "text-brand-400" },
+  { icon: Zap, text: "PURITY VERIFIED: 99.8%+ third-party testing on all catalog lines", color: "text-success" },
+  { icon: TrendingUp, text: "TRENDING: GLP-1 research demand across European institutions", color: "text-purity" },
+  { icon: AlertCircle, text: "RESTOCK: TB-500 10mg lyophilized — Netherlands warehouse", color: "text-brand-300" },
 ];
 
 export default function LiveTicker() {
@@ -15,7 +15,7 @@ export default function LiveTicker() {
   const displayItems = [...TICKER_ITEMS, ...TICKER_ITEMS];
 
   return (
-    <div className="bg-gray-900 border-b border-white/5 py-2.5 overflow-hidden relative group">
+    <div className="bg-navy-950 border-b border-brand-900/30 py-2.5 overflow-hidden relative group">
       <motion.div 
         className="flex whitespace-nowrap gap-12 items-center"
         animate={{ x: [0, -1500] }}
@@ -29,7 +29,7 @@ export default function LiveTicker() {
         {displayItems.map((item, i) => (
           <div key={i} className="flex items-center gap-3">
             <item.icon className={`h-3.5 w-3.5 ${item.color}`} />
-            <span className="text-[10px] font-black uppercase tracking-[0.15em] text-gray-400">
+            <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-silver-400">
               {item.text}
             </span>
             <div className="h-1 w-1 bg-gray-700 rounded-full" />

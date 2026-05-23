@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Niederlande · Europäische Forschungsstandards",
+    "title": "Präzisionspeptide für",
+    "titleHighlight": "europäische Laboratorien.",
+    "subtitle": "Research Peptides EU liefert Material in Institutsqualität mit unabhängiger Analytik, pharmazeutischer Handhabung und EU-Vertrieb.",
+    "ctaShop": "Katalog ansehen",
+    "ctaWizard": "Verbindungsauswahl",
+    "trustPurity": "99,8 %+ verifizierte Reinheit",
+    "trustShipping": "EU-weiter Cold-Chain-Versand",
+    "trustCoa": "COA für jede Charge"
+  },
+  "featured": {
+    "eyebrow": "Katalog-Highlights",
+    "title": "Empfohlene Forschungsverbindungen",
+    "subtitle": "Chargengeprüfte Peptide und Chemikalien für den EU-Laborversand."
+  },
+  "whyEu": {
+    "eyebrow": "Warum EU-Forscher uns wählen",
+    "title": "Für europäische Laborstandards entwickelt"
+  },
+  "categories": {
+    "eyebrow": "Nach Anwendung",
+    "title": "Forschungskategorien",
+    "viewAll": "Alle Kategorien"
+  },
+  "trust": {
+    "eyebrow": "Qualitätssicherung",
+    "title": "Nachweisbare Verifikation",
+    "coaCta": "COA-Bibliothek erkunden"
+  },
+  "experience": {
+    "eyebrow": "Forschererlebnis",
+    "title": "Support in jeder Phase",
+    "faqCta": "Forscher-FAQ lesen"
+  },
+  "cta": {
+    "title": "Bereit, Ihr Labor auszustatten?",
+    "subtitle": "Durchsuchen Sie den EU-Katalog oder nutzen Sie die Auswahlhilfe.",
+    "button": "Forschungskatalog shoppen"
+  }
+}

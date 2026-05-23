@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "eyebrow": "Nederland · Europese onderzoeksstandaarden",
+    "title": "Precisiepeptiden voor",
+    "titleHighlight": "Europese laboratoria.",
+    "subtitle": "Research Peptides EU levert institutioneel materiaal met onafhankelijke analyse, farmaceutische handling en betrouwbare EU-distributie.",
+    "ctaShop": "Catalogus bekijken",
+    "ctaWizard": "Verbindingskiezer",
+    "trustPurity": "99,8%+ geverifieerde zuiverheid",
+    "trustShipping": "EU-brede cold-chain verzending",
+    "trustCoa": "COA bij elke batch"
+  },
+  "featured": {
+    "eyebrow": "Catalogushighlights",
+    "title": "Uitgelichte onderzoeksverbindingen",
+    "subtitle": "Batch-geverifieerde peptiden en chemicaliën, klaar voor EU-laboratoriumverzending."
+  },
+  "whyEu": {
+    "eyebrow": "Waarom EU-onderzoekers ons kiezen",
+    "title": "Gebouwd voor Europese laboratoriumstandaarden"
+  },
+  "categories": {
+    "eyebrow": "Bladeren op toepassing",
+    "title": "Onderzoekscategorieën",
+    "viewAll": "Alle categorieën"
+  },
+  "trust": {
+    "eyebrow": "Kwaliteitsborging",
+    "title": "Verificatie die u kunt documenteren",
+    "coaCta": "COA-bibliotheek verkennen"
+  },
+  "experience": {
+    "eyebrow": "Onderzoekerservaring",
+    "title": "Ondersteuning in elke fase",
+    "faqCta": "FAQ voor onderzoekers lezen"
+  },
+  "cta": {
+    "title": "Klaar om uw laboratorium uit te rusten?",
+    "subtitle": "Bekijk de EU-catalogus of gebruik de kiezer om uw onderzoekslijn te verfijnen.",
+    "button": "Onderzoekscatalogus shoppen"
+  }
+}

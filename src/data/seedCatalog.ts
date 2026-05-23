@@ -1,3 +1,8 @@
+import { DEFAULT_CURRENCY } from '../lib/currency';
+import { slugifyProductName } from '../lib/productUrl';
+
+/** Catalog reference prices are stored and displayed in EUR (canonical DB currency). */
+
 export type SeedCategory = {
   name: string;
   slug: string;
@@ -23,6 +28,23 @@ export type SeedProduct = {
   compareAtPrice?: number;
   variants?: ProductVariant[];
 };
+
+export function mapSeedProductToRow(p: SeedProduct) {
+  return {
+    title: p.title,
+    slug: slugifyProductName(p.title),
+    description: p.description,
+    price: p.price,
+    compare_at_price: p.compareAtPrice ?? null,
+    currency: DEFAULT_CURRENCY,
+    inventory: p.inventory,
+    categories: p.categories,
+    specifications: p.specifications,
+    images: [p.image],
+    rating: p.rating,
+    review_count: p.reviewCount,
+  };
+}
 
 export const referenceSeedCategories: SeedCategory[] = [
   {

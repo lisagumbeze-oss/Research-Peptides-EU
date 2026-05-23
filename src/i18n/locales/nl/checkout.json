@@ -1,0 +1,26 @@
+{
+  "header": {
+    "eyebrow": "Veilig afrekenen",
+    "title": "Bestelling afronden",
+    "description": "EU-verzending · BTW-klaar · afhandeling vanuit Nederland"
+  },
+  "steps": {
+    "shipping": "Verzending",
+    "payment": "Betaling",
+    "confirm": "Bevestigen"
+  },
+  "cart": {
+    "title": "Uw winkelwagen",
+    "empty": "Uw winkelwagen is leeg",
+    "emptyCta": "Catalogus bekijken",
+    "summary": "Besteloverzicht",
+    "promo": "Promotiecode",
+    "subtotal": "Subtotaal",
+    "discount": "Korting",
+    "shipping": "Verzending",
+    "shippingAtCheckout": "Bij afrekenen",
+    "total": "Totaal",
+    "proceed": "Naar afrekenen",
+    "vatNote": "Prijzen in EUR. BTW wordt waar van toepassing berekend op basis van uw EU-verzendland."
+  }
+}

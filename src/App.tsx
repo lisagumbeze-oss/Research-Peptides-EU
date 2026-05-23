@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { LocaleLayout } from './i18n/LocaleLayout';
+import { LocaleRedirect } from './i18n/LocaleRedirect';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
@@ -83,34 +85,37 @@ function AppRoutes() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="shop" element={<Shop />} />
-          <Route path="product/:slug" element={<ProductDetails />} />
-          <Route path="product/:id" element={<ProductDetails />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="admin" element={<AdminDashboard />} />
-          <Route path="blog" element={<Blog />} />
-          <Route path="blog/:id" element={<BlogPost />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="wishlist" element={<Wishlist />} />
-          <Route path="search" element={<Search />} />
-          <Route path="categories" element={<Categories />} />
-          <Route path="login" element={<Login />} />
-          <Route path="faq" element={<FAQ />} />
-          <Route path="shipping" element={<Shipping />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="about-us" element={<AboutUs />} />
-          <Route path="peptide-guide" element={<PeptideGuide />} />
-          <Route path="peptide-calculator" element={<PeptideCalculator />} />
-          <Route path="coas" element={<COALibrary />} />
-          <Route path="peptide-information" element={<PeptideInformation />} />
-          <Route path="peptide-research" element={<PeptideResearch />} />
-          <Route path="terms" element={<Terms />} />
-          <Route path="privacy" element={<Privacy />} />
-          <Route path="refund-returns" element={<RefundReturns />} />
+        <Route path="/" element={<LocaleRedirect />} />
+        <Route path="/:locale" element={<LocaleLayout />}>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="shop" element={<Shop />} />
+            <Route path="product/:slug" element={<ProductDetails />} />
+            <Route path="product/:id" element={<ProductDetails />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="admin" element={<AdminDashboard />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="blog/:id" element={<BlogPost />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="wishlist" element={<Wishlist />} />
+            <Route path="search" element={<Search />} />
+            <Route path="categories" element={<Categories />} />
+            <Route path="login" element={<Login />} />
+            <Route path="faq" element={<FAQ />} />
+            <Route path="shipping" element={<Shipping />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="about-us" element={<AboutUs />} />
+            <Route path="peptide-guide" element={<PeptideGuide />} />
+            <Route path="peptide-calculator" element={<PeptideCalculator />} />
+            <Route path="coas" element={<COALibrary />} />
+            <Route path="peptide-information" element={<PeptideInformation />} />
+            <Route path="peptide-research" element={<PeptideResearch />} />
+            <Route path="terms" element={<Terms />} />
+            <Route path="privacy" element={<Privacy />} />
+            <Route path="refund-returns" element={<RefundReturns />} />
+          </Route>
         </Route>
       </Routes>
     </AnimatePresence>

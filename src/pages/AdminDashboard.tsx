@@ -6,6 +6,7 @@ import { Plus, Trash2, LayoutDashboard, ShoppingBag, Package, Settings, Trending
 import { motion, AnimatePresence } from 'motion/react';
 import { DashboardSkeleton, StatSkeleton } from '../components/DashboardSkeleton';
 import {
+  mapSeedProductToRow,
   referenceSeedCategories,
   referenceSeedProducts,
 } from '../data/seedCatalog';
@@ -63,12 +64,8 @@ export default function AdminDashboard() {
     try {
       // Upsert products from reference data
       const { error: pError } = await supabase.from('products').upsert(
-        referenceSeedProducts.map(p => ({
-          ...p,
-          rating: 5,
-          review_count: Math.floor(Math.random() * 50) + 10,
-          compare_at_price: p.compareAtPrice ?? null,
-        }))
+        referenceSeedProducts.map((p) => mapSeedProductToRow(p)),
+        { onConflict: 'slug' },
       );
       if (pError) throw pError;
       addToast("Catalog synchronized successfully", "success");
@@ -90,12 +87,7 @@ export default function AdminDashboard() {
       if (dError) throw dError;
       
       const { error: iError } = await supabase.from('products').insert(
-        referenceSeedProducts.map(p => ({
-          ...p,
-          rating: 5,
-          review_count: Math.floor(Math.random() * 50) + 10,
-          compare_at_price: p.compareAtPrice ?? null,
-        }))
+        referenceSeedProducts.map((p) => mapSeedProductToRow(p)),
       );
       if (iError) throw iError;
       addToast("Wipe and re-seed complete", "success");
@@ -331,7 +323,7 @@ export default function AdminDashboard() {
             <pre className="bg-white border border-amber-200 rounded-lg p-3 overflow-x-auto text-xs font-mono whitespace-pre-wrap break-all">
 {`UPDATE public.users SET role = 'admin' WHERE id = '${user.id}';`}
             </pre>
-            <p className="mt-2 text-xs text-amber-800">Apply migrations <span className="font-mono">003_admin_rls_orders_products.sql</span> and <span className="font-mono">004_products_compare_at_price.sql</span> in Supabase so admins can manage orders, products, and optional compare-at (RRP) pricing.</p>
+            <p className="mt-2 text-xs text-amber-800">Apply migrations <span className="font-mono">003</span>–<span className="font-mono">006_currency_eur.sql</span> in Supabase. Catalog prices are stored in EUR (<span className="font-mono">npm run db:seed:supabase</span>).</p>
           </div>
         )}
       </div>
@@ -356,6 +348,7 @@ export default function AdminDashboard() {
         description,
         price: priceVal,
         compare_at_price,
+        currency: 'EUR',
         inventory: invVal,
         images: imageUrl ? [imageUrl] : [],
         categories: [],
@@ -508,10 +501,10 @@ export default function AdminDashboard() {
                    <input required type="text" placeholder="Product Title" value={title} onChange={e => setTitle(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
                    <textarea required rows={4} placeholder="Description" value={description} onChange={e => setDescription(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
                    <div className="grid grid-cols-2 gap-4">
-                      <input required type="number" step="0.01" placeholder="Price £" value={price} onChange={e => setPrice(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
+                      <input required type="number" step="0.01" placeholder="Price €" value={price} onChange={e => setPrice(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
                       <input required type="number" placeholder="Inventory" value={inventory} onChange={e => setInventory(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
                    </div>
-                   <input type="number" step="0.01" placeholder="Compare-at / RRP £ (optional, must exceed price)" value={compareAtPrice} onChange={e => setCompareAtPrice(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
+                   <input type="number" step="0.01" placeholder="Compare-at / RRP € (optional, must exceed price)" value={compareAtPrice} onChange={e => setCompareAtPrice(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
                    <input type="url" placeholder="Image URL (optional)" value={imageUrl} onChange={e => setImageUrl(e.target.value)} className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-medium" />
                    <button type="submit" className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200">
                      List Product

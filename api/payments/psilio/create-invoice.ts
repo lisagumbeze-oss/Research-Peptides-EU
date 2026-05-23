@@ -65,7 +65,7 @@ export default async function handler(req: any, res: any) {
     const body = (req.body || {}) as CreateInvoiceBody;
     const orderId = String(body.order_id || '').trim();
     const amount = Number(body.amount || 0);
-    const currency = String(body.currency || 'GBP').toUpperCase();
+    const currency = String(body.currency || 'EUR').toUpperCase();
     const email = String(body.email || '').trim();
     const name = String(body.name || '').trim();
 

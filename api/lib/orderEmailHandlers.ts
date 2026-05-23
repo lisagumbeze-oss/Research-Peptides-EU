@@ -9,7 +9,7 @@ import {
 import { sendTransactionalEmail } from './resendSend.js';
 
 function getAdminRecipient() {
-  return process.env.EMAIL_ADMIN_TO || process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.uk';
+  return process.env.EMAIL_ADMIN_TO || process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.eu';
 }
 
 function hasOrderEvent(shippingAddress: Record<string, any> | null | undefined, eventKey: string) {

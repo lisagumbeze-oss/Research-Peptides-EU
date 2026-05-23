@@ -154,7 +154,7 @@ app.post('/api/payment/create', async (req, res) => {
     }
 
     const params = new URLSearchParams({
-      source_currency: 'GBP', // Hardcoding GBP as per the frontend formatCurrency
+      source_currency: 'EUR',
       source_amount: amount.toString(),
       order_name: `Research Peptides UK Order #${order_id.substring(0, 8)}`,
       order_number: order_id,
