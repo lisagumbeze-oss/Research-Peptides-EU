@@ -14,8 +14,8 @@ type PsilioWebhookPayload = {
   [key: string]: unknown;
 };
 
-import { fetchOrderById, patchOrderShippingAddress, patchOrderStatus } from '../../lib/supabaseOrders.js';
-import { handleOrderStatus } from '../../lib/orderEmailHandlers.js';
+import { fetchOrderById, patchOrderShippingAddress, patchOrderStatus } from '../../_lib/supabaseOrders.js';
+import { handleOrderStatus } from '../../_lib/orderEmailHandlers.js';
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
