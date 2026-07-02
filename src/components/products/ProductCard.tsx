@@ -75,7 +75,7 @@ export function ProductCard({
             decoding="async"
             width={400}
             height={500}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className="h-full w-full object-contain p-6 pt-12 pb-6 transition-transform duration-700 group-hover:scale-105 mix-blend-multiply"
           />
         ) : (
           <ProductImagePlaceholder
