@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { usePageSeo } from '../seo/SeoProvider';
 import { breadcrumbJsonLd, itemListJsonLd } from '../seo/structuredData';
@@ -6,7 +7,7 @@ import type { LocaleCode } from '../i18n/locales';
 import { supabase } from '../supabase';
 import { sortProducts, type CatalogSortKey } from '../lib/productSort';
 import { catalogPriceSliderMax, productEffectiveMaxPrice } from '../lib/catalogPriceSlider';
-import { SHOP_PRODUCT_COLUMNS } from '../lib/shopCatalogQuery';
+import { SHOP_PAGE_SIZE, SHOP_PRODUCT_COLUMNS } from '../lib/shopCatalogQuery';
 import { Container } from '../design-system';
 import { CatalogPageHeader } from '../components/catalog/CatalogPageHeader';
 import { CatalogTrustBar } from '../components/catalog/CatalogTrustBar';
@@ -18,6 +19,7 @@ import {
 import { CatalogSortSelect } from '../components/catalog/CatalogSortSelect';
 import { CatalogEmptyState } from '../components/catalog/CatalogEmptyState';
 import { ProductGrid } from '../components/catalog/ProductGrid';
+import { CatalogPagination } from '../components/catalog/CatalogPagination';
 import { useProductCatalogActions } from '../hooks/useProductCatalogActions';
 import type { CategoryOption } from '../components/catalog/types';
 import type { CatalogProduct } from '../components/products/ProductCard';
@@ -25,6 +27,7 @@ import type { CatalogProduct } from '../components/products/ProductCard';
 export default function Shop() {
   const { t, i18n } = useTranslation('shop');
   const locale = i18n.language as LocaleCode;
+  const [searchParams, setSearchParams] = useSearchParams();
   const [allProducts, setAllProducts] = useState<CatalogProduct[]>([]);
   const [categories, setCategories] = useState<CategoryOption[]>([]);
   const [loading, setLoading] = useState(true);
@@ -96,16 +99,69 @@ export default function Shop() {
     return sortProducts(result, sortBy);
   }, [allProducts, selectedCategorySlugs, priceRange, sortBy]);
 
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / SHOP_PAGE_SIZE));
+  const rawPage = parseInt(searchParams.get('page') ?? '1', 10);
+  const currentPage = Number.isFinite(rawPage) ? Math.min(Math.max(1, rawPage), totalPages) : 1;
+
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage - 1) * SHOP_PAGE_SIZE;
+    return filteredProducts.slice(start, start + SHOP_PAGE_SIZE);
+  }, [filteredProducts, currentPage]);
+
+  const resultsFrom = filteredProducts.length === 0 ? 0 : (currentPage - 1) * SHOP_PAGE_SIZE + 1;
+  const resultsTo = Math.min(currentPage * SHOP_PAGE_SIZE, filteredProducts.length);
+
+  const setPage = (page: number) => {
+    const next = new URLSearchParams(searchParams);
+    if (page <= 1) next.delete('page');
+    else next.set('page', String(page));
+    setSearchParams(next);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const resetPage = () => {
+    setSearchParams(
+      (prev) => {
+        if (!prev.has('page')) return prev;
+        const next = new URLSearchParams(prev);
+        next.delete('page');
+        return next;
+      },
+      { replace: true },
+    );
+  };
+
+  useEffect(() => {
+    if (rawPage !== currentPage) {
+      const next = new URLSearchParams(searchParams);
+      if (currentPage <= 1) next.delete('page');
+      else next.set('page', String(currentPage));
+      setSearchParams(next, { replace: true });
+    }
+  }, [rawPage, currentPage, searchParams, setSearchParams]);
+
   const toggleCategory = (slug: string) => {
+    resetPage();
     setSelectedCategorySlugs((prev) =>
       prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug],
     );
   };
 
   const clearFilters = () => {
+    resetPage();
     setSelectedCategorySlugs([]);
     setPriceRange(priceSliderMax);
     setSortBy('newest');
+  };
+
+  const handlePriceChange = (value: number) => {
+    resetPage();
+    setPriceRange(value);
+  };
+
+  const handleSortChange = (value: CatalogSortKey) => {
+    resetPage();
+    setSortBy(value);
   };
 
   const filterProps: CatalogFiltersProps = {
@@ -115,7 +171,7 @@ export default function Shop() {
     priceRange,
     priceSliderMax,
     priceSliderStep,
-    onPriceChange: setPriceRange,
+    onPriceChange: handlePriceChange,
     onClear: clearFilters,
     showMobile: showMobileFilters,
     onCloseMobile: () => setShowMobileFilters(false),
@@ -139,11 +195,16 @@ export default function Shop() {
       <Container className="py-10 md:py-12">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <p className="text-sm text-steel-600">
-            {t('results', { count: filteredProducts.length, total: allProducts.length })}
+            {t('results', {
+              from: resultsFrom,
+              to: resultsTo,
+              count: filteredProducts.length,
+              total: allProducts.length,
+            })}
           </p>
           <div className="flex items-center gap-3">
             <CatalogFilters {...filterProps} mode="trigger" />
-            <CatalogSortSelect value={sortBy} onChange={(v) => setSortBy(v as CatalogSortKey)} />
+            <CatalogSortSelect value={sortBy} onChange={(v) => handleSortChange(v as CatalogSortKey)} />
           </div>
         </div>
 
@@ -161,14 +222,21 @@ export default function Shop() {
                 clearLabel={t('filters.clearAll')}
               />
             ) : (
-              <ProductGrid
-                products={filteredProducts}
-                loading={loading}
-                showDescription
-                inWishlist={isInWishlist}
-                onToggleWishlist={handleToggleWishlist}
-                onAddToCart={handleAddToCart}
-              />
+              <>
+                <ProductGrid
+                  products={paginatedProducts}
+                  loading={loading}
+                  showDescription
+                  inWishlist={isInWishlist}
+                  onToggleWishlist={handleToggleWishlist}
+                  onAddToCart={handleAddToCart}
+                />
+                <CatalogPagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setPage}
+                />
+              </>
             )}
           </div>
         </div>

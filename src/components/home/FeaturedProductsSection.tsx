@@ -51,6 +51,7 @@ export function FeaturedProductsSection() {
           products={products}
           loading={loading}
           skeletonCount={4}
+          gridClassName="grid-cols-2 lg:grid-cols-4"
           inWishlist={isInWishlist}
           onToggleWishlist={handleToggleWishlist}
           onAddToCart={handleAddToCart}

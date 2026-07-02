@@ -5,7 +5,13 @@
     "titleHighlight": "peptides",
     "description": "Browse verified research compounds with EU fulfillment, batch documentation, and transparent specifications."
   },
-  "results": "Showing {{count}} of {{total}} products",
+  "results": "Showing {{from}}–{{to}} of {{count}} products ({{total}} total)",
+  "pagination": {
+    "label": "Shop pagination",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{page}}"
+  },
   "filters": {
     "categories": "Categories",
     "maxPrice": "Max price",
