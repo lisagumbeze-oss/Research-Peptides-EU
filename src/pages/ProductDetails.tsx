@@ -4,9 +4,6 @@ import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { useTranslation } from 'react-i18next';
 import { Star } from 'lucide-react';
 import { supabase } from '../supabase';
-// #region agent log
-import { agentLog } from '../debug/agentLog';
-// #endregion
 import { useCartStore } from '../store/useCartStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { useWishlistStore } from '../store/useWishlistStore';
@@ -101,14 +98,6 @@ export default function ProductDetails() {
     const fetchProductAndReviews = async () => {
       if (!slug && !id) return;
       setLoading(true);
-      // #region agent log
-      const pdpStart = Date.now();
-      agentLog('D', 'ProductDetails.tsx:103', 'product page fetch chain started', {
-        slug: slug ?? null,
-        id: id ?? null,
-        scrollYAtStart: window.scrollY,
-      });
-      // #endregion
       try {
         const query = supabase.from('products').select('*');
         const { data: pData } = slug
@@ -157,13 +146,6 @@ export default function ProductDetails() {
       } catch (error) {
         console.error('Error fetching product:', error);
       } finally {
-        // #region agent log
-        agentLog('A,D', 'ProductDetails.tsx:158', 'product page fetch chain finished', {
-          durationMs: Date.now() - pdpStart,
-          scrollYAtEnd: window.scrollY,
-          docHeight: document.documentElement.scrollHeight,
-        });
-        // #endregion
         setLoading(false);
       }
     };

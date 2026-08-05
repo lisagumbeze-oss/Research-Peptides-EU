@@ -51,14 +51,6 @@ function LayoutShell() {
   };
 
   // #region agent log
-  const renderCountRef = React.useRef(0);
-  renderCountRef.current += 1;
-  useEffect(() => {
-    agentLog('E', 'Layout.tsx:55', 'LayoutShell render count for path', {
-      pathname: location.pathname,
-      renderCount: renderCountRef.current,
-    });
-  });
   useEffect(() => {
     if (typeof PerformanceObserver === 'undefined') return;
     let reported = 0;

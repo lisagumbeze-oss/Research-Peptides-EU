@@ -6,9 +6,10 @@ import './index.css';
 
 import { HelmetProvider } from 'react-helmet-async';
 // #region agent log
-import { agentLog, installRequestTracker } from './debug/agentLog';
+import { agentLog, installRequestTracker, installScrollTracker } from './debug/agentLog';
 
 installRequestTracker();
+installScrollTracker();
 agentLog('boot', 'main.tsx:11', 'app boot — instrumentation loaded', {
   href: window.location.href,
   origin: window.location.origin,

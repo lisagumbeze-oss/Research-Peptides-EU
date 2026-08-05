@@ -1,9 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { PRIMARY_PROMO_CODE, PROMO_DISCOUNT_PERCENT, isValidPromoCode } from '../lib/promoCodes';
-// #region agent log
-import { agentLog } from '../debug/agentLog';
-// #endregion
 
 export interface CartItem {
   productId: string;
@@ -102,14 +99,7 @@ export const useCartStore = create<CartState>()(
     {
       name: 'cart-storage',
       partialize: (state) => ({ items: state.items, promoCode: state.promoCode, discount: state.discount }), // Don't persist UI state like isOpen
-      onRehydrateStorage: () => (state, error) => {
-        // #region agent log
-        agentLog('H', 'useCartStore.ts:104', 'cart persist rehydrate callback', {
-          hasState: Boolean(state),
-          error: error ? String(error) : null,
-          itemCount: state?.items?.length ?? -1,
-        });
-        // #endregion
+      onRehydrateStorage: () => (state) => {
         state?.closeCart();
         state?.setHasHydrated(true);
       },

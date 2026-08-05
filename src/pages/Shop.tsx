@@ -23,9 +23,6 @@ import { CatalogPagination } from '../components/catalog/CatalogPagination';
 import { useProductCatalogActions } from '../hooks/useProductCatalogActions';
 import type { CategoryOption } from '../components/catalog/types';
 import type { CatalogProduct } from '../components/products/ProductCard';
-// #region agent log
-import { agentLog } from '../debug/agentLog';
-// #endregion
 
 export default function Shop() {
   const { t, i18n } = useTranslation('shop');
@@ -43,25 +40,11 @@ export default function Shop() {
 
   useEffect(() => {
     void (async () => {
-      // #region agent log
-      const fetchStart = Date.now();
-      agentLog('D', 'Shop.tsx:45', 'shop supabase fetch started', {});
-      // #endregion
       try {
         const [prodResult, catResult] = await Promise.all([
           supabase.from('products').select(SHOP_PRODUCT_COLUMNS).order('created_at', { ascending: false }),
           supabase.from('categories').select('name, slug').order('name'),
         ]);
-        // #region agent log
-        agentLog('D', 'Shop.tsx:56', 'shop supabase fetch settled', {
-          durationMs: Date.now() - fetchStart,
-          productCount: prodResult.data?.length ?? 0,
-          categoryCount: catResult.data?.length ?? 0,
-          prodError: prodResult.error?.message ?? null,
-          catError: catResult.error?.message ?? null,
-        });
-        // #endregion
-
         if (!prodResult.error && prodResult.data) {
           setAllProducts(prodResult.data as CatalogProduct[]);
           setPriceRange(catalogPriceSliderMax(prodResult.data));

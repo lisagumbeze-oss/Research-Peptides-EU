@@ -85,6 +85,57 @@ export function installRequestTracker() {
   );
 }
 
+/** Identifies who moves the scroll position after a route change. */
+export function installScrollTracker() {
+  if ((window as unknown as { __agentScroll?: boolean }).__agentScroll) return;
+  (window as unknown as { __agentScroll?: boolean }).__agentScroll = true;
+
+  const caller = () =>
+    (new Error().stack ?? '')
+      .split('\n')
+      .slice(2, 5)
+      .map((l) => l.trim())
+      .join(' | ')
+      .slice(0, 300);
+
+  const originalScrollTo = window.scrollTo.bind(window);
+  window.scrollTo = ((...args: unknown[]) => {
+    const target = typeof args[0] === 'object' ? (args[0] as ScrollToOptions)?.top : args[1];
+    agentLog('K', 'agentLog.ts:100', 'window.scrollTo called', {
+      target: target ?? null,
+      fromY: window.scrollY,
+      caller: caller(),
+    });
+    return (originalScrollTo as (...a: unknown[]) => void)(...args);
+  }) as typeof window.scrollTo;
+
+  const originalScrollIntoView = Element.prototype.scrollIntoView;
+  Element.prototype.scrollIntoView = function (this: Element, ...args: unknown[]) {
+    agentLog('K', 'agentLog.ts:110', 'scrollIntoView called', {
+      tag: this.tagName,
+      cls: String((this as HTMLElement).className ?? '').slice(0, 80),
+      fromY: window.scrollY,
+      caller: caller(),
+    });
+    return (originalScrollIntoView as (...a: unknown[]) => void).apply(this, args);
+  } as typeof Element.prototype.scrollIntoView;
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      const y = window.scrollY;
+      if (y > 0 && performance.now() < 12_000) {
+        agentLog('B,K', 'agentLog.ts:124', 'page scrolled away from top shortly after load', {
+          scrollY: y,
+          sincePageLoadMs: Math.round(performance.now()),
+          scrollRestoration: history.scrollRestoration,
+        });
+      }
+    },
+    { once: true, passive: true },
+  );
+}
+
 export function pendingRequestSnapshot() {
   const now = Date.now();
   return [...pendingRequests.values()].map((r) => ({ url: r.url, ageMs: now - r.started }));
