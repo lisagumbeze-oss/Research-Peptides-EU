@@ -5,6 +5,16 @@ import App from './App.tsx';
 import './index.css';
 
 import { HelmetProvider } from 'react-helmet-async';
+// #region agent log
+import { agentLog, installRequestTracker } from './debug/agentLog';
+
+installRequestTracker();
+agentLog('boot', 'main.tsx:11', 'app boot — instrumentation loaded', {
+  href: window.location.href,
+  origin: window.location.origin,
+  userAgent: navigator.userAgent,
+});
+// #endregion
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
