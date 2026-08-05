@@ -5,7 +5,7 @@ import { useAuthStore } from '../store/useAuthStore';
 import { formatCurrency, DEFAULT_CURRENCY } from '../lib/utils';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { supabase } from '../supabase';
-import { CheckCircle, Loader2, Truck, Package, Globe, Shield, CreditCard, Landmark, Bitcoin, AlertCircle } from 'lucide-react';
+import { CheckCircle, Loader2, Truck, Package, Globe, Shield, Landmark, Bitcoin } from 'lucide-react';
 import { europeanLocations } from '../data/europeanCountries';
 import { postOrderCreatedEmail, postPsilioCreateInvoice } from '../lib/transactionalEmailApi';
 import { CheckoutSkeleton } from '../components/Skeleton';
@@ -33,6 +33,22 @@ const SHIPPING_METHODS = {
 
 const EUROPEAN_COUNTRIES = Array.from(new Set(europeanLocations.map(l => l.country)));
 
+/** Bank transfer is only offered once merchandise + shipping reaches this EUR amount. */
+const BANK_TRANSFER_MIN_EUR = 100;
+
+type PaymentMethodId = 'bank' | 'crypto';
+
+const ALL_PAYMENT_METHODS: Array<{
+  id: PaymentMethodId;
+  name: string;
+  icon: typeof Bitcoin;
+  subtext: string;
+  badge?: string;
+}> = [
+  { id: 'crypto', name: 'Cryptocurrency', icon: Bitcoin, subtext: 'Pay with BTC, ETH, USDT (+5% OFF)', badge: 'Save 5%' },
+  { id: 'bank', name: 'Bank Transfer', icon: Landmark, subtext: 'Direct Structural Payment' },
+];
+
 export default function Checkout() {
   usePageSeo({ canonicalPath: '/checkout', noindex: true });
   const { t } = useTranslation('checkout');
@@ -50,8 +66,7 @@ export default function Checkout() {
     postalCode: ''
   });
   const [selectedShippingId, setSelectedShippingId] = useState('intl_eu');
-  const [paymentMethod, setPaymentMethod] = useState<'card' | 'bank' | 'crypto'>('crypto');
-  const [billingCallbackNote, setBillingCallbackNote] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethodId>('crypto');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [placedOrderId, setPlacedOrderId] = useState<string | null>(null);
   const [checkoutMessage, setCheckoutMessage] = useState('');
@@ -135,6 +150,20 @@ export default function Checkout() {
   
   const subtotalValue = getSubtotal();
   const promoDiscountValue = Math.min(appliedDiscount, subtotalValue);
+  // Order total used for payment-method eligibility (before crypto discount).
+  const orderTotalBeforeCrypto = subtotalValue - promoDiscountValue + shippingCost;
+  const bankTransferAvailable = orderTotalBeforeCrypto >= BANK_TRANSFER_MIN_EUR;
+  const availablePaymentMethods = ALL_PAYMENT_METHODS.filter(
+    (method) => method.id === 'crypto' || (method.id === 'bank' && bankTransferAvailable),
+  );
+
+  // If bank drops below the threshold (e.g. shipping/promo change), fall back to crypto.
+  React.useEffect(() => {
+    if (paymentMethod === 'bank' && !bankTransferAvailable) {
+      setPaymentMethod('crypto');
+    }
+  }, [paymentMethod, bankTransferAvailable]);
+
   // Calculate crypto discount after promo discount is applied.
   const cryptoDiscount = paymentMethod === 'crypto' ? (subtotalValue - promoDiscountValue) * 0.05 : 0;
   const finalTotalValue = subtotalValue - promoDiscountValue - cryptoDiscount + shippingCost;
@@ -186,7 +215,13 @@ export default function Checkout() {
 
   const validatePaymentStep = () => {
     const errors: Record<string, string> = {};
-    if (!paymentMethod) errors.paymentMethod = 'Please select a payment method.';
+    if (!paymentMethod) {
+      errors.paymentMethod = 'Please select a payment method.';
+    } else if (paymentMethod === 'bank' && !bankTransferAvailable) {
+      errors.paymentMethod = `Bank transfer is only available for orders of ${formatCurrency(BANK_TRANSFER_MIN_EUR)} or more.`;
+    } else if (!availablePaymentMethods.some((m) => m.id === paymentMethod)) {
+      errors.paymentMethod = 'Please select a payment method.';
+    }
     setPaymentErrors(errors);
     if (Object.keys(errors).length > 0) {
       return false;
@@ -238,11 +273,10 @@ export default function Checkout() {
         items: items,
         total_amount: finalTotalValue,
         currency: DEFAULT_CURRENCY,
-        status: paymentMethod === 'card' ? 'processing' : 'pending',
+        status: 'pending',
         shipping_address: {
           ...shipping,
           payment_method: paymentMethod,
-          billing_callback_note: paymentMethod === 'card' ? billingCallbackNote.trim() : '',
           crypto_discount: cryptoDiscount,
           shipping_method: selectedMethod.name,
           shipping_cost: shippingCost
@@ -284,8 +318,6 @@ export default function Checkout() {
             `Order created, but automatic crypto redirect failed. ${psilioError?.message || 'Please contact support with your order ID.'}`
           );
         }
-      } else if (paymentMethod === 'card') {
-        setCheckoutMessage('Order created successfully. Admin and customer emails were sent. Card payment is queued for manual billing review.');
       } else {
         setCheckoutMessage('Order created successfully. Admin and customer emails were sent. Bank transfer instructions will follow by email.');
       }
@@ -414,12 +446,8 @@ export default function Checkout() {
                 </div>
 
                 <div className="grid grid-cols-1 gap-4" role="radiogroup" aria-labelledby="checkout-payment-heading">
-                  {[
-                    { id: 'crypto', name: 'Cryptocurrency', icon: Bitcoin, subtext: 'Pay with BTC, ETH, USDT (+5% OFF)', badge: 'Save 5%' },
-                    { id: 'card', name: 'Credit / Debit Card', icon: CreditCard, subtext: 'Secure Manual Processing' },
-                    { id: 'bank', name: 'Bank Transfer', icon: Landmark, subtext: 'Direct Structural Payment' },
-                  ].map((method) => (
-                    <button key={method.id} type="button" role="radio" aria-checked={paymentMethod === method.id} onClick={() => setPaymentMethod(method.id as 'card' | 'bank' | 'crypto')} className={`relative flex items-center gap-5 p-6 rounded-[2rem] border-2 transition-all ${paymentMethod === method.id ? 'border-brand-500 bg-brand-50/30' : 'border-gray-50 bg-mist-50/30 hover:border-gray-200'}`}>
+                  {availablePaymentMethods.map((method) => (
+                    <button key={method.id} type="button" role="radio" aria-checked={paymentMethod === method.id} onClick={() => setPaymentMethod(method.id)} className={`relative flex items-center gap-5 p-6 rounded-[2rem] border-2 transition-all ${paymentMethod === method.id ? 'border-brand-500 bg-brand-50/30' : 'border-gray-50 bg-mist-50/30 hover:border-gray-200'}`}>
                       <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${paymentMethod === method.id ? 'bg-brand-500 text-white' : 'bg-white text-silver-400 border border-brand-100'}`}>
                         <method.icon className="w-8 h-8" aria-hidden />
                       </div>
@@ -436,6 +464,11 @@ export default function Checkout() {
                     </button>
                   ))}
                 </div>
+                {!bankTransferAvailable && (
+                  <p className="text-xs font-semibold text-steel-600">
+                    Bank transfer becomes available for orders of {formatCurrency(BANK_TRANSFER_MIN_EUR)} or more.
+                  </p>
+                )}
                 {paymentErrors.paymentMethod && <p className="text-xs font-semibold text-red-600">{paymentErrors.paymentMethod}</p>}
 
                 <button type="button" onClick={handleConfirmPaymentChoice} className="w-full bg-gray-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all shadow-xl shadow-gray-200">
@@ -450,40 +483,6 @@ export default function Checkout() {
                   <h2 className="text-2xl font-black text-navy-950">Final Confirmation</h2>
                   <button type="button" onClick={() => setStep(2)} className="text-xs font-black text-brand-600 uppercase tracking-widest hover:underline">Change Method</button>
                 </div>
-
-                {paymentMethod === 'card' && (
-                  <fieldset className="space-y-6 border-0 min-w-0 p-0">
-                    <legend className="sr-only">Card payment callback note</legend>
-                    <div className="bg-brand-50 p-4 rounded-2xl border border-brand-100 flex gap-3">
-                      <AlertCircle className="w-5 h-5 text-brand-600 shrink-0" aria-hidden />
-                      <p className="text-xs font-bold text-navy-900 leading-relaxed">
-                        Card payments are processed manually. Add a billing callback note (best call time / reference) and place the order.
-                        Status updates to <span className="underline">Processing</span> immediately.
-                      </p>
-                    </div>
-                    <div>
-                      <label htmlFor="checkout-billing-callback-note" className="block text-xs font-black uppercase tracking-widest text-steel-600 mb-2">
-                        Billing Callback Note (Optional)
-                      </label>
-                      <textarea
-                        id="checkout-billing-callback-note"
-                        placeholder="Example: Call weekdays after 17:00 CET. Reference: Lab project A12."
-                        value={billingCallbackNote}
-                        onChange={e => setBillingCallbackNote(e.target.value)}
-                        className="w-full p-4 bg-mist-50 border-none rounded-2xl outline-none font-semibold text-navy-950 min-h-[120px]"
-                        maxLength={600}
-                      />
-                      <div className="mt-1 flex items-center justify-between">
-                        {paymentErrors.billingCallbackNote ? (
-                          <p className="text-xs font-semibold text-red-600">{paymentErrors.billingCallbackNote}</p>
-                        ) : (
-                          <span className="text-[10px] font-semibold text-silver-400">Shared with billing admin on order email.</span>
-                        )}
-                        <span className="text-[10px] font-semibold text-silver-400">{billingCallbackNote.length}/600</span>
-                      </div>
-                    </div>
-                  </fieldset>
-                )}
 
                 {paymentMethod === 'bank' && (
                   <div className="bg-mist-50 p-8 rounded-[2rem] text-center space-y-4">
