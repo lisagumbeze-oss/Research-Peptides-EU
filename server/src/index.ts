@@ -140,51 +140,6 @@ app.get('/api/products', async (req, res) => {
 
 // --- Legacy Payment API (retained for compatibility) ---
 
-app.post('/api/payment/create', async (req, res) => {
-  try {
-    const { amount, order_id, return_url } = req.body;
-    
-    if (!amount || !order_id) {
-      return res.status(400).json({ success: false, error: 'Missing amount or order_id' });
-    }
-
-    const apiKey = process.env.PLISIO_SECRET_KEY;
-    if (!apiKey) {
-      throw new Error("PLISIO_SECRET_KEY is not configured on the server.");
-    }
-
-    const params = new URLSearchParams({
-      source_currency: 'EUR',
-      source_amount: amount.toString(),
-      order_name: `Research Peptides EU Order #${order_id.substring(0, 8)}`,
-      order_number: order_id,
-      plugin: 'custom',
-      api_key: apiKey,
-    });
-
-    if (return_url) {
-      params.append('success_url', return_url);
-    }
-
-    console.log("Plisio API Requesting invoice with params:", params.toString().replace(apiKey, 'REDACTED'));
-    const response = await fetch(`https://api.plisio.net/api/v1/invoices/new?${params.toString()}`);
-    const data = await response.json() as any;
-
-    console.log("Plisio API Response:", JSON.stringify(data));
-
-    if (data.status === 'success') {
-      res.json({ success: true, invoice_url: data.data.invoice_url });
-    } else {
-      const errorMsg = data.data?.message || JSON.stringify(data.data) || 'Failed to create Plisio invoice';
-      console.error("Plisio Invoice Creation Error:", errorMsg);
-      res.status(400).json({ success: false, error: errorMsg });
-    }
-  } catch (error: any) {
-    console.error("Plisio create error:", error);
-    res.status(500).json({ success: false, error: error.message });
-  }
-});
-
 app.post('/api/payment/manual-card', async (req, res) => {
   try {
     const { order_id, card_details } = req.body;
@@ -211,27 +166,6 @@ app.post('/api/payment/manual-card', async (req, res) => {
   } catch (error: any) {
     console.error("Manual payment logic error:", error);
     res.status(500).json({ success: false, error: error.message });
-  }
-});
-
-app.post('/api/payment/webhook', async (req, res) => {
-  try {
-    // Plisio sends IPN details in POST body via form-data or JSON? They usually send POST form data.
-    // For simplicity, we just log and update the database if status == 'completed' or 'mismatch' (if overpaid).
-    const ipnData = req.body;
-    
-    if (ipnData && ipnData.status === 'completed') {
-       const orderId = ipnData.order_number;
-       if (orderId) {
-         await pool.query('UPDATE orders SET status = $1, crypto_tx_hash = $2 WHERE id = $3', ['paid', ipnData.tx_url || ipnData.txn_id, orderId]);
-         console.log(`Order ${orderId} marked as paid via Plisio IPN.`);
-       }
-    }
-
-    res.status(200).send('OK');
-  } catch (error: any) {
-    console.error("Plisio webhook error:", error);
-    res.status(500).send('Error');
   }
 });
 

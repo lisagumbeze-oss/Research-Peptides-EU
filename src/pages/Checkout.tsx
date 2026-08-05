@@ -5,15 +5,16 @@ import { useAuthStore } from '../store/useAuthStore';
 import { formatCurrency, DEFAULT_CURRENCY } from '../lib/utils';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { supabase } from '../supabase';
-import { CheckCircle, Loader2, Truck, Package, Globe, Shield, Landmark, Bitcoin } from 'lucide-react';
+import { CheckCircle, Loader2, Truck, Package, Globe, Shield, Landmark, Bitcoin, Copy, Check } from 'lucide-react';
 import { europeanLocations } from '../data/europeanCountries';
-import { postOrderCreatedEmail, postPsilioCreateInvoice } from '../lib/transactionalEmailApi';
+import { postOrderCreatedEmail, postBtcPaymentDeclared } from '../lib/transactionalEmailApi';
 import { CheckoutSkeleton } from '../components/Skeleton';
 import { PRIMARY_PROMO_CODE, PROMO_DISCOUNT_PERCENT, isValidPromoCode } from '../lib/promoCodes';
 import { Container } from '../design-system';
 import { CatalogPageHeader } from '../components/catalog/CatalogPageHeader';
 import { CheckoutProgress } from '../components/checkout/CheckoutProgress';
 import { usePageSeo } from '../seo/SeoProvider';
+import { BTC_PAYMENT_ADDRESS } from '../lib/paymentConfig';
 
 /** Shipping rates in EUR (Netherlands fulfilment · May 2026). */
 const SHIPPING_METHODS = {
@@ -33,9 +34,6 @@ const SHIPPING_METHODS = {
 
 const EUROPEAN_COUNTRIES = Array.from(new Set(europeanLocations.map(l => l.country)));
 
-/** Bank transfer is only offered once merchandise + shipping reaches this EUR amount. */
-const BANK_TRANSFER_MIN_EUR = 100;
-
 type PaymentMethodId = 'bank' | 'crypto';
 
 const ALL_PAYMENT_METHODS: Array<{
@@ -43,9 +41,8 @@ const ALL_PAYMENT_METHODS: Array<{
   name: string;
   icon: typeof Bitcoin;
   subtext: string;
-  badge?: string;
 }> = [
-  { id: 'crypto', name: 'Cryptocurrency', icon: Bitcoin, subtext: 'Pay with BTC, ETH, USDT (+5% OFF)', badge: 'Save 5%' },
+  { id: 'crypto', name: 'Bitcoin (BTC)', icon: Bitcoin, subtext: 'Pay directly to our BTC wallet' },
   { id: 'bank', name: 'Bank Transfer', icon: Landmark, subtext: 'Direct Structural Payment' },
 ];
 
@@ -70,10 +67,12 @@ export default function Checkout() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [placedOrderId, setPlacedOrderId] = useState<string | null>(null);
   const [checkoutMessage, setCheckoutMessage] = useState('');
+  const [addressCopied, setAddressCopied] = useState(false);
+  const [isDeclaringPayment, setIsDeclaringPayment] = useState(false);
+  const [paymentDeclared, setPaymentDeclared] = useState(false);
   const [lockedTotals, setLockedTotals] = useState<{
     subtotal: number;
     promoDiscount: number;
-    cryptoDiscount: number;
     shippingCost: number;
     finalTotal: number;
   } | null>(null);
@@ -150,23 +149,8 @@ export default function Checkout() {
   
   const subtotalValue = getSubtotal();
   const promoDiscountValue = Math.min(appliedDiscount, subtotalValue);
-  // Order total used for payment-method eligibility (before crypto discount).
-  const orderTotalBeforeCrypto = subtotalValue - promoDiscountValue + shippingCost;
-  const bankTransferAvailable = orderTotalBeforeCrypto >= BANK_TRANSFER_MIN_EUR;
-  const availablePaymentMethods = ALL_PAYMENT_METHODS.filter(
-    (method) => method.id === 'crypto' || (method.id === 'bank' && bankTransferAvailable),
-  );
-
-  // If bank drops below the threshold (e.g. shipping/promo change), fall back to crypto.
-  React.useEffect(() => {
-    if (paymentMethod === 'bank' && !bankTransferAvailable) {
-      setPaymentMethod('crypto');
-    }
-  }, [paymentMethod, bankTransferAvailable]);
-
-  // Calculate crypto discount after promo discount is applied.
-  const cryptoDiscount = paymentMethod === 'crypto' ? (subtotalValue - promoDiscountValue) * 0.05 : 0;
-  const finalTotalValue = subtotalValue - promoDiscountValue - cryptoDiscount + shippingCost;
+  const availablePaymentMethods = ALL_PAYMENT_METHODS;
+  const finalTotalValue = subtotalValue - promoDiscountValue + shippingCost;
 
   const applyPromo = () => {
     if (isValidPromoCode(promoCode)) {
@@ -215,11 +199,7 @@ export default function Checkout() {
 
   const validatePaymentStep = () => {
     const errors: Record<string, string> = {};
-    if (!paymentMethod) {
-      errors.paymentMethod = 'Please select a payment method.';
-    } else if (paymentMethod === 'bank' && !bankTransferAvailable) {
-      errors.paymentMethod = `Bank transfer is only available for orders of ${formatCurrency(BANK_TRANSFER_MIN_EUR)} or more.`;
-    } else if (!availablePaymentMethods.some((m) => m.id === paymentMethod)) {
+    if (!paymentMethod || !availablePaymentMethods.some((m) => m.id === paymentMethod)) {
       errors.paymentMethod = 'Please select a payment method.';
     }
     setPaymentErrors(errors);
@@ -256,13 +236,12 @@ export default function Checkout() {
       setLockedTotals({
         subtotal: subtotalValue,
         promoDiscount: promoDiscountValue,
-        cryptoDiscount,
         shippingCost,
         finalTotal: finalTotalValue
       });
       setCheckoutMessage('');
 
-      // NOTE: We wrap non-schema columns (payment_method, crypto_discount) inside shipping_address JSON
+      // NOTE: We wrap non-schema columns (payment_method) inside shipping_address JSON
       // to avoid Supabase errors until columns are officially added to the database.
       // 1. Generate ID manually so we don't need .select() (which fails for guests due to RLS)
       const generatedId = crypto.randomUUID();
@@ -277,7 +256,6 @@ export default function Checkout() {
         shipping_address: {
           ...shipping,
           payment_method: paymentMethod,
-          crypto_discount: cryptoDiscount,
           shipping_method: selectedMethod.name,
           shipping_cost: shippingCost
         }
@@ -301,23 +279,7 @@ export default function Checkout() {
       if (emailDispatchFailed) {
         setCheckoutMessage('Order placed, but one or more transactional emails failed. Please contact support with your order ID.');
       } else if (paymentMethod === 'crypto') {
-        try {
-          const result = await postPsilioCreateInvoice({
-            order_id: orderId,
-            amount: finalTotalValue,
-            currency: 'EUR',
-            email: shipping.email,
-            name: shipping.fullName
-          });
-          clearCart();
-          window.location.assign(result.paymentUrl);
-          return;
-        } catch (psilioError: any) {
-          console.error('Psilio redirect failed:', psilioError);
-          setCheckoutMessage(
-            `Order created, but automatic crypto redirect failed. ${psilioError?.message || 'Please contact support with your order ID.'}`
-          );
-        }
+        setCheckoutMessage('Order created. Send Bitcoin to the address below, then tap “I have Paid”.');
       } else {
         setCheckoutMessage('Order created successfully. Admin and customer emails were sent. Bank transfer instructions will follow by email.');
       }
@@ -338,6 +300,31 @@ export default function Checkout() {
       // Don't set step to 4 on hard errors unless we want to show a failure state
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleCopyBtcAddress = async () => {
+    try {
+      await navigator.clipboard.writeText(BTC_PAYMENT_ADDRESS);
+      setAddressCopied(true);
+      window.setTimeout(() => setAddressCopied(false), 2000);
+    } catch {
+      setCheckoutMessage('Could not copy address. Please select and copy it manually.');
+    }
+  };
+
+  const handleDeclareBtcPaid = async () => {
+    if (!placedOrderId || paymentDeclared || isDeclaringPayment) return;
+    setIsDeclaringPayment(true);
+    try {
+      await postBtcPaymentDeclared(placedOrderId);
+      setPaymentDeclared(true);
+      setCheckoutMessage('Thanks — we have been notified. Our team will verify your Bitcoin payment shortly.');
+    } catch (error: any) {
+      console.error('BTC payment declare failed:', error);
+      setCheckoutMessage(error?.message || 'Could not confirm payment declaration. Please contact support with your order ID.');
+    } finally {
+      setIsDeclaringPayment(false);
     }
   };
 
@@ -452,10 +439,7 @@ export default function Checkout() {
                         <method.icon className="w-8 h-8" aria-hidden />
                       </div>
                       <div className="text-left flex-1">
-                        <div className="flex items-center gap-2">
-                           <span className="text-lg font-black text-navy-950">{method.name}</span>
-                           {method.badge && <span className="bg-emerald-500 text-white text-[8px] font-black px-2 py-0.5 rounded-full uppercase">{method.badge}</span>}
-                        </div>
+                        <span className="text-lg font-black text-navy-950">{method.name}</span>
                         <p className="text-xs font-bold text-silver-400">{method.subtext}</p>
                       </div>
                       <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${paymentMethod === method.id ? 'border-brand-500 bg-brand-500' : 'border-gray-200'}`}>
@@ -464,11 +448,6 @@ export default function Checkout() {
                     </button>
                   ))}
                 </div>
-                {!bankTransferAvailable && (
-                  <p className="text-xs font-semibold text-steel-600">
-                    Bank transfer becomes available for orders of {formatCurrency(BANK_TRANSFER_MIN_EUR)} or more.
-                  </p>
-                )}
                 {paymentErrors.paymentMethod && <p className="text-xs font-semibold text-red-600">{paymentErrors.paymentMethod}</p>}
 
                 <button type="button" onClick={handleConfirmPaymentChoice} className="w-full bg-gray-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all shadow-xl shadow-gray-200">
@@ -500,10 +479,10 @@ export default function Checkout() {
                   <div className="bg-orange-50 p-8 rounded-[2rem] text-center space-y-4 border border-orange-100">
                     <Bitcoin className="w-16 h-16 text-orange-500 mx-auto" />
                     <div>
-                      <h3 className="text-xl font-black text-navy-950">Crypto Efficiency Discount</h3>
+                      <h3 className="text-xl font-black text-navy-950">Bitcoin Payment</h3>
                       <p className="text-sm font-bold text-orange-800 mt-2">
-                        You have unlocked a 5% discount for choosing a cryptographically secure payment method.
-                        Total Saved: <span className="font-black underline">{formatCurrency(cryptoDiscount)}</span>
+                        After placing your order you will see our BTC address. Send the Bitcoin equivalent of{' '}
+                        <span className="font-black underline">{formatCurrency(finalTotalValue)}</span>, then confirm with “I have Paid”.
                       </p>
                     </div>
                   </div>
@@ -516,7 +495,7 @@ export default function Checkout() {
             )}
 
             {step === 4 && (
-              <div className="text-center py-20 animate-in fade-in zoom-in duration-500">
+              <div className="text-center py-12 sm:py-20 animate-in fade-in zoom-in duration-500">
                 <div className="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
                   <CheckCircle className="w-12 h-12" />
                 </div>
@@ -525,11 +504,61 @@ export default function Checkout() {
                    <p className="text-[10px] font-black uppercase text-silver-400 mb-1">Order Identification</p>
                    <p className="text-lg font-black text-brand-600 select-all tracking-wider">{placedOrderId || 'Processing...'}</p>
                 </div>
-                <p className="text-steel-600 mt-6 max-w-sm mx-auto font-medium">
-                  {paymentMethod === 'bank' 
-                    ? "An admin will contact you shortly via email with transfer details." 
-                    : "Your order is now being processed by our analytical team."}
-                </p>
+
+                {paymentMethod === 'crypto' ? (
+                  <div className="mt-8 max-w-lg mx-auto text-left space-y-4">
+                    <div className="bg-orange-50 border border-orange-100 rounded-[2rem] p-6 space-y-4">
+                      <div className="flex items-center gap-3">
+                        <Bitcoin className="w-8 h-8 text-orange-500 shrink-0" />
+                        <div>
+                          <h3 className="text-lg font-black text-navy-950">Send Bitcoin Payment</h3>
+                          <p className="text-xs font-bold text-orange-800">
+                            Amount due: {formatCurrency(lockedTotals?.finalTotal ?? finalTotalValue)} (BTC equivalent)
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-silver-400 mb-2">BTC Address</p>
+                        <div className="flex items-stretch gap-2">
+                          <p className="flex-1 p-3 bg-white border border-orange-100 rounded-xl font-mono text-xs sm:text-sm font-bold text-navy-950 break-all select-all">
+                            {BTC_PAYMENT_ADDRESS}
+                          </p>
+                          <button
+                            type="button"
+                            onClick={handleCopyBtcAddress}
+                            className="px-4 rounded-xl bg-gray-900 text-white hover:bg-black transition-all flex items-center justify-center"
+                            aria-label="Copy Bitcoin address"
+                          >
+                            {addressCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                          </button>
+                        </div>
+                      </div>
+                      <p className="text-xs font-medium text-steel-600 leading-relaxed">
+                        Send the Bitcoin equivalent of your order total to this address. After the transfer is submitted, tap the button below so our team can verify it.
+                      </p>
+                    </div>
+
+                    {!paymentDeclared ? (
+                      <button
+                        type="button"
+                        onClick={handleDeclareBtcPaid}
+                        disabled={isDeclaringPayment || !placedOrderId}
+                        className="w-full bg-brand-500 text-white py-5 rounded-2xl font-black text-lg hover:bg-brand-600 transition-all shadow-xl shadow-glow flex items-center justify-center gap-3 disabled:opacity-60"
+                      >
+                        {isDeclaringPayment ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden /> : 'I have Paid'}
+                      </button>
+                    ) : (
+                      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl px-4 py-4 text-sm font-semibold text-center">
+                        Payment declared — we will verify your Bitcoin transfer and update your order.
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <p className="text-steel-600 mt-6 max-w-sm mx-auto font-medium">
+                    An admin will contact you shortly via email with transfer details.
+                  </p>
+                )}
+
                 {checkoutMessage && (
                   <p className="text-amber-700 bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 mt-4 text-sm font-semibold max-w-lg mx-auto">
                     {checkoutMessage}
@@ -567,12 +596,6 @@ export default function Checkout() {
                 <div className="flex justify-between text-sm font-black text-emerald-500">
                   <span>Promo Discount</span>
                   <span>-{formatCurrency(lockedTotals?.promoDiscount ?? promoDiscountValue)}</span>
-                </div>
-              )}
-              {(lockedTotals?.cryptoDiscount ?? cryptoDiscount) > 0 && (
-                <div className="flex justify-between text-sm font-black text-orange-500">
-                  <span>Crypto Incentive (5%)</span>
-                  <span>-{formatCurrency(lockedTotals?.cryptoDiscount ?? cryptoDiscount)}</span>
                 </div>
               )}
               <div className="flex justify-between text-sm font-bold text-steel-600">

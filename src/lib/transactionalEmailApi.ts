@@ -95,17 +95,11 @@ export async function postNewsletterSubscribe(payload: { email: string }) {
   return readJsonResponse<{ success: boolean; dryRun?: boolean }>(response);
 }
 
-export async function postPsilioCreateInvoice(payload: {
-  order_id: string;
-  amount: number;
-  currency: string;
-  email: string;
-  name: string;
-}) {
-  const response = await fetch('/api/payments/psilio/create-invoice', {
+export async function postBtcPaymentDeclared(orderId: string) {
+  const response = await fetch('/api/payments/btc-paid', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify(payload),
+    body: JSON.stringify({ order_id: orderId }),
   });
-  return readJsonResponse<{ success: boolean; paymentUrl: string }>(response);
+  return readJsonResponse<{ success: boolean; result?: unknown }>(response);
 }

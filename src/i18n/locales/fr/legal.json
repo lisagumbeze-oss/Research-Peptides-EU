@@ -53,7 +53,7 @@
         "items": [
           {
             "q": "Quels moyens de paiement acceptez-vous ?",
-            "a": "Nous acceptons les cryptomonnaies (BTC, ETH, USDT) avec 5 % de réduction, le virement bancaire et les commandes par carte examinées manuellement."
+            "a": "Nous acceptons le Bitcoin (BTC) vers notre adresse de portefeuille publiée, le virement bancaire et les commandes par carte examinées manuellement."
           },
           {
             "q": "Quelle est votre politique de retour ?",

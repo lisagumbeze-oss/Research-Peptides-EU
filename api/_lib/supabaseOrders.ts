@@ -42,6 +42,10 @@ export async function patchOrderShippingAddress(orderId: string, shipping_addres
 }
 
 export async function patchOrderStatus(orderId: string, status: string) {
+  return patchOrderFields(orderId, { status });
+}
+
+export async function patchOrderFields(orderId: string, fields: Record<string, unknown>) {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) throw new Error('SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is not configured');
@@ -54,10 +58,10 @@ export async function patchOrderStatus(orderId: string, status: string) {
       'Content-Type': 'application/json',
       Prefer: 'return=minimal'
     },
-    body: JSON.stringify({ status })
+    body: JSON.stringify(fields)
   });
   if (!res.ok) {
     const t = await res.text();
-    throw new Error(`Supabase orders status patch failed: ${res.status} ${t}`);
+    throw new Error(`Supabase orders patch failed: ${res.status} ${t}`);
   }
 }

@@ -53,7 +53,7 @@
         "items": [
           {
             "q": "Welke betaalmethoden accepteren jullie?",
-            "a": "We accepteren cryptocurrency (BTC, ETH, USDT) met 5% korting, bankoverschrijving en kaartbestellingen die handmatig worden beoordeeld."
+            "a": "We accepteren Bitcoin (BTC) naar ons gepubliceerde walletadres, bankoverschrijving en kaartbestellingen die handmatig worden beoordeeld."
           },
           {
             "q": "Wat is jullie retourbeleid?",

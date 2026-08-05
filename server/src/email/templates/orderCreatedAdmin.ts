@@ -1,5 +1,6 @@
 import { renderBrandLayout, stripHtml, formatCurrency } from '../layout.js';
 import type { EmailRenderResult, OrderEmailPayload } from '../types.js';
+import { BTC_PAYMENT_ADDRESS, isCryptoPaymentMethod } from '../paymentConfig.js';
 
 export function renderOrderCreatedAdminEmail(payload: OrderEmailPayload): EmailRenderResult {
   const itemRows = payload.items
@@ -12,6 +13,19 @@ export function renderOrderCreatedAdminEmail(payload: OrderEmailPayload): EmailR
         </tr>`
     )
     .join('');
+
+  const btcBlock = isCryptoPaymentMethod(payload.paymentMethod)
+    ? `
+    <div style="margin:18px 0 0;padding:16px;border:1px solid #fdba74;background:#fff7ed;border-radius:12px;">
+      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#c2410c;font-weight:800;">Bitcoin Payment Details Sent to Customer</p>
+      <p style="margin:0 0 10px;font-size:13px;color:#9a3412;line-height:1.7;">
+        Customer was instructed to send the BTC equivalent of <strong>${formatCurrency(payload.totalAmount)}</strong> to:
+      </p>
+      <p style="margin:0;padding:12px;background:#ffffff;border:1px solid #fed7aa;border-radius:10px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;color:#0f172a;word-break:break-all;font-weight:700;">
+        ${BTC_PAYMENT_ADDRESS}
+      </p>
+    </div>`
+    : '';
 
   const bodyHtml = `
     <p style="margin:0 0 14px;font-size:14px;color:#334155;line-height:1.7;">
@@ -33,10 +47,15 @@ export function renderOrderCreatedAdminEmail(payload: OrderEmailPayload): EmailR
         <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;text-transform:capitalize;">${payload.status}</td>
       </tr>
       <tr>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Payment Method</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;text-transform:capitalize;">${payload.paymentMethod}</td>
+      </tr>
+      <tr>
         <td style="font-size:13px;color:#64748b;padding:4px 0;">Total</td>
         <td style="font-size:13px;color:#249688;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
-    </table>`;
+    </table>
+    ${btcBlock}`;
 
   const html = renderBrandLayout({
     title: `New Order • ${payload.orderId.slice(0, 8)}`,

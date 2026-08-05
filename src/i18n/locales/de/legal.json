@@ -53,7 +53,7 @@
         "items": [
           {
             "q": "Welche Zahlungsmethoden akzeptieren Sie?",
-            "a": "Wir akzeptieren Kryptowährungen (BTC, ETH, USDT) mit 5 % Rabatt, Banküberweisung und Kartenzahlungen, die manuell geprüft werden."
+            "a": "Wir akzeptieren Bitcoin (BTC) an unsere veröffentlichte Wallet-Adresse, Banküberweisung und Kartenzahlungen, die manuell geprüft werden."
           },
           {
             "q": "Wie lautet Ihre Rückgaberichtlinie?",

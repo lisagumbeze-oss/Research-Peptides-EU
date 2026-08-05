@@ -1,5 +1,35 @@
 import { renderBrandLayout, stripHtml, formatCurrency } from '../layout.js';
 import type { EmailRenderResult, OrderEmailPayload } from '../types.js';
+import { BTC_PAYMENT_ADDRESS, isCryptoPaymentMethod } from '../paymentConfig.js';
+
+function renderBtcPaymentInstructions(payload: {
+  orderId: string;
+  totalAmount: number;
+  forAdmin?: boolean;
+}) {
+  const shortId = payload.orderId.slice(0, 8);
+  return `
+    <div style="margin:18px 0;padding:16px;border:1px solid #fdba74;background:#fff7ed;border-radius:12px;">
+      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#c2410c;font-weight:800;">
+        ${payload.forAdmin ? 'Bitcoin Payment Details Sent to Customer' : 'Pay with Bitcoin'}
+      </p>
+      <p style="margin:0 0 10px;font-size:13px;color:#9a3412;line-height:1.7;">
+        ${
+          payload.forAdmin
+            ? `Customer was instructed to send the BTC equivalent of <strong>${formatCurrency(payload.totalAmount)}</strong> to:`
+            : `Please send the Bitcoin equivalent of <strong>${formatCurrency(payload.totalAmount)}</strong> to the address below. Use Order ID <strong>${shortId}</strong> as a reference where possible.`
+        }
+      </p>
+      <p style="margin:0;padding:12px;background:#ffffff;border:1px solid #fed7aa;border-radius:10px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;color:#0f172a;word-break:break-all;font-weight:700;">
+        ${BTC_PAYMENT_ADDRESS}
+      </p>
+      ${
+        payload.forAdmin
+          ? ''
+          : `<p style="margin:10px 0 0;font-size:12px;color:#9a3412;line-height:1.6;">After sending payment, return to checkout and tap <strong>I have Paid</strong> so our team can verify the transaction.</p>`
+      }
+    </div>`;
+}
 
 export function renderOrderCreatedCustomerEmail(payload: OrderEmailPayload): EmailRenderResult {
   const itemRows = payload.items
@@ -38,7 +68,8 @@ export function renderOrderCreatedCustomerEmail(payload: OrderEmailPayload): Ema
         <td style="font-size:15px;color:#0f172a;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">Total</td>
         <td style="font-size:15px;color:#249688;text-align:right;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
-    </table>`;
+    </table>
+    ${isCryptoPaymentMethod(payload.paymentMethod) ? renderBtcPaymentInstructions({ orderId: payload.orderId, totalAmount: payload.totalAmount }) : ''}`;
 
   const html = renderBrandLayout({
     title: `Order Confirmed • ${payload.orderId.slice(0, 8)}`,

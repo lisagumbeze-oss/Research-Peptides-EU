@@ -1,5 +1,6 @@
 import { safeHtml } from './safeHtml.js';
 import { formatCurrency } from './currency.js';
+import { BTC_PAYMENT_ADDRESS, isCryptoPaymentMethod } from './paymentConfig.js';
 
 export { formatCurrency };
 
@@ -14,10 +15,41 @@ export function stripHtml(input: string) {
 
 function paymentMethodLabel(method: string | undefined) {
   const value = String(method || '').toLowerCase().trim();
-  if (value === 'crypto' || value === 'cryptocurrency') return 'Cryptocurrency';
+  if (value === 'crypto' || value === 'cryptocurrency' || value === 'bitcoin' || value === 'btc') {
+    return 'Bitcoin (BTC)';
+  }
   if (value === 'card' || value === 'credit_card' || value === 'credit-card') return 'Credit / Debit Card';
   if (value === 'bank' || value === 'bank_transfer' || value === 'bank-transfer') return 'Bank Transfer';
   return method ? method : 'Unknown';
+}
+
+function renderBtcPaymentInstructions(payload: {
+  orderId: string;
+  totalAmount: number;
+  forAdmin?: boolean;
+}) {
+  const shortId = payload.orderId.slice(0, 8);
+  return `
+    <div style="margin:18px 0;padding:16px;border:1px solid #fdba74;background:#fff7ed;border-radius:12px;">
+      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#c2410c;font-weight:800;">
+        ${payload.forAdmin ? 'Bitcoin Payment Details Sent to Customer' : 'Pay with Bitcoin'}
+      </p>
+      <p style="margin:0 0 10px;font-size:13px;color:#9a3412;line-height:1.7;">
+        ${
+          payload.forAdmin
+            ? `Customer was instructed to send the BTC equivalent of <strong>${formatCurrency(payload.totalAmount)}</strong> to:`
+            : `Please send the Bitcoin equivalent of <strong>${formatCurrency(payload.totalAmount)}</strong> to the address below. Use Order ID <strong>${safeHtml(shortId)}</strong> as a reference where possible.`
+        }
+      </p>
+      <p style="margin:0;padding:12px;background:#ffffff;border:1px solid #fed7aa;border-radius:10px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;color:#0f172a;word-break:break-all;font-weight:700;">
+        ${safeHtml(BTC_PAYMENT_ADDRESS)}
+      </p>
+      ${
+        payload.forAdmin
+          ? ''
+          : `<p style="margin:10px 0 0;font-size:12px;color:#9a3412;line-height:1.6;">After sending payment, return to checkout and tap <strong>I have Paid</strong> so our team can verify the transaction.</p>`
+      }
+    </div>`;
 }
 
 function renderBrandLayout(params: { title: string; preheader: string; bodyHtml: string }) {
@@ -154,7 +186,8 @@ export function renderOrderCreatedCustomerEmail(payload: OrderEmailPayload): Ema
         <td style="font-size:15px;color:#0f172a;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">Total</td>
         <td style="font-size:15px;color:#249688;text-align:right;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
-    </table>`;
+    </table>
+    ${isCryptoPaymentMethod(payload.paymentMethod) ? renderBtcPaymentInstructions({ orderId: payload.orderId, totalAmount: payload.totalAmount }) : ''}`;
 
   const html = renderBrandLayout({
     title: `Order Confirmed • ${payload.orderId.slice(0, 8)}`,
@@ -221,7 +254,8 @@ export function renderOrderCreatedAdminEmail(payload: OrderEmailPayload): EmailR
         <td style="font-size:13px;color:#64748b;padding:4px 0;">Total</td>
         <td style="font-size:13px;color:#249688;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
-    </table>`;
+    </table>
+    ${isCryptoPaymentMethod(payload.paymentMethod) ? renderBtcPaymentInstructions({ orderId: payload.orderId, totalAmount: payload.totalAmount, forAdmin: true }) : ''}`;
 
   const html = renderBrandLayout({
     title: `New Order • ${payload.orderId.slice(0, 8)}`,
@@ -231,6 +265,55 @@ export function renderOrderCreatedAdminEmail(payload: OrderEmailPayload): EmailR
 
   return {
     subject: `New Order • #${payload.orderId.slice(0, 8)}`,
+    html,
+    text: stripHtml(bodyHtml)
+  };
+}
+
+export function renderBtcPaymentDeclaredAdminEmail(payload: {
+  orderId: string;
+  customerName: string;
+  customerEmail: string;
+  totalAmount: number;
+}): EmailRenderResult {
+  const bodyHtml = `
+    <p style="margin:0 0 14px;font-size:14px;color:#334155;line-height:1.7;">
+      A customer marked their Bitcoin payment as sent and is awaiting verification.
+    </p>
+    <div style="padding:16px;border:1px solid #fde68a;background:#fffbeb;border-radius:12px;margin-bottom:18px;">
+      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#92400e;font-weight:800;">Order ID</p>
+      <p style="margin:0;font-size:18px;color:#78350f;font-weight:800;">${safeHtml(payload.orderId)}</p>
+    </div>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="font-size:13px;color:#64748b;padding:6px 0;">Customer</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:6px 0;font-weight:700;">${safeHtml(payload.customerName || 'Guest')}</td>
+      </tr>
+      <tr>
+        <td style="font-size:13px;color:#64748b;padding:6px 0;">Email</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:6px 0;font-weight:700;">${safeHtml(payload.customerEmail)}</td>
+      </tr>
+      <tr>
+        <td style="font-size:13px;color:#64748b;padding:6px 0;">Amount</td>
+        <td style="font-size:13px;color:#249688;text-align:right;padding:6px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
+      </tr>
+      <tr>
+        <td style="font-size:13px;color:#64748b;padding:6px 0;">BTC Address</td>
+        <td style="font-size:12px;color:#0f172a;text-align:right;padding:6px 0;font-weight:700;word-break:break-all;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;">${safeHtml(BTC_PAYMENT_ADDRESS)}</td>
+      </tr>
+    </table>
+    <p style="margin:18px 0 0;font-size:13px;color:#334155;line-height:1.7;">
+      Please verify the incoming Bitcoin transaction, then mark the order as paid in the admin dashboard.
+    </p>`;
+
+  const html = renderBrandLayout({
+    title: `BTC Payment Declared • ${payload.orderId.slice(0, 8)}`,
+    preheader: `Customer declared Bitcoin payment for order ${payload.orderId.slice(0, 8)}`,
+    bodyHtml
+  });
+
+  return {
+    subject: `BTC Payment Declared • #${payload.orderId.slice(0, 8)}`,
     html,
     text: stripHtml(bodyHtml)
   };

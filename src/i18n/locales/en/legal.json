@@ -53,7 +53,7 @@
         "items": [
           {
             "q": "Which payment methods do you accept?",
-            "a": "We accept cryptocurrency (BTC, ETH, USDT) with a 5% discount, bank transfer, and card orders reviewed manually."
+            "a": "We accept Bitcoin (BTC) paid to our published wallet address, bank transfer, and card orders reviewed manually."
           },
           {
             "q": "What is your return policy?",
