@@ -34,6 +34,9 @@ const SHIPPING_METHODS = {
 
 const EUROPEAN_COUNTRIES = Array.from(new Set(europeanLocations.map(l => l.country)));
 
+/** Bank transfer is only offered once merchandise + shipping reaches this EUR amount. */
+const BANK_TRANSFER_MIN_EUR = 100;
+
 type PaymentMethodId = 'bank' | 'crypto';
 
 const ALL_PAYMENT_METHODS: Array<{
@@ -149,8 +152,19 @@ export default function Checkout() {
   
   const subtotalValue = getSubtotal();
   const promoDiscountValue = Math.min(appliedDiscount, subtotalValue);
-  const availablePaymentMethods = ALL_PAYMENT_METHODS;
-  const finalTotalValue = subtotalValue - promoDiscountValue + shippingCost;
+  const orderTotalBeforePayment = subtotalValue - promoDiscountValue + shippingCost;
+  const bankTransferAvailable = orderTotalBeforePayment >= BANK_TRANSFER_MIN_EUR;
+  const availablePaymentMethods = ALL_PAYMENT_METHODS.filter(
+    (method) => method.id === 'crypto' || (method.id === 'bank' && bankTransferAvailable),
+  );
+  const finalTotalValue = orderTotalBeforePayment;
+
+  // If bank drops below the threshold (e.g. shipping/promo change), fall back to crypto.
+  React.useEffect(() => {
+    if (paymentMethod === 'bank' && !bankTransferAvailable) {
+      setPaymentMethod('crypto');
+    }
+  }, [paymentMethod, bankTransferAvailable]);
 
   const applyPromo = () => {
     if (isValidPromoCode(promoCode)) {
@@ -199,7 +213,11 @@ export default function Checkout() {
 
   const validatePaymentStep = () => {
     const errors: Record<string, string> = {};
-    if (!paymentMethod || !availablePaymentMethods.some((m) => m.id === paymentMethod)) {
+    if (!paymentMethod) {
+      errors.paymentMethod = 'Please select a payment method.';
+    } else if (paymentMethod === 'bank' && !bankTransferAvailable) {
+      errors.paymentMethod = `Bank transfer is only available for orders of ${formatCurrency(BANK_TRANSFER_MIN_EUR)} or more.`;
+    } else if (!availablePaymentMethods.some((m) => m.id === paymentMethod)) {
       errors.paymentMethod = 'Please select a payment method.';
     }
     setPaymentErrors(errors);
@@ -448,6 +466,11 @@ export default function Checkout() {
                     </button>
                   ))}
                 </div>
+                {!bankTransferAvailable && (
+                  <p className="text-xs font-semibold text-steel-600">
+                    Bank transfer becomes available for orders of {formatCurrency(BANK_TRANSFER_MIN_EUR)} or more.
+                  </p>
+                )}
                 {paymentErrors.paymentMethod && <p className="text-xs font-semibold text-red-600">{paymentErrors.paymentMethod}</p>}
 
                 <button type="button" onClick={handleConfirmPaymentChoice} className="w-full bg-gray-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all shadow-xl shadow-gray-200">
