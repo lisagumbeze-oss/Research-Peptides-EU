@@ -6,6 +6,13 @@
     "essentialOnly": "Nur essenziell",
     "privacyLink": "Datenschutzerklärung"
   },
+  "ageGate": {
+    "title": "Alters- und Forschungsbestätigung",
+    "description": "Dieser Katalog liefert Forschungsverbindungen ausschließlich für den Laborgebrauch. Sie müssen mindestens 18 Jahre alt sein, um fortzufahren. Produkte sind nicht für den menschlichen oder tierärztlichen Gebrauch bestimmt.",
+    "confirm": "Ich bin 18+ und betrete die Seite nur für Forschungszwecke",
+    "footer": "Mit dem Fortfahren stimmen Sie unseren",
+    "termsLink": "Nutzungsbedingungen"
+  },
   "faq": {
     "eyebrow": "Support",
     "title": "FAQ für Forscher",
@@ -39,8 +46,8 @@
             "a": "Standardlieferung in der EU dauert in der Regel 3–7 Werktage. Abwicklung aus den Niederlanden mit nachverfolgbaren Versanddienstleistern."
           },
           {
-            "q": "Ist die Verpackung diskret?",
-            "a": "Ja. Bestellungen werden in neutraler, unmarkierter Verpackung versendet, geeignet für Forschungseinrichtungen."
+            "q": "Wie werden Bestellungen verpackt?",
+            "a": "Bestellungen werden vakuumversiegelt in neutraler Verpackung versendet, geeignet für Forschungseinrichtungen."
           },
           {
             "q": "Versenden Sie außerhalb der EU?",

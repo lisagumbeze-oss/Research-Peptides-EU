@@ -1,7 +1,4 @@
 import React from 'react';
-// #region agent log
-import { agentLog } from '../debug/agentLog';
-// #endregion
 
 type Props = { children: React.ReactNode };
 
@@ -20,7 +17,7 @@ function isStaleChunkError(error: unknown): boolean {
 
 const RELOAD_GUARD_KEY = 'rp-eu-chunk-reload';
 
-function reloadOnceForStaleChunks(reason: string): boolean {
+function reloadOnceForStaleChunks(): boolean {
   try {
     const last = sessionStorage.getItem(RELOAD_GUARD_KEY);
     if (last && Date.now() - Number(last) < 15_000) return false;
@@ -28,12 +25,6 @@ function reloadOnceForStaleChunks(reason: string): boolean {
   } catch {
     /* sessionStorage unavailable */
   }
-  // #region agent log
-  agentLog('L', 'RouteChunkErrorBoundary.tsx:33', 'stale chunk recovery reload', {
-    reason,
-    href: window.location.href,
-  });
-  // #endregion
   window.location.reload();
   return true;
 }
@@ -50,7 +41,7 @@ export class RouteChunkErrorBoundary extends React.Component<Props, State> {
   }
 
   componentDidCatch(error: unknown) {
-    if (isStaleChunkError(error) && reloadOnceForStaleChunks('error-boundary')) return;
+    if (isStaleChunkError(error) && reloadOnceForStaleChunks()) return;
     console.error('Route render failed:', error);
   }
 
@@ -80,13 +71,13 @@ export class RouteChunkErrorBoundary extends React.Component<Props, State> {
 export function installStaleChunkRecovery() {
   window.addEventListener('vite:preloadError', (event) => {
     event.preventDefault();
-    reloadOnceForStaleChunks('vite-preload-error');
+    reloadOnceForStaleChunks();
   });
 
   window.addEventListener('unhandledrejection', (event) => {
     if (isStaleChunkError(event.reason)) {
       event.preventDefault();
-      reloadOnceForStaleChunks('unhandled-rejection');
+      reloadOnceForStaleChunks();
     }
   });
 }

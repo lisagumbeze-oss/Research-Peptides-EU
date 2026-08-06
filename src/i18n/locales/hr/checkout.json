@@ -1,26 +1,33 @@
-{
-  "header": {
-    "eyebrow": "Sigurna naplata",
-    "title": "Dovršite narudžbu",
-    "description": "EU dostava · fakturiranje s PDV-om · ispunjenje iz Nizozemske"
-  },
-  "steps": {
-    "shipping": "Dostava",
-    "payment": "Plaćanje",
-    "confirm": "Potvrdi"
-  },
-  "cart": {
-    "title": "Vaša košarica",
-    "empty": "Vaša košarica je prazna",
-    "emptyCta": "Pregledaj katalog",
-    "summary": "Sažetak narudžbe",
-    "promo": "Promotivni kod",
-    "subtotal": "Međuzbroj",
-    "discount": "Popust",
-    "shipping": "Dostava",
-    "shippingAtCheckout": "Pri naplati",
-    "total": "Ukupno",
-    "proceed": "Nastavi na naplatu",
-    "vatNote": "Cijene u EUR. PDV se primjenjuje gdje je potrebno pri naplati prema zemlji dostave u EU."
-  }
+﻿{
+    "header":  {
+                   "eyebrow":  "Sigurna naplata",
+                   "title":  "Dovršite narudžbu",
+                   "description":  "EU dostava · fakturiranje s PDV-om · ispunjenje iz Nizozemske"
+               },
+    "steps":  {
+                  "shipping":  "Dostava",
+                  "payment":  "Plaćanje",
+                  "confirm":  "Potvrdi"
+              },
+    "cart":  {
+                 "title":  "Vaša košarica",
+                 "empty":  "Vaša košarica je prazna",
+                 "emptyCta":  "Pregledaj katalog",
+                 "summary":  "Sažetak narudžbe",
+                 "promo":  "Promotivni kod",
+                 "subtotal":  "Međuzbroj",
+                 "discount":  "Popust",
+                 "shipping":  "Dostava",
+                 "shippingAtCheckout":  "Pri naplati",
+                 "total":  "Ukupno",
+                 "proceed":  "Nastavi na naplatu",
+                 "vatNote":  "Cijene u EUR. PDV se primjenjuje gdje je potrebno pri naplati prema zemlji dostave u EU."
+             },
+    "attestation":  {
+                        "required":  "Please confirm all attestations to place your order.",
+                        "researchUse":  "I confirm these products are for laboratory research use only and not for human or veterinary use.",
+                        "age":  "I confirm that I am at least 18 years old.",
+                        "terms":  "I agree to the",
+                        "termsLink":  "Terms of Service"
+                    }
 }

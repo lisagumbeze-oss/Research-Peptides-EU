@@ -1,26 +1,33 @@
-{
-  "header": {
-    "eyebrow": "Ασφαλής ολοκλήρωση αγοράς",
-    "title": "Ολοκληρώστε την παραγγελία σας",
-    "description": "Αποστολή ΕΕ · τιμολόγηση ΦΠΑ · εκπλήρωση από Netherlands"
-  },
-  "steps": {
-    "shipping": "Αποστολή",
-    "payment": "Πληρωμή",
-    "confirm": "Επιβεβαίωση"
-  },
-  "cart": {
-    "title": "Το καλάθι σας",
-    "empty": "Το καλάθι σας είναι άδειο",
-    "emptyCta": "Περιήγηση στον κατάλογο",
-    "summary": "Σύνοψη παραγγελίας",
-    "promo": "Κωδικός προσφοράς",
-    "subtotal": "Υποσύνολο",
-    "discount": "Έκπτωση",
-    "shipping": "Αποστολή",
-    "shippingAtCheckout": "Στην ολοκλήρωση αγοράς",
-    "total": "Σύνολο",
-    "proceed": "Μετάβαση στην ολοκλήρωση αγοράς",
-    "vatNote": "Τιμές σε EUR. ΦΠΑ εφαρμόζεται όπου απαιτείται στην ολοκλήρωση αγοράς ανάλογα με τη χώρα αποστολής στην ΕΕ."
-  }
+﻿{
+    "header":  {
+                   "eyebrow":  "Ασφαλής ολοκλήρωση αγοράς",
+                   "title":  "Ολοκληρώστε την παραγγελία σας",
+                   "description":  "Αποστολή ΕΕ · τιμολόγηση ΦΠΑ · εκπλήρωση από Netherlands"
+               },
+    "steps":  {
+                  "shipping":  "Αποστολή",
+                  "payment":  "Πληρωμή",
+                  "confirm":  "Επιβεβαίωση"
+              },
+    "cart":  {
+                 "title":  "Το καλάθι σας",
+                 "empty":  "Το καλάθι σας είναι άδειο",
+                 "emptyCta":  "Περιήγηση στον κατάλογο",
+                 "summary":  "Σύνοψη παραγγελίας",
+                 "promo":  "Κωδικός προσφοράς",
+                 "subtotal":  "Υποσύνολο",
+                 "discount":  "Έκπτωση",
+                 "shipping":  "Αποστολή",
+                 "shippingAtCheckout":  "Στην ολοκλήρωση αγοράς",
+                 "total":  "Σύνολο",
+                 "proceed":  "Μετάβαση στην ολοκλήρωση αγοράς",
+                 "vatNote":  "Τιμές σε EUR. ΦΠΑ εφαρμόζεται όπου απαιτείται στην ολοκλήρωση αγοράς ανάλογα με τη χώρα αποστολής στην ΕΕ."
+             },
+    "attestation":  {
+                        "required":  "Please confirm all attestations to place your order.",
+                        "researchUse":  "I confirm these products are for laboratory research use only and not for human or veterinary use.",
+                        "age":  "I confirm that I am at least 18 years old.",
+                        "terms":  "I agree to the",
+                        "termsLink":  "Terms of Service"
+                    }
 }

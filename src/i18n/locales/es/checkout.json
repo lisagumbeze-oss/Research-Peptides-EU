@@ -1,26 +1,33 @@
-{
-  "header": {
-    "eyebrow": "Pago seguro",
-    "title": "Complete su pedido",
-    "description": "Envío UE · facturación con IVA · cumplimiento desde Países Bajos"
-  },
-  "steps": {
-    "shipping": "Envío",
-    "payment": "Pago",
-    "confirm": "Confirmar"
-  },
-  "cart": {
-    "title": "Su carrito",
-    "empty": "Su carrito está vacío",
-    "emptyCta": "Explorar catálogo",
-    "summary": "Resumen del pedido",
-    "promo": "Código promocional",
-    "subtotal": "Subtotal",
-    "discount": "Descuento",
-    "shipping": "Envío",
-    "shippingAtCheckout": "En el pago",
-    "total": "Total",
-    "proceed": "Ir al pago",
-    "vatNote": "Precios en EUR. IVA aplicado cuando corresponda en el pago según su país de envío en la UE."
-  }
+﻿{
+    "header":  {
+                   "eyebrow":  "Pago seguro",
+                   "title":  "Complete su pedido",
+                   "description":  "Envío UE · facturación con IVA · cumplimiento desde Países Bajos"
+               },
+    "steps":  {
+                  "shipping":  "Envío",
+                  "payment":  "Pago",
+                  "confirm":  "Confirmar"
+              },
+    "cart":  {
+                 "title":  "Su carrito",
+                 "empty":  "Su carrito está vacío",
+                 "emptyCta":  "Explorar catálogo",
+                 "summary":  "Resumen del pedido",
+                 "promo":  "Código promocional",
+                 "subtotal":  "Subtotal",
+                 "discount":  "Descuento",
+                 "shipping":  "Envío",
+                 "shippingAtCheckout":  "En el pago",
+                 "total":  "Total",
+                 "proceed":  "Ir al pago",
+                 "vatNote":  "Precios en EUR. IVA aplicado cuando corresponda en el pago según su país de envío en la UE."
+             },
+    "attestation":  {
+                        "required":  "Please confirm all attestations to place your order.",
+                        "researchUse":  "I confirm these products are for laboratory research use only and not for human or veterinary use.",
+                        "age":  "I confirm that I am at least 18 years old.",
+                        "terms":  "I agree to the",
+                        "termsLink":  "Terms of Service"
+                    }
 }

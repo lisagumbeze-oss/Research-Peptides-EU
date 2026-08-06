@@ -16,13 +16,13 @@ export function CtaSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <p className="text-caption text-brand-300 mb-4">Start your research protocol</p>
+            <p className="text-caption text-brand-300 mb-4">Equip your laboratory</p>
             <h2 className="text-h1 text-white font-display font-bold mb-4 max-w-2xl mx-auto">
-              Access Europe&apos;s premium research peptide catalog today
+              Access Europe&apos;s research peptide catalog
             </h2>
             <p className="text-silver-400 text-sm md:text-base max-w-xl mx-auto mb-8 leading-relaxed">
               Verified purity, COA-backed batches, and Netherlands-based EU fulfillment — built for
-              laboratories that demand clinical precision.
+              laboratories that require documented analytical standards.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link to="/shop">
@@ -33,7 +33,7 @@ export function CtaSection() {
               </Link>
               <Button variant="ghost" size="lg" onClick={openWizard} className="gap-2 border border-white/15 min-w-[200px]">
                 <Sparkles className="h-4 w-4 text-brand-300" />
-                Find your compound
+                Browse by research area
               </Button>
             </div>
           </motion.div>

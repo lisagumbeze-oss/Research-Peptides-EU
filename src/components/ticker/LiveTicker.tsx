@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { AlertCircle, TrendingUp, Zap, Globe } from 'lucide-react';
+import { AlertCircle, FlaskConical, Zap, Package } from 'lucide-react';
 
 const TICKER_ITEMS = [
-  { icon: AlertCircle, text: "LOW STOCK: BPC-157 5mg — limited EU batch availability", color: "text-warning" },
-  { icon: Globe, text: "EU DISPATCH: Semaglutide research units shipped to Amsterdam, NL", color: "text-brand-400" },
-  { icon: Zap, text: "PURITY VERIFIED: 99.8%+ third-party testing on all catalog lines", color: "text-success" },
-  { icon: TrendingUp, text: "TRENDING: GLP-1 research demand across European institutions", color: "text-purity" },
-  { icon: AlertCircle, text: "RESTOCK: TB-500 10mg lyophilized — Netherlands warehouse", color: "text-brand-300" },
+  { icon: Package, text: "EU DISPATCH: Netherlands warehouse — tracked laboratory shipments", color: "text-brand-400" },
+  { icon: Zap, text: "ANALYTICS: Third-party HPLC verification on catalog batches", color: "text-success" },
+  { icon: FlaskConical, text: "RESEARCH USE ONLY: Not for human or veterinary use", color: "text-purity" },
+  { icon: AlertCircle, text: "DOCUMENTATION: COA available for verified batch lines", color: "text-brand-300" },
+  { icon: Package, text: "FULFILLMENT: Cold-chain handling for sensitive research materials", color: "text-warning" },
 ];
 
 export default function LiveTicker() {

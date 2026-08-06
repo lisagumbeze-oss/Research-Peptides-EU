@@ -6,6 +6,13 @@
     "essentialOnly": "Essentiels uniquement",
     "privacyLink": "Politique de confidentialité"
   },
+  "ageGate": {
+    "title": "Confirmation d'âge et d'usage recherche",
+    "description": "Ce catalogue fournit des composés de recherche pour usage laboratoire uniquement. Vous devez avoir au moins 18 ans pour continuer. Les produits ne sont pas destinés à un usage humain ou vétérinaire.",
+    "confirm": "J'ai 18 ans ou plus et j'accède pour un usage recherche uniquement",
+    "footer": "En continuant, vous acceptez nos",
+    "termsLink": "Conditions d'utilisation"
+  },
   "faq": {
     "eyebrow": "Assistance",
     "title": "FAQ chercheurs",
@@ -39,8 +46,8 @@
             "a": "La livraison standard dans l'UE prend généralement 3 à 7 jours ouvrables. Expédition depuis les Pays-Bas avec transporteurs suivis."
           },
           {
-            "q": "L'emballage est-il discret ?",
-            "a": "Oui. Les commandes sont expédiées dans un emballage neutre et non marqué, adapté aux installations de recherche."
+            "q": "Comment les commandes sont-elles emballées ?",
+            "a": "Les commandes sont expédiées sous vide dans un emballage neutre adapté aux installations de recherche."
           },
           {
             "q": "Livrez-vous hors de l'UE ?",

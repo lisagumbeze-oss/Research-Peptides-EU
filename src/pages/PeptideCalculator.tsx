@@ -9,10 +9,10 @@ function round(value: number) {
 export default function PeptideCalculator() {
   const [massMg, setMassMg] = React.useState(10);
   const [diluentMl, setDiluentMl] = React.useState(2);
-  const [targetDoseMcg, setTargetDoseMcg] = React.useState(250);
+  const [aliquotMcg, setAliquotMcg] = React.useState(250);
 
   const concentrationMcgPerMl = diluentMl > 0 ? (massMg * 1000) / diluentMl : 0;
-  const requiredVolumeMl = concentrationMcgPerMl > 0 ? targetDoseMcg / concentrationMcgPerMl : 0;
+  const requiredVolumeMl = concentrationMcgPerMl > 0 ? aliquotMcg / concentrationMcgPerMl : 0;
 
   return (
     <div className="bg-white min-h-screen pt-12 pb-24">
@@ -24,7 +24,7 @@ export default function PeptideCalculator() {
           </div>
           <h1>Peptide Calculator</h1>
           <p className="text-gray-500 mt-4 font-medium italic max-w-3xl mx-auto">
-            Quick reconstitution and dose-volume estimates for research planning. Validate all values against your SOP and batch documentation.
+            Quick reconstitution and aliquot-volume estimates for laboratory planning. Validate all values against your SOP and batch documentation. Not for human or veterinary use.
           </p>
         </motion.div>
 
@@ -59,16 +59,16 @@ export default function PeptideCalculator() {
               />
             </div>
             <div>
-              <label htmlFor="calc-dose" className="block text-[11px] font-black uppercase tracking-widest text-gray-500 mb-2">
-                Target Dose (mcg)
+              <label htmlFor="calc-aliquot" className="block text-[11px] font-black uppercase tracking-widest text-gray-500 mb-2">
+                Working aliquot (mcg)
               </label>
               <input
-                id="calc-dose"
+                id="calc-aliquot"
                 type="number"
                 min={1}
                 step={1}
-                value={targetDoseMcg}
-                onChange={(e) => setTargetDoseMcg(Number(e.target.value) || 0)}
+                value={aliquotMcg}
+                onChange={(e) => setAliquotMcg(Number(e.target.value) || 0)}
                 className="w-full p-4 rounded-2xl border border-gray-200 bg-white font-bold text-gray-900 outline-none focus:ring-2 focus:ring-brand-400/30"
               />
             </div>
@@ -85,11 +85,11 @@ export default function PeptideCalculator() {
                 <p className="text-2xl font-black text-brand-300">{round(concentrationMcgPerMl)} mcg/mL</p>
               </div>
               <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
-                <p className="text-gray-300 text-xs uppercase tracking-widest font-black mb-1">Volume per target dose</p>
+                <p className="text-gray-300 text-xs uppercase tracking-widest font-black mb-1">Volume per working aliquot</p>
                 <p className="text-2xl font-black text-brand-300">{round(requiredVolumeMl)} mL</p>
               </div>
               <p className="text-gray-400 leading-relaxed">
-                For laboratory planning only. Confirm final concentration and dose volumes against method-specific requirements before experimental use.
+                For laboratory planning and preparation only. Confirm final concentration and aliquot volumes against method-specific requirements before experimental use.
               </p>
             </div>
           </section>

@@ -9,6 +9,13 @@
     "payment": "Payment",
     "confirm": "Confirm"
   },
+  "attestation": {
+    "age": "I confirm that I am at least 18 years old.",
+    "researchUse": "I confirm these products are for laboratory research use only and not for human or veterinary use.",
+    "terms": "I agree to the",
+    "termsLink": "Terms of Service",
+    "required": "Please confirm all attestations to place your order."
+  },
   "cart": {
     "title": "Your cart",
     "empty": "Your cart is empty",

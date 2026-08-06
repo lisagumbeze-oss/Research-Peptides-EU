@@ -3,10 +3,10 @@
     "eyebrow": "Netherlands · European research standards",
     "title": "Precision peptides for",
     "titleHighlight": "European laboratories.",
-    "subtitle": "Research Peptides EU supplies institutional-grade compounds with third-party analytical verification, pharmaceutical handling, and trusted EU distribution.",
+    "subtitle": "Research Peptides EU supplies institutional-grade compounds with third-party analytical verification, laboratory handling, and trusted EU distribution.",
     "ctaShop": "Browse catalog",
-    "ctaWizard": "Compound selector",
-    "trustPurity": "99.8%+ verified purity",
+    "ctaWizard": "Browse by research area",
+    "trustPurity": "Third-party verified purity",
     "trustShipping": "EU-wide cold-chain dispatch",
     "trustCoa": "COA on every batch"
   },
@@ -36,7 +36,7 @@
   },
   "cta": {
     "title": "Ready to equip your laboratory?",
-    "subtitle": "Browse the EU catalog or use the compound selector to narrow your research line.",
+    "subtitle": "Browse the EU catalog or use the research area selector to narrow your laboratory line.",
     "button": "Shop research catalog"
   }
 }

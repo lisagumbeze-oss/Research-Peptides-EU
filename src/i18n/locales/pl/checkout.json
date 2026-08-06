@@ -1,26 +1,33 @@
-{
-  "header": {
-    "eyebrow": "Bezpieczna kasa",
-    "title": "Dokończ zamówienie",
-    "description": "Wysyłka UE · fakturowanie VAT · realizacja z Holandii"
-  },
-  "steps": {
-    "shipping": "Wysyłka",
-    "payment": "Płatność",
-    "confirm": "Potwierdź"
-  },
-  "cart": {
-    "title": "Twój koszyk",
-    "empty": "Twój koszyk jest pusty",
-    "emptyCta": "Przeglądaj katalog",
-    "summary": "Podsumowanie zamówienia",
-    "promo": "Kod promocyjny",
-    "subtotal": "Suma częściowa",
-    "discount": "Rabat",
-    "shipping": "Wysyłka",
-    "shippingAtCheckout": "Przy kasie",
-    "total": "Razem",
-    "proceed": "Przejdź do kasy",
-    "vatNote": "Ceny w EUR. VAT stosowany tam, gdzie wymagany przy kasie według kraju wysyłki w UE."
-  }
+﻿{
+    "header":  {
+                   "eyebrow":  "Bezpieczna kasa",
+                   "title":  "Dokończ zamówienie",
+                   "description":  "Wysyłka UE · fakturowanie VAT · realizacja z Holandii"
+               },
+    "steps":  {
+                  "shipping":  "Wysyłka",
+                  "payment":  "Płatność",
+                  "confirm":  "Potwierdź"
+              },
+    "cart":  {
+                 "title":  "Twój koszyk",
+                 "empty":  "Twój koszyk jest pusty",
+                 "emptyCta":  "Przeglądaj katalog",
+                 "summary":  "Podsumowanie zamówienia",
+                 "promo":  "Kod promocyjny",
+                 "subtotal":  "Suma częściowa",
+                 "discount":  "Rabat",
+                 "shipping":  "Wysyłka",
+                 "shippingAtCheckout":  "Przy kasie",
+                 "total":  "Razem",
+                 "proceed":  "Przejdź do kasy",
+                 "vatNote":  "Ceny w EUR. VAT stosowany tam, gdzie wymagany przy kasie według kraju wysyłki w UE."
+             },
+    "attestation":  {
+                        "required":  "Please confirm all attestations to place your order.",
+                        "researchUse":  "I confirm these products are for laboratory research use only and not for human or veterinary use.",
+                        "age":  "I confirm that I am at least 18 years old.",
+                        "terms":  "I agree to the",
+                        "termsLink":  "Terms of Service"
+                    }
 }

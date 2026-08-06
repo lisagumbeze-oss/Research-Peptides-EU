@@ -1,26 +1,33 @@
-{
-  "header": {
-    "eyebrow": "Biztonságos pénztár",
-    "title": "Fejezze be rendelését",
-    "description": "EU szállítás · ÁFA-kész számlázás · teljesítés Netherlandsből"
-  },
-  "steps": {
-    "shipping": "Szállítás",
-    "payment": "Fizetés",
-    "confirm": "Megerősítés"
-  },
-  "cart": {
-    "title": "Kosara",
-    "empty": "A kosara üres",
-    "emptyCta": "Katalógus böngészése",
-    "summary": "Rendelés összegzése",
-    "promo": "Promóciós kód",
-    "subtotal": "Részösszeg",
-    "discount": "Kedvezmény",
-    "shipping": "Szállítás",
-    "shippingAtCheckout": "A pénztárnál",
-    "total": "Összesen",
-    "proceed": "Tovább a pénztárhoz",
-    "vatNote": "Árak EUR-ban. ÁFA alkalmazása, ahol szükséges a pénztárnál az EU szállítási ország szerint."
-  }
+﻿{
+    "header":  {
+                   "eyebrow":  "Biztonságos pénztár",
+                   "title":  "Fejezze be rendelését",
+                   "description":  "EU szállítás · ÁFA-kész számlázás · teljesítés Netherlandsből"
+               },
+    "steps":  {
+                  "shipping":  "Szállítás",
+                  "payment":  "Fizetés",
+                  "confirm":  "Megerősítés"
+              },
+    "cart":  {
+                 "title":  "Kosara",
+                 "empty":  "A kosara üres",
+                 "emptyCta":  "Katalógus böngészése",
+                 "summary":  "Rendelés összegzése",
+                 "promo":  "Promóciós kód",
+                 "subtotal":  "Részösszeg",
+                 "discount":  "Kedvezmény",
+                 "shipping":  "Szállítás",
+                 "shippingAtCheckout":  "A pénztárnál",
+                 "total":  "Összesen",
+                 "proceed":  "Tovább a pénztárhoz",
+                 "vatNote":  "Árak EUR-ban. ÁFA alkalmazása, ahol szükséges a pénztárnál az EU szállítási ország szerint."
+             },
+    "attestation":  {
+                        "required":  "Please confirm all attestations to place your order.",
+                        "researchUse":  "I confirm these products are for laboratory research use only and not for human or veterinary use.",
+                        "age":  "I confirm that I am at least 18 years old.",
+                        "terms":  "I agree to the",
+                        "termsLink":  "Terms of Service"
+                    }
 }

@@ -19,13 +19,11 @@ import CartDrawer from './cart/CartDrawer';
 import Omnisearch from './search/Omnisearch';
 import TawkToChat from './chat/TawkToChat';
 import { CookieConsent } from './gdpr/CookieConsent';
+import { AgeGate } from './gdpr/AgeGate';
 import { PageLoader } from './PageLoader';
 import { RouteChunkErrorBoundary } from './RouteChunkErrorBoundary';
 import { postNewsletterSubscribe } from '../lib/transactionalEmailApi';
 import { JsonLd } from './seo/JsonLd';
-// #region agent log
-import { agentLog, pendingRequestSnapshot } from '../debug/agentLog';
-// #endregion
 
 function LayoutShell() {
   const { user, profile, setUser } = useAuthStore();
@@ -50,59 +48,6 @@ function LayoutShell() {
       console.error('Logout failed', error);
     }
   };
-
-  // #region agent log
-  useEffect(() => {
-    if (typeof PerformanceObserver === 'undefined') return;
-    let reported = 0;
-    let observer: PerformanceObserver | undefined;
-    try {
-      observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          if (entry.duration < 150 || reported >= 15) continue;
-          reported += 1;
-          agentLog('C', 'Layout.tsx:68', 'long task blocking main thread', {
-            durationMs: Math.round(entry.duration),
-            startTime: Math.round(entry.startTime),
-            name: entry.name,
-            pathname: window.location.pathname,
-          });
-        }
-      });
-      observer.observe({ type: 'longtask', buffered: true });
-    } catch {
-      /* longtask unsupported */
-    }
-    return () => observer?.disconnect();
-  }, []);
-  useEffect(() => {
-    let visibleSince: number | null = null;
-    let lastReportedBucket = 0;
-    const interval = window.setInterval(() => {
-      const indicators = document.querySelectorAll('.animate-spin, .animate-pulse, [role="status"]');
-      if (indicators.length === 0) {
-        visibleSince = null;
-        lastReportedBucket = 0;
-        return;
-      }
-      if (visibleSince === null) visibleSince = Date.now();
-      const stuckMs = Date.now() - visibleSince;
-      const bucket = Math.floor(stuckMs / 5000);
-      if (bucket > lastReportedBucket && bucket <= 6) {
-        lastReportedBucket = bucket;
-        agentLog('F', 'Layout.tsx:90', 'loading indicator still on screen', {
-          stuckMs,
-          indicatorCount: indicators.length,
-          firstIndicatorClass: indicators[0].className?.toString().slice(0, 140),
-          pathname: window.location.pathname,
-          rootChildren: document.getElementById('root')?.childElementCount ?? -1,
-          pendingRequests: pendingRequestSnapshot(),
-        });
-      }
-    }, 1000);
-    return () => window.clearInterval(interval);
-  }, []);
-  // #endregion
 
   useEffect(() => {
     setMobileNavOpen(false);
@@ -210,17 +155,7 @@ function LayoutShell() {
       <main id="main-content" className="flex-grow pb-20 md:pb-0 relative" tabIndex={-1}>
         <RouteChunkErrorBoundary>
           <Suspense fallback={<PageLoader />}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={location.pathname}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-              >
-                <Outlet />
-              </motion.div>
-            </AnimatePresence>
+            <Outlet />
           </Suspense>
         </RouteChunkErrorBoundary>
       </main>
@@ -258,6 +193,7 @@ function LayoutShell() {
       <SelectorWizard />
       <RecentlyViewedSidebar />
       <ToastContainer />
+      <AgeGate />
       <CookieConsent />
       {!location.pathname.includes('/admin') && <TawkToChat />}
     </div>

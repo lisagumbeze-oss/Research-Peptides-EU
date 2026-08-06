@@ -1,26 +1,33 @@
-{
-  "header": {
-    "eyebrow": "Сигурно плащане",
-    "title": "Завършете поръчката си",
-    "description": "Доставка ЕС · фактуриране с ДДС · изпълнение от Netherlands"
-  },
-  "steps": {
-    "shipping": "Доставка",
-    "payment": "Плащане",
-    "confirm": "Потвърди"
-  },
-  "cart": {
-    "title": "Вашата количка",
-    "empty": "Вашата количка е празна",
-    "emptyCta": "Разгледай каталога",
-    "summary": "Обобщение на поръчката",
-    "promo": "Промо код",
-    "subtotal": "Междинна сума",
-    "discount": "Отстъпка",
-    "shipping": "Доставка",
-    "shippingAtCheckout": "При плащане",
-    "total": "Общо",
-    "proceed": "Към плащане",
-    "vatNote": "Цени в EUR. ДДС се прилага, когато е необходимо при плащане според държавата ви за доставка в ЕС."
-  }
+﻿{
+    "header":  {
+                   "eyebrow":  "Сигурно плащане",
+                   "title":  "Завършете поръчката си",
+                   "description":  "Доставка ЕС · фактуриране с ДДС · изпълнение от Netherlands"
+               },
+    "steps":  {
+                  "shipping":  "Доставка",
+                  "payment":  "Плащане",
+                  "confirm":  "Потвърди"
+              },
+    "cart":  {
+                 "title":  "Вашата количка",
+                 "empty":  "Вашата количка е празна",
+                 "emptyCta":  "Разгледай каталога",
+                 "summary":  "Обобщение на поръчката",
+                 "promo":  "Промо код",
+                 "subtotal":  "Междинна сума",
+                 "discount":  "Отстъпка",
+                 "shipping":  "Доставка",
+                 "shippingAtCheckout":  "При плащане",
+                 "total":  "Общо",
+                 "proceed":  "Към плащане",
+                 "vatNote":  "Цени в EUR. ДДС се прилага, когато е необходимо при плащане според държавата ви за доставка в ЕС."
+             },
+    "attestation":  {
+                        "required":  "Please confirm all attestations to place your order.",
+                        "researchUse":  "I confirm these products are for laboratory research use only and not for human or veterinary use.",
+                        "age":  "I confirm that I am at least 18 years old.",
+                        "terms":  "I agree to the",
+                        "termsLink":  "Terms of Service"
+                    }
 }

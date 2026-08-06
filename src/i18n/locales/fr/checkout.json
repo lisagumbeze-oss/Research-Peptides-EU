@@ -1,26 +1,33 @@
-{
-  "header": {
-    "eyebrow": "Paiement sécurisé",
-    "title": "Finaliser votre commande",
-    "description": "Livraison UE · facturation TVA · expédition depuis les Pays-Bas"
-  },
-  "steps": {
-    "shipping": "Livraison",
-    "payment": "Paiement",
-    "confirm": "Confirmation"
-  },
-  "cart": {
-    "title": "Votre panier",
-    "empty": "Votre panier est vide",
-    "emptyCta": "Voir le catalogue",
-    "summary": "Récapitulatif",
-    "promo": "Code promo",
-    "subtotal": "Sous-total",
-    "discount": "Remise",
-    "shipping": "Livraison",
-    "shippingAtCheckout": "Au paiement",
-    "total": "Total",
-    "proceed": "Passer au paiement",
-    "vatNote": "Prix en EUR. TVA appliquée selon le pays de livraison UE."
-  }
+﻿{
+    "header":  {
+                   "eyebrow":  "Paiement sécurisé",
+                   "title":  "Finaliser votre commande",
+                   "description":  "Livraison UE · facturation TVA · expédition depuis les Pays-Bas"
+               },
+    "steps":  {
+                  "shipping":  "Livraison",
+                  "payment":  "Paiement",
+                  "confirm":  "Confirmation"
+              },
+    "cart":  {
+                 "title":  "Votre panier",
+                 "empty":  "Votre panier est vide",
+                 "emptyCta":  "Voir le catalogue",
+                 "summary":  "Récapitulatif",
+                 "promo":  "Code promo",
+                 "subtotal":  "Sous-total",
+                 "discount":  "Remise",
+                 "shipping":  "Livraison",
+                 "shippingAtCheckout":  "Au paiement",
+                 "total":  "Total",
+                 "proceed":  "Passer au paiement",
+                 "vatNote":  "Prix en EUR. TVA appliquée selon le pays de livraison UE."
+             },
+    "attestation":  {
+                        "required":  "Veuillez confirmer toutes les attestations pour passer commande.",
+                        "researchUse":  "Je confirme que ces produits sont destinés uniquement à la recherche en laboratoire et non à un usage humain ou vétérinaire.",
+                        "age":  "Je confirme avoir au moins 18 ans.",
+                        "terms":  "J\u0027accepte les",
+                        "termsLink":  "Conditions d\u0027utilisation"
+                    }
 }

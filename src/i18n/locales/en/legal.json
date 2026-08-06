@@ -6,6 +6,13 @@
     "essentialOnly": "Essential only",
     "privacyLink": "Privacy policy"
   },
+  "ageGate": {
+    "title": "Age & research confirmation",
+    "description": "This catalog supplies research compounds for laboratory use only. You must be at least 18 years old to continue. Products are not for human or veterinary use.",
+    "confirm": "I am 18+ and enter for research use only",
+    "footer": "By continuing you agree to our",
+    "termsLink": "Terms of Service"
+  },
   "faq": {
     "eyebrow": "Support",
     "title": "Researcher FAQ",
@@ -39,8 +46,8 @@
             "a": "Standard EU delivery is typically 3–7 business days. Netherlands fulfillment with tracked carriers."
           },
           {
-            "q": "Is packaging discreet?",
-            "a": "Yes. Orders ship in plain, unmarked packaging suitable for research facilities."
+            "q": "How are orders packaged?",
+            "a": "Orders ship vacuum-sealed in plain packaging suitable for research facilities."
           },
           {
             "q": "Do you ship outside the EU?",

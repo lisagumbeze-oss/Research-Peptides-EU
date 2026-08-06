@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { useCartStore } from '../store/useCartStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { formatCurrency, DEFAULT_CURRENCY } from '../lib/utils';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
+import { useLocalizedPath } from '../i18n/useLocalizedPath';
 import { supabase } from '../supabase';
 import { CheckCircle, Loader2, Truck, Package, Globe, Shield, Landmark, Bitcoin, Copy, Check } from 'lucide-react';
 import { europeanLocations } from '../data/europeanCountries';
@@ -55,6 +57,7 @@ export default function Checkout() {
   const { items, getTotal, getSubtotal, clearCart, hasHydrated } = useCartStore();
   const { user } = useAuthStore();
   const navigate = useLocaleNavigate();
+  const termsPath = useLocalizedPath('/terms');
   const [step, setStep] = useState(1);
   const [shipping, setShipping] = useState({
     fullName: '',
@@ -86,6 +89,10 @@ export default function Checkout() {
   const [showPromo, setShowPromo] = useState(false);
   const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({});
   const [paymentErrors, setPaymentErrors] = useState<Record<string, string>>({});
+  const [attestAge, setAttestAge] = useState(false);
+  const [attestResearchUse, setAttestResearchUse] = useState(false);
+  const [attestTerms, setAttestTerms] = useState(false);
+  const [attestationError, setAttestationError] = useState('');
 
   // Sync email if user logs in/out
   React.useEffect(() => {
@@ -227,6 +234,15 @@ export default function Checkout() {
     return true;
   };
 
+  const validateAttestation = () => {
+    if (!attestAge || !attestResearchUse || !attestTerms) {
+      setAttestationError(t('attestation.required'));
+      return false;
+    }
+    setAttestationError('');
+    return true;
+  };
+
   const handleContinueToPayment = () => {
     if (!validateShippingStep()) return;
     setStep(2);
@@ -244,6 +260,9 @@ export default function Checkout() {
     }
     if (!validatePaymentStep()) {
       setStep(2);
+      return;
+    }
+    if (!validateAttestation()) {
       return;
     }
 
@@ -275,7 +294,13 @@ export default function Checkout() {
           ...shipping,
           payment_method: paymentMethod,
           shipping_method: selectedMethod.name,
-          shipping_cost: shippingCost
+          shipping_cost: shippingCost,
+          attestation: {
+            age_18_plus: true,
+            research_use_only: true,
+            terms_accepted: true,
+            attested_at: new Date().toISOString(),
+          },
         }
       };
       
@@ -510,6 +535,54 @@ export default function Checkout() {
                     </div>
                   </div>
                 )}
+
+                <div className="space-y-3 rounded-[2rem] border border-brand-100 bg-mist-50 p-6">
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={attestAge}
+                      onChange={(e) => {
+                        setAttestAge(e.target.checked);
+                        setAttestationError('');
+                      }}
+                      className="mt-1 h-4 w-4 rounded border-brand-200 text-brand-600 focus:ring-brand-500"
+                    />
+                    <span className="text-sm font-semibold text-navy-950">{t('attestation.age')}</span>
+                  </label>
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={attestResearchUse}
+                      onChange={(e) => {
+                        setAttestResearchUse(e.target.checked);
+                        setAttestationError('');
+                      }}
+                      className="mt-1 h-4 w-4 rounded border-brand-200 text-brand-600 focus:ring-brand-500"
+                    />
+                    <span className="text-sm font-semibold text-navy-950">{t('attestation.researchUse')}</span>
+                  </label>
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={attestTerms}
+                      onChange={(e) => {
+                        setAttestTerms(e.target.checked);
+                        setAttestationError('');
+                      }}
+                      className="mt-1 h-4 w-4 rounded border-brand-200 text-brand-600 focus:ring-brand-500"
+                    />
+                    <span className="text-sm font-semibold text-navy-950">
+                      {t('attestation.terms')}{' '}
+                      <Link to={termsPath} className="text-brand-600 hover:underline">
+                        {t('attestation.termsLink')}
+                      </Link>
+                      .
+                    </span>
+                  </label>
+                  {attestationError && (
+                    <p className="text-xs font-semibold text-red-600">{attestationError}</p>
+                  )}
+                </div>
 
                 <button type="button" onClick={handleOrderSubmit} disabled={isSubmitting} className="w-full bg-brand-500 text-white py-6 rounded-2xl font-black text-xl hover:bg-brand-600 transition-all shadow-xl shadow-glow flex items-center justify-center gap-3">
                   {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin" aria-hidden /> : 'Complete Secure Purchase'}

@@ -1,26 +1,33 @@
-{
-  "header": {
-    "eyebrow": "Turvallinen kassa",
-    "title": "Viimeistele tilaus",
-    "description": "EU-toimitus · ALV-laskutus · täyttö Netherlandsista"
-  },
-  "steps": {
-    "shipping": "Toimitus",
-    "payment": "Maksu",
-    "confirm": "Vahvista"
-  },
-  "cart": {
-    "title": "Ostoskorisi",
-    "empty": "Ostoskorisi on tyhjä",
-    "emptyCta": "Selaa luetteloa",
-    "summary": "Tilauksen yhteenveto",
-    "promo": "Kampanjakoodi",
-    "subtotal": "Välisumma",
-    "discount": "Alennus",
-    "shipping": "Toimitus",
-    "shippingAtCheckout": "Kassalla",
-    "total": "Yhteensä",
-    "proceed": "Siirry kassalle",
-    "vatNote": "Hinnat EUR. ALV sovelletaan tarvittaessa kassalla EU-toimitusmaasi mukaan."
-  }
+﻿{
+    "header":  {
+                   "eyebrow":  "Turvallinen kassa",
+                   "title":  "Viimeistele tilaus",
+                   "description":  "EU-toimitus · ALV-laskutus · täyttö Netherlandsista"
+               },
+    "steps":  {
+                  "shipping":  "Toimitus",
+                  "payment":  "Maksu",
+                  "confirm":  "Vahvista"
+              },
+    "cart":  {
+                 "title":  "Ostoskorisi",
+                 "empty":  "Ostoskorisi on tyhjä",
+                 "emptyCta":  "Selaa luetteloa",
+                 "summary":  "Tilauksen yhteenveto",
+                 "promo":  "Kampanjakoodi",
+                 "subtotal":  "Välisumma",
+                 "discount":  "Alennus",
+                 "shipping":  "Toimitus",
+                 "shippingAtCheckout":  "Kassalla",
+                 "total":  "Yhteensä",
+                 "proceed":  "Siirry kassalle",
+                 "vatNote":  "Hinnat EUR. ALV sovelletaan tarvittaessa kassalla EU-toimitusmaasi mukaan."
+             },
+    "attestation":  {
+                        "required":  "Please confirm all attestations to place your order.",
+                        "researchUse":  "I confirm these products are for laboratory research use only and not for human or veterinary use.",
+                        "age":  "I confirm that I am at least 18 years old.",
+                        "terms":  "I agree to the",
+                        "termsLink":  "Terms of Service"
+                    }
 }

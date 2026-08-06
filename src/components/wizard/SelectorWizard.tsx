@@ -24,21 +24,21 @@ interface WizardStep {
 const STEPS: WizardStep[] = [
   {
     id: 'goal',
-    title: 'What is your primary research goal?',
+    title: 'Which research area are you exploring?',
     options: [
-      { id: 'fat-loss', label: 'Fat Loss & Metabolism', icon: Target, category: 'Weight Loss' },
-      { id: 'muscle', label: 'Muscle Development', icon: Zap, category: 'Muscle Growth' },
-      { id: 'recovery', label: 'Tissue Repair & Recovery', icon: Waves, category: 'Healing' },
-      { id: 'cognitive', label: 'Cognitive Enhancement', icon: Sparkles, category: 'Nootropics' }
+      { id: 'fat-loss', label: 'Metabolic research pathways', icon: Target, category: 'Weight Loss' },
+      { id: 'muscle', label: 'Muscle tissue research models', icon: Zap, category: 'Muscle Growth' },
+      { id: 'recovery', label: 'Cellular repair research', icon: Waves, category: 'Healing' },
+      { id: 'cognitive', label: 'Neuro research models', icon: Sparkles, category: 'Nootropics' }
     ]
   },
   {
     id: 'experience',
-    title: 'What is your experience level?',
+    title: 'What is your laboratory experience level?',
     options: [
-      { id: 'beginner', label: 'Entry Level', description: 'New to research peptides' },
-      { id: 'intermediate', label: 'Intermediate', description: 'Have conducted prior studies' },
-      { id: 'advanced', label: 'Advanced Explorer', description: 'Experienced researcher' }
+      { id: 'beginner', label: 'Entry Level', description: 'New to peptide research workflows' },
+      { id: 'intermediate', label: 'Intermediate', description: 'Have conducted prior laboratory studies' },
+      { id: 'advanced', label: 'Advanced', description: 'Experienced laboratory researcher' }
     ]
   }
 ];
@@ -120,8 +120,8 @@ export default function SelectorWizard() {
             {/* Header */}
             <div className="p-8 border-b dark:border-gray-800 flex justify-between items-center">
               <div>
-                <h2 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">Compound Selector</h2>
-                <p className="text-gray-500 text-sm mt-1">Experimental guidance based on your research goals</p>
+                <h2 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">Research area selector</h2>
+                <p className="text-gray-500 text-sm mt-1">Browse compounds by laboratory research area</p>
               </div>
               <button 
                 onClick={closeWizard}
@@ -192,8 +192,8 @@ export default function SelectorWizard() {
                     <div className="w-16 h-16 bg-green-50 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                       <CheckCircle2 className="h-8 w-8 text-green-500" />
                     </div>
-                    <h3 className="text-2xl font-black text-gray-900 dark:text-white">Research Protocol Ready</h3>
-                    <p className="text-gray-500 mt-1">Our algorithm suggests starting your study with these compounds:</p>
+                    <h3 className="text-2xl font-black text-gray-900 dark:text-white">Suggested research compounds</h3>
+                    <p className="text-gray-500 mt-1">Based on your selected research area, these catalog lines may be relevant:</p>
                   </div>
 
                   {loading ? (

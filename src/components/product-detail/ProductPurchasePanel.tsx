@@ -313,12 +313,16 @@ export function ProductPurchasePanel({
         </Button>
       </div>
 
-      <p className="text-xs text-silver-400 text-center">
-        <Link to="/coas" className="text-brand-600 hover:underline font-medium">
-          {t('purchase.viewCoaLibrary')}
-        </Link>
-        {' · '}
-        {t('purchase.laboratoryOnly')}
+      <p className="text-xs text-silver-400 text-center space-y-1">
+        <span className="block font-semibold text-steel-600">{t('purchase.researchOnly')}</span>
+        <span className="block">{t('purchase.researchOnlyDetail')}</span>
+        <span className="block">
+          <Link to="/coas" className="text-brand-600 hover:underline font-medium">
+            {t('purchase.viewCoaLibrary')}
+          </Link>
+          {' · '}
+          {t('purchase.laboratoryOnly')}
+        </span>
       </p>
     </div>
   );

@@ -1,11 +1,11 @@
-{
+﻿{
   "hero": {
     "eyebrow": "Netherlands · eurooppalaiset tutkimusstandardit",
     "title": "Tarkkuuspeptidit",
     "titleHighlight": "Eurooppalaiset laboratoriot.",
     "subtitle": "Research Peptides EU toimittaa institutionaalisen tason yhdisteitä kolmannen osapuolen analyyttisellä varmennuksella, farmaseuttisella käsittelyllä ja luotettavalla EU-jakelulla.",
     "ctaShop": "Selaa luetteloa",
-    "ctaWizard": "Yhdisteiden valitsin",
+    "ctaWizard": "Selaa tutkimusaiheen mukaan",
     "trustPurity": "Varmennettu puhtaus 99,8 %+",
     "trustShipping": "EU-laajuinen kylmäketjutoimitus",
     "trustCoa": "COA jokaiselle erälle"

@@ -6,6 +6,13 @@
     "essentialOnly": "Alleen essentieel",
     "privacyLink": "Privacybeleid"
   },
+  "ageGate": {
+    "title": "Leeftijds- en onderzoeksbevestiging",
+    "description": "Deze catalogus levert onderzoeksverbindingen uitsluitend voor laboratoriumgebruik. U moet minstens 18 jaar oud zijn om door te gaan. Producten zijn niet voor menselijk of veterinair gebruik.",
+    "confirm": "Ik ben 18+ en ga verder uitsluitend voor onderzoeksgebruik",
+    "footer": "Door verder te gaan gaat u akkoord met onze",
+    "termsLink": "Algemene voorwaarden"
+  },
   "faq": {
     "eyebrow": "Support",
     "title": "FAQ voor onderzoekers",
@@ -39,8 +46,8 @@
             "a": "Standaard EU-levering duurt doorgaans 3–7 werkdagen. Afhandeling vanuit Nederland met traceerbare vervoerders."
           },
           {
-            "q": "Is de verpakking discreet?",
-            "a": "Ja. Bestellingen worden verzonden in neutrale, ongemarkeerde verpakking geschikt voor onderzoeksfaciliteiten."
+            "q": "Hoe worden bestellingen verpakt?",
+            "a": "Bestellingen worden vacuümverzegeld verzonden in neutrale verpakking geschikt voor onderzoeksfaciliteiten."
           },
           {
             "q": "Verzenden jullie buiten de EU?",

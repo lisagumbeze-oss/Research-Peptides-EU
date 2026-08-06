@@ -1,26 +1,33 @@
-{
-  "header": {
-    "eyebrow": "Varna blagajna",
-    "title": "Dokončajte naročilo",
-    "description": "Dostava EU · fakturiranje z DDV · izpolnitev iz Netherlands"
-  },
-  "steps": {
-    "shipping": "Dostava",
-    "payment": "Plačilo",
-    "confirm": "Potrdi"
-  },
-  "cart": {
-    "title": "Vaša košarica",
-    "empty": "Vaša košarica je prazna",
-    "emptyCta": "Brskaj po katalogu",
-    "summary": "Povzetek naročila",
-    "promo": "Promocijska koda",
-    "subtotal": "Medseštevek",
-    "discount": "Popust",
-    "shipping": "Dostava",
-    "shippingAtCheckout": "Pri blagajni",
-    "total": "Skupaj",
-    "proceed": "Na blagajno",
-    "vatNote": "Cene v EUR. DDV se uporabi, kjer je zahtevan pri blagajni glede na državo dostave v EU."
-  }
+﻿{
+    "header":  {
+                   "eyebrow":  "Varna blagajna",
+                   "title":  "Dokončajte naročilo",
+                   "description":  "Dostava EU · fakturiranje z DDV · izpolnitev iz Netherlands"
+               },
+    "steps":  {
+                  "shipping":  "Dostava",
+                  "payment":  "Plačilo",
+                  "confirm":  "Potrdi"
+              },
+    "cart":  {
+                 "title":  "Vaša košarica",
+                 "empty":  "Vaša košarica je prazna",
+                 "emptyCta":  "Brskaj po katalogu",
+                 "summary":  "Povzetek naročila",
+                 "promo":  "Promocijska koda",
+                 "subtotal":  "Medseštevek",
+                 "discount":  "Popust",
+                 "shipping":  "Dostava",
+                 "shippingAtCheckout":  "Pri blagajni",
+                 "total":  "Skupaj",
+                 "proceed":  "Na blagajno",
+                 "vatNote":  "Cene v EUR. DDV se uporabi, kjer je zahtevan pri blagajni glede na državo dostave v EU."
+             },
+    "attestation":  {
+                        "required":  "Please confirm all attestations to place your order.",
+                        "researchUse":  "I confirm these products are for laboratory research use only and not for human or veterinary use.",
+                        "age":  "I confirm that I am at least 18 years old.",
+                        "terms":  "I agree to the",
+                        "termsLink":  "Terms of Service"
+                    }
 }
