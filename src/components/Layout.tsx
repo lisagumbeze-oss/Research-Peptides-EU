@@ -20,6 +20,7 @@ import Omnisearch from './search/Omnisearch';
 import TawkToChat from './chat/TawkToChat';
 import { CookieConsent } from './gdpr/CookieConsent';
 import { PageLoader } from './PageLoader';
+import { RouteChunkErrorBoundary } from './RouteChunkErrorBoundary';
 import { postNewsletterSubscribe } from '../lib/transactionalEmailApi';
 import { JsonLd } from './seo/JsonLd';
 // #region agent log
@@ -207,19 +208,21 @@ function LayoutShell() {
       />
 
       <main id="main-content" className="flex-grow pb-20 md:pb-0 relative" tabIndex={-1}>
-        <Suspense fallback={<PageLoader />}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={location.pathname}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-            >
-              <Outlet />
-            </motion.div>
-          </AnimatePresence>
-        </Suspense>
+        <RouteChunkErrorBoundary>
+          <Suspense fallback={<PageLoader />}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={location.pathname}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              >
+                <Outlet />
+              </motion.div>
+            </AnimatePresence>
+          </Suspense>
+        </RouteChunkErrorBoundary>
       </main>
 
       <SiteFooter
