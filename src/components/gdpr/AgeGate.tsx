@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { FlaskConical } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Button } from '../../design-system';
-import { useLocalizedPath } from '../../i18n/useLocalizedPath';
+import { modalMotion, overlayMotion } from '../../design-system/motion';
 
 const AGE_GATE_KEY = 'rp-eu-age-gate';
 
 export function AgeGate() {
   const { t } = useTranslation('legal');
-  const termsPath = useLocalizedPath('/terms');
   const [visible, setVisible] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const overlay = overlayMotion(Boolean(reduceMotion));
+  const panel = modalMotion(Boolean(reduceMotion));
 
   useEffect(() => {
     try {
@@ -39,15 +41,11 @@ export function AgeGate() {
           aria-modal="true"
           aria-labelledby="age-gate-title"
           aria-describedby="age-gate-desc"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          {...overlay}
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-navy-950/80 backdrop-blur-sm"
         >
           <motion.div
-            initial={{ opacity: 0, y: 16, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 12, scale: 0.98 }}
+            {...panel}
             className="w-full max-w-md bg-white border border-brand-100 rounded-2xl shadow-elevated p-6 md:p-8"
           >
             <div className="flex gap-3 mb-5">
@@ -68,9 +66,9 @@ export function AgeGate() {
             </Button>
             <p className="text-center text-xs text-steel-500 mt-4 leading-relaxed">
               {t('ageGate.footer')}{' '}
-              <Link to={termsPath} className="text-brand-600 font-semibold hover:text-brand-700">
+              <LocaleLink to="/terms" className="text-brand-600 font-semibold hover:text-brand-700">
                 {t('ageGate.termsLink')}
-              </Link>
+              </LocaleLink>
               .
             </p>
           </motion.div>

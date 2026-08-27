@@ -2,7 +2,7 @@ import { ProductCard, type CatalogProduct } from '../products/ProductCard';
 import { ProductSkeleton } from '../Skeleton';
 import { cn } from '../../lib/utils';
 
-const defaultGridClass = 'grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4';
+const defaultGridClass = 'grid-cols-2 lg:grid-cols-3';
 
 type ProductGridProps = {
   products: CatalogProduct[];
@@ -45,6 +45,7 @@ export function ProductGrid({
           product={product}
           index={index}
           showDescription={showDescription}
+          animate={false}
           inWishlist={inWishlist(product.id)}
           onToggleWishlist={(e) => onToggleWishlist(product.id, e)}
           onAddToCart={() => onAddToCart(product)}

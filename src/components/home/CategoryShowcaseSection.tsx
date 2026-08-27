@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { ArrowRight, Beaker, Dna, Layers, Pill, TestTube2 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { supabase } from '../../supabase';
 import { Container, Section } from '../../design-system';
 import { SectionHeading } from './SectionHeading';
+import { staggerDelay } from '../../design-system/motion';
 import { cn } from '../../lib/utils';
 
 type Category = {
@@ -19,6 +20,7 @@ const iconPool = [Dna, Beaker, TestTube2, Layers, Pill];
 export function CategoryShowcaseSection() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     void (async () => {
@@ -53,19 +55,19 @@ export function CategoryShowcaseSection() {
               return (
                 <motion.div
                   key={cat.id}
-                  initial={{ opacity: 0, scale: 0.96 }}
+                  initial={reduceMotion ? false : { opacity: 0, scale: 0.98 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  whileHover={{ y: -6 }}
+                  transition={{ delay: staggerDelay(i, 0.05) }}
                   className="h-full"
                 >
-                  <Link
+                  <LocaleLink
                     to={`/search?category=${cat.slug}`}
                     className={cn(
                       'group flex flex-col h-full min-h-[9rem] p-5 rounded-2xl',
                       'bg-white/5 border border-white/10 backdrop-blur-sm',
                       'hover:bg-brand-500/20 hover:border-brand-400/40 transition-all duration-300',
+                      'motion-safe:hover:-translate-y-1',
                     )}
                   >
                     <div className="w-10 h-10 rounded-xl bg-brand-500/30 flex items-center justify-center mb-4 group-hover:bg-brand-500 transition-colors">
@@ -80,7 +82,7 @@ export function CategoryShowcaseSection() {
                     <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-brand-300 opacity-0 group-hover:opacity-100 transition-opacity">
                       Browse <ArrowRight className="h-3 w-3" />
                     </span>
-                  </Link>
+                  </LocaleLink>
                 </motion.div>
               );
             })}
@@ -88,13 +90,13 @@ export function CategoryShowcaseSection() {
         )}
 
         <div className="mt-10 text-center">
-          <Link
+          <LocaleLink
             to="/categories"
             className="inline-flex items-center gap-2 text-sm font-semibold text-brand-300 hover:text-white transition-colors"
           >
             View all categories
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </LocaleLink>
         </div>
       </Container>
     </Section>

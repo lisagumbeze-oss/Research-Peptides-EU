@@ -5,6 +5,7 @@ const FOCUSABLE_SELECTOR =
 
 /**
  * While `active`, keeps Tab cycling inside `containerRef` and closes on Escape via `onClose`.
+ * Key listeners attach even if the ref is populated one frame later (portals / AnimatePresence).
  */
 export function useFocusTrap(
   active: boolean,
@@ -16,18 +17,24 @@ export function useFocusTrap(
 
   useEffect(() => {
     if (!active) return;
-    const root = containerRef.current;
-    if (!root) return;
 
     const previous = document.activeElement as HTMLElement | null;
 
-    const getFocusable = (): HTMLElement[] =>
-      Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+    const getRoot = () => containerRef.current;
+
+    const getFocusable = (): HTMLElement[] => {
+      const root = getRoot();
+      if (!root) return [];
+      return Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
         (el) => !el.hasAttribute('disabled'),
       );
+    };
 
-    const focusables = getFocusable();
-    focusables[0]?.focus();
+    const focusFirst = () => {
+      getFocusable()[0]?.focus();
+    };
+
+    const raf = requestAnimationFrame(focusFirst);
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -47,16 +54,15 @@ export function useFocusTrap(
           e.preventDefault();
           last.focus();
         }
-      } else {
-        if (document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
+      } else if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
       }
     };
 
     document.addEventListener('keydown', onKeyDown);
     return () => {
+      cancelAnimationFrame(raf);
       document.removeEventListener('keydown', onKeyDown);
       previous?.focus?.();
     };

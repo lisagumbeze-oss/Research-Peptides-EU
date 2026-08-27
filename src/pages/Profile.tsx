@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { Mail, Shield, Calendar, MapPin, CreditCard } from 'lucide-react';
 import { formatLocaleDate } from '../lib/formatLocaleDate';
-import { motion } from 'motion/react';
 import { AccountShell } from '../components/account/AccountShell';
 import { useAuthStore } from '../store/useAuthStore';
+import { Reveal } from '../design-system';
 
 export default function Profile() {
   const { i18n } = useTranslation();
@@ -11,11 +11,7 @@ export default function Profile() {
 
   return (
     <AccountShell title="Account overview" subtitle="Manage your researcher profile and preferences">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-6"
-      >
+      <Reveal className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <section className="bg-white p-8 rounded-3xl border border-brand-100 shadow-card">
           <h3 className="font-display font-bold text-lg text-navy-950 mb-6 flex items-center gap-2">
             <Shield className="h-5 w-5 text-brand-600" aria-hidden />
@@ -63,9 +59,9 @@ export default function Profile() {
             </button>
           </div>
         </section>
-      </motion.div>
+      </Reveal>
 
-      <section className="mt-6 bg-white p-8 rounded-3xl border border-brand-100 shadow-card">
+      <Reveal delay={0.08} className="mt-6 bg-white p-8 rounded-3xl border border-brand-100 shadow-card">
         <div className="flex justify-between items-center mb-6">
           <h3 className="font-display font-bold text-lg flex items-center gap-2 text-navy-950">
             <CreditCard className="h-5 w-5 text-brand-600" aria-hidden />
@@ -83,7 +79,7 @@ export default function Profile() {
             <p className="text-2xl font-display font-bold text-navy-950">—</p>
           </div>
         </div>
-      </section>
+      </Reveal>
     </AccountShell>
   );
 }

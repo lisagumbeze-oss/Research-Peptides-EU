@@ -1,12 +1,14 @@
 export * from './tokens';
 export * from './motion';
-export { Button, type ButtonProps, type ButtonVariant, type ButtonSize } from './components/Button';
+export { Button, buttonClassName, type ButtonProps, type ButtonVariant, type ButtonSize } from './components/Button';
 export { Badge, type BadgeProps, type BadgeVariant } from './components/Badge';
 export { Card, type CardProps, type CardVariant } from './components/Card';
 export { Input, type InputProps } from './components/Input';
+export { FormError } from './components/FormError';
 export { Section, type SectionProps } from './components/Section';
 export { Container, type ContainerProps } from './components/Container';
 export { GlassPanel, type GlassPanelProps } from './components/GlassPanel';
 export { GlowPanel, type GlowPanelProps } from './components/GlowPanel';
 export { ScientificBackdrop, type ScientificBackdropProps } from './components/ScientificBackdrop';
 export { Reveal, type RevealProps } from './components/Reveal';
+export { CountBadge, type CountBadgeProps } from './components/CountBadge';

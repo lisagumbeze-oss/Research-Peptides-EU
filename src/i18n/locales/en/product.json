@@ -26,6 +26,7 @@
     "increaseQty": "Increase quantity",
     "variantFallback": "Variant {{index}}",
     "addToCart": "Add to cart",
+    "addedToCart": "Added",
     "inWishlist": "In wishlist",
     "saveWishlist": "Save to wishlist",
     "share": "Share",

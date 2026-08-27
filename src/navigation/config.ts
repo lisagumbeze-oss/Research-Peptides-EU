@@ -11,6 +11,7 @@ export type PrimaryNavItem =
   | { labelKey: string; megaMenu: MegaMenuId };
 
 export const primaryNav: PrimaryNavItem[] = [
+  { labelKey: 'primary.home', href: '/' },
   { labelKey: 'primary.shop', megaMenu: 'shop' },
   { labelKey: 'primary.research', megaMenu: 'research' },
   { labelKey: 'primary.blog', href: '/blog' },

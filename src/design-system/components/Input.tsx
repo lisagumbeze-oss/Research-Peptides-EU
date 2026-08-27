@@ -1,5 +1,6 @@
 import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react';
 import { cn } from '../../lib/utils';
+import { FormError } from './FormError';
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
@@ -30,21 +31,23 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         <input
           ref={ref}
           id={inputId}
+          {...props}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error && inputId ? `${inputId}-error` : undefined}
           className={cn(
             'w-full h-11 rounded-xl border bg-white px-4 text-navy-950 text-sm',
             'border-silver-400/40 placeholder:text-silver-400/80',
-            'transition-colors duration-200',
+            'transition-[border-color,box-shadow,background-color] duration-200',
             'focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-500',
             'disabled:cursor-not-allowed disabled:opacity-50',
             error && 'border-error focus:ring-error/40 focus:border-error',
             startAdornment && 'pl-10',
             className,
           )}
-          {...props}
         />
       </div>
-      {error && <p className="text-xs text-error font-medium">{error}</p>}
-      {hint && !error && <p className="text-xs text-silver-400">{hint}</p>}
+      <FormError message={error} id={inputId ? `${inputId}-error` : undefined} />
+      {hint && !error ? <p className="text-xs text-silver-400">{hint}</p> : null}
     </div>
   );
 });

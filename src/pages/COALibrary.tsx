@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'motion/react';
 import { FileCheck2, Search, ShieldCheck } from 'lucide-react';
+import { Reveal } from '../design-system';
 
 type COARow = {
   product: string;
@@ -33,7 +33,7 @@ export default function COALibrary() {
   return (
     <div className="bg-white min-h-screen pt-12 pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
+        <Reveal className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 text-brand-600 rounded-full text-xs font-black uppercase tracking-widest mb-6">
             <FileCheck2 className="h-4 w-4" />
             Verification Portal
@@ -42,9 +42,9 @@ export default function COALibrary() {
           <p className="text-gray-500 mt-4 font-medium italic max-w-3xl mx-auto">
             Search batch-level Certificate of Analysis references for Research Peptides EU catalog lines.
           </p>
-        </motion.div>
+        </Reveal>
 
-        <section className="mb-8">
+        <Reveal delay={0.08} className="mb-8">
           <div className="relative max-w-xl mx-auto">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input
@@ -55,9 +55,9 @@ export default function COALibrary() {
               className="w-full pl-12 pr-4 py-4 rounded-2xl border border-gray-200 bg-gray-50 font-medium outline-none focus:bg-white focus:ring-2 focus:ring-brand-400/30"
             />
           </div>
-        </section>
+        </Reveal>
 
-        <section className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
+        <Reveal delay={0.12} className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px]">
               <thead className="bg-gray-50">
@@ -85,15 +85,15 @@ export default function COALibrary() {
           {filteredRows.length === 0 && (
             <p className="px-6 py-8 text-sm text-gray-500 text-center">No matching COA references found for your search.</p>
           )}
-        </section>
+        </Reveal>
 
-        <section className="mt-8 bg-slate-950 text-white rounded-3xl p-6 md:p-8 flex items-start gap-3">
+        <Reveal delay={0.16} className="mt-8 bg-slate-950 text-white rounded-3xl p-6 md:p-8 flex items-start gap-3">
           <ShieldCheck className="h-5 w-5 text-brand-400 mt-0.5" />
           <p className="text-sm text-gray-300 leading-relaxed">
             This library is provided for research documentation visibility. If you need a full report pack for a specific batch,
             request it via <span className="font-bold text-brand-300">info@researchpeptide.eu</span>.
           </p>
-        </section>
+        </Reveal>
       </div>
     </div>
   );

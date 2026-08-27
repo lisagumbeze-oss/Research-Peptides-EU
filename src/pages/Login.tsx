@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { AnimatePresence, motion } from 'motion/react';
 import { supabase } from '../supabase';
+import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { LogIn, Mail, Lock, Loader2 } from 'lucide-react';
 import { Button, Container, GlassPanel } from '../design-system';
+import { fadeUpVariants } from '../design-system/motion';
 import logo from '../assets/brandLogo';
 
 export default function Login() {
@@ -12,7 +14,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const navigate = useLocaleNavigate();
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,6 +59,7 @@ export default function Login() {
       <div className="absolute inset-0 bg-gradient-glow opacity-60 pointer-events-none" aria-hidden />
 
       <Container size="narrow" className="relative z-10 w-full max-w-md">
+        <motion.div variants={fadeUpVariants()} initial="hidden" animate="visible">
         <GlassPanel variant="dark" padding="lg" className="shadow-glow">
           <div className="text-center mb-8">
             <img src={logo} alt="" className="h-12 w-auto mx-auto mb-6 drop-shadow-[0_4px_20px_rgba(45,181,163,0.4)]" width={52} height={52} />
@@ -70,16 +73,32 @@ export default function Login() {
             </p>
           </div>
 
-          {error && (
-            <div className="mb-4 p-3 rounded-xl bg-error/15 border border-error/30 text-sm text-red-200">
-              {error}
-            </div>
-          )}
-          {success && (
-            <div className="mb-4 p-3 rounded-xl bg-success/15 border border-success/30 text-sm text-emerald-200">
-              {success}
-            </div>
-          )}
+          <AnimatePresence>
+            {error ? (
+              <motion.div
+                key="login-error"
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="mb-4 p-3 rounded-xl bg-error/15 border border-error/30 text-sm text-red-200"
+                role="alert"
+              >
+                {error}
+              </motion.div>
+            ) : null}
+            {success ? (
+              <motion.div
+                key="login-success"
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="mb-4 p-3 rounded-xl bg-success/15 border border-success/30 text-sm text-emerald-200"
+                role="status"
+              >
+                {success}
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
 
           <form className="space-y-4" onSubmit={handleAuth}>
             <div>
@@ -162,6 +181,7 @@ export default function Login() {
             Google
           </button>
         </GlassPanel>
+        </motion.div>
       </Container>
     </div>
   );

@@ -23,16 +23,21 @@ import { CatalogPagination } from '../components/catalog/CatalogPagination';
 import { useProductCatalogActions } from '../hooks/useProductCatalogActions';
 import type { CategoryOption } from '../components/catalog/types';
 import type { CatalogProduct } from '../components/products/ProductCard';
+import { peekCatalog, rememberCatalog } from '../lib/catalogCache';
 
 export default function Shop() {
   const { t, i18n } = useTranslation('shop');
   const locale = i18n.language as LocaleCode;
   const [searchParams, setSearchParams] = useSearchParams();
-  const [allProducts, setAllProducts] = useState<CatalogProduct[]>([]);
-  const [categories, setCategories] = useState<CategoryOption[]>([]);
-  const [loading, setLoading] = useState(true);
+  const cached = peekCatalog();
+  const readyCatalog = cached?.complete ? cached : null;
+  const [allProducts, setAllProducts] = useState<CatalogProduct[]>(readyCatalog?.products ?? []);
+  const [categories, setCategories] = useState<CategoryOption[]>(readyCatalog?.categories ?? cached?.categories ?? []);
+  const [loading, setLoading] = useState(!readyCatalog);
   const [selectedCategorySlugs, setSelectedCategorySlugs] = useState<string[]>([]);
-  const [priceRange, setPriceRange] = useState(500);
+  const [priceRange, setPriceRange] = useState(() =>
+    readyCatalog ? catalogPriceSliderMax(readyCatalog.products) : 500,
+  );
   const [sortBy, setSortBy] = useState<CatalogSortKey>('newest');
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
@@ -46,8 +51,13 @@ export default function Shop() {
           supabase.from('categories').select('name, slug').order('name'),
         ]);
         if (!prodResult.error && prodResult.data) {
-          setAllProducts(prodResult.data as CatalogProduct[]);
-          setPriceRange(catalogPriceSliderMax(prodResult.data));
+          const products = prodResult.data as CatalogProduct[];
+          setAllProducts(products);
+          setPriceRange(catalogPriceSliderMax(products));
+          rememberCatalog({
+            products,
+            categories: (catResult.data as CategoryOption[] | null) ?? cached?.categories ?? [],
+          });
         }
 
         if (!catResult.error && catResult.data) {
@@ -225,6 +235,7 @@ export default function Shop() {
                 <ProductGrid
                   products={paginatedProducts}
                   loading={loading}
+                  skeletonCount={SHOP_PAGE_SIZE}
                   showDescription
                   inWishlist={isInWishlist}
                   onToggleWishlist={handleToggleWishlist}

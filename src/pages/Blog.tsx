@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabase';
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../i18n/LocaleLink';
 import { BookOpen, Sparkles, ArrowRight, Clock, User } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Reveal } from '../design-system';
+import { staggerDelay } from '../design-system/motion';
 
 export default function Blog() {
   const [posts, setPosts] = useState<any[]>([]);
@@ -28,15 +29,11 @@ export default function Blog() {
       <section className="bg-gray-50 border-b border-gray-100 pt-24 pb-20 relative overflow-hidden">
          <div className="absolute top-0 right-0 w-[40%] h-full bg-brand-500/5 -skew-x-12 translate-x-1/2" />
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="max-w-3xl">
-               <motion.div
-                 initial={{ opacity: 0, x: -20 }}
-                 animate={{ opacity: 1, x: 0 }}
-                 className="flex items-center gap-2 mb-6"
-               >
+            <Reveal className="max-w-3xl">
+               <div className="flex items-center gap-2 mb-6">
                   <Sparkles className="h-4 w-4 text-brand-600" />
                   <span className="text-xs font-black uppercase tracking-[0.3em] text-brand-600">Research Peptides EU Journals</span>
-               </motion.div>
+               </div>
                <h1 className="mb-8">
                   Scientific <br /><span className="text-brand-600">Insights</span> & Research.
                </h1>
@@ -44,7 +41,7 @@ export default function Blog() {
                   Deep dives into peptide synthesis, biological activity, and global research trends. 
                   Curated for the modern scientific community.
                </p>
-            </div>
+            </Reveal>
          </div>
       </section>
 
@@ -69,16 +66,15 @@ export default function Blog() {
          ) : (
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
              {posts.map((post, idx) => (
-               <motion.article 
+               <Reveal
                  key={post.id}
-                 initial={{ opacity: 0, y: 30 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 transition={{ delay: idx * 0.1 }}
+                 as="article"
+                 delay={staggerDelay(idx)}
                  className="group flex flex-col"
                >
-                 <Link to={`/blog/${post.id}`} className="block relative aspect-[16/10] rounded-[2.5rem] overflow-hidden bg-gray-100 mb-8 shadow-xl shadow-gray-200/20">
+                 <LocaleLink to={`/blog/${post.id}`} className="block relative aspect-[16/10] rounded-[2.5rem] overflow-hidden bg-gray-100 mb-8 shadow-xl shadow-gray-200/20">
                    {post.image_url ? (
-                     <img src={post.image_url} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                     <img src={post.image_url} alt={post.title} className="w-full h-full object-cover motion-safe:group-hover:scale-110 transition-transform duration-1000 motion-reduce:transition-none" />
                    ) : (
                      <div className="w-full h-full flex items-center justify-center bg-brand-50 text-brand-200">
                         <BookOpen className="h-12 w-12" />
@@ -87,7 +83,7 @@ export default function Blog() {
                    <div className="absolute top-6 left-6 flex gap-2">
                       <span className="px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest text-gray-900 shadow-sm">Research</span>
                    </div>
-                 </Link>
+                 </LocaleLink>
 
                  <div className="px-2 flex-grow flex flex-col">
                    <div className="flex items-center gap-6 text-[10px] font-black uppercase tracking-widest text-gray-400 mb-5">
@@ -104,15 +100,15 @@ export default function Blog() {
                    </p>
                    
                    <div className="mt-auto">
-                     <Link 
+                     <LocaleLink 
                        to={`/blog/${post.id}`} 
                        className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-brand-600 group-hover:gap-4 transition-all"
                      >
                        Explore Article <ArrowRight className="h-3 w-3" />
-                     </Link>
+                     </LocaleLink>
                    </div>
                  </div>
-               </motion.article>
+               </Reveal>
              ))}
            </div>
          )}

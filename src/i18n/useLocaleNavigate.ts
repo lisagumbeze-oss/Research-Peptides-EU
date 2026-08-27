@@ -2,6 +2,13 @@ import { useCallback } from 'react';
 import { useNavigate, type NavigateOptions } from 'react-router-dom';
 import { useLocale } from './LocaleProvider';
 import { pathWithLocale } from './routing';
+import { prefetchFromPath } from '../routes/prefetchRoute';
+
+function jumpToTop() {
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
 
 export function useLocaleNavigate() {
   const navigate = useNavigate();
@@ -14,6 +21,8 @@ export function useLocaleNavigate() {
         return;
       }
       const path = to.startsWith('/') ? to : `/${to}`;
+      prefetchFromPath(path);
+      jumpToTop();
       navigate(pathWithLocale(locale, path), options);
     },
     [navigate, locale],

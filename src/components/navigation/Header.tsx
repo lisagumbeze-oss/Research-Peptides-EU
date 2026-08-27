@@ -9,11 +9,12 @@ import { useAuthStore } from '../../store/useAuthStore';
 import { useCartStore } from '../../store/useCartStore';
 import { useSearchStore } from '../../store/useSearchStore';
 import { primaryNav, type MegaMenuId } from '../../navigation/config';
-import { Button } from '../../design-system';
+import { Button, CountBadge } from '../../design-system';
 import { cn } from '../../lib/utils';
 import LanguageSwitcher from './LanguageSwitcher';
 import MegaMenu from './MegaMenu';
 import AccountMenu from './AccountMenu';
+import { HamburgerIcon } from './HamburgerIcon';
 
 type HeaderProps = {
   onLogin: () => void;
@@ -58,7 +59,7 @@ export default function Header({
   }, [location.pathname]);
 
   const iconBtnClass =
-    'relative flex h-10 w-10 items-center justify-center rounded-xl text-steel-600 hover:text-brand-600 hover:bg-brand-50/80 transition-colors';
+    'relative flex h-10 w-10 items-center justify-center rounded-xl text-steel-600 hover:text-brand-600 hover:bg-brand-50/80 transition-colors motion-safe:active:scale-95';
 
   return (
     <header
@@ -71,7 +72,12 @@ export default function Header({
       onMouseLeave={() => setActiveMega(null)}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-[4.25rem] items-center justify-between gap-4">
+        <div
+          className={cn(
+            'flex items-center justify-between gap-4 transition-[height] duration-300 motion-reduce:transition-none',
+            scrolled ? 'h-14' : 'h-[4.25rem]',
+          )}
+        >
           <LocaleLink
             to="/"
             className="shrink-0 flex items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
@@ -80,7 +86,10 @@ export default function Header({
             <img
               src={logo}
               alt=""
-              className="h-10 md:h-11 w-auto"
+              className={cn(
+                'w-auto transition-[height] duration-300 motion-reduce:transition-none',
+                scrolled ? 'h-9 md:h-10' : 'h-10 md:h-11',
+              )}
               width={44}
               height={44}
               fetchPriority="high"
@@ -159,14 +168,7 @@ export default function Header({
               }
             >
               <ShoppingCart className="h-5 w-5" aria-hidden />
-              {cartItemCount > 0 && (
-                <span
-                  className="absolute -top-0.5 -right-0.5 min-w-[1.125rem] h-[1.125rem] px-0.5 bg-brand-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center tabular-nums"
-                  aria-hidden
-                >
-                  {cartItemCount > 99 ? '99+' : cartItemCount}
-                </span>
-              )}
+              <CountBadge count={cartItemCount} />
             </button>
             {user ? (
               <AccountMenu
@@ -196,14 +198,7 @@ export default function Header({
               }
             >
               <ShoppingCart className="h-5 w-5" aria-hidden />
-              {cartItemCount > 0 && (
-                <span
-                  className="absolute -top-0.5 -right-0.5 min-w-[1.125rem] h-[1.125rem] px-0.5 bg-brand-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center"
-                  aria-hidden
-                >
-                  {cartItemCount}
-                </span>
-              )}
+              <CountBadge count={cartItemCount} />
             </button>
             <button
               type="button"
@@ -214,13 +209,7 @@ export default function Header({
               onClick={onMobileMenuOpen}
             >
               <span className="sr-only">{mobileMenuOpen ? 'Close' : 'Menu'}</span>
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                {mobileMenuOpen ? (
-                  <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
-                ) : (
-                  <path strokeLinecap="round" d="M4 7h16M4 12h16M4 17h16" />
-                )}
-              </svg>
+              <HamburgerIcon open={mobileMenuOpen} />
             </button>
           </div>
         </div>

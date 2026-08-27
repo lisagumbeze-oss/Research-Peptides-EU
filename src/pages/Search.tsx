@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import { LocaleLink } from '../i18n/LocaleLink';
 import { Search as SearchIcon, ArrowRight } from 'lucide-react';
 import { supabase } from '../supabase';
 import { sortProducts, type CatalogSortKey } from '../lib/productSort';
@@ -12,12 +13,14 @@ import { ProductGrid } from '../components/catalog/ProductGrid';
 import { useProductCatalogActions } from '../hooks/useProductCatalogActions';
 import type { CategoryOption } from '../components/catalog/types';
 import type { CatalogProduct } from '../components/products/ProductCard';
+import { peekCatalog, rememberCatalog } from '../lib/catalogCache';
 
 export default function Search() {
-  const [allProducts, setAllProducts] = useState<CatalogProduct[]>([]);
-  const [categories, setCategories] = useState<CategoryOption[]>([]);
+  const cached = peekCatalog();
+  const [allProducts, setAllProducts] = useState<CatalogProduct[]>(cached?.products ?? []);
+  const [categories, setCategories] = useState<CategoryOption[]>(cached?.categories ?? []);
   const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!cached?.products.length);
   const [searchParams, setSearchParams] = useSearchParams();
   const [sortBy, setSortBy] = useState<CatalogSortKey | 'relevance'>('relevance');
 
@@ -31,7 +34,14 @@ export default function Search() {
           supabase.from('products').select('*'),
           supabase.from('categories').select('name, slug').order('name'),
         ]);
-        if (prodRes.data) setAllProducts(prodRes.data as CatalogProduct[]);
+        if (prodRes.data) {
+          const products = prodRes.data as CatalogProduct[];
+          setAllProducts(products);
+          rememberCatalog({
+            products,
+            categories: (catRes.data as CategoryOption[] | null) ?? cached?.categories ?? [],
+          });
+        }
         if (catRes.data) setCategories(catRes.data as CategoryOption[]);
       } catch (error) {
         console.error('Error fetching search data:', error);
@@ -187,12 +197,12 @@ export default function Search() {
 
         {!hasNoCatalog && !hasNoMatches && (
           <p className="text-center mt-10">
-            <Link
+            <LocaleLink
               to="/shop"
               className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700"
             >
               Browse full shop <ArrowRight className="h-4 w-4" />
-            </Link>
+            </LocaleLink>
           </p>
         )}
       </Container>

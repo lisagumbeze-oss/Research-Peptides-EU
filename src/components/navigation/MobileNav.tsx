@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { supabase } from '../../supabase';
 import { primaryNav, researchTools } from '../../navigation/config';
 import { LocaleLink } from '../../i18n/LocaleLink';
 import { Button } from '../../design-system';
+import { overlayMotion, slideFromRightMotion } from '../../design-system/motion';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import LanguageSwitcher from './LanguageSwitcher';
 import { cn } from '../../lib/utils';
 
@@ -33,6 +35,11 @@ export default function MobileNav({
   const { t: tNav } = useTranslation('nav');
   const [categories, setCategories] = useState<CategoryRow[]>([]);
   const [shopExpanded, setShopExpanded] = useState(true);
+  const reduceMotion = useReducedMotion();
+  const panelRef = useRef<HTMLElement>(null);
+  useFocusTrap(open, panelRef, onClose);
+  const overlay = overlayMotion(Boolean(reduceMotion));
+  const panel = slideFromRightMotion(Boolean(reduceMotion));
 
   useEffect(() => {
     if (!open) return;
@@ -67,20 +74,16 @@ export default function MobileNav({
         <>
           <motion.div
             className="fixed inset-0 z-[55] bg-navy-950/40 backdrop-blur-sm lg:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            {...overlay}
             aria-hidden
             onClick={onClose}
           />
           <motion.nav
+            ref={panelRef}
             id="mobile-nav-drawer"
             aria-label="Mobile primary"
             className="fixed inset-y-0 right-0 z-[56] w-full max-w-sm bg-white shadow-elevated flex flex-col lg:hidden"
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', stiffness: 380, damping: 36 }}
+            {...panel}
           >
             <div className="flex items-center justify-between px-4 py-4 border-b border-brand-100">
               <span className="font-display font-bold text-navy-950">Menu</span>
@@ -95,6 +98,14 @@ export default function MobileNav({
 
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-6">
               <LanguageSwitcher variant="mobile" />
+
+              <ul className="space-y-0.5">
+                <li>
+                  <LocaleLink to="/" className={linkClass} onClick={onClose}>
+                    {tNav('primary.home')}
+                  </LocaleLink>
+                </li>
+              </ul>
 
               <div>
                 <button
@@ -148,7 +159,7 @@ export default function MobileNav({
 
               <ul className="space-y-0.5">
                 {primaryNav
-                  .filter((item): item is { labelKey: string; href: string } => 'href' in item)
+                  .filter((item): item is { labelKey: string; href: string } => 'href' in item && item.href !== '/')
                   .map((item) => (
                     <li key={item.href}>
                       <LocaleLink to={item.href} className={linkClass} onClick={onClose}>

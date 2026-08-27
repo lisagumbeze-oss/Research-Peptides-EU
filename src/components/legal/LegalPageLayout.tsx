@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { motion } from 'motion/react';
 import { Container, GlassPanel, Reveal } from '../../design-system';
 import { cn } from '../../lib/utils';
 
@@ -23,11 +22,7 @@ export function LegalPageLayout({
   return (
     <div className={cn('min-h-screen bg-mist-50 pt-12 pb-20', className)}>
       <Container className="max-w-4xl py-12 md:py-16">
-        <motion.header
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12 md:mb-14"
-        >
+        <Reveal as="header" className="text-center mb-12 md:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 text-brand-600 rounded-full text-xs font-semibold uppercase tracking-wider mb-5">
             {icon}
             {eyebrow}
@@ -36,7 +31,7 @@ export function LegalPageLayout({
           {subtitle ? (
             <p className="text-steel-600 mt-4 max-w-2xl mx-auto leading-relaxed">{subtitle}</p>
           ) : null}
-        </motion.header>
+        </Reveal>
         <div className="space-y-10 text-steel-600 leading-relaxed">{children}</div>
       </Container>
     </div>

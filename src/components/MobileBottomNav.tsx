@@ -4,6 +4,7 @@ import { LocaleNavLink } from '../i18n/LocaleLink';
 import { Home, List, ShoppingCart, User } from 'lucide-react';
 import { useCartStore } from '../store/useCartStore';
 import { useAuthStore } from '../store/useAuthStore';
+import { CountBadge } from '../design-system';
 import { cn } from '../lib/utils';
 
 export default function MobileBottomNav() {
@@ -15,9 +16,11 @@ export default function MobileBottomNav() {
 
   const navClass = ({ isActive }: { isActive: boolean }) =>
     cn(
-      'flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors rounded-lg',
+      'relative flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors rounded-lg',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2',
       isActive ? 'text-brand-600' : 'text-steel-600 hover:text-brand-600',
+      isActive &&
+        'after:absolute after:bottom-1 after:left-1/2 after:-translate-x-1/2 after:h-0.5 after:w-5 after:rounded-full after:bg-brand-500',
     );
 
   return (
@@ -44,14 +47,7 @@ export default function MobileBottomNav() {
         >
           <div className="relative">
             <ShoppingCart className="h-6 w-6" aria-hidden />
-            {cartItemCount > 0 && (
-              <span
-                className="absolute -top-1.5 -right-2 min-w-4 h-4 px-0.5 bg-brand-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center tabular-nums"
-                aria-hidden
-              >
-                {cartItemCount > 99 ? '99+' : cartItemCount}
-              </span>
-            )}
+            <CountBadge count={cartItemCount} className="-top-1.5 -right-2 min-w-4 h-4" />
           </div>
           <span className="text-[10px] font-semibold">{t('cart')}</span>
         </button>

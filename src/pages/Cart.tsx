@@ -5,11 +5,13 @@ import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { ShoppingBag } from 'lucide-react';
 import { useCartStore } from '../store/useCartStore';
 import { CartPageSkeleton } from '../components/Skeleton';
-import { Container, Button, Reveal } from '../design-system';
+import { Container, buttonClassName, Reveal } from '../design-system';
 import { CatalogPageHeader } from '../components/catalog/CatalogPageHeader';
 import { CartLineItem } from '../components/cart/CartLineItem';
 import { OrderSummaryPanel } from '../components/cart/OrderSummaryPanel';
+import { staggerDelay } from '../design-system/motion';
 import { usePageSeo } from '../seo/SeoProvider';
+import { motion, useReducedMotion } from 'motion/react';
 
 export default function Cart() {
   usePageSeo({ canonicalPath: '/cart', noindex: true });
@@ -29,6 +31,7 @@ export default function Cart() {
   const [promoInput, setPromoInput] = React.useState('');
   const [promoError, setPromoError] = React.useState('');
   const navigate = useLocaleNavigate();
+  const reduceMotion = useReducedMotion();
 
   const handleApplyPromo = () => {
     const success = applyPromoCode(promoInput);
@@ -63,8 +66,8 @@ export default function Cart() {
             <ShoppingBag className="h-14 w-14 text-brand-200 mx-auto mb-4" aria-hidden />
             <h2 className="font-display font-bold text-2xl text-navy-950 mb-3">{t('cart.empty')}</h2>
             <p className="text-steel-600 mb-8">{t('hero.subtitle', { ns: 'home' })}</p>
-            <LocaleLink to="/shop">
-              <Button size="lg">{t('cart.emptyCta')}</Button>
+            <LocaleLink to="/shop" className={buttonClassName({ size: 'lg', className: 'whitespace-nowrap' })}>
+              {t('cart.emptyCta')}
             </LocaleLink>
           </Reveal>
         </Container>
@@ -89,14 +92,24 @@ export default function Cart() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-4">
             {items.map((item, index) => (
-              <CartLineItem
+              <motion.div
                 key={`${item.productId}-${item.specification}-${index}`}
-                item={item}
-                onUpdateQuantity={(qty) =>
-                  updateQuantity(item.productId, qty, item.specification)
-                }
-                onRemove={() => removeItem(item.productId, item.specification)}
-              />
+                initial={{ opacity: reduceMotion ? 1 : 0, y: reduceMotion ? 0 : 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: reduceMotion ? 0 : 0.22,
+                  delay: staggerDelay(index),
+                  ease: 'easeOut',
+                }}
+              >
+                <CartLineItem
+                  item={item}
+                  onUpdateQuantity={(qty) =>
+                    updateQuantity(item.productId, qty, item.specification)
+                  }
+                  onRemove={() => removeItem(item.productId, item.specification)}
+                />
+              </motion.div>
             ))}
           </div>
 

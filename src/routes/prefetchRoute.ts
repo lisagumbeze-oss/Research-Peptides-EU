@@ -1,4 +1,6 @@
-/** Prefetch lazy route chunks on link hover so navigation feels instant. */
+import { stripLocaleFromPath } from '../i18n/routing';
+
+/** Prefetch lazy route chunks on pointer-down / hover so navigation feels instant. */
 const ROUTE_PRELOADERS: Record<string, () => Promise<unknown>> = {
   '/': () => import('../pages/Home'),
   '/shop': () => import('../pages/Shop'),
@@ -23,12 +25,18 @@ const ROUTE_PRELOADERS: Record<string, () => Promise<unknown>> = {
   '/terms': () => import('../pages/Terms'),
   '/privacy': () => import('../pages/Privacy'),
   '/refund-returns': () => import('../pages/RefundReturns'),
+  '/admin': () => import('../pages/AdminDashboard'),
 };
 
 const prefetched = new Set<string>();
 
+function routeKey(to: string) {
+  const pathOnly = to.split(/[?#]/)[0] || '/';
+  return stripLocaleFromPath(pathOnly).replace(/\/$/, '') || '/';
+}
+
 export function prefetchRoutePath(to: string) {
-  const key = to.split('?')[0].replace(/\/$/, '') || '/';
+  const key = routeKey(to);
   if (prefetched.has(key)) return;
   const loader = ROUTE_PRELOADERS[key];
   if (!loader) return;
@@ -36,23 +44,38 @@ export function prefetchRoutePath(to: string) {
   void loader();
 }
 
-/** Product detail pages share one lazy chunk regardless of slug. */
+/** Product detail pages share one chunk regardless of slug. */
 export function prefetchProductRoute() {
   if (prefetched.has('__product__')) return;
   prefetched.add('__product__');
   void import('../pages/ProductDetails');
 }
 
+function prefetchBlogPostRoute() {
+  if (prefetched.has('__blog_post__')) return;
+  prefetched.add('__blog_post__');
+  void import('../pages/BlogPost');
+}
+
 export function prefetchFromPath(to: string) {
-  const path = to.split('?')[0].replace(/\/$/, '') || '/';
-  if (path.startsWith('/product/') || /^\/[^/]+\/product\//.test(path)) {
+  const path = routeKey(to);
+  if (path.startsWith('/product/')) {
     prefetchProductRoute();
     return;
   }
-  if (path.startsWith('/blog/')) {
+  if (path.startsWith('/blog/') && path !== '/blog') {
     prefetchRoutePath('/blog');
-    void import('../pages/BlogPost');
+    prefetchBlogPostRoute();
     return;
   }
-  prefetchRoutePath(path.startsWith('/') ? path : `/${path}`);
+  prefetchRoutePath(path);
+}
+
+/** Warm remaining storefront chunks after first paint (mobile has no hover). */
+export function prefetchAllStorefrontRoutes() {
+  prefetchProductRoute();
+  prefetchBlogPostRoute();
+  for (const key of Object.keys(ROUTE_PRELOADERS)) {
+    prefetchRoutePath(key);
+  }
 }

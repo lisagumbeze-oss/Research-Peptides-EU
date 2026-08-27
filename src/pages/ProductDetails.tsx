@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { LocaleLink } from '../i18n/LocaleLink';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { useTranslation } from 'react-i18next';
 import { Star } from 'lucide-react';
@@ -20,6 +21,8 @@ import { usePageSeo } from '../seo/SeoProvider';
 import { breadcrumbJsonLd, productJsonLd } from '../seo/structuredData';
 import type { LocaleCode } from '../i18n/locales';
 import { localizedProductDescription, localizedProductTitle } from '../lib/localizedProduct';
+import { findCachedProduct, rememberProduct } from '../lib/catalogCache';
+import { stripLocaleFromPath } from '../i18n/routing';
 
 const STATIC_REVIEWS = [
   {
@@ -42,12 +45,13 @@ export default function ProductDetails() {
   const { t, i18n } = useTranslation('product');
   const locale = i18n.language as LocaleCode;
   const { slug, id } = useParams<{ slug?: string; id?: string }>();
-  const [product, setProduct] = useState<any>(null);
+  const cachedProduct = findCachedProduct(slug) ?? findCachedProduct(id);
+  const [product, setProduct] = useState<any>(cachedProduct ?? null);
   const [reviews, setReviews] = useState<any[]>([]);
   const [recommended, setRecommended] = useState<CatalogProduct[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!cachedProduct);
   const [quantity, setQuantity] = useState(1);
-  const [selectedVariant, setSelectedVariant] = useState<any>(null);
+  const [selectedVariant, setSelectedVariant] = useState<any>(cachedProduct?.variants?.[0] ?? null);
   const [showShare, setShowShare] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
   const [recentlyViewed, setRecentlyViewed] = useState<CatalogProduct[]>([]);
@@ -97,7 +101,16 @@ export default function ProductDetails() {
   useEffect(() => {
     const fetchProductAndReviews = async () => {
       if (!slug && !id) return;
-      setLoading(true);
+      const fromCache = findCachedProduct(slug) ?? findCachedProduct(id);
+      if (fromCache) {
+        setProduct(fromCache);
+        setLoading(false);
+        if (fromCache.variants?.length > 0) {
+          setSelectedVariant(fromCache.variants[0]);
+        }
+      } else {
+        setLoading(true);
+      }
       try {
         const query = supabase.from('products').select('*');
         const { data: pData } = slug
@@ -105,8 +118,9 @@ export default function ProductDetails() {
           : await query.eq('id', id as string).maybeSingle();
 
         if (pData) {
+          rememberProduct(pData as CatalogProduct);
           const canonical = productPath(pData);
-          if (canonical !== window.location.pathname) {
+          if (stripLocaleFromPath(window.location.pathname) !== canonical) {
             navigate(canonical, { replace: true });
           }
           setProduct(pData);
@@ -150,7 +164,6 @@ export default function ProductDetails() {
       }
     };
     fetchProductAndReviews();
-    window.scrollTo(0, 0);
   }, [slug, id, navigate]);
 
   const handleAddToCart = () => {
@@ -194,9 +207,9 @@ export default function ProductDetails() {
     return (
       <Container className="py-20 text-center">
         <h2 className="font-display font-bold text-2xl text-navy-950 mb-4">{t('notFound.title')}</h2>
-        <Link to="/shop" className="text-brand-600 font-semibold hover:underline">
+        <LocaleLink to="/shop" className="text-brand-600 font-semibold hover:underline">
           {t('notFound.cta')}
-        </Link>
+        </LocaleLink>
       </Container>
     );
   }

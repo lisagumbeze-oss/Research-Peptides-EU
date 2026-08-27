@@ -12,7 +12,7 @@ export function HomeSectionFallback({
 }: HomeSectionFallbackProps) {
   return (
     <div
-      className={cn('animate-pulse bg-mist-50/80', minHeight, className)}
+      className={cn('skeleton-block bg-mist-50/90 rounded-none', minHeight, className)}
       aria-hidden
     />
   );

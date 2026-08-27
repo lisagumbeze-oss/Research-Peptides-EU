@@ -1,7 +1,8 @@
 import { BadgeCheck, FileCheck, ShieldCheck, Thermometer } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { motion } from 'motion/react';
 import { Container, Section, GlowPanel } from '../../design-system';
+import { fadeUpVariants, staggerDelay } from '../../design-system/motion';
 import { SectionHeading } from './SectionHeading';
 
 const standards = [
@@ -28,6 +29,8 @@ const standards = [
 ];
 
 export function TrustQualitySection() {
+  const itemVariants = fadeUpVariants();
+
   return (
     <Section size="lg" tone="light">
       <Container>
@@ -48,10 +51,11 @@ export function TrustQualitySection() {
               {standards.map((item, i) => (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, x: 12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  variants={itemVariants}
+                  initial="hidden"
+                  whileInView="visible"
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
+                  transition={{ delay: staggerDelay(i, 0.08) }}
                   className="flex gap-4"
                 >
                   <div className="shrink-0 w-11 h-11 rounded-xl bg-brand-500/30 flex items-center justify-center">
@@ -64,12 +68,12 @@ export function TrustQualitySection() {
                 </motion.div>
               ))}
             </div>
-            <Link
+            <LocaleLink
               to="/coas"
               className="inline-flex mt-8 text-sm font-semibold text-brand-300 hover:text-white transition-colors"
             >
               Open COA library →
-            </Link>
+            </LocaleLink>
           </GlowPanel>
         </div>
       </Container>

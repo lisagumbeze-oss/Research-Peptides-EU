@@ -1,6 +1,6 @@
 import { LocaleLink } from '../../i18n/LocaleLink';
 import { Heart, ShoppingCart } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { Card } from '../../design-system';
 import { ProductBadge } from './ProductBadge';
 import { ProductCardRating } from './ProductCardRating';
@@ -8,7 +8,7 @@ import { ProductImagePlaceholder } from './ProductImagePlaceholder';
 import { ProductCardPriceBlock } from './ProductCardPriceBlock';
 import { getPrimaryProductBadge } from '../../lib/productBadges';
 import { productPath } from '../../lib/productUrl';
-import { cardHoverState } from '../../design-system/motion';
+import { staggerDelay } from '../../design-system/motion';
 import { cn } from '../../lib/utils';
 
 export type CatalogProduct = {
@@ -51,6 +51,7 @@ export function ProductCard({
   const primaryBadge = getPrimaryProductBadge(product);
   const lowStock = Number(product.inventory) < 10;
   const categoryLabel = product.categories?.[0];
+  const reduceMotion = useReducedMotion();
 
   const card = (
     <Card
@@ -89,10 +90,10 @@ export function ProductCard({
           type="button"
           onClick={onToggleWishlist}
           className={cn(
-            'absolute top-3 right-3 z-20 p-2.5 rounded-full backdrop-blur-sm transition-all',
+            'absolute top-3 right-3 z-20 p-2.5 rounded-full backdrop-blur-sm transition-all motion-safe:active:scale-90',
             inWishlist
               ? 'bg-red-50/95 text-error shadow-inner'
-              : 'bg-white/90 text-silver-400 hover:text-error',
+              : 'bg-white/90 text-silver-400 hover:text-error hover:bg-white',
           )}
           aria-label={
             inWishlist
@@ -134,7 +135,7 @@ export function ProductCard({
           <button
             type="button"
             onClick={onAddToCart}
-            className="shrink-0 p-3 rounded-xl bg-navy-950 text-white hover:bg-brand-500 shadow-card transition-colors active:scale-95"
+            className="shrink-0 p-3 rounded-xl bg-navy-950 text-white hover:bg-brand-500 hover:shadow-glow shadow-card transition-all motion-safe:active:scale-95"
             aria-label={`Add ${product.title} to cart`}
           >
             <ShoppingCart className="h-4 w-4 md:h-5 md:w-5" />
@@ -144,16 +145,15 @@ export function ProductCard({
     </Card>
   );
 
-  if (!animate) return card;
+  if (!animate || reduceMotion) return card;
 
   return (
     <motion.div
       className="h-full"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-24px' }}
-      transition={{ delay: index * 0.04, duration: 0.35 }}
-      whileHover={cardHoverState()}
+      transition={{ delay: staggerDelay(index), duration: 0.35, ease: 'easeOut' }}
     >
       {card}
     </motion.div>

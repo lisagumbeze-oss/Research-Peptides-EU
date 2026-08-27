@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import { ProductImagePlaceholder } from '../products/ProductImagePlaceholder';
 import { formatCurrency } from '../../lib/utils';
@@ -48,7 +48,7 @@ export function CartLineItem({ item, compact = false, onUpdateQuantity, onRemove
       </div>
 
       <div className="flex-1 min-w-0 flex flex-col">
-        <Link
+        <LocaleLink
           to={productPath({ title: item.title })}
           className={cn(
             'font-display font-bold text-navy-950 hover:text-brand-600 transition-colors line-clamp-2',
@@ -56,7 +56,7 @@ export function CartLineItem({ item, compact = false, onUpdateQuantity, onRemove
           )}
         >
           {item.title}
-        </Link>
+        </LocaleLink>
         {item.specification ? (
           <span className="inline-block mt-1 text-[10px] font-semibold uppercase tracking-wide text-steel-600 bg-mist-50 px-2 py-0.5 rounded-md w-fit">
             {item.specification}
@@ -69,7 +69,7 @@ export function CartLineItem({ item, compact = false, onUpdateQuantity, onRemove
             <button
               type="button"
               onClick={() => onUpdateQuantity(Math.max(1, item.quantity - 1))}
-              className="p-2 text-steel-600 hover:bg-brand-50 transition-colors"
+              className="p-2 text-steel-600 hover:bg-brand-50 transition-colors motion-safe:active:scale-95"
               aria-label={`Decrease quantity of ${item.title}`}
             >
               <Minus className="h-3.5 w-3.5" />
@@ -80,7 +80,7 @@ export function CartLineItem({ item, compact = false, onUpdateQuantity, onRemove
             <button
               type="button"
               onClick={() => onUpdateQuantity(item.quantity + 1)}
-              className="p-2 text-steel-600 hover:bg-brand-50 transition-colors"
+              className="p-2 text-steel-600 hover:bg-brand-50 transition-colors motion-safe:active:scale-95"
               aria-label={`Increase quantity of ${item.title}`}
             >
               <Plus className="h-3.5 w-3.5" />

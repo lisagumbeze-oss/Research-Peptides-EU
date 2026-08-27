@@ -28,6 +28,29 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: 'h-12 px-8 text-base font-semibold rounded-xl',
 };
 
+export function buttonClassName({
+  variant = 'primary',
+  size = 'md',
+  fullWidth,
+  className,
+}: {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  fullWidth?: boolean;
+  className?: string;
+} = {}) {
+  return cn(
+    'group inline-flex flex-nowrap items-center justify-center gap-2 transition-all duration-200',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2',
+    'disabled:pointer-events-none disabled:opacity-50',
+    'motion-safe:active:scale-[0.98]',
+    variantClasses[variant],
+    sizeClasses[size],
+    fullWidth && 'w-full',
+    className,
+  );
+}
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   { variant = 'primary', size = 'md', fullWidth, className, disabled, type = 'button', children, ...props },
   ref,
@@ -37,16 +60,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       ref={ref}
       type={type}
       disabled={disabled}
-      className={cn(
-        'inline-flex items-center justify-center gap-2 transition-all duration-200',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2',
-        'disabled:pointer-events-none disabled:opacity-50',
-        'motion-safe:active:scale-[0.98]',
-        variantClasses[variant],
-        sizeClasses[size],
-        fullWidth && 'w-full',
-        className,
-      )}
+      className={buttonClassName({ variant, size, fullWidth, className })}
       {...props}
     >
       {children}

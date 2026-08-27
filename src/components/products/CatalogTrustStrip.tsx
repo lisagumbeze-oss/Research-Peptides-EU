@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { Truck, ShieldCheck } from 'lucide-react';
 
 export function CatalogTrustStrip() {
@@ -21,9 +21,9 @@ export function CatalogTrustStrip() {
             <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-emerald-600" aria-hidden />
             <span>
               Research sales are final — see{' '}
-              <Link to="/faq" className="text-brand-600 underline-offset-2 hover:underline">
+              <LocaleLink to="/faq" className="text-brand-600 underline-offset-2 hover:underline">
                 FAQ &amp; support
-              </Link>
+              </LocaleLink>
             </span>
           </span>
         </p>

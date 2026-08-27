@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HelpCircle, ChevronDown, FlaskConical, Truck, CreditCard } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { LegalPageLayout } from '../components/legal/LegalPageLayout';
 import { LocaleLink } from '../i18n/LocaleLink';
-import { Button } from '../design-system';
+import { buttonClassName, Reveal } from '../design-system';
+import { accordionMotion } from '../design-system/motion';
 import { cn } from '../lib/utils';
 import { usePageSeo } from '../seo/SeoProvider';
 
@@ -19,6 +20,8 @@ type FaqItem = { q: string; a: string };
 export default function FAQ() {
   const { t } = useTranslation('legal');
   const [openIndex, setOpenIndex] = useState<string | null>('0-0');
+  const reduceMotion = useReducedMotion();
+  const panelMotion = accordionMotion(Boolean(reduceMotion));
   
   // Aggregate all FAQs for Schema
   const allFaqItems = GROUP_META.flatMap(group => 
@@ -54,12 +57,12 @@ export default function FAQ() {
       icon={<HelpCircle className="h-4 w-4" aria-hidden />}
     >
       {/* Answer Capsule for GEO Optimization */}
-      <div className="bg-brand-50 border-l-4 border-brand-500 p-6 rounded-r-2xl mb-10 text-left shadow-sm">
+      <Reveal className="bg-brand-50 border-l-4 border-brand-500 p-6 rounded-r-2xl mb-10 text-left shadow-sm">
         <p className="text-navy-950 font-bold text-lg mb-2">Quick Answer: Shipping & Quality</p>
         <p className="text-steel-700 font-medium leading-relaxed">
           Research Peptides EU ships exclusively within Europe using temperature-controlled logistics to ensure peptide stability. All batches undergo rigorous third-party HPLC and MS testing, guaranteeing a minimum of 99% purity for your laboratory research.
         </p>
-      </div>
+      </Reveal>
 
       {GROUP_META.map((group, groupIdx) => {
         const items = t(`faq.groups.${group.key}.items`, {
@@ -90,6 +93,8 @@ export default function FAQ() {
                     <button
                       type="button"
                       onClick={() => toggle(id)}
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-panel-${id}`}
                       className="w-full px-5 py-4 flex items-center justify-between text-left gap-3"
                     >
                       <span className="font-semibold text-navy-950 text-sm md:text-base leading-snug">
@@ -97,7 +102,7 @@ export default function FAQ() {
                       </span>
                       <ChevronDown
                         className={cn(
-                          'h-5 w-5 text-silver-400 shrink-0 transition-transform',
+                          'h-5 w-5 text-silver-400 shrink-0 transition-transform motion-reduce:transition-none',
                           isOpen && 'rotate-180',
                         )}
                         aria-hidden
@@ -106,10 +111,9 @@ export default function FAQ() {
                     <AnimatePresence>
                       {isOpen && (
                         <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden"
+                          id={`faq-panel-${id}`}
+                          role="region"
+                          {...panelMotion}
                         >
                           <p className="px-5 pb-4 text-sm text-steel-600">{item.a}</p>
                         </motion.div>
@@ -123,14 +127,17 @@ export default function FAQ() {
         );
       })}
 
-      <div className="bg-navy-950 rounded-3xl p-8 text-center relative overflow-hidden">
+      <Reveal className="bg-navy-950 rounded-3xl p-8 text-center relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-brand-500/20 rounded-full blur-3xl" aria-hidden />
         <h3 className="text-white font-display font-bold mb-2 relative z-10">{t('faq.ctaTitle')}</h3>
         <p className="text-silver-400 text-sm mb-6 relative z-10">{t('faq.ctaBody')}</p>
-        <LocaleLink to="/contact" className="relative z-10 inline-block">
-          <Button variant="primary">{t('faq.ctaButton')}</Button>
+        <LocaleLink
+          to="/contact"
+          className={buttonClassName({ className: 'relative z-10 whitespace-nowrap' })}
+        >
+          {t('faq.ctaButton')}
         </LocaleLink>
-      </div>
+      </Reveal>
     </LegalPageLayout>
   );
 }

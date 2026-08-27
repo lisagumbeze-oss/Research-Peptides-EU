@@ -19,9 +19,16 @@ export function stripLocaleFromPath(pathname: string): string {
 }
 
 export function pathWithLocale(locale: LocaleCode, path = '/'): string {
-  const normalized = path.startsWith('/') ? path : `/${path}`;
-  if (normalized === '/') return `/${locale}`;
-  return `/${locale}${normalized}`;
+  const hashIndex = path.indexOf('#');
+  const hash = hashIndex >= 0 ? path.slice(hashIndex) : '';
+  const withoutHash = hashIndex >= 0 ? path.slice(0, hashIndex) : path;
+  const queryIndex = withoutHash.indexOf('?');
+  const search = queryIndex >= 0 ? withoutHash.slice(queryIndex) : '';
+  const pathname = queryIndex >= 0 ? withoutHash.slice(0, queryIndex) : withoutHash;
+  const normalized = pathname.startsWith('/') ? pathname : `/${pathname}`;
+  const stripped = stripLocaleFromPath(normalized);
+  if (stripped === '/') return `/${locale}${search}${hash}`;
+  return `/${locale}${stripped}${search}${hash}`;
 }
 
 export function persistLocaleCookie(locale: LocaleCode): void {

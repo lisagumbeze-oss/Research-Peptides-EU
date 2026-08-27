@@ -25,6 +25,13 @@ export function LazyWhenVisible({
     const el = ref.current;
     if (!el || visible) return;
 
+    const preloadPx = 200;
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight + preloadPx) {
+      setVisible(true);
+      return;
+    }
+
     if (typeof IntersectionObserver === 'undefined') {
       setVisible(true);
       return;
@@ -37,7 +44,7 @@ export function LazyWhenVisible({
           observer.disconnect();
         }
       },
-      { rootMargin, threshold: 0.01 },
+      { rootMargin, threshold: 0 },
     );
 
     observer.observe(el);

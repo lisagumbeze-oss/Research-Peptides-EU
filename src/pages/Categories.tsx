@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../i18n/LocaleLink';
 import { ArrowRight, Beaker, Dna, Layers, Pill, TestTube2 } from 'lucide-react';
-import { motion } from 'motion/react';
 import { supabase } from '../supabase';
-import { Container, Section } from '../design-system';
+import { Container, Section, Reveal } from '../design-system';
 import { CatalogPageHeader } from '../components/catalog/CatalogPageHeader';
 import { CatalogTrustBar } from '../components/catalog/CatalogTrustBar';
 import { cn } from '../lib/utils';
+import { staggerDelay } from '../design-system/motion';
 
 type Category = {
   id: string;
@@ -58,28 +58,22 @@ export default function Categories() {
           ) : categories.length === 0 ? (
             <div className="text-center py-16 rounded-3xl bg-white border border-brand-100 shadow-card">
               <p className="text-steel-600">No categories found.</p>
-              <Link to="/shop" className="inline-block mt-4 text-brand-600 font-semibold text-sm">
+              <LocaleLink to="/shop" className="inline-block mt-4 text-brand-600 font-semibold text-sm">
                 Browse full shop →
-              </Link>
+              </LocaleLink>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {categories.map((category, i) => {
                 const Icon = icons[i % icons.length];
                 return (
-                  <motion.div
-                    key={category.id}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.05 }}
-                  >
-                    <Link
+                  <Reveal key={category.id} delay={staggerDelay(i)}>
+                    <LocaleLink
                       to={`/search?category=${category.slug}`}
                       className={cn(
                         'group flex flex-col h-full p-8 rounded-3xl bg-white border border-brand-100',
-                        'shadow-card hover:shadow-elevated hover:border-brand-300 transition-all duration-300',
-                        'hover:-translate-y-1',
+                        'shadow-card hover:shadow-elevated hover:border-brand-300 transition-all duration-300 motion-reduce:transition-none',
+                        'motion-safe:hover:-translate-y-1',
                       )}
                     >
                       <div className="w-12 h-12 rounded-2xl bg-brand-50 flex items-center justify-center mb-5 group-hover:bg-brand-500 transition-colors">
@@ -97,8 +91,8 @@ export default function Categories() {
                         View products
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </span>
-                    </Link>
-                  </motion.div>
+                    </LocaleLink>
+                  </Reveal>
                 );
               })}
             </div>

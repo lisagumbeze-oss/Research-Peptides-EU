@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { Quote, Star } from 'lucide-react';
 import { motion } from 'motion/react';
 import scientistLab from '../../assets/scientist_lab.png';
 import { Container, Section, Card } from '../../design-system';
+import { fadeUpVariants, staggerDelay } from '../../design-system/motion';
 import { SectionHeading } from './SectionHeading';
 
 const testimonials = [
@@ -30,6 +31,8 @@ const testimonials = [
 ];
 
 export function CustomerExperienceSection() {
+  const enter = fadeUpVariants();
+
   return (
     <Section size="lg" tone="mist">
       <Container>
@@ -43,15 +46,16 @@ export function CustomerExperienceSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={enter}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            className="lg:col-span-5 relative rounded-3xl overflow-hidden min-h-[280px] border border-brand-100 shadow-elevated"
+            className="lg:col-span-5 relative rounded-3xl overflow-hidden min-h-[280px] border border-brand-100 shadow-elevated group"
           >
             <img
               src={scientistLab}
               alt="Laboratory research environment"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover motion-safe:transition-transform motion-safe:duration-700 motion-safe:group-hover:scale-[1.04]"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/20 to-transparent" />
@@ -76,10 +80,11 @@ export function CustomerExperienceSection() {
             {testimonials.map((t, i) => (
               <motion.div
                 key={t.author}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                variants={enter}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: staggerDelay(i, 0.08) }}
               >
                 <Card variant="trust" className="relative pl-12">
                   <Quote
@@ -105,9 +110,9 @@ export function CustomerExperienceSection() {
         </div>
 
         <p className="text-center mt-10">
-          <Link to="/faq" className="text-sm font-semibold text-brand-600 hover:text-brand-700">
+          <LocaleLink to="/faq" className="text-sm font-semibold text-brand-600 hover:text-brand-700">
             Read researcher FAQ →
-          </Link>
+          </LocaleLink>
         </p>
       </Container>
     </Section>

@@ -37,11 +37,11 @@ export function CheckoutProgress({ step }: CheckoutProgressProps) {
             </span>
           </div>
           {idx < STEPS.length - 1 && (
-            <div className="flex-1 h-0.5 mx-3 bg-brand-100 self-center -mt-6 min-w-[2rem]">
+            <div className="flex-1 h-0.5 mx-3 bg-brand-100 self-center -mt-6 min-w-[2rem] overflow-hidden rounded-full">
               <div
                 className={cn(
-                  'h-full bg-brand-500 transition-all duration-500',
-                  step > s.id ? 'w-full' : 'w-0',
+                  'h-full w-full origin-left bg-brand-500 transition-transform duration-500 motion-reduce:transition-none',
+                  step > s.id ? 'scale-x-100' : 'scale-x-0',
                 )}
               />
             </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Mail, Phone, MessageSquare, Clock, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
-import { motion } from 'motion/react';
 import { Container, Button, GlassPanel, GlowPanel, Reveal } from '../design-system';
 import { HQ_LOCATION, SUPPORT_EMAIL } from '../config/brand';
 import { useToastStore } from '../store/useToastStore';
@@ -48,18 +47,14 @@ export default function Contact() {
           
           {/* Left: Contact Info */}
           <div>
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="mb-12"
-            >
+            <Reveal as="header" className="mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 text-brand-600 rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
                 <MessageSquare className="h-4 w-4" aria-hidden />
                 {t('contact.eyebrow')}
               </div>
               <h1 className="text-h1 text-navy-950 mb-6">{t('contact.title')}</h1>
               <p className="text-lg text-steel-600 leading-relaxed max-w-lg">{t('contact.subtitle')}</p>
-            </motion.div>
+            </Reveal>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <Reveal>

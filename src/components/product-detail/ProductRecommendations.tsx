@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { useTranslation } from 'react-i18next';
 import { formatCurrency } from '../../lib/utils';
 import { productPath } from '../../lib/productUrl';
@@ -30,9 +30,9 @@ export function ProductRecommendations({
         <section>
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-h2 font-display font-bold text-navy-950">{t('recommendations.relatedTitle')}</h2>
-            <Link to="/shop" className="text-sm font-semibold text-brand-600 hover:text-brand-700">
+            <LocaleLink to="/shop" className="text-sm font-semibold text-brand-600 hover:text-brand-700">
               {t('recommendations.viewCatalog')} →
-            </Link>
+            </LocaleLink>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {recommended.map((product, index) => (
@@ -54,7 +54,7 @@ export function ProductRecommendations({
           <h2 className="text-caption text-brand-600 mb-6">{t('recommendations.recentTitle')}</h2>
           <div className="flex gap-4 overflow-x-auto pb-2">
             {recentlyViewed.map((rv) => (
-              <Link
+              <LocaleLink
                 key={rv.id}
                 to={productPath(rv)}
                 className="shrink-0 w-44 group"
@@ -82,7 +82,7 @@ export function ProductRecommendations({
                 <p className="text-xs text-brand-600 font-semibold tabular-nums mt-0.5">
                   {formatCurrency(rv.price)}
                 </p>
-              </Link>
+              </LocaleLink>
             ))}
           </div>
         </section>

@@ -42,7 +42,7 @@ export default function LanguageSwitcher({ variant = 'header' }: LanguageSwitche
 
   const handleSelect = (code: LocaleCode) => {
     const path = stripLocaleFromPath(location.pathname);
-    navigate(`${pathWithLocale(code, path)}${location.search}${location.hash}`);
+    navigate(pathWithLocale(code, `${path}${location.search}${location.hash}`));
     setLocale(code);
     persistLocaleCookie(code);
     setOpen(false);

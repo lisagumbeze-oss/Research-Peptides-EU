@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { Shield } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Button } from '../../design-system';
-import { useLocalizedPath } from '../../i18n/useLocalizedPath';
+import { overlayMotion } from '../../design-system/motion';
 
 const CONSENT_KEY = 'rp-eu-cookie-consent';
 
@@ -12,8 +12,9 @@ export type CookieConsentLevel = 'all' | 'essential';
 
 export function CookieConsent() {
   const { t } = useTranslation('legal');
-  const privacyPath = useLocalizedPath('/privacy');
   const [visible, setVisible] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const panel = overlayMotion(Boolean(reduceMotion));
 
   useEffect(() => {
     try {
@@ -40,9 +41,7 @@ export function CookieConsent() {
           role="dialog"
           aria-labelledby="cookie-consent-title"
           aria-describedby="cookie-consent-desc"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 24 }}
+          {...panel}
           className="fixed bottom-20 md:bottom-6 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-[90] bg-white border border-brand-100 rounded-2xl shadow-elevated p-5 md:p-6"
         >
           <div className="flex gap-3 mb-4">
@@ -66,12 +65,12 @@ export function CookieConsent() {
               {t('cookie.essentialOnly')}
             </Button>
           </div>
-          <Link
-            to={privacyPath}
+          <LocaleLink
+            to="/privacy"
             className="block text-center text-xs text-brand-600 font-semibold mt-3 hover:text-brand-700"
           >
             {t('cookie.privacyLink')}
-          </Link>
+          </LocaleLink>
         </motion.div>
       )}
     </AnimatePresence>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../i18n/LocaleLink';
 import { Heart } from 'lucide-react';
 import { supabase } from '../supabase';
 import { useAuthStore } from '../store/useAuthStore';
@@ -7,7 +7,7 @@ import { useWishlistStore } from '../store/useWishlistStore';
 import { AccountShell } from '../components/account/AccountShell';
 import { ProductGrid } from '../components/catalog/ProductGrid';
 import { useProductCatalogActions } from '../hooks/useProductCatalogActions';
-import { Button } from '../design-system';
+import { buttonClassName } from '../design-system';
 import type { CatalogProduct } from '../components/products/ProductCard';
 
 export default function Wishlist() {
@@ -58,9 +58,9 @@ export default function Wishlist() {
           <p className="text-steel-600 text-sm mb-6 max-w-sm mx-auto">
             Save compounds from the catalog for faster access in future research sessions.
           </p>
-          <Link to="/shop">
-            <Button>Discover catalog</Button>
-          </Link>
+          <LocaleLink to="/shop" className={buttonClassName({ className: 'whitespace-nowrap' })}>
+            Discover catalog
+          </LocaleLink>
         </div>
       ) : (
         <ProductGrid

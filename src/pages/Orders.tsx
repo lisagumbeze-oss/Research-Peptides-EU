@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { formatLocaleDate } from '../lib/formatLocaleDate';
-import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { LocaleLink } from '../i18n/LocaleLink';
 import {
   Package,
   ExternalLink,
@@ -16,7 +15,8 @@ import { useAuthStore } from '../store/useAuthStore';
 import { formatCurrency } from '../lib/utils';
 import { productPath } from '../lib/productUrl';
 import { AccountShell } from '../components/account/AccountShell';
-import { Button } from '../design-system';
+import { buttonClassName, Reveal } from '../design-system';
+import { staggerDelay } from '../design-system/motion';
 
 export default function Orders() {
   const { i18n } = useTranslation();
@@ -77,18 +77,17 @@ export default function Orders() {
           <Package className="h-12 w-12 text-brand-200 mx-auto mb-4" aria-hidden />
           <p className="font-display font-bold text-xl text-navy-950 mb-2">No orders yet</p>
           <p className="text-steel-600 text-sm mb-6">Your research compound orders will appear here.</p>
-          <Link to="/shop">
-            <Button>Explore catalog</Button>
-          </Link>
+          <LocaleLink to="/shop" className={buttonClassName({ className: 'whitespace-nowrap' })}>
+            Explore catalog
+          </LocaleLink>
         </div>
       ) : (
         <div className="space-y-6">
           {orders.map((order, orderIdx) => (
-            <motion.article
+            <Reveal
               key={order.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: orderIdx * 0.06 }}
+              as="article"
+              delay={staggerDelay(orderIdx)}
               className="bg-white rounded-3xl border border-brand-100 shadow-card overflow-hidden"
             >
               <div className="px-6 py-4 border-b border-brand-50 bg-mist-50/50 flex flex-wrap justify-between gap-4">
@@ -120,11 +119,12 @@ export default function Orders() {
 
               <div className="px-6 py-8">
                 <div className="relative flex justify-between max-w-lg mx-auto">
-                  <div className="absolute top-1/2 left-0 w-full h-0.5 bg-brand-100 -translate-y-1/2" />
-                  <div
-                    className="absolute top-1/2 left-0 h-0.5 bg-brand-500 -translate-y-1/2 transition-all duration-700"
-                    style={{ width: `${((getStatusStep(order.status) - 1) / 3) * 100}%` }}
-                  />
+                  <div className="absolute top-1/2 left-0 w-full h-0.5 bg-brand-100 -translate-y-1/2 overflow-hidden rounded-full">
+                    <div
+                      className="h-full w-full origin-left bg-brand-500 transition-transform duration-500 motion-reduce:transition-none"
+                      style={{ transform: `scaleX(${(getStatusStep(order.status) - 1) / 3})` }}
+                    />
+                  </div>
                   {[
                     { label: 'Pending', icon: Clock },
                     { label: 'Paid', icon: CreditCard },
@@ -169,12 +169,12 @@ export default function Orders() {
                         <div className="w-12 h-12 rounded-xl bg-mist-50 border border-brand-50" />
                       )}
                       <div className="min-w-0">
-                        <Link
+                        <LocaleLink
                           to={productPath({ slug: item.slug, title: item.title })}
                           className="text-sm font-semibold text-navy-950 hover:text-brand-600 truncate block"
                         >
                           {item.title}
-                        </Link>
+                        </LocaleLink>
                         <p className="text-xs text-steel-600">
                           Qty {item.quantity} · {formatCurrency(item.price)}
                         </p>
@@ -202,7 +202,7 @@ export default function Orders() {
                   </div>
                 )}
               </div>
-            </motion.article>
+            </Reveal>
           ))}
         </div>
       )}

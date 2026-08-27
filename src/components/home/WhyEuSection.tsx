@@ -2,7 +2,7 @@ import { Activity, Award, FlaskConical, Microscope } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Card, Container, ScientificBackdrop, Section } from '../../design-system';
 import { SectionHeading } from './SectionHeading';
-import { staggerContainerVariants, staggerItem } from '../../design-system/motion';
+import { staggerContainerVariants, staggerItemVariants } from '../../design-system/motion';
 
 const pillars = [
   {
@@ -53,8 +53,8 @@ export function WhyEuSection() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {pillars.map((item) => (
-            <motion.div key={item.title} variants={staggerItem}>
-              <Card variant="feature" className="h-full group hover:border-brand-200 transition-colors">
+            <motion.div key={item.title} variants={staggerItemVariants()}>
+              <Card variant="feature" className="h-full group hover:border-brand-200 transition-colors motion-safe:hover:-translate-y-0.5">
                 <div className="w-14 h-14 rounded-2xl bg-brand-500 flex items-center justify-center mb-5 shadow-card group-hover:shadow-elevated transition-shadow">
                   <item.icon className="h-7 w-7 text-white" aria-hidden />
                 </div>

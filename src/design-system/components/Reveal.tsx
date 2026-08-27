@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { cn } from '../../lib/utils';
 import { fadeUpVariants, scaleInVariants } from '../motion';
 
@@ -11,7 +11,7 @@ export type RevealProps = {
   variant?: 'fadeUp' | 'scaleIn';
   /** Viewport margin passed to whileInView */
   margin?: string;
-  as?: 'div' | 'section' | 'article' | 'li';
+  as?: 'div' | 'section' | 'article' | 'li' | 'header';
 };
 
 const motionTags = {
@@ -19,6 +19,7 @@ const motionTags = {
   section: motion.section,
   article: motion.article,
   li: motion.li,
+  header: motion.header,
 } as const;
 
 export function Reveal({
@@ -29,6 +30,14 @@ export function Reveal({
   margin = '-48px',
   as = 'div',
 }: RevealProps) {
+  const reduce = useReducedMotion();
+  const classNames = cn(className);
+
+  if (reduce) {
+    const Tag = as;
+    return <Tag className={classNames}>{children}</Tag>;
+  }
+
   const Component = motionTags[as];
   const variants = variant === 'scaleIn' ? scaleInVariants() : fadeUpVariants();
 
@@ -39,7 +48,7 @@ export function Reveal({
       viewport={{ once: true, margin }}
       variants={variants}
       transition={delay > 0 ? { delay } : undefined}
-      className={cn(className)}
+      className={classNames}
     >
       {children}
     </Component>

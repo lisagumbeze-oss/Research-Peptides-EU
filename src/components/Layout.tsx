@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { ArrowUp } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { useAuthStore } from '../store/useAuthStore';
 import { useSearchStore } from '../store/useSearchStore';
 import { supabase } from '../supabase';
@@ -24,6 +24,7 @@ import { PageLoader } from './PageLoader';
 import { RouteChunkErrorBoundary } from './RouteChunkErrorBoundary';
 import { postNewsletterSubscribe } from '../lib/transactionalEmailApi';
 import { JsonLd } from './seo/JsonLd';
+import { overlayMotion } from '../design-system/motion';
 
 function LayoutShell() {
   const { user, profile, setUser } = useAuthStore();
@@ -36,6 +37,8 @@ function LayoutShell() {
   const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
   const [newsletterMessage, setNewsletterMessage] = useState<string | null>(null);
   const [newsletterError, setNewsletterError] = useState<string | null>(null);
+  const reduceMotion = useReducedMotion();
+  const backToTopMotion = overlayMotion(Boolean(reduceMotion));
 
   const handleLogin = () => navigate('/login');
 
@@ -61,7 +64,7 @@ function LayoutShell() {
   }, []);
 
   const handleBackToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
   };
 
   const handleNewsletterSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -174,11 +177,8 @@ function LayoutShell() {
           <motion.button
             type="button"
             onClick={handleBackToTop}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2 }}
-            className="fixed bottom-24 md:bottom-8 left-4 md:left-8 z-50 bg-brand-500 hover:bg-brand-600 text-white rounded-full p-3 shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
+            {...backToTopMotion}
+            className="fixed bottom-24 md:bottom-8 left-4 md:left-8 z-50 bg-brand-500 hover:bg-brand-600 text-white rounded-full p-3 shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 motion-safe:active:scale-95"
             aria-label="Back to top"
           >
             <ArrowUp className="h-5 w-5" aria-hidden />

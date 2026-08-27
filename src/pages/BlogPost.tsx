@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { LocaleLink } from '../i18n/LocaleLink';
 import { supabase } from '../supabase';
 import { BookOpen, ArrowLeft, Clock, Share2, Tag, Calendar } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Reveal } from '../design-system';
 
 import { usePageSeo } from '../seo/SeoProvider';
 
@@ -67,9 +68,9 @@ export default function BlogPost() {
           <BookOpen className="h-16 w-16 text-gray-200 mx-auto mb-6" />
           <h2 className="text-3xl font-black text-gray-900 mb-4">Research Entry Forbidden</h2>
           <p className="text-gray-400 font-medium mb-8">The requested publication could not be identified.</p>
-          <Link to="/blog" className="inline-flex items-center gap-2 text-brand-600 font-black uppercase tracking-widest text-xs hover:gap-4 transition-all">
+          <LocaleLink to="/blog" className="inline-flex items-center gap-2 text-brand-600 font-black uppercase tracking-widest text-xs hover:gap-4 transition-all">
             <ArrowLeft className="h-3 w-3" /> Return to Archives
-          </Link>
+          </LocaleLink>
         </div>
       </div>
     );
@@ -79,15 +80,11 @@ export default function BlogPost() {
     <article className="bg-white min-h-screen pb-32">
       {/* Article Header */}
       <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-16 pb-12">
-        <Link to="/blog" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-brand-600 transition-colors mb-12">
+        <LocaleLink to="/blog" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-brand-600 transition-colors mb-12">
           <ArrowLeft className="h-3 w-3" /> Scientific Journals
-        </Link>
+        </LocaleLink>
         
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
+        <Reveal>
           <div className="flex flex-wrap items-center gap-6 mb-8 text-[10px] font-black uppercase tracking-widest text-brand-600">
              <span className="flex items-center gap-2 px-4 py-1.5 bg-brand-50 rounded-full"><Tag className="h-3 w-3" /> Research Insight</span>
              <span className="flex items-center gap-2 text-gray-400"><Calendar className="h-3 w-3" /> {new Date(post.created_at).toLocaleDateString()}</span>
@@ -112,45 +109,35 @@ export default function BlogPost() {
                 <Share2 className="h-5 w-5" />
              </button>
           </div>
-        </motion.div>
+        </Reveal>
       </header>
 
       {/* Featured Image */}
       {post.image_url && (
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="max-w-6xl mx-auto px-4 mb-20"
-        >
+        <Reveal variant="scaleIn" delay={0.08} className="max-w-6xl mx-auto px-4 mb-20">
           <div className="aspect-[21/9] rounded-[3.5rem] overflow-hidden shadow-2xl shadow-navy-950/10">
             <img src={post.image_url} alt={post.title} className="w-full h-full object-cover" />
           </div>
-        </motion.div>
+        </Reveal>
       )}
 
       {/* Content */}
       <main className="max-w-3xl mx-auto px-4 sm:px-6">
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="prose prose-xl prose-blue max-w-none text-gray-600 font-medium leading-relaxed"
-        >
+        <Reveal delay={0.12} className="prose prose-xl prose-blue max-w-none text-gray-600 font-medium leading-relaxed">
           <div className="whitespace-pre-wrap selection:bg-brand-100">
              {post.content}
           </div>
-        </motion.div>
+        </Reveal>
 
         {/* Footer Navigation */}
         <footer className="mt-24 pt-16 border-t border-gray-100 text-center">
            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-8">End of Scientific Journal Entry</p>
-           <Link 
+           <LocaleLink 
              to="/blog" 
-             className="inline-flex items-center justify-center px-10 py-5 bg-gray-900 text-white rounded-[2rem] font-black uppercase tracking-widest text-[10px] hover:bg-brand-600 hover:shadow-2xl hover:shadow-glow transition-all active:scale-95"
+             className="inline-flex items-center justify-center px-10 py-5 bg-gray-900 text-white rounded-[2rem] font-black uppercase tracking-widest text-[10px] hover:bg-brand-600 hover:shadow-2xl hover:shadow-glow transition-all motion-safe:active:scale-95"
            >
               Return to All Research
-           </Link>
+           </LocaleLink>
         </footer>
       </main>
     </article>

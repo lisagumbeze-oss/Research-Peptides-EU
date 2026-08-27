@@ -1,9 +1,11 @@
 import type { ReactNode } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ChevronRight, Heart, Package, Settings, User } from 'lucide-react';
 import { useAuthStore } from '../../store/useAuthStore';
 import { Container } from '../../design-system';
 import { CatalogPageHeader } from '../catalog/CatalogPageHeader';
+import { LocaleLink } from '../../i18n/LocaleLink';
+import { stripLocaleFromPath } from '../../i18n/routing';
 import { cn } from '../../lib/utils';
 
 const NAV = [
@@ -30,12 +32,12 @@ export function AccountShell({ title, subtitle, children }: AccountShellProps) {
           <User className="h-14 w-14 text-brand-200 mx-auto mb-4" aria-hidden />
           <p className="font-display font-bold text-xl text-navy-950 mb-2">Sign in required</p>
           <p className="text-steel-600 text-sm mb-6">Access your researcher account to view this area.</p>
-          <Link
+          <LocaleLink
             to="/login"
             className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-brand-500 text-white font-semibold hover:bg-brand-600 transition-colors"
           >
             Sign in
-          </Link>
+          </LocaleLink>
         </div>
       </div>
     );
@@ -75,9 +77,9 @@ export function AccountShell({ title, subtitle, children }: AccountShellProps) {
 
             <nav className="bg-white rounded-3xl border border-brand-100 p-3 shadow-card space-y-1">
               {NAV.map((item) => {
-                const active = location.pathname === item.path;
+                const active = stripLocaleFromPath(location.pathname) === item.path;
                 return (
-                  <Link
+                  <LocaleLink
                     key={item.path + item.label}
                     to={item.path}
                     className={cn(
@@ -98,7 +100,7 @@ export function AccountShell({ title, subtitle, children }: AccountShellProps) {
                       )}
                       aria-hidden
                     />
-                  </Link>
+                  </LocaleLink>
                 );
               })}
             </nav>

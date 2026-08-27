@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { LocaleLink } from '../i18n/LocaleLink';
 import { useCartStore } from '../store/useCartStore';
 import { useAuthStore } from '../store/useAuthStore';
-import { formatCurrency, DEFAULT_CURRENCY } from '../lib/utils';
+import { formatCurrency, DEFAULT_CURRENCY, cn } from '../lib/utils';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
-import { useLocalizedPath } from '../i18n/useLocalizedPath';
 import { supabase } from '../supabase';
 import { CheckCircle, Loader2, Truck, Package, Globe, Shield, Landmark, Bitcoin, Copy, Check } from 'lucide-react';
 import { europeanLocations } from '../data/europeanCountries';
 import { postOrderCreatedEmail, postBtcPaymentDeclared } from '../lib/transactionalEmailApi';
 import { CheckoutSkeleton } from '../components/Skeleton';
 import { PRIMARY_PROMO_CODE, PROMO_DISCOUNT_PERCENT, isValidPromoCode } from '../lib/promoCodes';
-import { Container } from '../design-system';
+import { Button, Container, FormError } from '../design-system';
+import { accordionMotion, scaleInVariants } from '../design-system/motion';
 import { CatalogPageHeader } from '../components/catalog/CatalogPageHeader';
 import { CheckoutProgress } from '../components/checkout/CheckoutProgress';
+import { CheckoutStepPanel } from '../components/checkout/CheckoutStepPanel';
+import {
+  checkoutChoiceClass,
+  checkoutFieldClass,
+  checkoutPaymentChoiceClass,
+  checkoutSelectClass,
+} from '../components/checkout/fieldStyles';
 import { usePageSeo } from '../seo/SeoProvider';
 import { BTC_PAYMENT_ADDRESS } from '../lib/paymentConfig';
 
@@ -57,7 +65,9 @@ export default function Checkout() {
   const { items, getTotal, getSubtotal, clearCart, hasHydrated } = useCartStore();
   const { user } = useAuthStore();
   const navigate = useLocaleNavigate();
-  const termsPath = useLocalizedPath('/terms');
+  const reduceMotion = useReducedMotion();
+  const promoMotion = accordionMotion(Boolean(reduceMotion));
+  const successMark = scaleInVariants();
   const [step, setStep] = useState(1);
   const [shipping, setShipping] = useState({
     fullName: '',
@@ -385,45 +395,47 @@ export default function Checkout() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-8">
-          <div className="bg-white p-6 sm:p-10 rounded-3xl shadow-card border border-brand-100 min-h-[500px]">
+          <div className="bg-white p-6 sm:p-10 rounded-3xl shadow-card border border-brand-100 min-h-[500px] overflow-hidden">
+            <AnimatePresence mode="wait" initial={false}>
             {step === 1 && (
+              <CheckoutStepPanel key="shipping">
               <div className="space-y-8">
                 <h2 className="text-2xl font-black text-navy-950">Shipping Details</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="md:col-span-2">
                     <label htmlFor="checkout-email" className="block text-xs font-black uppercase tracking-widest text-steel-600 mb-2">Email Address</label>
-                    <input id="checkout-email" required type="email" value={shipping.email} onChange={e => setShipping({...shipping, email: e.target.value})} className="w-full p-4 bg-mist-50 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-bold text-navy-950" placeholder="researcher@university.edu" disabled={!!user} autoComplete="email" />
+                    <input id="checkout-email" required type="email" value={shipping.email} onChange={e => setShipping({...shipping, email: e.target.value})} className={checkoutFieldClass(Boolean(shippingErrors.email))} placeholder="researcher@university.edu" disabled={!!user} autoComplete="email" aria-invalid={shippingErrors.email ? true : undefined} aria-describedby={shippingErrors.email ? 'checkout-email-error' : undefined} />
                     {user && <p className="text-[10px] font-bold text-silver-400 mt-1 uppercase tracking-widest">Locked to account email</p>}
-                    {shippingErrors.email && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.email}</p>}
+                    <FormError message={shippingErrors.email} id="checkout-email-error" className="mt-1" />
                   </div>
                   <div className="md:col-span-2">
                     <label htmlFor="checkout-full-name" className="block text-xs font-black uppercase tracking-widest text-steel-600 mb-2">Full Name</label>
-                    <input id="checkout-full-name" required type="text" value={shipping.fullName} onChange={e => setShipping({...shipping, fullName: e.target.value})} className="w-full p-4 bg-mist-50 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-bold text-navy-950" placeholder="John Doe" autoComplete="name" />
-                    {shippingErrors.fullName && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.fullName}</p>}
+                    <input id="checkout-full-name" required type="text" value={shipping.fullName} onChange={e => setShipping({...shipping, fullName: e.target.value})} className={checkoutFieldClass(Boolean(shippingErrors.fullName))} placeholder="John Doe" autoComplete="name" aria-invalid={shippingErrors.fullName ? true : undefined} aria-describedby={shippingErrors.fullName ? 'checkout-full-name-error' : undefined} />
+                    <FormError message={shippingErrors.fullName} id="checkout-full-name-error" className="mt-1" />
                   </div>
                   <div className="md:col-span-2">
                     <label htmlFor="checkout-phone" className="block text-xs font-black uppercase tracking-widest text-steel-600 mb-2">Phone Number</label>
-                    <input id="checkout-phone" required type="tel" value={shipping.phone} onChange={e => setShipping({...shipping, phone: e.target.value})} className="w-full p-4 bg-mist-50 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-bold text-navy-950" placeholder="+31 6 12345678" autoComplete="tel" />
-                    {shippingErrors.phone && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.phone}</p>}
+                    <input id="checkout-phone" required type="tel" value={shipping.phone} onChange={e => setShipping({...shipping, phone: e.target.value})} className={checkoutFieldClass(Boolean(shippingErrors.phone))} placeholder="+31 6 12345678" autoComplete="tel" aria-invalid={shippingErrors.phone ? true : undefined} aria-describedby={shippingErrors.phone ? 'checkout-phone-error' : undefined} />
+                    <FormError message={shippingErrors.phone} id="checkout-phone-error" className="mt-1" />
                   </div>
                   <div className="md:col-span-2">
                     <label htmlFor="checkout-address-line" className="block text-xs font-black uppercase tracking-widest text-steel-600 mb-2">Street Address</label>
-                    <input id="checkout-address-line" required type="text" value={shipping.address} onChange={e => setShipping({...shipping, address: e.target.value})} className="w-full p-4 bg-mist-50 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-bold text-navy-950" placeholder="123 Research Way" autoComplete="street-address" />
-                    {shippingErrors.address && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.address}</p>}
+                    <input id="checkout-address-line" required type="text" value={shipping.address} onChange={e => setShipping({...shipping, address: e.target.value})} className={checkoutFieldClass(Boolean(shippingErrors.address))} placeholder="123 Research Way" autoComplete="street-address" aria-invalid={shippingErrors.address ? true : undefined} aria-describedby={shippingErrors.address ? 'checkout-address-line-error' : undefined} />
+                    <FormError message={shippingErrors.address} id="checkout-address-line-error" className="mt-1" />
                   </div>
                   <div>
                     <label htmlFor="checkout-city" className="block text-xs font-black uppercase tracking-widest text-steel-600 mb-2">City</label>
-                    <input id="checkout-city" required type="text" value={shipping.city} onChange={e => setShipping({...shipping, city: e.target.value})} className="w-full p-4 bg-mist-50 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-bold text-navy-950" placeholder="Amsterdam" autoComplete="address-level2" />
-                    {shippingErrors.city && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.city}</p>}
+                    <input id="checkout-city" required type="text" value={shipping.city} onChange={e => setShipping({...shipping, city: e.target.value})} className={checkoutFieldClass(Boolean(shippingErrors.city))} placeholder="Amsterdam" autoComplete="address-level2" aria-invalid={shippingErrors.city ? true : undefined} aria-describedby={shippingErrors.city ? 'checkout-city-error' : undefined} />
+                    <FormError message={shippingErrors.city} id="checkout-city-error" className="mt-1" />
                   </div>
                   <div>
                     <label htmlFor="checkout-postal" className="block text-xs font-black uppercase tracking-widest text-steel-600 mb-2">Postal Code</label>
-                    <input id="checkout-postal" required type="text" value={shipping.postalCode} onChange={e => setShipping({...shipping, postalCode: e.target.value})} className="w-full p-4 bg-mist-50 border-none rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-bold text-navy-950" placeholder="1012 AB" autoComplete="postal-code" />
-                    {shippingErrors.postalCode && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.postalCode}</p>}
+                    <input id="checkout-postal" required type="text" value={shipping.postalCode} onChange={e => setShipping({...shipping, postalCode: e.target.value})} className={checkoutFieldClass(Boolean(shippingErrors.postalCode))} placeholder="1012 AB" autoComplete="postal-code" aria-invalid={shippingErrors.postalCode ? true : undefined} aria-describedby={shippingErrors.postalCode ? 'checkout-postal-error' : undefined} />
+                    <FormError message={shippingErrors.postalCode} id="checkout-postal-error" className="mt-1" />
                   </div>
                   <div className="md:col-span-2">
                     <label htmlFor="checkout-country" className="block text-xs font-black uppercase tracking-widest text-steel-600 mb-2">Country</label>
-                    <select id="checkout-country" value={shipping.country} onChange={e => setShipping({...shipping, country: e.target.value})} className="w-full p-4 bg-mist-50 border border-brand-100 rounded-2xl focus:ring-2 focus:ring-brand-400 outline-none transition-all font-semibold text-navy-950 appearance-none cursor-pointer" autoComplete="country-name">
+                    <select id="checkout-country" value={shipping.country} onChange={e => setShipping({...shipping, country: e.target.value})} className={checkoutSelectClass(Boolean(shippingErrors.country))} autoComplete="country-name" aria-invalid={shippingErrors.country ? true : undefined} aria-describedby={shippingErrors.country ? 'checkout-country-error' : undefined}>
                       <optgroup label="European Union">
                         <option value="Netherlands">Netherlands</option>
                         {EUROPEAN_COUNTRIES.filter(c => c !== 'Netherlands' && c !== 'United Kingdom').sort().map(c => <option key={c} value={c}>{c}</option>)}
@@ -435,7 +447,7 @@ export default function Checkout() {
                         <option value="Other">Other International</option>
                       </optgroup>
                     </select>
-                    {shippingErrors.country && <p className="mt-1 text-xs font-semibold text-red-600">{shippingErrors.country}</p>}
+                    <FormError message={shippingErrors.country} id="checkout-country-error" className="mt-1" />
                   </div>
                 </div>
 
@@ -445,9 +457,9 @@ export default function Checkout() {
                   </legend>
                   <div className="grid grid-cols-1 gap-3" role="radiogroup" aria-labelledby="checkout-shipping-method-legend">
                     {availableMethods.map((m) => (
-                      <button key={m.id} type="button" role="radio" aria-checked={selectedShippingId === m.id} onClick={() => setSelectedShippingId(m.id)} className={`flex items-center justify-between p-4 rounded-2xl border-2 transition-all ${selectedShippingId === m.id ? 'border-brand-500 bg-brand-50/50' : 'border-gray-50 bg-mist-50/50 hover:border-gray-200'}`}>
+                      <button key={m.id} type="button" role="radio" aria-checked={selectedShippingId === m.id} onClick={() => setSelectedShippingId(m.id)} className={checkoutChoiceClass(selectedShippingId === m.id)}>
                         <div className="flex items-center gap-4 text-left">
-                          <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedShippingId === m.id ? 'border-brand-500 bg-brand-500' : 'border-gray-300'}`}>
+                          <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedShippingId === m.id ? 'border-brand-500 bg-brand-500' : 'border-silver-400'}`}>
                             {selectedShippingId === m.id && <div className="w-2 h-2 rounded-full bg-white" />}
                           </div>
                           <div>
@@ -459,25 +471,27 @@ export default function Checkout() {
                       </button>
                     ))}
                   </div>
-                  {shippingErrors.shippingMethod && <p className="text-xs font-semibold text-red-600">{shippingErrors.shippingMethod}</p>}
+                  <FormError message={shippingErrors.shippingMethod} className="mt-1" />
                 </fieldset>
 
-                <button type="button" onClick={handleContinueToPayment} className="w-full bg-gray-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all shadow-xl shadow-gray-200">
+                <Button type="button" size="lg" fullWidth onClick={handleContinueToPayment} className="h-auto py-5 text-lg">
                   Continue to Payment
-                </button>
+                </Button>
               </div>
+              </CheckoutStepPanel>
             )}
 
             {step === 2 && (
+              <CheckoutStepPanel key="payment">
               <div className="space-y-8">
                 <div className="flex items-center justify-between">
                   <h2 id="checkout-payment-heading" className="text-2xl font-black text-navy-950">Payment Method</h2>
-                  <button type="button" onClick={() => setStep(1)} className="text-xs font-black text-brand-600 uppercase tracking-widest hover:underline">Edit Shipping</button>
+                  <button type="button" onClick={() => setStep(1)} className="text-xs font-black text-brand-600 uppercase tracking-widest hover:underline motion-safe:active:scale-95">Edit Shipping</button>
                 </div>
 
                 <div className="grid grid-cols-1 gap-4" role="radiogroup" aria-labelledby="checkout-payment-heading">
                   {availablePaymentMethods.map((method) => (
-                    <button key={method.id} type="button" role="radio" aria-checked={paymentMethod === method.id} onClick={() => setPaymentMethod(method.id)} className={`relative flex items-center gap-5 p-6 rounded-[2rem] border-2 transition-all ${paymentMethod === method.id ? 'border-brand-500 bg-brand-50/30' : 'border-gray-50 bg-mist-50/30 hover:border-gray-200'}`}>
+                    <button key={method.id} type="button" role="radio" aria-checked={paymentMethod === method.id} onClick={() => setPaymentMethod(method.id)} className={checkoutPaymentChoiceClass(paymentMethod === method.id)}>
                       <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${paymentMethod === method.id ? 'bg-brand-500 text-white' : 'bg-white text-silver-400 border border-brand-100'}`}>
                         <method.icon className="w-8 h-8" aria-hidden />
                       </div>
@@ -485,7 +499,7 @@ export default function Checkout() {
                         <span className="text-lg font-black text-navy-950">{method.name}</span>
                         <p className="text-xs font-bold text-silver-400">{method.subtext}</p>
                       </div>
-                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${paymentMethod === method.id ? 'border-brand-500 bg-brand-500' : 'border-gray-200'}`}>
+                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${paymentMethod === method.id ? 'border-brand-500 bg-brand-500' : 'border-silver-400'}`}>
                         {paymentMethod === method.id && <div className="w-2.5 h-2.5 rounded-full bg-white shadow-sm" />}
                       </div>
                     </button>
@@ -496,19 +510,21 @@ export default function Checkout() {
                     Bank transfer becomes available for orders of {formatCurrency(BANK_TRANSFER_MIN_EUR)} or more.
                   </p>
                 )}
-                {paymentErrors.paymentMethod && <p className="text-xs font-semibold text-red-600">{paymentErrors.paymentMethod}</p>}
+                <FormError message={paymentErrors.paymentMethod} />
 
-                <button type="button" onClick={handleConfirmPaymentChoice} className="w-full bg-gray-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-black transition-all shadow-xl shadow-gray-200">
+                <Button type="button" size="lg" fullWidth onClick={handleConfirmPaymentChoice} className="h-auto py-5 text-lg">
                   Confirm Payment Choice
-                </button>
+                </Button>
               </div>
+              </CheckoutStepPanel>
             )}
 
             {step === 3 && (
+              <CheckoutStepPanel key="confirm">
               <div className="space-y-8">
                 <div className="flex items-center justify-between">
                   <h2 className="text-2xl font-black text-navy-950">Final Confirmation</h2>
-                  <button type="button" onClick={() => setStep(2)} className="text-xs font-black text-brand-600 uppercase tracking-widest hover:underline">Change Method</button>
+                  <button type="button" onClick={() => setStep(2)} className="text-xs font-black text-brand-600 uppercase tracking-widest hover:underline motion-safe:active:scale-95">Change Method</button>
                 </div>
 
                 {paymentMethod === 'bank' && (
@@ -573,28 +589,42 @@ export default function Checkout() {
                     />
                     <span className="text-sm font-semibold text-navy-950">
                       {t('attestation.terms')}{' '}
-                      <Link to={termsPath} className="text-brand-600 hover:underline">
+                      <LocaleLink to="/terms" className="text-brand-600 hover:underline">
                         {t('attestation.termsLink')}
-                      </Link>
+                      </LocaleLink>
                       .
                     </span>
                   </label>
-                  {attestationError && (
-                    <p className="text-xs font-semibold text-red-600">{attestationError}</p>
-                  )}
+                  <FormError message={attestationError} className="mt-1" />
                 </div>
 
-                <button type="button" onClick={handleOrderSubmit} disabled={isSubmitting} className="w-full bg-brand-500 text-white py-6 rounded-2xl font-black text-xl hover:bg-brand-600 transition-all shadow-xl shadow-glow flex items-center justify-center gap-3">
-                  {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin" aria-hidden /> : 'Complete Secure Purchase'}
-                </button>
+                <Button
+                  type="button"
+                  size="lg"
+                  fullWidth
+                  onClick={handleOrderSubmit}
+                  disabled={isSubmitting}
+                  aria-busy={isSubmitting}
+                  className="h-auto py-6 text-xl shadow-glow"
+                >
+                  {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin" aria-hidden /> : null}
+                  {isSubmitting ? 'Processing…' : 'Complete Secure Purchase'}
+                </Button>
               </div>
+              </CheckoutStepPanel>
             )}
 
             {step === 4 && (
-              <div className="text-center py-12 sm:py-20 animate-in fade-in zoom-in duration-500">
-                <div className="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
+              <CheckoutStepPanel key="success">
+              <div className="text-center py-12 sm:py-20">
+                <motion.div
+                  variants={successMark}
+                  initial="hidden"
+                  animate="visible"
+                  className="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner"
+                >
                   <CheckCircle className="w-12 h-12" />
-                </div>
+                </motion.div>
                 <h2 className="text-3xl font-black text-navy-950">Research Order Secured</h2>
                 <div className="mt-4 p-4 bg-mist-50 rounded-2xl border border-brand-100 max-w-xs mx-auto">
                    <p className="text-[10px] font-black uppercase text-silver-400 mb-1">Order Identification</p>
@@ -622,7 +652,7 @@ export default function Checkout() {
                           <button
                             type="button"
                             onClick={handleCopyBtcAddress}
-                            className="px-4 rounded-xl bg-gray-900 text-white hover:bg-black transition-all flex items-center justify-center"
+                            className="px-4 rounded-xl bg-navy-950 text-white hover:bg-navy-900 transition-colors motion-safe:active:scale-95 flex items-center justify-center"
                             aria-label="Copy Bitcoin address"
                           >
                             {addressCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -635,18 +665,27 @@ export default function Checkout() {
                     </div>
 
                     {!paymentDeclared ? (
-                      <button
+                      <Button
                         type="button"
+                        size="lg"
+                        fullWidth
                         onClick={handleDeclareBtcPaid}
                         disabled={isDeclaringPayment || !placedOrderId}
-                        className="w-full bg-brand-500 text-white py-5 rounded-2xl font-black text-lg hover:bg-brand-600 transition-all shadow-xl shadow-glow flex items-center justify-center gap-3 disabled:opacity-60"
+                        aria-busy={isDeclaringPayment}
+                        className="h-auto py-5 text-lg shadow-glow"
                       >
-                        {isDeclaringPayment ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden /> : 'I have Paid'}
-                      </button>
+                        {isDeclaringPayment ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden /> : null}
+                        I have Paid
+                      </Button>
                     ) : (
-                      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl px-4 py-4 text-sm font-semibold text-center">
+                      <motion.div
+                        initial={{ opacity: reduceMotion ? 1 : 0, y: reduceMotion ? 0 : -6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl px-4 py-4 text-sm font-semibold text-center"
+                        role="status"
+                      >
                         Payment declared — we will verify your Bitcoin transfer and update your order.
-                      </div>
+                      </motion.div>
                     )}
                   </div>
                 ) : (
@@ -655,27 +694,36 @@ export default function Checkout() {
                   </p>
                 )}
 
-                {checkoutMessage && (
-                  <p className="text-amber-700 bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 mt-4 text-sm font-semibold max-w-lg mx-auto">
-                    {checkoutMessage}
-                  </p>
-                )}
+                <AnimatePresence>
+                  {checkoutMessage ? (
+                    <motion.p
+                      key={checkoutMessage}
+                      {...promoMotion}
+                      className="text-amber-700 bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 mt-4 text-sm font-semibold max-w-lg mx-auto"
+                      role="status"
+                    >
+                      {checkoutMessage}
+                    </motion.p>
+                  ) : null}
+                </AnimatePresence>
                 <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
                   {user ? (
-                    <button type="button" onClick={() => navigate('/orders')} className="bg-gray-900 text-white px-10 py-4 rounded-2xl font-black hover:bg-black transition-all">
+                    <Button type="button" size="lg" onClick={() => navigate('/orders')} className="h-auto px-10 py-4">
                       View My History
-                    </button>
+                    </Button>
                   ) : (
                     <div className="p-4 bg-brand-50 rounded-2xl text-navy-900 text-[10px] font-bold max-w-xs mx-auto border border-brand-100">
                       Please save your Order ID above. Since you checked out as a guest, this is your primary reference for correspondence.
                     </div>
                   )}
-                  <button type="button" onClick={() => navigate('/')} className="bg-white text-navy-950 border-2 border-brand-100 px-10 py-4 rounded-2xl font-black hover:bg-mist-50 transition-all">
+                  <Button type="button" variant="outline" size="lg" onClick={() => navigate('/')} className="h-auto px-10 py-4">
                     Continue Research
-                  </button>
+                  </Button>
                 </div>
               </div>
+              </CheckoutStepPanel>
             )}
+            </AnimatePresence>
           </div>
         </div>
 
@@ -700,24 +748,51 @@ export default function Checkout() {
               </div>
               <div className="pt-4 border-t border-brand-100 flex justify-between items-end">
                 <span className="text-sm font-black text-navy-950 uppercase">Total Payable</span>
-                <span className="text-2xl font-black text-brand-600 leading-none">{formatCurrency(lockedTotals?.finalTotal ?? finalTotalValue)}</span>
+                <span className="text-2xl font-black text-brand-600 leading-none tabular-nums">
+                  <motion.span
+                    key={lockedTotals?.finalTotal ?? finalTotalValue}
+                    initial={{ opacity: reduceMotion ? 1 : 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: reduceMotion ? 0 : 0.2 }}
+                    className="inline-block"
+                  >
+                    {formatCurrency(lockedTotals?.finalTotal ?? finalTotalValue)}
+                  </motion.span>
+                </span>
               </div>
             </div>
 
             {step < 3 && (
               <div className="mt-8 pt-8 border-t border-brand-100">
                 {!showPromo ? (
-                   <button type="button" onClick={() => setShowPromo(true)} className="text-[10px] font-black text-brand-600 uppercase tracking-widest hover:underline">Apply Reference Code?</button>
+                   <button type="button" onClick={() => setShowPromo(true)} className="text-[10px] font-black text-brand-600 uppercase tracking-widest hover:underline motion-safe:active:scale-95">Apply Reference Code?</button>
                 ) : (
-                  <div className="space-y-2">
+                  <motion.div {...promoMotion} className="space-y-2">
                     <div className="flex gap-2">
                       <label htmlFor="checkout-promo-code" className="sr-only">Promotion code</label>
-                      <input id="checkout-promo-code" type="text" placeholder={PRIMARY_PROMO_CODE} value={promoCode} onChange={e => setPromoCode(e.target.value)} className="flex-1 p-3 bg-mist-50 border-none rounded-xl outline-none text-xs font-black" />
-                      <button type="button" onClick={applyPromo} className="bg-gray-900 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest">Apply</button>
+                      <input
+                        id="checkout-promo-code"
+                        type="text"
+                        placeholder={PRIMARY_PROMO_CODE}
+                        value={promoCode}
+                        onChange={e => setPromoCode(e.target.value)}
+                        aria-invalid={promoError ? true : undefined}
+                        aria-describedby={promoError ? 'checkout-promo-code-error' : undefined}
+                        className={cn(
+                          'flex-1 p-3 bg-mist-50 rounded-xl outline-none text-xs font-black',
+                          'transition-[box-shadow,border-color] duration-200',
+                          promoError
+                            ? 'border border-error ring-2 ring-error/30'
+                            : 'border border-transparent',
+                        )}
+                      />
+                      <Button type="button" variant="secondary" size="sm" onClick={applyPromo} className="h-auto px-4 py-2 text-[10px] uppercase tracking-widest">
+                        Apply
+                      </Button>
                     </div>
-                    {promoError && <p className="text-[10px] text-red-500 font-bold">{promoError}</p>}
+                    <FormError message={promoError} id="checkout-promo-code-error" className="text-[10px]" />
                     {appliedDiscount > 0 && <p className="text-[10px] text-emerald-500 font-bold">✓ Reference Code Accepted</p>}
-                  </div>
+                  </motion.div>
                 )}
               </div>
             )}

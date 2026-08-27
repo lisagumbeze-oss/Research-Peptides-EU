@@ -1,16 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { History, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import { History, X, ChevronRight } from 'lucide-react';
+import { LocaleLink } from '../../i18n/LocaleLink';
+import { useLocation } from 'react-router-dom';
 import { supabase } from '../../supabase';
 import { ProductImagePlaceholder } from './ProductImagePlaceholder';
 import { productPath } from '../../lib/productUrl';
+import { slideFromRightMotion } from '../../design-system/motion';
+import type { CatalogProduct } from './ProductCard';
+import { cn } from '../../lib/utils';
+
+type RecentProduct = Pick<CatalogProduct, 'id' | 'title' | 'images' | 'price'>;
 
 export default function RecentlyViewedSidebar() {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<RecentProduct[]>([]);
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const location = useLocation();
+  const reduceMotion = useReducedMotion();
+  const panel = slideFromRightMotion(Boolean(reduceMotion));
 
   useEffect(() => {
     const fetchRecent = async () => {
@@ -22,10 +30,11 @@ export default function RecentlyViewedSidebar() {
             .from('products')
             .select('id, title, images, price')
             .in('id', ids.slice(0, 5));
-          
+
           if (data) {
-            // Sort to match the order of IDs in localStorage
-            const sortedData = ids.map((id: string) => data.find(p => p.id === id)).filter(Boolean);
+            const sortedData = ids
+              .map((id: string) => data.find((p) => p.id === id))
+              .filter(Boolean) as RecentProduct[];
             setProducts(sortedData);
             setIsVisible(true);
           }
@@ -36,36 +45,50 @@ export default function RecentlyViewedSidebar() {
     fetchRecent();
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (!isExpanded) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsExpanded(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [isExpanded]);
+
   if (!isVisible || products.length === 0) return null;
 
   return (
-    <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[40] hidden lg:flex items-center">
-      {/* Toggle Button */}
+    <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 hidden lg:flex items-center">
       <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-2 rounded-l-xl shadow-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-all text-gray-500 hover:text-brand-600"
+        type="button"
+        onClick={() => setIsExpanded((open) => !open)}
+        aria-expanded={isExpanded}
+        aria-controls="recently-viewed-rail"
+        aria-label={isExpanded ? 'Collapse recently viewed' : 'Recently viewed products'}
+        className={cn(
+          'bg-white border border-brand-100 p-2 rounded-l-xl shadow-card',
+          'text-steel-600 hover:bg-brand-50 hover:text-brand-600 transition-colors',
+        )}
       >
-        {isExpanded ? <ChevronRight className="h-5 w-5" /> : <History className="h-5 w-5" />}
+        {isExpanded ? <ChevronRight className="h-5 w-5" aria-hidden /> : <History className="h-5 w-5" aria-hidden />}
       </button>
 
       <AnimatePresence>
         {isExpanded && (
           <motion.div
-            initial={{ x: '100%', opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: '100%', opacity: 0 }}
-            className="bg-white dark:bg-gray-900 border-l border-t border-b border-gray-200 dark:border-gray-800 rounded-l-[2rem] shadow-[-10px_0_30px_rgba(0,0,0,0.1)] p-4 w-24 flex flex-col items-center gap-4"
+            id="recently-viewed-rail"
+            {...panel}
+            className="bg-white border-l border-t border-b border-brand-100 rounded-l-3xl shadow-elevated p-4 w-24 flex flex-col items-center gap-4"
           >
-            <p className="text-[8px] font-black uppercase tracking-widest text-gray-400 text-center mb-2">History</p>
+            <p className="text-caption text-center">History</p>
             {products.map((product) => (
-              <Link
-                key={product.id}
-                to={productPath(product)}
-                className="relative group"
-              >
-                <div className="h-12 w-12 rounded-full overflow-hidden border-2 border-transparent group-hover:border-brand-500 transition-all shadow-md">
+              <LocaleLink key={product.id} to={productPath(product)} className="relative group">
+                <div className="h-12 w-12 rounded-full overflow-hidden border-2 border-transparent group-hover:border-brand-500 transition-colors shadow-card">
                   {product.images?.[0] ? (
-                  <img src={product.images[0]} alt="" className="h-full w-full object-cover group-hover:scale-110 transition-transform" />
+                    <img
+                      src={product.images[0]}
+                      alt={product.title}
+                      className="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-105"
+                    />
                   ) : (
                     <ProductImagePlaceholder
                       productId={String(product.id)}
@@ -76,19 +99,20 @@ export default function RecentlyViewedSidebar() {
                     />
                   )}
                 </div>
-                {/* Tooltip on hover */}
-                <span className="absolute right-14 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-xl">
+                <span className="absolute right-14 top-1/2 -translate-y-1/2 bg-navy-950 text-white text-[10px] font-semibold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-elevated">
                   {product.title}
                 </span>
-              </Link>
+              </LocaleLink>
             ))}
-            <button 
+            <button
+              type="button"
               onClick={() => {
                 localStorage.removeItem('recentlyViewed');
                 setProducts([]);
                 setIsVisible(false);
               }}
-              className="mt-2 p-2 text-gray-300 hover:text-red-500 transition-colors"
+              className="mt-2 p-2 rounded-lg text-silver-400 hover:text-error hover:bg-red-50 transition-colors"
+              aria-label="Clear recently viewed"
             >
               <X className="h-4 w-4" />
             </button>

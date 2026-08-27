@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { useTranslation } from 'react-i18next';
 import {
   CheckCircle2,
@@ -12,7 +12,9 @@ import {
   Truck,
   Zap,
 } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { Button, Badge } from '../../design-system';
+import { accordionMotion, fadeUpVariants } from '../../design-system/motion';
 import { ProductBadge } from '../products/ProductBadge';
 import { formatCurrency } from '../../lib/utils';
 import { cn } from '../../lib/utils';
@@ -67,6 +69,22 @@ export function ProductPurchasePanel({
 }: ProductPurchasePanelProps) {
   const { t } = useTranslation('product');
   const basePrice = Number(currentPrice) || 0;
+  const reduceMotion = useReducedMotion();
+  const enter = fadeUpVariants();
+  const shareMotion = accordionMotion(Boolean(reduceMotion));
+  const [justAdded, setJustAdded] = useState(false);
+  const addedTimer = useRef<number>(0);
+
+  useEffect(() => {
+    return () => window.clearTimeout(addedTimer.current);
+  }, []);
+
+  const handleAddToCartClick = () => {
+    onAddToCart();
+    setJustAdded(true);
+    window.clearTimeout(addedTimer.current);
+    addedTimer.current = window.setTimeout(() => setJustAdded(false), 1600);
+  };
 
   const bundleTiers = useMemo(
     () =>
@@ -107,39 +125,47 @@ export function ProductPurchasePanel({
   );
 
   return (
-    <div className="lg:sticky lg:top-24 space-y-6">
+    <motion.div
+      className="lg:sticky lg:top-24 space-y-6"
+      variants={enter}
+      initial="hidden"
+      animate="visible"
+    >
       <div className="flex justify-between items-start gap-4">
         <h1 className="text-h2 font-display font-bold text-navy-950">{title}</h1>
         <div className="flex gap-2 shrink-0 relative">
           <button
             type="button"
             onClick={onToggleShare}
-            className="p-2.5 rounded-xl border border-brand-100 text-steel-600 hover:bg-brand-50 hover:text-brand-600"
+            className="p-2.5 rounded-xl border border-brand-100 text-steel-600 hover:bg-brand-50 hover:text-brand-600 motion-safe:active:scale-95 transition-colors"
             aria-expanded={showShare}
             aria-label={t('purchase.shareProduct')}
           >
             <Share2 className="h-5 w-5" />
           </button>
-          {showShare && (
-            <div
-              className="absolute right-0 top-12 bg-white border border-brand-100 shadow-elevated rounded-xl p-2 z-10"
-              role="menu"
-            >
-              <button
-                type="button"
-                onClick={onCopyLink}
-                className="p-2 rounded-lg hover:bg-brand-50 text-steel-600"
-                aria-label={t('purchase.copyLinkAria')}
+          <AnimatePresence>
+            {showShare ? (
+              <motion.div
+                {...shareMotion}
+                className="absolute right-0 top-12 bg-white border border-brand-100 shadow-elevated rounded-xl p-2 z-10"
+                role="menu"
               >
-                <LinkIcon className="h-5 w-5" />
-              </button>
-            </div>
-          )}
+                <button
+                  type="button"
+                  onClick={onCopyLink}
+                  className="p-2 rounded-lg hover:bg-brand-50 text-steel-600"
+                  aria-label={t('purchase.copyLinkAria')}
+                >
+                  <LinkIcon className="h-5 w-5" />
+                </button>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
           <button
             type="button"
             onClick={onToggleWishlist}
             className={cn(
-              'p-2.5 rounded-xl border transition-colors',
+              'p-2.5 rounded-xl border transition-colors motion-safe:active:scale-95',
               inWishlist
                 ? 'border-error/30 bg-red-50 text-error'
                 : 'border-brand-100 text-steel-600 hover:bg-brand-50',
@@ -170,9 +196,15 @@ export function ProductPurchasePanel({
               {formatCurrency(compareWas)}
             </span>
           )}
-          <span className="text-3xl md:text-4xl font-display font-bold text-navy-950 tabular-nums">
+          <motion.span
+            key={basePrice}
+            initial={{ opacity: reduceMotion ? 1 : 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: reduceMotion ? 0 : 0.2 }}
+            className="text-3xl md:text-4xl font-display font-bold text-navy-950 tabular-nums block"
+          >
             {formatCurrency(basePrice)}
-          </span>
+          </motion.span>
         </div>
         <Badge variant="purity">{t('purchase.priceVerified')}</Badge>
       </div>
@@ -197,9 +229,9 @@ export function ProductPurchasePanel({
                   type="button"
                   onClick={() => onSelectVariant(v)}
                   className={cn(
-                    'px-4 py-2 rounded-xl text-sm font-semibold border-2 transition-all',
+                    'px-4 py-2 rounded-xl text-sm font-semibold border-2 transition-colors motion-safe:active:scale-[0.98]',
                     selected
-                      ? 'border-brand-500 bg-brand-50 text-brand-700'
+                      ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-card'
                       : 'border-brand-100 bg-white text-steel-600 hover:border-brand-300',
                   )}
                   aria-pressed={selected}
@@ -248,7 +280,7 @@ export function ProductPurchasePanel({
                 type="button"
                 onClick={() => onQuantityChange(tier.qty)}
                 className={cn(
-                  'p-3 rounded-2xl border-2 text-center transition-all',
+                  'p-3 rounded-2xl border-2 text-center transition-colors motion-safe:active:scale-[0.98]',
                   isSelected
                     ? 'border-brand-500 bg-brand-50 shadow-card'
                     : 'border-brand-50 bg-white hover:border-brand-200',
@@ -285,7 +317,7 @@ export function ProductPurchasePanel({
           <button
             type="button"
             onClick={() => onQuantityChange(Math.max(1, quantity - 1))}
-            className="px-4 py-3 text-steel-600 hover:bg-brand-50"
+            className="px-4 py-3 text-steel-600 hover:bg-brand-50 motion-safe:active:scale-95 transition-colors"
             aria-label={t('purchase.decreaseQty')}
           >
             −
@@ -301,15 +333,25 @@ export function ProductPurchasePanel({
           <button
             type="button"
             onClick={() => onQuantityChange(quantity + 1)}
-            className="px-4 py-3 text-steel-600 hover:bg-brand-50"
+            className="px-4 py-3 text-steel-600 hover:bg-brand-50 motion-safe:active:scale-95 transition-colors"
             aria-label={t('purchase.increaseQty')}
           >
             +
           </button>
         </div>
-        <Button size="lg" fullWidth onClick={onAddToCart} className="gap-2 flex-1">
-          <ShoppingCart className="h-5 w-5" />
-          {t('purchase.addToCart')}
+        <Button
+          size="lg"
+          fullWidth
+          onClick={handleAddToCartClick}
+          className={cn('gap-2 flex-1', justAdded && 'bg-success hover:brightness-100')}
+          aria-live="polite"
+        >
+          {justAdded ? (
+            <CheckCircle2 className="h-5 w-5" aria-hidden />
+          ) : (
+            <ShoppingCart className="h-5 w-5" aria-hidden />
+          )}
+          {justAdded ? t('purchase.addedToCart', { defaultValue: 'Added' }) : t('purchase.addToCart')}
         </Button>
       </div>
 
@@ -317,13 +359,13 @@ export function ProductPurchasePanel({
         <span className="block font-semibold text-steel-600">{t('purchase.researchOnly')}</span>
         <span className="block">{t('purchase.researchOnlyDetail')}</span>
         <span className="block">
-          <Link to="/coas" className="text-brand-600 hover:underline font-medium">
+          <LocaleLink to="/coas" className="text-brand-600 hover:underline font-medium">
             {t('purchase.viewCoaLibrary')}
-          </Link>
+          </LocaleLink>
           {' · '}
           {t('purchase.laboratoryOnly')}
         </span>
       </p>
-    </div>
+    </motion.div>
   );
 }

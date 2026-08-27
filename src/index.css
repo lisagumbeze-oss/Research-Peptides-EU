@@ -47,12 +47,19 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+    overflow-anchor: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+    }
+
+    .animate-spin,
+    .animate-pulse,
+    .animate-bounce {
+      animation: none !important;
     }
   }
 
@@ -186,6 +193,36 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+  .skeleton-block {
+    @apply rounded-xl bg-brand-100/80 motion-safe:animate-pulse motion-reduce:animate-none;
+  }
+
+  @keyframes ticker-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .ticker-track {
+    animation: ticker-scroll 40s linear infinite;
+    will-change: transform;
+  }
+
+  .group\/ticker:hover .ticker-track,
+  .group\/ticker:focus-within .ticker-track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+      animation: none !important;
+      will-change: auto;
+    }
   }
 
   #tawk-bubble-container,

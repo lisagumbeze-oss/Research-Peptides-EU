@@ -43,7 +43,7 @@ function LocaleLayoutInner() {
     } catch {
       /* ignore */
     }
-    return <Navigate to={pathWithLocale(target, location.pathname)} replace />;
+    return <Navigate to={pathWithLocale(target, `${location.pathname}${location.search}${location.hash}`)} replace />;
   }
 
   return (

@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { usePreloadImage } from '../../hooks/usePreloadImage';
-import { ArrowRight, FlaskConical, ShieldCheck, Sparkles, Truck } from 'lucide-react';
-import { motion } from 'motion/react';
+import { ArrowRight, ChevronDown, FlaskConical, ShieldCheck, Sparkles, Truck } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 import { LocaleLink } from '../../i18n/LocaleLink';
-import { Button, Container, GlassPanel, ScientificBackdrop } from '../../design-system';
+import { Button, buttonClassName, Container, GlassPanel, ScientificBackdrop } from '../../design-system';
+import { fadeUpVariants, staggerContainerVariants, staggerItemVariants } from '../../design-system/motion';
 import { useWizardStore } from '../../store/useWizardStore';
 import heroBg from '../../assets/hero_bg.png';
 import vialsHero from '../../assets/vials_hero.png';
@@ -11,6 +12,7 @@ import vialsHero from '../../assets/vials_hero.png';
 export function HeroSection() {
   const { t } = useTranslation('home');
   const openWizard = useWizardStore((s) => s.openWizard);
+  const reduceMotion = useReducedMotion();
   usePreloadImage(vialsHero);
 
   const trustPills = [
@@ -18,6 +20,13 @@ export function HeroSection() {
     { icon: Truck, label: t('hero.trustShipping') },
     { icon: FlaskConical, label: t('hero.trustCoa') },
   ];
+
+  const scrollToCatalog = () => {
+    document.getElementById('catalog-preview')?.scrollIntoView({
+      behavior: reduceMotion ? 'auto' : 'smooth',
+      block: 'start',
+    });
+  };
 
   return (
     <section className="relative overflow-hidden bg-navy-950">
@@ -37,90 +46,87 @@ export function HeroSection() {
 
       <Container className="relative z-10 py-16 md:py-24 lg:py-28">
         <GlassPanel variant="dark" padding="none" className="overflow-hidden shadow-glow">
-          <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
-            <div className="p-8 md:p-12 lg:p-14">
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="text-caption text-brand-300 mb-4"
-              >
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.85fr)] items-center">
+            <motion.div
+              className="p-8 md:p-12 lg:p-12 lg:pr-8"
+              variants={staggerContainerVariants()}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.p variants={staggerItemVariants()} className="text-caption text-brand-300 mb-4">
                 {t('hero.eyebrow')}
               </motion.p>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.05 }}
-                className="text-display text-white mb-6"
-              >
+              <motion.h1 variants={staggerItemVariants()} className="text-display text-white mb-6">
                 {t('hero.title')}{' '}
-                <span className="text-gradient-brand">
-                  {t('hero.titleHighlight')}
-                </span>
+                <span className="text-gradient-brand">{t('hero.titleHighlight')}</span>
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.12 }}
+                variants={staggerItemVariants()}
                 className="text-silver-400 text-sm md:text-base leading-relaxed mb-8 max-w-lg"
               >
                 {t('hero.subtitle')}
               </motion.p>
 
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.18 }}
-                className="flex flex-col sm:flex-row gap-3 mb-10"
+                variants={staggerItemVariants()}
+                className="flex flex-col sm:flex-row lg:flex-nowrap gap-3 mb-10"
               >
-                <LocaleLink to="/shop">
-                  <Button size="lg" className="w-full sm:w-auto gap-2">
-                    {t('hero.ctaShop')}
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
+                <LocaleLink
+                  to="/shop"
+                  className={buttonClassName({
+                    size: 'lg',
+                    className: 'relative z-10 w-full sm:w-auto shrink-0 whitespace-nowrap',
+                  })}
+                >
+                  {t('hero.ctaShop')}
+                  <ArrowRight className="h-4 w-4 shrink-0 motion-safe:transition-transform motion-safe:duration-200 group-hover:translate-x-0.5" />
                 </LocaleLink>
-                <Button variant="ghost" size="lg" onClick={openWizard} className="gap-2 border border-white/15">
-                  <Sparkles className="h-4 w-4 text-brand-300" />
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  onClick={openWizard}
+                  className="shrink-0 gap-2 border border-white/15 whitespace-nowrap"
+                >
+                  <Sparkles className="h-4 w-4 shrink-0 text-brand-300" />
                   {t('hero.ctaWizard')}
                 </Button>
               </motion.div>
 
-              <motion.ul
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="flex flex-wrap gap-2"
-              >
+              <motion.ul variants={staggerItemVariants()} className="flex flex-nowrap items-center gap-2 overflow-x-auto">
                 {trustPills.map(({ icon: Icon, label }) => (
                   <li
                     key={label}
-                    className="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-xs font-medium text-brand-100"
+                    className="inline-flex items-center gap-2 shrink-0 whitespace-nowrap rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-xs font-medium text-brand-100"
                   >
                     <Icon className="h-3.5 w-3.5 text-brand-400 shrink-0" aria-hidden />
                     {label}
                   </li>
                 ))}
               </motion.ul>
-            </div>
+            </motion.div>
 
-            <div className="relative flex items-center justify-center p-8 lg:p-12 min-h-[280px] lg:min-h-0">
-              <motion.div
-                className="absolute w-64 h-64 rounded-full bg-brand-400/25 blur-3xl"
-                animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.6, 0.4] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                aria-hidden
-              />
+            <div className="relative flex items-center justify-center p-6 lg:p-8 min-h-[220px] lg:min-h-0">
+              {!reduceMotion ? (
+                <motion.div
+                  className="absolute w-52 h-52 rounded-full bg-brand-400/25 blur-3xl"
+                  animate={{ scale: [1, 1.12, 1], opacity: [0.4, 0.55, 0.4] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+                  aria-hidden
+                />
+              ) : (
+                <div className="absolute w-52 h-52 rounded-full bg-brand-400/25 blur-3xl" aria-hidden />
+              )}
               <motion.img
                 src={vialsHero}
                 alt="Premium research peptide vials"
-                width={512}
-                height={512}
-                initial={{ opacity: 0, x: 32 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.25 }}
-                className="relative z-10 w-full max-w-md aspect-square object-contain drop-shadow-[0_24px_48px_rgba(67,87,214,0.35)]"
+                width={384}
+                height={384}
+                variants={fadeUpVariants()}
+                initial="hidden"
+                animate="visible"
+                className="relative z-10 w-full max-w-[18rem] sm:max-w-[20rem] lg:max-w-[22rem] aspect-square object-contain drop-shadow-[0_24px_48px_rgba(67,87,214,0.35)]"
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
@@ -129,6 +135,21 @@ export function HeroSection() {
           </div>
         </GlassPanel>
       </Container>
+
+      <div className="relative z-10 flex justify-center pb-6">
+        <button
+          type="button"
+          onClick={scrollToCatalog}
+          className="inline-flex flex-col items-center gap-1 text-brand-200/80 hover:text-brand-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-xl px-3 py-2"
+          aria-label="Scroll to featured compounds"
+        >
+          <span className="text-[10px] font-semibold uppercase tracking-[0.16em]">Explore catalog</span>
+          <ChevronDown
+            className="h-5 w-5 motion-safe:animate-bounce"
+            aria-hidden
+          />
+        </button>
+      </div>
     </section>
   );
 }

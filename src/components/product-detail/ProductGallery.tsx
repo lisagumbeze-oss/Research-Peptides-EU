@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { ProductBadge } from '../products/ProductBadge';
 import { ProductImagePlaceholder } from '../products/ProductImagePlaceholder';
 import { cn } from '../../lib/utils';
@@ -20,6 +20,8 @@ export function ProductGallery({
   onSelectImage,
   lowStock,
 }: ProductGalleryProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <div className="space-y-4">
       <div className="relative rounded-3xl aspect-square overflow-hidden bg-white border border-brand-100 shadow-card">
@@ -30,7 +32,7 @@ export function ProductGallery({
             alt={title}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: reduceMotion ? 0 : 0.25 }}
             className="w-full h-full object-cover"
             loading={activeIndex === 0 ? 'eager' : 'lazy'}
             decoding="async"
@@ -55,7 +57,7 @@ export function ProductGallery({
               className={cn(
                 'w-20 h-20 shrink-0 rounded-xl overflow-hidden border-2 transition-all',
                 activeIndex === i
-                  ? 'border-brand-500 shadow-elevated scale-105'
+                  ? 'border-brand-500 shadow-elevated motion-safe:scale-105'
                   : 'border-transparent opacity-70 hover:opacity-100',
               )}
               aria-label={`Show image ${i + 1} of ${images.length}`}

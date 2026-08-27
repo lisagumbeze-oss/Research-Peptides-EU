@@ -1,10 +1,11 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, Filter } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { formatCurrency } from '../../lib/utils';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { Button, GlassPanel } from '../../design-system';
+import { overlayMotion, slideFromRightMotion } from '../../design-system/motion';
 import type { CategoryOption } from './types';
 import { cn } from '../../lib/utils';
 
@@ -106,7 +107,20 @@ export function CatalogFilters(props: CatalogFiltersProps) {
   const { showMobile, onCloseMobile, onOpenMobile, className, mode = 'sidebar' } = props;
 
   const mobileRef = useRef<HTMLDivElement>(null);
-  useFocusTrap(showMobile && mode === 'drawer', mobileRef, onCloseMobile);
+  const reduceMotion = useReducedMotion();
+  const overlay = overlayMotion(Boolean(reduceMotion));
+  const panel = slideFromRightMotion(Boolean(reduceMotion));
+  const drawerOpen = showMobile && mode === 'drawer';
+  useFocusTrap(drawerOpen, mobileRef, onCloseMobile);
+
+  useEffect(() => {
+    if (!drawerOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [drawerOpen]);
 
   if (mode === 'trigger') {
     return (
@@ -137,30 +151,26 @@ export function CatalogFilters(props: CatalogFiltersProps) {
   }
 
   return (
-    <>
-      <AnimatePresence>
-        {showMobile && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-navy-950/40 z-50 lg:hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={onCloseMobile}
-              aria-hidden
-            />
-            <motion.div
-              ref={mobileRef}
-              id="catalog-mobile-filters"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Product filters"
-              className="fixed inset-y-0 right-0 w-full max-w-sm bg-white z-[60] p-6 shadow-elevated lg:hidden flex flex-col"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 380, damping: 36 }}
-            >
+    <AnimatePresence>
+      {showMobile && (
+        <>
+          <motion.button
+            type="button"
+            {...overlay}
+            className="fixed inset-0 bg-navy-950/40 backdrop-blur-sm z-50 lg:hidden"
+            onClick={onCloseMobile}
+            aria-label={t('filters.close')}
+            tabIndex={-1}
+          />
+          <motion.div
+            ref={mobileRef}
+            {...panel}
+            id="catalog-mobile-filters"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Product filters"
+            className="fixed inset-y-0 right-0 w-full max-w-sm bg-white z-[60] p-6 shadow-elevated lg:hidden flex flex-col"
+          >
               <div className="flex justify-between items-center mb-6">
                 <h2 className="font-display font-bold text-lg">{t('filters.filters')}</h2>
                 <button
@@ -179,10 +189,9 @@ export function CatalogFilters(props: CatalogFiltersProps) {
                 {t('filters.showResults')}
               </Button>
             </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </>
+        </>
+      )}
+    </AnimatePresence>
   );
 }
 

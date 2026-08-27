@@ -1,14 +1,16 @@
 import { lazy, Suspense, type ReactNode } from 'react';
 import { HeroSection } from '../components/home/HeroSection';
+import { FeaturedProductsSection } from '../components/home/FeaturedProductsSection';
+import { NewestProductsSection } from '../components/home/NewestProductsSection';
+import { BestsellerProductsSection } from '../components/home/BestsellerProductsSection';
+import { CategoryProductSections } from '../components/home/CategoryProductSections';
 import { HomeSectionFallback } from '../components/home/HomeSectionFallback';
 import { LazyWhenVisible } from '../components/LazyWhenVisible';
+import { loadHomeCatalog } from '../lib/homeCatalog';
 import { usePageSeo } from '../seo/SeoProvider';
 
-const FeaturedProductsSection = lazy(() =>
-  import('../components/home/FeaturedProductsSection').then((m) => ({
-    default: m.FeaturedProductsSection,
-  })),
-);
+void loadHomeCatalog();
+
 const WhyEuSection = lazy(() =>
   import('../components/home/WhyEuSection').then((m) => ({ default: m.WhyEuSection })),
 );
@@ -57,17 +59,19 @@ export default function Home() {
   });
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-x-hidden">
       <HeroSection />
-      <DeferredSection minHeight="min-h-[420px]">
-        <FeaturedProductsSection />
-      </DeferredSection>
+      <div id="catalog-preview" className="scroll-mt-28" />
+      <FeaturedProductsSection />
       <DeferredSection minHeight="min-h-[320px]">
         <WhyEuSection />
       </DeferredSection>
+      <NewestProductsSection />
       <DeferredSection minHeight="min-h-[360px]" className="bg-navy-950/5">
         <CategoryShowcaseSection />
       </DeferredSection>
+      <BestsellerProductsSection />
+      <CategoryProductSections />
       <DeferredSection minHeight="min-h-[300px]">
         <TrustQualitySection />
       </DeferredSection>

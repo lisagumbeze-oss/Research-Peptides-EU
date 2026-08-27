@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { Building2, BadgeCheck, Microscope, Mail, Phone } from 'lucide-react';
-import { motion } from 'motion/react';
 import { Container, GlassPanel, GlowPanel, Reveal } from '../design-system';
 import { HQ_LOCATION, SUPPORT_EMAIL } from '../config/brand';
 
@@ -10,18 +9,14 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen bg-mist-50 pt-12 pb-20">
       <Container className="max-w-5xl py-12 md:py-16">
-        <motion.header
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
+        <Reveal as="header" className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 text-brand-600 rounded-full text-xs font-semibold uppercase tracking-wider mb-5">
             <Building2 className="h-4 w-4" aria-hidden />
             {t('about.eyebrow')}
           </div>
           <h1 className="text-h1 text-navy-950">{t('about.title')}</h1>
           <p className="text-steel-600 mt-4 max-w-2xl mx-auto">{t('about.subtitle')}</p>
-        </motion.header>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           <Reveal className="lg:col-span-2">

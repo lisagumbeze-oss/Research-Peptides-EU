@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { ShieldCheck, Truck } from 'lucide-react';
 import { Container } from '../../design-system';
 
@@ -17,9 +17,9 @@ export function CatalogTrustBar() {
           <span className="inline-flex items-center gap-1.5">
             <ShieldCheck className="h-3.5 w-3.5 text-success shrink-0" aria-hidden />
             Research-only ·{' '}
-            <Link to="/faq" className="text-brand-600 hover:text-brand-700 underline-offset-2 hover:underline">
+            <LocaleLink to="/faq" className="text-brand-600 hover:text-brand-700 underline-offset-2 hover:underline">
               FAQ &amp; compliance
-            </Link>
+            </LocaleLink>
           </span>
         </p>
       </Container>

@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LocaleLink } from '../../i18n/LocaleLink';
 import { ArrowRight, FlaskConical, Microscope } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { supabase } from '../../supabase';
 import { researchTools, type MegaMenuId } from '../../navigation/config';
+import { overlayMotion, dropDownMotion } from '../../design-system/motion';
 import { cn } from '../../lib/utils';
 
 type CategoryRow = {
@@ -23,6 +24,9 @@ export default function MegaMenu({ activeMenu, onClose }: MegaMenuProps) {
   const { t } = useTranslation('nav');
   const [categories, setCategories] = useState<CategoryRow[]>([]);
   const [loading, setLoading] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const overlay = overlayMotion(Boolean(reduceMotion));
+  const panel = dropDownMotion(Boolean(reduceMotion));
 
   useEffect(() => {
     if (activeMenu !== 'shop') return;
@@ -48,9 +52,7 @@ export default function MegaMenu({ activeMenu, onClose }: MegaMenuProps) {
             type="button"
             aria-label="Close menu"
             className="fixed inset-0 z-40 bg-navy-950/20 backdrop-blur-[2px] hidden md:block"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            {...overlay}
             onClick={onClose}
           />
           <motion.div
@@ -58,10 +60,7 @@ export default function MegaMenu({ activeMenu, onClose }: MegaMenuProps) {
             role="region"
             aria-label={activeMenu === 'shop' ? 'Shop categories' : 'Research resources'}
             className="hidden md:block absolute left-0 right-0 top-full z-50 border-t border-brand-100/80 bg-white shadow-elevated"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
+            {...panel}
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               {activeMenu === 'shop' ? (

@@ -1,39 +1,43 @@
+import { useRef } from 'react';
 import { LocaleLink } from '../../i18n/LocaleLink';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { ShoppingBag, X } from 'lucide-react';
 import { useCartStore } from '../../store/useCartStore';
-import { formatCurrency } from '../../lib/utils';
-import { Button } from '../../design-system';
+import { formatCurrency, cn } from '../../lib/utils';
+import { buttonClassName } from '../../design-system';
+import { overlayMotion, slideFromRightMotion } from '../../design-system/motion';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { CartLineItem } from './CartLineItem';
 
 const FREE_SHIPPING_THRESHOLD = 500;
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQuantity, getTotal } = useCartStore();
+  const reduceMotion = useReducedMotion();
+  const panelRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(isOpen, panelRef, closeCart);
 
   const cartLineCount = items.reduce((sum, i) => sum + i.quantity, 0);
   const subtotal = useCartStore.getState().getSubtotal();
   const progress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
   const amountToFreeShipping = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
+  const overlay = overlayMotion(Boolean(reduceMotion));
+  const panel = slideFromRightMotion(Boolean(reduceMotion));
 
   return (
     <AnimatePresence>
       {isOpen && (
         <>
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            {...overlay}
             onClick={closeCart}
             className="fixed inset-0 bg-navy-950/40 backdrop-blur-sm z-50"
             aria-hidden
           />
 
           <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+            ref={panelRef}
+            {...panel}
             className="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-elevated z-50 flex flex-col"
             role="dialog"
             aria-modal="true"
@@ -68,10 +72,14 @@ export default function CartDrawer() {
               </div>
               <div className="w-full bg-brand-100 rounded-full h-2 overflow-hidden">
                 <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${progress}%` }}
-                  transition={{ duration: 0.4 }}
-                  className={`h-2 rounded-full ${progress === 100 ? 'bg-success' : 'bg-brand-500'}`}
+                  initial={false}
+                  animate={{ scaleX: progress / 100 }}
+                  transition={reduceMotion ? { duration: 0 } : { duration: 0.4, ease: 'easeOut' }}
+                  className={cn(
+                    'h-2 w-full origin-left rounded-full',
+                    progress === 100 ? 'bg-success' : 'bg-brand-500',
+                  )}
+                  style={{ transformOrigin: '0% 50%' }}
                 />
               </div>
               <p className="text-[10px] text-center mt-2 text-silver-400">
@@ -82,22 +90,30 @@ export default function CartDrawer() {
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center" role="status">
-                  <ShoppingBag className="w-12 h-12 text-brand-200 mb-4" aria-hidden />
+                  <div className="w-16 h-16 rounded-2xl bg-brand-50 flex items-center justify-center mb-4">
+                    <ShoppingBag className="w-8 h-8 text-brand-300" aria-hidden />
+                  </div>
                   <h3 className="font-display font-bold text-navy-950 mb-2">Cart is empty</h3>
                   <p className="text-steel-600 text-sm mb-6 max-w-[240px]">
                     Research compounds you add will appear here.
                   </p>
-                  <Button onClick={closeCart}>Browse catalog</Button>
+                  <LocaleLink
+                    to="/shop"
+                    onClick={closeCart}
+                    className={buttonClassName({ className: 'whitespace-nowrap' })}
+                  >
+                    Browse catalog
+                  </LocaleLink>
                 </div>
               ) : (
                 <AnimatePresence initial={false}>
                   {items.map((item) => (
                     <motion.div
                       key={`${item.productId}-${item.specification || 'default'}`}
-                      layout
-                      initial={{ opacity: 0, y: 12 }}
+                      layout={!reduceMotion}
+                      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
+                      exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
                     >
                       <CartLineItem
                         item={item}
@@ -120,10 +136,12 @@ export default function CartDrawer() {
                   <span className="tabular-nums">{formatCurrency(getTotal())}</span>
                 </div>
                 <p className="text-xs text-steel-600">Shipping &amp; VAT calculated at checkout.</p>
-                <LocaleLink to="/checkout" onClick={closeCart}>
-                  <Button fullWidth size="lg">
-                    Checkout securely
-                  </Button>
+                <LocaleLink
+                  to="/checkout"
+                  onClick={closeCart}
+                  className={buttonClassName({ fullWidth: true, size: 'lg' })}
+                >
+                  Checkout securely
                 </LocaleLink>
                 <LocaleLink
                   to="/cart"
