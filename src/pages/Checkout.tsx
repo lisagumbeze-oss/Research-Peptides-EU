@@ -8,7 +8,7 @@ import { formatCurrency, DEFAULT_CURRENCY, cn } from '../lib/utils';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { supabase } from '../supabase';
 import { CheckCircle, Loader2, Truck, Package, Globe, Shield, Landmark, Bitcoin, Copy, Check } from 'lucide-react';
-import { europeanLocations } from '../data/europeanCountries';
+import { isEuropeanCountry, EUROPEAN_COUNTRIES } from '../data/europeanCountries';
 import { postOrderCreatedEmail, postBtcPaymentDeclared } from '../lib/transactionalEmailApi';
 import { CheckoutSkeleton } from '../components/Skeleton';
 import { PRIMARY_PROMO_CODE, PROMO_DISCOUNT_PERCENT, isValidPromoCode } from '../lib/promoCodes';
@@ -41,8 +41,6 @@ const SHIPPING_METHODS = {
     { id: 'intl_row', name: 'International', subtext: '5–14 business days', price: 29.84 },
   ],
 };
-
-const EUROPEAN_COUNTRIES = Array.from(new Set(europeanLocations.map(l => l.country)));
 
 /** Bank transfer is only offered once merchandise + shipping reaches this EUR amount. */
 const BANK_TRANSFER_MIN_EUR = 100;
@@ -132,7 +130,7 @@ export default function Checkout() {
     let baseMethods = [];
     let threshold = 500;
 
-    if (EUROPEAN_COUNTRIES.includes(shipping.country)) {
+    if (isEuropeanCountry(shipping.country)) {
       baseMethods = SHIPPING_METHODS.EUROPE;
       threshold = 500;
     } else if (shipping.country === 'United Kingdom') {
@@ -436,9 +434,11 @@ export default function Checkout() {
                   <div className="md:col-span-2">
                     <label htmlFor="checkout-country" className="block text-xs font-black uppercase tracking-widest text-steel-600 mb-2">Country</label>
                     <select id="checkout-country" value={shipping.country} onChange={e => setShipping({...shipping, country: e.target.value})} className={checkoutSelectClass(Boolean(shippingErrors.country))} autoComplete="country-name" aria-invalid={shippingErrors.country ? true : undefined} aria-describedby={shippingErrors.country ? 'checkout-country-error' : undefined}>
-                      <optgroup label="European Union">
+                      <optgroup label="Europe">
                         <option value="Netherlands">Netherlands</option>
-                        {EUROPEAN_COUNTRIES.filter(c => c !== 'Netherlands' && c !== 'United Kingdom').sort().map(c => <option key={c} value={c}>{c}</option>)}
+                        {EUROPEAN_COUNTRIES.filter(c => c !== 'Netherlands' && c !== 'United Kingdom')
+                          .sort()
+                          .map(c => <option key={c} value={c}>{c}</option>)}
                       </optgroup>
                       <option value="United Kingdom">United Kingdom</option>
                       <optgroup label="Rest of World">
