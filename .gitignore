@@ -32,3 +32,10 @@ dist-ssr
 server/output/
 
 .vercel
+
+# Python / Search Growth Engine caches
+**/__pycache__/
+*.py[cod]
+Search Growth Engineering Skill/.tmp/
+Search Growth Engineering Skill/.pytest_cache/
+Search Growth Engineering Skill/.search-growth-engine/
