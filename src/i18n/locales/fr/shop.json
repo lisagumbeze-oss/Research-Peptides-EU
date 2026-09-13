@@ -1,9 +1,9 @@
 {
   "header": {
-    "eyebrow": "Catalogue recherche",
+    "eyebrow": "Catalogue recherche · France & UE",
     "title": "Boutique",
     "titleHighlight": "peptides",
-    "description": "Composés de recherche vérifiés avec expédition UE, documentation de lots et spécifications transparentes."
+    "description": "European peptide / peptides eu pour laboratoires en France et en Europe. Expédition UE depuis les Pays-Bas, documentation de lots et spécifications transparentes. Usage recherche uniquement."
   },
   "results": "{{count}} sur {{total}} produits",
   "filters": {

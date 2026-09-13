@@ -1,5 +1,6 @@
 import { Activity, Award, FlaskConical, Microscope } from 'lucide-react';
 import { motion } from 'motion/react';
+import { LocaleLink } from '../../i18n/LocaleLink';
 import { Card, Container, ScientificBackdrop, Section } from '../../design-system';
 import { SectionHeading } from './SectionHeading';
 import { staggerContainerVariants, staggerItemVariants } from '../../design-system/motion';
@@ -40,10 +41,34 @@ export function WhyEuSection() {
               <span className="text-brand-600">scientific trust</span>
             </>
           }
-          description="Headquartered in the Netherlands, we combine European regulatory discipline with pharmaceutical-grade logistics for research teams across the EU."
+          description="Headquartered in the Netherlands, Research Peptides Europe combines European regulatory discipline with pharmaceutical-grade logistics for research teams across Spain and the wider EU."
           align="center"
           className="mb-14"
         />
+
+        <p className="text-center text-sm text-steel-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+          Browse the{' '}
+          <LocaleLink to="/shop" className="font-semibold text-brand-700 hover:underline underline-offset-4">
+            buy peptides online UK &amp; Europe catalog
+          </LocaleLink>
+          , plan volumes with the{' '}
+          <LocaleLink to="/peptide-calculator" className="font-semibold text-brand-700 hover:underline underline-offset-4">
+            peptide calculator
+          </LocaleLink>
+          , or start with{' '}
+          <LocaleLink to="/product/bacteriostatic-water" className="font-semibold text-brand-700 hover:underline underline-offset-4">
+            bacteriostatic water
+          </LocaleLink>
+          ,{' '}
+          <LocaleLink to="/product/retatrutide" className="font-semibold text-brand-700 hover:underline underline-offset-4">
+            Retatrutide buy (research)
+          </LocaleLink>
+          , and{' '}
+          <LocaleLink to="/product/cjc-1295-no-dac-ipamorelin-blend" className="font-semibold text-brand-700 hover:underline underline-offset-4">
+            CJC-1295 Ipamorelin
+          </LocaleLink>
+          .
+        </p>
 
         <motion.div
           variants={staggerContainerVariants()}

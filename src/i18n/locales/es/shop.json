@@ -1,11 +1,17 @@
 {
   "header": {
-    "eyebrow": "Catálogo de investigación",
-    "title": "Tienda",
+    "eyebrow": "Catálogo de investigación · España y Europa",
+    "title": "Comprar",
     "titleHighlight": "péptidos",
-    "description": "Explore compuestos de investigación verificados con cumplimiento en la UE, documentación por lote y especificaciones transparentes."
+    "description": "Comprar péptidos en España y en línea para laboratorios de toda Europa. Catálogo verificado Research Peptides EU con cumplimiento desde Países Bajos, documentación por lote y especificaciones transparentes. Solo uso en investigación."
   },
-  "results": "Mostrando {{count}} de {{total}} productos",
+  "results": "Mostrando {{from}}–{{to}} de {{count}} productos ({{total}} en total)",
+  "pagination": {
+    "label": "Paginación de la tienda",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "page": "Página {{page}}"
+  },
   "filters": {
     "categories": "Categorías",
     "maxPrice": "Precio máximo",

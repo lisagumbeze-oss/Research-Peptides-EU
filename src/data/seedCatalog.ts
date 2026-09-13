@@ -17,6 +17,8 @@ export type ProductVariant = {
 export type SeedProduct = {
   title: string;
   description: string;
+  /** Optional per-locale PDP descriptions (e.g. Spanish SEO copy). */
+  description_i18n?: Partial<Record<string, string>>;
   price: number;
   inventory: number;
   categories: string[];
@@ -34,6 +36,7 @@ export function mapSeedProductToRow(p: SeedProduct) {
     title: p.title,
     slug: slugifyProductName(p.title),
     description: p.description,
+    description_i18n: p.description_i18n ?? null,
     price: p.price,
     compare_at_price: p.compareAtPrice ?? null,
     currency: DEFAULT_CURRENCY,
@@ -50,7 +53,7 @@ export const referenceSeedCategories: SeedCategory[] = [
   {
     name: 'Peptides',
     slug: 'peptides',
-    description: 'High-purity research peptides for scientific and academic studies.',
+    description: 'High-purity research peptides for scientific and academic studies across Spain and the wider European Union.',
   },
   {
     name: 'SARMs',
@@ -90,7 +93,7 @@ export const referenceSeedCategories: SeedCategory[] = [
   {
     name: 'Lab Supplies',
     slug: 'lab-supplies',
-    description: 'Bacteriostatic water and essential chemical reconstitution supplies.',
+    description: 'Bacteriostatic water (agua bacteriostática) and essential chemical reconstitution supplies for European labs.',
   },
   {
     name: 'Peptide Powder',
@@ -136,7 +139,11 @@ export const referenceSeedProducts: SeedProduct[] = [
   },
   {
     title: 'Retatrutide GLP-3',
-    description: 'Cutting-edge triple agonist (GLP-1, GIP, GCGR) for complex metabolic research models.',
+    description:
+      'Research-grade Retatrutide (triple agonist GLP-1 / GIP / GCGR) for metabolic pathway studies. Available to laboratories across Spain and Europe via Research Peptides EU — research use only, not for human consumption.',
+    description_i18n: {
+      es: 'Retatrutide de grado investigación (agonista triple GLP-1 / GIP / GCGR) para modelos metabólicos. Comprar Retatrutide en España y en toda Europa a través de Research Peptides EU. Solo uso en laboratorio — no apto para consumo humano.',
+    },
     price: 95.00,
     inventory: 90,
     categories: ['peptides', 'research-chemicals'],
@@ -263,7 +270,11 @@ export const referenceSeedProducts: SeedProduct[] = [
   },
   {
     title: 'IGF-1 LR3 1mg',
-    description: 'Extended half-life variant of Insulin-like Growth Factor-1 for prolonged cellular receptor studies.',
+    description:
+      'Extended half-life IGF-1 LR3 for prolonged cellular receptor studies. Research Peptides EU supplies IGF-1 research material to laboratories across Spain and Europe — research use only.',
+    description_i18n: {
+      es: 'IGF-1 LR3 de vida media prolongada para estudios de receptores celulares. Comprar IGF-1 de investigación en España y Europa con Research Peptides EU. Solo uso en laboratorio.',
+    },
     price: 57.00,
     inventory: 70,
     categories: ['igf-1-proteins', 'peptides'],
@@ -314,7 +325,11 @@ export const referenceSeedProducts: SeedProduct[] = [
   },
   {
     title: 'Bacteriostatic Water 0.9% Benzyl Alcohol 30mL',
-    description: 'Crucial laboratory supply for the reconstitution and sterile preparation of lyophilized research compounds.',
+    description:
+      'Sterile bacteriostatic water with 0.9% benzyl alcohol for reconstituting lyophilized research peptides. Suitable laboratory diluent (agua bacteriostática) for multi-use vial workflows across European research facilities.',
+    description_i18n: {
+      es: 'Agua bacteriostática estéril con 0,9 % de alcohol bencílico para reconstituir péptidos liofilizados de investigación. Diluyente de laboratorio (agua bacteriostática para inyección en protocolos de investigación) disponible para laboratorios en España y Europa. Solo uso en laboratorio.',
+    },
     price: 14.25,
     inventory: 500,
     categories: ['lab-supplies'],
@@ -442,7 +457,11 @@ export const referenceSeedProducts: SeedProduct[] = [
   },
   {
     title: 'Vio Labs Retatrutide 40mg / 3ml Prefilled Pen',
-    description: 'Retatrutide prefilled pen format for laboratory and research use. Precision-controlled delivery system for consistent handling across protocols.',
+    description:
+      'Retatrutide research pen format for controlled laboratory handling. Pen peptides for Spain and EU research teams — precision delivery for protocol consistency. Research use only.',
+    description_i18n: {
+      es: 'Formato pluma de Retatrutide para manipulación controlada en laboratorio. Pen peptides Spain / Europa: sistema de dosificación precisa para protocolos de investigación. Solo uso en laboratorio — no apto para uso humano.',
+    },
     price: 144.00,
     inventory: 65,
     categories: ['peptides', 'research-chemicals'],

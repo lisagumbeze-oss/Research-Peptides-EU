@@ -131,24 +131,24 @@
     "footer": "Research Peptides EU Operations"
   },
   "about": {
-    "eyebrow": "About us",
-    "title": "About Research Peptides Europe",
-    "subtitle": "Europa peptide supply for European and UK research-grade compounds — verified documentation and Netherlands-based fulfillment across the EU and UK.",
-    "missionTitle": "Our mission",
-    "missionBody": "As Research Peptides Europe, we focus on consistency, batch documentation, and researcher confidence across EU and UK laboratory workflows — from Spain to the UK and the wider European research community.",
-    "qualityTitle": "Quality focus",
-    "qualityBody": "Batch-level verification and COA references are central to our catalog.",
-    "researchTitle": "Research-only positioning",
-    "researchBody": "All compounds are offered for laboratory and scientific research only — not for human or veterinary use."
+    "eyebrow": "Sobre nosotros",
+    "title": "Sobre Research Peptides Europe",
+    "subtitle": "Europa peptide: compuestos de grado investigación para laboratorios en España y toda la UE, con documentación verificada y cumplimiento desde Países Bajos.",
+    "missionTitle": "Nuestra misión",
+    "missionBody": "Como Research Peptides Europe, priorizamos la consistencia, la documentación por lote y la confianza del investigador en flujos de laboratorio de toda la UE — desde España hasta el resto de Europa.",
+    "qualityTitle": "Enfoque en calidad",
+    "qualityBody": "La verificación por lote y las referencias COA son centrales en nuestro catálogo de péptidos UE.",
+    "researchTitle": "Posicionamiento solo investigación",
+    "researchBody": "Todos los compuestos se ofrecen únicamente para investigación científica y de laboratorio — no para uso humano ni veterinario."
   },
   "contact": {
-    "eyebrow": "Contact",
-    "title": "Contact our EU team",
-    "subtitle": "Orders, documentation, and institutional inquiries.",
+    "eyebrow": "Contacto",
+    "title": "Contacte con nuestro equipo en la UE",
+    "subtitle": "Pedidos, documentación e consultas institucionales en España y Europa.",
     "emailLabel": "Email",
-    "phoneLabel": "Phone",
-    "locationLabel": "Headquarters",
-    "locationValue": "Netherlands · European Union"
+    "phoneLabel": "Teléfono",
+    "locationLabel": "Sede",
+    "locationValue": "Países Bajos · Unión Europea"
   },
   "refund": {
     "eyebrow": "Returns",

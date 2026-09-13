@@ -1,0 +1,135 @@
+{
+  "market_code": "au",
+  "country_name": "Australia",
+  "brand_target": "Research Peptides EU",
+  "evidence_sources": [
+    {
+      "evidence_source_domain": "researchpeptide.co.uk",
+      "source_file": "researchpeptide.co.uk-organic.Positions-au-20260912-2026-09-13T05_59_13Z.csv",
+      "rows": 10,
+      "unique_keywords": 9
+    }
+  ],
+  "unique_keyword_count": 9,
+  "target_count": 8,
+  "skipped_count": 1,
+  "keywords": [
+    {
+      "keyword": "glutathione peptide",
+      "market_code": "au",
+      "position": 21.0,
+      "volume": 390,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glutathione-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "aicar peptide",
+      "market_code": "au",
+      "position": 5.0,
+      "volume": 140,
+      "kd": 25,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/aicar/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptide glutathione",
+      "market_code": "au",
+      "position": 42.0,
+      "volume": 140,
+      "kd": 22,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glutathione-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "tb 4",
+      "market_code": "au",
+      "position": 41.0,
+      "volume": 110,
+      "kd": 17,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/thymosin-beta-4-tb500-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy peg-mgf",
+      "market_code": "au",
+      "position": 12.0,
+      "volume": 70,
+      "kd": 6,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/peg-mgf-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy mgf peptide",
+      "market_code": "au",
+      "position": 18.0,
+      "volume": 70,
+      "kd": 19,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/peg-mgf-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy gonadorelin",
+      "market_code": "au",
+      "position": 20.0,
+      "volume": 70,
+      "kd": 43,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/gonadorelin-acetategnrh-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 157 10mg tb500 10mg",
+      "market_code": "au",
+      "position": 13.0,
+      "volume": 50,
+      "kd": 12,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "kpv dosing",
+      "market_code": "au",
+      "position": 45.0,
+      "volume": 50,
+      "kd": 0,
+      "intent": "commercial, informational",
+      "best_url": "https://researchpeptide.co.uk/product/kpv/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "skip"
+    }
+  ]
+}

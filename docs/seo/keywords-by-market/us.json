@@ -1,0 +1,960 @@
+{
+  "market_code": "us",
+  "country_name": "United States",
+  "brand_target": "Research Peptides EU",
+  "evidence_sources": [
+    {
+      "evidence_source_domain": "researchpeptide.co.uk",
+      "source_file": "researchpeptide.co.uk-organic.Positions-us-20260911-2026-09-13T06_02_17Z.csv",
+      "rows": 88,
+      "unique_keywords": 72
+    }
+  ],
+  "unique_keyword_count": 72,
+  "target_count": 70,
+  "skipped_count": 2,
+  "keywords": [
+    {
+      "keyword": "glow blend peptide",
+      "market_code": "us",
+      "position": 65.0,
+      "volume": 2400,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glow-blend-ghk-cu-bpc157-tb500/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh 191aa",
+      "market_code": "us",
+      "position": 8.0,
+      "volume": 1900,
+      "kd": 0,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh191aa",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 1000,
+      "kd": 6,
+      "intent": "commercial, informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "fragment 176-191",
+      "market_code": "us",
+      "position": 66.0,
+      "volume": 880,
+      "kd": 46,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hospira bacteriostatic water 10 ml",
+      "market_code": "us",
+      "position": 19.0,
+      "volume": 480,
+      "kd": 5,
+      "intent": "commercial, informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "myostatin inhibitor peptide",
+      "market_code": "us",
+      "position": 27.0,
+      "volume": 480,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/myostatin-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh 191aa peptide",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 390,
+      "kd": 3,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hospira bac water 10ml",
+      "market_code": "us",
+      "position": 23.0,
+      "volume": 390,
+      "kd": 11,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "gluta peptides",
+      "market_code": "us",
+      "position": 40.0,
+      "volume": 390,
+      "kd": 20,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glutathione-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hexarelin acetate",
+      "market_code": "us",
+      "position": 16.0,
+      "volume": 320,
+      "kd": 23,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hexarelin-acetate/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh 191aa vs hgh",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 260,
+      "kd": 6,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "glutathione peptides",
+      "market_code": "us",
+      "position": 41.0,
+      "volume": 210,
+      "kd": 15,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glutathione-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "adipo therapeutics",
+      "market_code": "us",
+      "position": 58.0,
+      "volume": 210,
+      "kd": 30,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/product/adipotide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "191aa hgh",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 170,
+      "kd": 10,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "191 hgh",
+      "market_code": "us",
+      "position": 3.0,
+      "volume": 170,
+      "kd": 29,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "0.9 benzyl alcohol",
+      "market_code": "us",
+      "position": 4.0,
+      "volume": 170,
+      "kd": 23,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptides glutathione",
+      "market_code": "us",
+      "position": 32.0,
+      "volume": 170,
+      "kd": 17,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glutathione-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh fragment 176-191 peptide",
+      "market_code": "us",
+      "position": 92.0,
+      "volume": 170,
+      "kd": 26,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh 191aa somatropin",
+      "market_code": "us",
+      "position": 5.0,
+      "volume": 140,
+      "kd": 5,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 157 5 mg",
+      "market_code": "us",
+      "position": 11.0,
+      "volume": 140,
+      "kd": 34,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-5mg-tb-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bacteriostatic water 0.9 benzyl alcohol",
+      "market_code": "us",
+      "position": 31.0,
+      "volume": 140,
+      "kd": 17,
+      "intent": "commercial, informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "191aa peptide",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 110,
+      "kd": 11,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy hgh fragment 176-191",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 110,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "191aa",
+      "market_code": "us",
+      "position": 3.0,
+      "volume": 110,
+      "kd": 0,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh-191aa",
+      "market_code": "us",
+      "position": 5.0,
+      "volume": 110,
+      "kd": 0,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "what is hgh 191aa",
+      "market_code": "us",
+      "position": 6.0,
+      "volume": 110,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "research peptides uk",
+      "market_code": "us",
+      "position": 10.0,
+      "volume": 110,
+      "kd": 31,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "myostatin peptide",
+      "market_code": "us",
+      "position": 22.0,
+      "volume": 110,
+      "kd": 24,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/myostatin-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh 176-191 fragment",
+      "market_code": "us",
+      "position": 60.0,
+      "volume": 110,
+      "kd": 21,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/"
+      ]
+    },
+    {
+      "keyword": "sodium chloride vs bacteriostatic water",
+      "market_code": "us",
+      "position": 66.0,
+      "volume": 110,
+      "kd": 8,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-sodium-chloride/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hexarelin acetate peptide",
+      "market_code": "us",
+      "position": 30.0,
+      "volume": 90,
+      "kd": 35,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hexarelin-acetate/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "176-191 peptide",
+      "market_code": "us",
+      "position": 33.0,
+      "volume": 90,
+      "kd": 27,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/"
+      ]
+    },
+    {
+      "keyword": "myostatin inhibitor buy",
+      "market_code": "us",
+      "position": 35.0,
+      "volume": 90,
+      "kd": 16,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/myostatin-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "fragment 176-191 peptide",
+      "market_code": "us",
+      "position": 36.0,
+      "volume": 90,
+      "kd": 35,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh 176-191",
+      "market_code": "us",
+      "position": 72.0,
+      "volume": 90,
+      "kd": 46,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh 191aa benefits",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 70,
+      "kd": 78,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 157 tb 500 10mg blend",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 70,
+      "kd": 19,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "human growth hormone 191 amino acids somatotropin 191 aa",
+      "market_code": "us",
+      "position": 11.0,
+      "volume": 70,
+      "kd": 3,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ghrp-2 10mg",
+      "market_code": "us",
+      "position": 18.0,
+      "volume": 70,
+      "kd": 15,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/ghrp-2-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hospira bacteriostatic water -- 10 ml",
+      "market_code": "us",
+      "position": 18.0,
+      "volume": 70,
+      "kd": 27,
+      "intent": "commercial, informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "myostatin inhibitor for sale",
+      "market_code": "us",
+      "position": 19.0,
+      "volume": 70,
+      "kd": 7,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/myostatin-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "myostatin blocker peptide",
+      "market_code": "us",
+      "position": 19.0,
+      "volume": 70,
+      "kd": 14,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/myostatin-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ghrp 6 5mg",
+      "market_code": "us",
+      "position": 20.0,
+      "volume": 70,
+      "kd": 16,
+      "intent": "commercial, informational",
+      "best_url": "https://researchpeptide.co.uk/product/ghrp-6-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 157 tb 500 10mg",
+      "market_code": "us",
+      "position": 24.0,
+      "volume": 70,
+      "kd": 12,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy myostatin inhibitor",
+      "market_code": "us",
+      "position": 25.0,
+      "volume": 70,
+      "kd": 19,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/myostatin-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ghk cu kpv blend",
+      "market_code": "us",
+      "position": 26.0,
+      "volume": 70,
+      "kd": 0,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/klow-blend-ghk-cu-bpc157-tb500-kpv/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "gonadorelin 2mg",
+      "market_code": "us",
+      "position": 27.0,
+      "volume": 70,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/gonadorelin-acetategnrh-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "pure bio labs hexarelin acetate peptide vial",
+      "market_code": "us",
+      "position": 28.0,
+      "volume": 70,
+      "kd": 4,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hexarelin-acetate/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh191aa dosage",
+      "market_code": "us",
+      "position": 30.0,
+      "volume": 70,
+      "kd": 0,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "skip"
+    },
+    {
+      "keyword": "myostatin propeptide",
+      "market_code": "us",
+      "position": 59.0,
+      "volume": 70,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/myostatin-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 10 mg",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 50,
+      "kd": 8,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh191aa peptide",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 50,
+      "kd": 20,
+      "intent": "commercial, informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh 191aa what is it",
+      "market_code": "us",
+      "position": 4.0,
+      "volume": 50,
+      "kd": 14,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "somatropin 191aa",
+      "market_code": "us",
+      "position": 7.0,
+      "volume": 50,
+      "kd": 1,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "myostatin inhibitor peptide for sale",
+      "market_code": "us",
+      "position": 11.0,
+      "volume": 50,
+      "kd": 12,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/myostatin-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh191aa vs hgh",
+      "market_code": "us",
+      "position": 12.0,
+      "volume": 50,
+      "kd": 3,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "igf-1des",
+      "market_code": "us",
+      "position": 15.0,
+      "volume": 50,
+      "kd": 0,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-des-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc157 + tb500 blend 10mg",
+      "market_code": "us",
+      "position": 18.0,
+      "volume": 50,
+      "kd": 21,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bc5 peptide",
+      "market_code": "us",
+      "position": 25.0,
+      "volume": 50,
+      "kd": 43,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-5mg-tb-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "igf 1des",
+      "market_code": "us",
+      "position": 43.0,
+      "volume": 50,
+      "kd": 8,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-des-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "what is glutathione peptide",
+      "market_code": "us",
+      "position": 50.0,
+      "volume": 50,
+      "kd": 15,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glutathione-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "thymosin beta 4 injection dosage",
+      "market_code": "us",
+      "position": 56.0,
+      "volume": 50,
+      "kd": 12,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/thymosin-beta-4-tb500-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "skip"
+    },
+    {
+      "keyword": "bpc 5mg + tb 5mg",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 40,
+      "kd": 10,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-5mg-tb-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "core peptides glutathione",
+      "market_code": "us",
+      "position": 12.0,
+      "volume": 40,
+      "kd": 15,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/product/glutathione-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "myostatin for sale",
+      "market_code": "us",
+      "position": 17.0,
+      "volume": 40,
+      "kd": 7,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/myostatin-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh fragment 176-191 for sale",
+      "market_code": "us",
+      "position": 35.0,
+      "volume": 40,
+      "kd": 12,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptide frag 176-191",
+      "market_code": "us",
+      "position": 43.0,
+      "volume": 40,
+      "kd": 31,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptide fragment 176-191",
+      "market_code": "us",
+      "position": 45.0,
+      "volume": 40,
+      "kd": 20,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "gdf8 antibody",
+      "market_code": "us",
+      "position": 85.0,
+      "volume": 40,
+      "kd": 6,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/gdf-8/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 157 tb 500 20mg blend",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 30,
+      "kd": 32,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 10mg",
+      "market_code": "us",
+      "position": 1.0,
+      "volume": 30,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "176-191 fragment",
+      "market_code": "us",
+      "position": 92.0,
+      "volume": 30,
+      "kd": 17,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    }
+  ]
+}

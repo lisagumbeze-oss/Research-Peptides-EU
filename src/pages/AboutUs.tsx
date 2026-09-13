@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { Building2, BadgeCheck, Microscope, Mail, Phone } from 'lucide-react';
+import { Building2, BadgeCheck, Microscope, Mail } from 'lucide-react';
 import { Container, GlassPanel, GlowPanel, Reveal } from '../design-system';
 import { HQ_LOCATION, SUPPORT_EMAIL } from '../config/brand';
+import { LocaleLink } from '../i18n/LocaleLink';
+import { ResearchLinkHub } from '../components/seo/ResearchLinkHub';
 
 export default function AboutUs() {
   const { t } = useTranslation('legal');
@@ -16,6 +18,20 @@ export default function AboutUs() {
           </div>
           <h1 className="text-h1 text-navy-950">{t('about.title')}</h1>
           <p className="text-steel-600 mt-4 max-w-2xl mx-auto">{t('about.subtitle')}</p>
+          <p className="text-sm text-steel-600 mt-4 max-w-2xl mx-auto">
+            Explore the{' '}
+            <LocaleLink to="/shop" className="font-semibold text-brand-700 hover:underline underline-offset-4">
+              research peptides EU catalog
+            </LocaleLink>
+            {' '}or read our guide on{' '}
+            <LocaleLink
+              to="/blog/research-peptides-spain-europe"
+              className="font-semibold text-brand-700 hover:underline underline-offset-4"
+            >
+              peptides for Spain and Europe
+            </LocaleLink>
+            .
+          </p>
         </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
@@ -46,20 +62,22 @@ export default function AboutUs() {
           </Reveal>
           <Reveal delay={0.06}>
             <GlassPanel variant="light" padding="lg" className="h-full shadow-card">
-            <h3 className="text-lg font-bold text-navy-950 mb-4">{t('contact.title')}</h3>
-            <div className="space-y-3 text-sm text-steel-600">
-              <p className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-brand-600 shrink-0" aria-hidden />
-                <a href={`mailto:${SUPPORT_EMAIL}`} className="hover:text-brand-600">
-                  {SUPPORT_EMAIL}
-                </a>
-              </p>
-              <p className="text-silver-400">{HQ_LOCATION}</p>
-            </div>
+              <h3 className="text-lg font-bold text-navy-950 mb-4">{t('contact.title')}</h3>
+              <div className="space-y-3 text-sm text-steel-600">
+                <p className="flex items-center gap-2">
+                  <Mail className="h-4 w-4 text-brand-600 shrink-0" aria-hidden />
+                  <a href={`mailto:${SUPPORT_EMAIL}`} className="hover:text-brand-600">
+                    {SUPPORT_EMAIL}
+                  </a>
+                </p>
+                <p className="text-silver-400">{HQ_LOCATION}</p>
+              </div>
             </GlassPanel>
           </Reveal>
         </div>
       </Container>
+
+      <ResearchLinkHub variant="compact" markets={['eu', 'es']} />
     </div>
   );
 }

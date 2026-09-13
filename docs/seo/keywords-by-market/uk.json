@@ -1,0 +1,2895 @@
+{
+  "market_code": "uk",
+  "country_name": "United Kingdom",
+  "brand_target": "Research Peptides EU",
+  "evidence_sources": [
+    {
+      "evidence_source_domain": "researchpeptide.co.uk",
+      "source_file": "researchpeptide.co.uk-organic.Positions-uk-20260912-2026-09-13T05_54_07Z.csv",
+      "rows": 252,
+      "unique_keywords": 219
+    }
+  ],
+  "unique_keyword_count": 219,
+  "target_count": 178,
+  "skipped_count": 41,
+  "keywords": [
+    {
+      "keyword": "cjc 1295",
+      "market_code": "uk",
+      "position": 42.0,
+      "volume": 4400,
+      "kd": 24,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bacteriostatic water",
+      "market_code": "uk",
+      "position": 45.0,
+      "volume": 4400,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "glow peptide",
+      "market_code": "uk",
+      "position": 44.0,
+      "volume": 3600,
+      "kd": 12,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glow-blend-ghk-cu-bpc157-tb500/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide buy",
+      "market_code": "uk",
+      "position": 21.0,
+      "volume": 2900,
+      "kd": 20,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc 1295 ipamorelin",
+      "market_code": "uk",
+      "position": 45.0,
+      "volume": 2900,
+      "kd": 19,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "kpv peptide",
+      "market_code": "uk",
+      "position": 48.0,
+      "volume": 2900,
+      "kd": 15,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/kpv/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "anglo peptides",
+      "market_code": "uk",
+      "position": 26.0,
+      "volume": 1900,
+      "kd": 16,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "retatrutide uk buy",
+      "market_code": "uk",
+      "position": 15.0,
+      "volume": 1600,
+      "kd": 26,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide for sale",
+      "market_code": "uk",
+      "position": 18.0,
+      "volume": 1600,
+      "kd": 18,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "5 amino 1mq",
+      "market_code": "uk",
+      "position": 18.0,
+      "volume": 1600,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/5-amino-1mq/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "where can i buy retatrutide online",
+      "market_code": "uk",
+      "position": 23.0,
+      "volume": 1300,
+      "kd": 26,
+      "intent": "informational, transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "igf 1 lr3",
+      "market_code": "uk",
+      "position": 34.0,
+      "volume": 1300,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-lr3-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc157 tb500",
+      "market_code": "uk",
+      "position": 34.0,
+      "volume": 1300,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptides semax",
+      "market_code": "uk",
+      "position": 47.0,
+      "volume": 1300,
+      "kd": 26,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/semax/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 157 and tb 500",
+      "market_code": "uk",
+      "position": 29.0,
+      "volume": 1000,
+      "kd": 27,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "rppeptides",
+      "market_code": "uk",
+      "position": 30.0,
+      "volume": 1000,
+      "kd": 14,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "reta uk",
+      "market_code": "uk",
+      "position": 31.0,
+      "volume": 1000,
+      "kd": 23,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc-1295 ipamorelin",
+      "market_code": "uk",
+      "position": 41.0,
+      "volume": 1000,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "nad peptide",
+      "market_code": "uk",
+      "position": 48.0,
+      "volume": 1000,
+      "kd": 20,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/nad-500mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide buy online",
+      "market_code": "uk",
+      "position": 21.0,
+      "volume": 880,
+      "kd": 12,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "dr peptide",
+      "market_code": "uk",
+      "position": 25.0,
+      "volume": 880,
+      "kd": 24,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "kpv",
+      "market_code": "uk",
+      "position": 32.0,
+      "volume": 880,
+      "kd": 15,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/kpv/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "5-amino-1mq",
+      "market_code": "uk",
+      "position": 40.0,
+      "volume": 880,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/5-amino-1mq/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "where to buy retatrutide",
+      "market_code": "uk",
+      "position": 32.0,
+      "volume": 720,
+      "kd": 17,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 157 tb 500",
+      "market_code": "uk",
+      "position": 35.0,
+      "volume": 720,
+      "kd": 14,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide where to buy",
+      "market_code": "uk",
+      "position": 36.0,
+      "volume": 720,
+      "kd": 23,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "nad+ peptide",
+      "market_code": "uk",
+      "position": 36.0,
+      "volume": 720,
+      "kd": 25,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/nad-500mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bac water hospira",
+      "market_code": "uk",
+      "position": 12.0,
+      "volume": 590,
+      "kd": 21,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hospira bacteriostatic water",
+      "market_code": "uk",
+      "position": 13.0,
+      "volume": 590,
+      "kd": 27,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "uk peptides retatrutide",
+      "market_code": "uk",
+      "position": 14.0,
+      "volume": 590,
+      "kd": 17,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ss-31 peptide",
+      "market_code": "uk",
+      "position": 24.0,
+      "volume": 590,
+      "kd": 29,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/ss-31/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "melanotan 1",
+      "market_code": "uk",
+      "position": 32.0,
+      "volume": 590,
+      "kd": 24,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/mt-1-melanotan-1-acetate-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bacteriostatic",
+      "market_code": "uk",
+      "position": 33.0,
+      "volume": 590,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptigen",
+      "market_code": "uk",
+      "position": 45.0,
+      "volume": 590,
+      "kd": 5,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "buy hcg",
+      "market_code": "uk",
+      "position": 12.0,
+      "volume": 480,
+      "kd": 22,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "mt1",
+      "market_code": "uk",
+      "position": 12.0,
+      "volume": 480,
+      "kd": 10,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/mt-1-melanotan-1-acetate-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide buy online uk",
+      "market_code": "uk",
+      "position": 14.0,
+      "volume": 480,
+      "kd": 6,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy retatrutide online",
+      "market_code": "uk",
+      "position": 15.0,
+      "volume": 480,
+      "kd": 24,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hcg peptide",
+      "market_code": "uk",
+      "position": 20.0,
+      "volume": 480,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide uk peptides",
+      "market_code": "uk",
+      "position": 20.0,
+      "volume": 480,
+      "kd": 8,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "mt1 peptide",
+      "market_code": "uk",
+      "position": 22.0,
+      "volume": 480,
+      "kd": 14,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/mt-1-melanotan-1-acetate-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "kpb peptide",
+      "market_code": "uk",
+      "position": 28.0,
+      "volume": 480,
+      "kd": 24,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/kpv/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "k.p.v",
+      "market_code": "uk",
+      "position": 31.0,
+      "volume": 480,
+      "kd": 10,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/kpv/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cic 1295",
+      "market_code": "uk",
+      "position": 38.0,
+      "volume": 480,
+      "kd": 25,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "delta sleep peptide",
+      "market_code": "uk",
+      "position": 39.0,
+      "volume": 480,
+      "kd": 25,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/dsip-delta-sleep-inducing-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ss 31",
+      "market_code": "uk",
+      "position": 43.0,
+      "volume": 480,
+      "kd": 29,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/ss-31/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc 1295 dac",
+      "market_code": "uk",
+      "position": 52.0,
+      "volume": 480,
+      "kd": 11,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-with-dac-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide uk buy online uk",
+      "market_code": "uk",
+      "position": 11.0,
+      "volume": 390,
+      "kd": 9,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "reta peptide buy",
+      "market_code": "uk",
+      "position": 15.0,
+      "volume": 390,
+      "kd": 13,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "reta peptide uk",
+      "market_code": "uk",
+      "position": 19.0,
+      "volume": 390,
+      "kd": 20,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc 1295 with dac",
+      "market_code": "uk",
+      "position": 21.0,
+      "volume": 390,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-with-dac-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptides of london",
+      "market_code": "uk",
+      "position": 24.0,
+      "volume": 390,
+      "kd": 10,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "ascend peptides uk",
+      "market_code": "uk",
+      "position": 25.0,
+      "volume": 390,
+      "kd": 28,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "purity peptides",
+      "market_code": "uk",
+      "position": 27.0,
+      "volume": 390,
+      "kd": 29,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "where can i buy retatrutide",
+      "market_code": "uk",
+      "position": 28.0,
+      "volume": 390,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "tested peptides",
+      "market_code": "uk",
+      "position": 29.0,
+      "volume": 390,
+      "kd": 28,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "kiss 1 peptide",
+      "market_code": "uk",
+      "position": 29.0,
+      "volume": 390,
+      "kd": 22,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/kisspeptin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "chemco peptides",
+      "market_code": "uk",
+      "position": 30.0,
+      "volume": 390,
+      "kd": 7,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "follistatin 344",
+      "market_code": "uk",
+      "position": 39.0,
+      "volume": 390,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/follistatin-344-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc ipamorelin",
+      "market_code": "uk",
+      "position": 39.0,
+      "volume": 390,
+      "kd": 22,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "nad peptides",
+      "market_code": "uk",
+      "position": 54.0,
+      "volume": 390,
+      "kd": 22,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/nad-500mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hcg 5000iu",
+      "market_code": "uk",
+      "position": 9.0,
+      "volume": 320,
+      "kd": 29,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy hcg uk",
+      "market_code": "uk",
+      "position": 16.0,
+      "volume": 320,
+      "kd": 23,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptide lab uk",
+      "market_code": "uk",
+      "position": 17.0,
+      "volume": 320,
+      "kd": 29,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "pendragon peptides",
+      "market_code": "uk",
+      "position": 18.0,
+      "volume": 320,
+      "kd": 20,
+      "intent": "informational, transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "thymogen alpha 1",
+      "market_code": "uk",
+      "position": 24.0,
+      "volume": 320,
+      "kd": 15,
+      "intent": "informational, transactional",
+      "best_url": "https://researchpeptide.co.uk/product/thymosin-alpha-1/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "glow ghk-cu",
+      "market_code": "uk",
+      "position": 24.0,
+      "volume": 320,
+      "kd": 5,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glow-blend-ghk-cu-bpc157-tb500/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "glow ghk cu",
+      "market_code": "uk",
+      "position": 25.0,
+      "volume": 320,
+      "kd": 3,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glow-blend-ghk-cu-bpc157-tb500/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "tb500 bpc 157",
+      "market_code": "uk",
+      "position": 26.0,
+      "volume": 320,
+      "kd": 20,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "glutathione peptide",
+      "market_code": "uk",
+      "position": 29.0,
+      "volume": 320,
+      "kd": 15,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glutathione-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "sterling peptides",
+      "market_code": "uk",
+      "position": 30.0,
+      "volume": 320,
+      "kd": 20,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "gdf8 myostatin",
+      "market_code": "uk",
+      "position": 35.0,
+      "volume": 320,
+      "kd": 23,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/gdf-8/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "precision peptides",
+      "market_code": "uk",
+      "position": 41.0,
+      "volume": 320,
+      "kd": 21,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bacteriostatic water for injection",
+      "market_code": "uk",
+      "position": 41.0,
+      "volume": 320,
+      "kd": 29,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bacteriostatic saline",
+      "market_code": "uk",
+      "position": 43.0,
+      "volume": 320,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-sodium-chloride/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc 1295 and ipamorelin",
+      "market_code": "uk",
+      "position": 45.0,
+      "volume": 320,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "purchase hcg",
+      "market_code": "uk",
+      "position": 1.0,
+      "volume": 260,
+      "kd": 11,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh 176-191 fragment",
+      "market_code": "uk",
+      "position": 1.0,
+      "volume": 260,
+      "kd": 11,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/"
+      ]
+    },
+    {
+      "keyword": "best uk peptide supplier",
+      "market_code": "uk",
+      "position": 6.0,
+      "volume": 260,
+      "kd": 29,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "trident peptides uk",
+      "market_code": "uk",
+      "position": 11.0,
+      "volume": 260,
+      "kd": 27,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "leolab uk",
+      "market_code": "uk",
+      "position": 14.0,
+      "volume": 260,
+      "kd": 22,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "buy reta uk",
+      "market_code": "uk",
+      "position": 17.0,
+      "volume": 260,
+      "kd": 10,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "rp peptides uk",
+      "market_code": "uk",
+      "position": 17.0,
+      "volume": 260,
+      "kd": 21,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "uk peptides bpc 157",
+      "market_code": "uk",
+      "position": 18.0,
+      "volume": 260,
+      "kd": 15,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "tirzepatide peptides uk",
+      "market_code": "uk",
+      "position": 18.0,
+      "volume": 260,
+      "kd": 2,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hcg buy",
+      "market_code": "uk",
+      "position": 20.0,
+      "volume": 260,
+      "kd": 22,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptiology uk",
+      "market_code": "uk",
+      "position": 20.0,
+      "volume": 260,
+      "kd": 27,
+      "intent": "navigational, transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "order hcg",
+      "market_code": "uk",
+      "position": 22.0,
+      "volume": 260,
+      "kd": 25,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "pt 141 uk",
+      "market_code": "uk",
+      "position": 22.0,
+      "volume": 260,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/pt-141-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "getpptidepen",
+      "market_code": "uk",
+      "position": 23.0,
+      "volume": 260,
+      "kd": 10,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "adipotide",
+      "market_code": "uk",
+      "position": 24.0,
+      "volume": 260,
+      "kd": 23,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/adipotide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide uk source",
+      "market_code": "uk",
+      "position": 25.0,
+      "volume": 260,
+      "kd": 17,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh fragment 176 191",
+      "market_code": "uk",
+      "position": 26.0,
+      "volume": 260,
+      "kd": 25,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "tesofensine peptide",
+      "market_code": "uk",
+      "position": 30.0,
+      "volume": 260,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/tesofensine-500mcg-60-capsules/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 157 tb 500 blend",
+      "market_code": "uk",
+      "position": 33.0,
+      "volume": 260,
+      "kd": 7,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "wellsculpt",
+      "market_code": "uk",
+      "position": 39.0,
+      "volume": 260,
+      "kd": 22,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "peptides gold",
+      "market_code": "uk",
+      "position": 41.0,
+      "volume": 260,
+      "kd": 9,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "bacteriostatic water uk",
+      "market_code": "uk",
+      "position": 44.0,
+      "volume": 260,
+      "kd": 3,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc 1295 no dac",
+      "market_code": "uk",
+      "position": 46.0,
+      "volume": 260,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy nad+",
+      "market_code": "uk",
+      "position": 48.0,
+      "volume": 260,
+      "kd": 10,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/nad-500mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh fragment",
+      "market_code": "uk",
+      "position": 1.0,
+      "volume": 210,
+      "kd": 24,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/"
+      ]
+    },
+    {
+      "keyword": "bacteriostatic water hospira",
+      "market_code": "uk",
+      "position": 2.0,
+      "volume": 210,
+      "kd": 22,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "trident peptide",
+      "market_code": "uk",
+      "position": 3.0,
+      "volume": 210,
+      "kd": 23,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "pure peptides uk review",
+      "market_code": "uk",
+      "position": 4.0,
+      "volume": 210,
+      "kd": 15,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "cjc with dac",
+      "market_code": "uk",
+      "position": 13.0,
+      "volume": 210,
+      "kd": 21,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-with-dac-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptide testing uk",
+      "market_code": "uk",
+      "position": 14.0,
+      "volume": 210,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/"
+      ]
+    },
+    {
+      "keyword": "thymalin",
+      "market_code": "uk",
+      "position": 14.0,
+      "volume": 210,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/thymalin-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hcg uk",
+      "market_code": "uk",
+      "position": 14.0,
+      "volume": 210,
+      "kd": 21,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hcg for sale",
+      "market_code": "uk",
+      "position": 16.0,
+      "volume": 210,
+      "kd": 22,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc-1295 with dac",
+      "market_code": "uk",
+      "position": 17.0,
+      "volume": 210,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-with-dac-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "injectable bacteriostatic water",
+      "market_code": "uk",
+      "position": 23.0,
+      "volume": 210,
+      "kd": 29,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "particle peptides",
+      "market_code": "uk",
+      "position": 24.0,
+      "volume": 210,
+      "kd": 28,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "raw peptides",
+      "market_code": "uk",
+      "position": 26.0,
+      "volume": 210,
+      "kd": 11,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "recov peptides",
+      "market_code": "uk",
+      "position": 27.0,
+      "volume": 210,
+      "kd": 3,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "where can i buy retatrutide online in uk",
+      "market_code": "uk",
+      "position": 29.0,
+      "volume": 210,
+      "kd": 13,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "mgf peptide",
+      "market_code": "uk",
+      "position": 31.0,
+      "volume": 210,
+      "kd": 25,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/peg-mgf-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc 1295 peptide",
+      "market_code": "uk",
+      "position": 34.0,
+      "volume": 210,
+      "kd": 26,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptides uk legal",
+      "market_code": "uk",
+      "position": 37.0,
+      "volume": 210,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc no dac",
+      "market_code": "uk",
+      "position": 42.0,
+      "volume": 210,
+      "kd": 25,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptide injections uk",
+      "market_code": "uk",
+      "position": 45.0,
+      "volume": 210,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "test peptide",
+      "market_code": "uk",
+      "position": 48.0,
+      "volume": 210,
+      "kd": 25,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "igf 1 supplements",
+      "market_code": "uk",
+      "position": 51.0,
+      "volume": 210,
+      "kd": 23,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-1-3-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "researchism",
+      "market_code": "uk",
+      "position": 53.0,
+      "volume": 210,
+      "kd": 26,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/shop/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "hcg uk buy",
+      "market_code": "uk",
+      "position": 4.0,
+      "volume": 170,
+      "kd": 14,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "new wave peptides review",
+      "market_code": "uk",
+      "position": 4.0,
+      "volume": 170,
+      "kd": 29,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "buy hcg online uk",
+      "market_code": "uk",
+      "position": 7.0,
+      "volume": 170,
+      "kd": 5,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "tested peptides uk",
+      "market_code": "uk",
+      "position": 10.0,
+      "volume": 170,
+      "kd": 17,
+      "intent": "informational, navigational",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/"
+      ]
+    },
+    {
+      "keyword": "best peptide",
+      "market_code": "uk",
+      "position": 14.0,
+      "volume": 170,
+      "kd": 25,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "glow blend",
+      "market_code": "uk",
+      "position": 20.0,
+      "volume": 170,
+      "kd": 8,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glow-blend-ghk-cu-bpc157-tb500/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ace 031 peptide",
+      "market_code": "uk",
+      "position": 21.0,
+      "volume": 170,
+      "kd": 10,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/ace-031-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ace-031",
+      "market_code": "uk",
+      "position": 22.0,
+      "volume": 170,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/ace-031-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ace 031",
+      "market_code": "uk",
+      "position": 22.0,
+      "volume": 170,
+      "kd": 12,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/ace-031-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptides hcg",
+      "market_code": "uk",
+      "position": 23.0,
+      "volume": 170,
+      "kd": 12,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ghrp - 6",
+      "market_code": "uk",
+      "position": 25.0,
+      "volume": 170,
+      "kd": 19,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/ghrp-6-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy ipamorelin",
+      "market_code": "uk",
+      "position": 25.0,
+      "volume": 170,
+      "kd": 24,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/ipamorelin-5mg-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ipamorelin uk",
+      "market_code": "uk",
+      "position": 25.0,
+      "volume": 170,
+      "kd": 14,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/ipamorelin-5mg-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bremelanotide uk",
+      "market_code": "uk",
+      "position": 26.0,
+      "volume": 170,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/pt-141-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "water for injection bacteriostatic",
+      "market_code": "uk",
+      "position": 26.0,
+      "volume": 170,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "igf lr3 peptide",
+      "market_code": "uk",
+      "position": 26.0,
+      "volume": 170,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-lr3-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "maxidol peptide",
+      "market_code": "uk",
+      "position": 31.0,
+      "volume": 170,
+      "kd": 15,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "ss-31 peptide dosage",
+      "market_code": "uk",
+      "position": 33.0,
+      "volume": 170,
+      "kd": 29,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/ss-31/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "skip"
+    },
+    {
+      "keyword": "igf-1 supplements",
+      "market_code": "uk",
+      "position": 48.0,
+      "volume": 170,
+      "kd": 19,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-1-3-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bachem uk",
+      "market_code": "uk",
+      "position": 59.0,
+      "volume": 170,
+      "kd": 25,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "191aa hgh",
+      "market_code": "uk",
+      "position": 1.0,
+      "volume": 140,
+      "kd": 9,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "10ml bacteriostatic water",
+      "market_code": "uk",
+      "position": 1.0,
+      "volume": 140,
+      "kd": 7,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc-1295 dac",
+      "market_code": "uk",
+      "position": 1.0,
+      "volume": 140,
+      "kd": 17,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-with-dac-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc 1295 ipamorelin uk",
+      "market_code": "uk",
+      "position": 1.0,
+      "volume": 140,
+      "kd": 12,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh191aa",
+      "market_code": "uk",
+      "position": 2.0,
+      "volume": 140,
+      "kd": 9,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptide manufacturers uk",
+      "market_code": "uk",
+      "position": 9.0,
+      "volume": 140,
+      "kd": 14,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "is uk peptides legit",
+      "market_code": "uk",
+      "position": 15.0,
+      "volume": 140,
+      "kd": 22,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bacteriostatic water 10ml",
+      "market_code": "uk",
+      "position": 17.0,
+      "volume": 140,
+      "kd": 7,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "kpv peptide uk",
+      "market_code": "uk",
+      "position": 17.0,
+      "volume": 140,
+      "kd": 8,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/kpv/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 157 10mg",
+      "market_code": "uk",
+      "position": 18.0,
+      "volume": 140,
+      "kd": 12,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "dr peptides uk",
+      "market_code": "uk",
+      "position": 19.0,
+      "volume": 140,
+      "kd": 21,
+      "intent": "commercial, informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "retatrutide peptide buy online uk",
+      "market_code": "uk",
+      "position": 19.0,
+      "volume": 140,
+      "kd": 7,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "thymalin peptide",
+      "market_code": "uk",
+      "position": 19.0,
+      "volume": 140,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/thymalin-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "igf des",
+      "market_code": "uk",
+      "position": 21.0,
+      "volume": 140,
+      "kd": 10,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-des-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "reta uk peptides",
+      "market_code": "uk",
+      "position": 22.0,
+      "volume": 140,
+      "kd": 6,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "mt 1",
+      "market_code": "uk",
+      "position": 23.0,
+      "volume": 140,
+      "kd": 11,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/mt-1-melanotan-1-acetate-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "reta peptides uk",
+      "market_code": "uk",
+      "position": 24.0,
+      "volume": 140,
+      "kd": 20,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "future peptides",
+      "market_code": "uk",
+      "position": 33.0,
+      "volume": 140,
+      "kd": 11,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "5-amino 1mq",
+      "market_code": "uk",
+      "position": 33.0,
+      "volume": 140,
+      "kd": 5,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/5-amino-1mq/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy sermorelin",
+      "market_code": "uk",
+      "position": 34.0,
+      "volume": 140,
+      "kd": 19,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "trevogrumab and garetosmab for sale",
+      "market_code": "uk",
+      "position": 36.0,
+      "volume": 140,
+      "kd": 8,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ss 31 peptide dose",
+      "market_code": "uk",
+      "position": 37.0,
+      "volume": 140,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/ss-31/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "skip"
+    },
+    {
+      "keyword": "cjc dac",
+      "market_code": "uk",
+      "position": 38.0,
+      "volume": 140,
+      "kd": 17,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-with-dac-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "kpv peptides",
+      "market_code": "uk",
+      "position": 39.0,
+      "volume": 140,
+      "kd": 14,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/kpv/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bp157 tb500",
+      "market_code": "uk",
+      "position": 42.0,
+      "volume": 140,
+      "kd": 26,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc without dac",
+      "market_code": "uk",
+      "position": 42.0,
+      "volume": 140,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc1295 ipamorelin",
+      "market_code": "uk",
+      "position": 43.0,
+      "volume": 140,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ipamorelin cjc-1295",
+      "market_code": "uk",
+      "position": 43.0,
+      "volume": 140,
+      "kd": 19,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy tirzepatide peptide",
+      "market_code": "uk",
+      "position": 44.0,
+      "volume": 140,
+      "kd": 2,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "nad+ peptides",
+      "market_code": "uk",
+      "position": 48.0,
+      "volume": 140,
+      "kd": 19,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/nad-500mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/product/nad-250mg/"
+      ]
+    },
+    {
+      "keyword": "bacteriostatic saline solution",
+      "market_code": "uk",
+      "position": 48.0,
+      "volume": 140,
+      "kd": 11,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-sodium-chloride/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "kpv peptide dosage",
+      "market_code": "uk",
+      "position": 53.0,
+      "volume": 140,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/kpv/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "skip"
+    },
+    {
+      "keyword": "ghkcu.uk",
+      "market_code": "uk",
+      "position": 78.0,
+      "volume": 140,
+      "kd": 17,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glow-blend-ghk-cu-bpc157-tb500/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "order hcg online",
+      "market_code": "uk",
+      "position": 1.0,
+      "volume": 110,
+      "kd": 13,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "frag 176-191",
+      "market_code": "uk",
+      "position": 1.0,
+      "volume": 110,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/"
+      ]
+    },
+    {
+      "keyword": "5 amino 1mq uk",
+      "market_code": "uk",
+      "position": 9.0,
+      "volume": 110,
+      "kd": 9,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/5-amino-1mq/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 157 tb500 blend",
+      "market_code": "uk",
+      "position": 9.0,
+      "volume": 110,
+      "kd": 11,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-5mg-tb-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/"
+      ]
+    },
+    {
+      "keyword": "verified peptides",
+      "market_code": "uk",
+      "position": 13.0,
+      "volume": 110,
+      "kd": 18,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "hcg buy uk",
+      "market_code": "uk",
+      "position": 15.0,
+      "volume": 110,
+      "kd": 14,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hospira bacteriostatic wate",
+      "market_code": "uk",
+      "position": 16.0,
+      "volume": 110,
+      "kd": 21,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "steroids uk hcg",
+      "market_code": "uk",
+      "position": 20.0,
+      "volume": 110,
+      "kd": 28,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "skip"
+    },
+    {
+      "keyword": "does bacteriostatic water contain alcohol",
+      "market_code": "uk",
+      "position": 21.0,
+      "volume": 110,
+      "kd": 29,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy kisspeptin",
+      "market_code": "uk",
+      "position": 23.0,
+      "volume": 110,
+      "kd": 9,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/kisspeptin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc 1295 tablets",
+      "market_code": "uk",
+      "position": 23.0,
+      "volume": 110,
+      "kd": 17,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "where to.buy reta",
+      "market_code": "uk",
+      "position": 25.0,
+      "volume": 110,
+      "kd": 8,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy igf-1 lr3",
+      "market_code": "uk",
+      "position": 26.0,
+      "volume": 110,
+      "kd": 22,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-lr3-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "k p v",
+      "market_code": "uk",
+      "position": 30.0,
+      "volume": 110,
+      "kd": 12,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/kpv/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide sales",
+      "market_code": "uk",
+      "position": 33.0,
+      "volume": 110,
+      "kd": 21,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc-157 / tb-500",
+      "market_code": "uk",
+      "position": 33.0,
+      "volume": 110,
+      "kd": 4,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "glp-3 peptides",
+      "market_code": "uk",
+      "position": 34.0,
+      "volume": 110,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "glow.peptide",
+      "market_code": "uk",
+      "position": 41.0,
+      "volume": 110,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glow-blend-ghk-cu-bpc157-tb500/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cjc-1295 / ipamorelin",
+      "market_code": "uk",
+      "position": 43.0,
+      "volume": 110,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "ss31 dosage",
+      "market_code": "uk",
+      "position": 46.0,
+      "volume": 110,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/ss-31/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "skip"
+    },
+    {
+      "keyword": "ipamorelin and cjc 1295",
+      "market_code": "uk",
+      "position": 52.0,
+      "volume": 110,
+      "kd": 27,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "fragment 176 191",
+      "market_code": "uk",
+      "position": 1.0,
+      "volume": 90,
+      "kd": 22,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "purepeptides uk",
+      "market_code": "uk",
+      "position": 6.0,
+      "volume": 90,
+      "kd": 25,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/"
+      ]
+    },
+    {
+      "keyword": "buy peptides online uk",
+      "market_code": "uk",
+      "position": 8.0,
+      "volume": 90,
+      "kd": 27,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/"
+      ]
+    },
+    {
+      "keyword": "rize peptides uk",
+      "market_code": "uk",
+      "position": 9.0,
+      "volume": 90,
+      "kd": 26,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "cjc1295 with dac",
+      "market_code": "uk",
+      "position": 9.0,
+      "volume": 90,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-with-dac-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc 157 5mg",
+      "market_code": "uk",
+      "position": 9.0,
+      "volume": 90,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-5mg-tb-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "5 amino 1mq peptide",
+      "market_code": "uk",
+      "position": 15.0,
+      "volume": 90,
+      "kd": 11,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/5-amino-1mq/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy pt 141 uk",
+      "market_code": "uk",
+      "position": 17.0,
+      "volume": 90,
+      "kd": 5,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/pt-141-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "tb500 bpc-157 blend",
+      "market_code": "uk",
+      "position": 18.0,
+      "volume": 90,
+      "kd": 14,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "perpetual peptides",
+      "market_code": "uk",
+      "position": 19.0,
+      "volume": 90,
+      "kd": 17,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "best place to buy bpc-157 uk",
+      "market_code": "uk",
+      "position": 21.0,
+      "volume": 90,
+      "kd": 5,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptides in uk",
+      "market_code": "uk",
+      "position": 21.0,
+      "volume": 90,
+      "kd": 23,
+      "intent": "commercial",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptide cjc 1295",
+      "market_code": "uk",
+      "position": 24.0,
+      "volume": 90,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/cjc-1295-no-dac-5mg-ipamorelin-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "where to buy reta",
+      "market_code": "uk",
+      "position": 24.0,
+      "volume": 90,
+      "kd": 23,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "aod 9604 uk",
+      "market_code": "uk",
+      "position": 24.0,
+      "volume": 90,
+      "kd": 7,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/aod-9604-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "test peptides",
+      "market_code": "uk",
+      "position": 28.0,
+      "volume": 90,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/best-peptide-website-in-uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target",
+      "alt_urls": [
+        "https://researchpeptide.co.uk/"
+      ]
+    },
+    {
+      "keyword": "bpc-157 tb-500",
+      "market_code": "uk",
+      "position": 29.0,
+      "volume": 90,
+      "kd": 3,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "igf 1 des",
+      "market_code": "uk",
+      "position": 29.0,
+      "volume": 90,
+      "kd": 9,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-des-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bpc157/tb500",
+      "market_code": "uk",
+      "position": 29.0,
+      "volume": 90,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bpc-10mg-tb-10mg-20mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "water bacteriostatic",
+      "market_code": "uk",
+      "position": 31.0,
+      "volume": 90,
+      "kd": 15,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/bacteriostatic-water-0-9-benzyl/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "myostatin blocker supplement",
+      "market_code": "uk",
+      "position": 35.0,
+      "volume": 90,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/myostatin-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "1gf lr3 peptide",
+      "market_code": "uk",
+      "position": 42.0,
+      "volume": 90,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-lr3-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    }
+  ]
+}

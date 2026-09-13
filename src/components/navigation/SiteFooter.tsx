@@ -3,7 +3,7 @@ import { LocaleLink } from '../../i18n/LocaleLink';
 import { MapPin, ShieldCheck, Truck } from 'lucide-react';
 import logo from '../../assets/brandLogo';
 import { Container, ScientificBackdrop } from '../../design-system';
-import { footerInventory, footerLegal, footerSupport } from '../../navigation/config';
+import { footerInventory, footerLegal, footerResearch, footerSupport } from '../../navigation/config';
 import { brandName } from '../../design-system/tokens';
 import { SUPPORT_EMAIL } from '../../config/brand';
 
@@ -37,8 +37,11 @@ export default function SiteFooter({
               <img src={logo} alt="" className="h-11 w-auto drop-shadow-[0_2px_12px_rgba(45,181,163,0.35)]" width={48} height={48} />
             </LocaleLink>
             <p className="text-sm text-silver-400 leading-relaxed max-w-sm">
-              {brandName} delivers research-grade peptide compounds to European laboratories with
-              third-party verified purity and pharmaceutical-level handling standards.
+              <LocaleLink to="/about-us" className="text-brand-300 hover:text-white">
+                Research Peptides Europe
+              </LocaleLink>{' '}
+              delivers research-grade peptide compounds to European laboratories — including Spain and
+              the wider EU — with third-party verified purity and pharmaceutical-level handling.
             </p>
             <p className="flex items-start gap-2 text-xs text-brand-300/90 mt-4 max-w-sm leading-relaxed">
               <MapPin className="h-4 w-4 shrink-0 mt-0.5" aria-hidden />
@@ -62,7 +65,7 @@ export default function SiteFooter({
           </div>
 
           <div className="md:col-span-2">
-            <h4 className="text-caption text-brand-400 mb-5">Catalog</h4>
+            <h4 className="text-caption text-brand-400 mb-5">{tNav('footer.inventory')}</h4>
             <ul className="space-y-3 text-sm text-silver-400">
               {footerInventory.map((item) => (
                 <li key={item.href}>
@@ -75,7 +78,20 @@ export default function SiteFooter({
           </div>
 
           <div className="md:col-span-2">
-            <h4 className="text-caption text-brand-400 mb-5">Support</h4>
+            <h4 className="text-caption text-brand-400 mb-5">{tNav('footer.research')}</h4>
+            <ul className="space-y-3 text-sm text-silver-400">
+              {footerResearch.map((item) => (
+                <li key={item.href}>
+                  <LocaleLink to={item.href} className="hover:text-white transition-colors">
+                    {tNav(item.labelKey)}
+                  </LocaleLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-2">
+            <h4 className="text-caption text-brand-400 mb-5">{tNav('footer.support')}</h4>
             <ul className="space-y-3 text-sm text-silver-400">
               {footerSupport.map((item) => (
                 <li key={item.href}>
@@ -87,7 +103,7 @@ export default function SiteFooter({
             </ul>
           </div>
 
-          <div className="md:col-span-4">
+          <div className="md:col-span-2">
             <h4 className="text-caption text-brand-400 mb-5">Research newsletter</h4>
             <p className="text-silver-400 text-sm mb-5 leading-relaxed">
               Priority updates on EU supply availability, batch COAs, and newly listed compounds.
@@ -128,6 +144,35 @@ export default function SiteFooter({
                 {newsletterError}
               </p>
             ) : null}
+            <p className="mt-4 text-[11px] text-silver-400 leading-relaxed">
+              References:{' '}
+              <a
+                href="https://pubchem.ncbi.nlm.nih.gov/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-300 hover:text-white underline-offset-2 hover:underline"
+              >
+                PubChem
+              </a>
+              {' · '}
+              <a
+                href="https://www.ema.europa.eu/en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-300 hover:text-white underline-offset-2 hover:underline"
+              >
+                EMA
+              </a>
+              {' · '}
+              <a
+                href="https://www.uniprot.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-300 hover:text-white underline-offset-2 hover:underline"
+              >
+                UniProt
+              </a>
+            </p>
           </div>
         </div>
       </Container>

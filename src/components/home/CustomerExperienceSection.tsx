@@ -109,9 +109,15 @@ export function CustomerExperienceSection() {
           </div>
         </div>
 
-        <p className="text-center mt-10">
-          <LocaleLink to="/faq" className="text-sm font-semibold text-brand-600 hover:text-brand-700">
-            Read researcher FAQ →
+        <p className="text-center mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-semibold">
+          <LocaleLink to="/faq" className="text-brand-600 hover:text-brand-700">
+            Researcher FAQ →
+          </LocaleLink>
+          <LocaleLink to="/blog" className="text-brand-600 hover:text-brand-700">
+            Research journal →
+          </LocaleLink>
+          <LocaleLink to="/peptide-information" className="text-brand-600 hover:text-brand-700">
+            Peptide information →
           </LocaleLink>
         </p>
       </Container>

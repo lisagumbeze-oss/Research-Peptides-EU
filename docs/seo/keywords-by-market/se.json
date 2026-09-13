@@ -1,0 +1,31 @@
+{
+  "market_code": "se",
+  "country_name": "Sweden",
+  "brand_target": "Research Peptides EU",
+  "evidence_sources": [
+    {
+      "evidence_source_domain": "researchpeptide.eu",
+      "source_file": "researchpeptide.eu-organic.Positions-se-20260912-2026-09-13T05_48_02Z.csv",
+      "rows": 1,
+      "unique_keywords": 1
+    }
+  ],
+  "unique_keyword_count": 1,
+  "target_count": 1,
+  "skipped_count": 0,
+  "keywords": [
+    {
+      "keyword": "peptides eu",
+      "market_code": "se",
+      "position": 20.0,
+      "volume": 260,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptide.eu/",
+      "evidence_source_domains": [
+        "researchpeptide.eu"
+      ],
+      "status": "target"
+    }
+  ]
+}

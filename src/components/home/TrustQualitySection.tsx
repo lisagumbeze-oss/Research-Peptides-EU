@@ -68,12 +68,26 @@ export function TrustQualitySection() {
                 </motion.div>
               ))}
             </div>
-            <LocaleLink
-              to="/coas"
-              className="inline-flex mt-8 text-sm font-semibold text-brand-300 hover:text-white transition-colors"
-            >
-              Open COA library →
-            </LocaleLink>
+            <div className="mt-8 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-5">
+              <LocaleLink
+                to="/coas"
+                className="inline-flex text-sm font-semibold text-brand-300 hover:text-white transition-colors"
+              >
+                COA library for research peptides →
+              </LocaleLink>
+              <LocaleLink
+                to="/shipping"
+                className="inline-flex text-sm font-semibold text-brand-300 hover:text-white transition-colors"
+              >
+                EU peptide shipping →
+              </LocaleLink>
+              <LocaleLink
+                to="/blog/reconstitute-research-peptides"
+                className="inline-flex text-sm font-semibold text-brand-300 hover:text-white transition-colors"
+              >
+                Bacteriostatic water reconstitution guide →
+              </LocaleLink>
+            </div>
           </GlowPanel>
         </div>
       </Container>

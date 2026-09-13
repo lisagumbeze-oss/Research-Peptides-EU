@@ -1,0 +1,271 @@
+{
+  "market_code": "nl",
+  "country_name": "Netherlands",
+  "brand_target": "Research Peptides EU",
+  "evidence_sources": [
+    {
+      "evidence_source_domain": "researchpeptide.eu",
+      "source_file": "researchpeptide.eu-organic.Positions-nl-20260912-2026-09-13T05_46_55Z.csv",
+      "rows": 5,
+      "unique_keywords": 4
+    },
+    {
+      "evidence_source_domain": "researchpeptide.co.uk",
+      "source_file": "researchpeptide.co.uk-organic.Positions-nl-20260912-2026-09-13T05_56_14Z.csv",
+      "rows": 17,
+      "unique_keywords": 16
+    }
+  ],
+  "unique_keyword_count": 19,
+  "target_count": 18,
+  "skipped_count": 1,
+  "keywords": [
+    {
+      "keyword": "research chem peptide",
+      "market_code": "nl",
+      "position": 71.0,
+      "volume": 90,
+      "kd": 27,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptide.eu/",
+      "evidence_source_domains": [
+        "researchpeptide.eu"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "research chemicals peptides",
+      "market_code": "nl",
+      "position": 82.0,
+      "volume": 90,
+      "kd": 30,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptide.eu/",
+      "evidence_source_domains": [
+        "researchpeptide.eu"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "glutathione peptide",
+      "market_code": "nl",
+      "position": 22.0,
+      "volume": 70,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glutathione-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptide glutathione",
+      "market_code": "nl",
+      "position": 41.0,
+      "volume": 70,
+      "kd": 23,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glutathione-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hexareline peptide apotheek prijs",
+      "market_code": "nl",
+      "position": 32.0,
+      "volume": 50,
+      "kd": 10,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/hexarelin-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peg mgf online",
+      "market_code": "nl",
+      "position": 2.0,
+      "volume": 40,
+      "kd": 0,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/peg-mgf-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peg mgf online aankoop",
+      "market_code": "nl",
+      "position": 9.0,
+      "volume": 40,
+      "kd": 3,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/peg-mgf-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bestellen frag 176-191 peptide",
+      "market_code": "nl",
+      "position": 18.0,
+      "volume": 40,
+      "kd": 3,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "researchpeptides-europe.com",
+      "market_code": "nl",
+      "position": 19.0,
+      "volume": 40,
+      "kd": 0,
+      "intent": "navigational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "competitor_noise"
+    },
+    {
+      "keyword": "bestellen frag 176-191 peptide online",
+      "market_code": "nl",
+      "position": 20.0,
+      "volume": 40,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hexarelin apotheek",
+      "market_code": "nl",
+      "position": 21.0,
+      "volume": 40,
+      "kd": 15,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hexarelin-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peg mgf koop",
+      "market_code": "nl",
+      "position": 22.0,
+      "volume": 40,
+      "kd": 1,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/peg-mgf-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peg mgf apotheek",
+      "market_code": "nl",
+      "position": 31.0,
+      "volume": 40,
+      "kd": 1,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/peg-mgf-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "kopen gonadoreline peptide",
+      "market_code": "nl",
+      "position": 31.0,
+      "volume": 40,
+      "kd": 3,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/gonadorelin-acetategnrh-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "igf-1 peptide apotheek",
+      "market_code": "nl",
+      "position": 34.0,
+      "volume": 40,
+      "kd": 0,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-lr3-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "frag 176-191 peptide prijs",
+      "market_code": "nl",
+      "position": 40.0,
+      "volume": 40,
+      "kd": 14,
+      "intent": "transactional",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-10mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "research peptides",
+      "market_code": "nl",
+      "position": 61.0,
+      "volume": 40,
+      "kd": 44,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptide.eu/",
+      "evidence_source_domains": [
+        "researchpeptide.eu"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "rcpeptide",
+      "market_code": "nl",
+      "position": 13.0,
+      "volume": 30,
+      "kd": 32,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "gluta peptide",
+      "market_code": "nl",
+      "position": 16.0,
+      "volume": 30,
+      "kd": 19,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/glutathione-peptide/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    }
+  ]
+}

@@ -1,0 +1,428 @@
+{
+  "brand_target": "Research Peptides EU — Europe-first; multi-market keyword evidence tagged by country",
+  "differentiation_rule": {
+    "market_code": "ISO-like country from Semrush export (uk, es, de, fr, nl, se, at, us, au)",
+    "evidence_source_domain": "Domain the Semrush project tracked (.eu / .co.uk / .es)",
+    "storage": "keywords stored as separate records per market_code — never merge UK+US+DE into one undifferentiated list",
+    "same_string_different_markets": "e.g. 'bacteriostatic water' in UK vs US vs ES are distinct tagged entries"
+  },
+  "countries": [
+    {
+      "market_code": "au",
+      "country_name": "Australia",
+      "evidence_sources": [
+        {
+          "source_domain": "researchpeptide.co.uk",
+          "file": "researchpeptide.co.uk-organic.Positions-au-20260912-2026-09-13T05_59_13Z.csv",
+          "unique_keywords": 9,
+          "rows": 10,
+          "exported_at": "2026-09-13T05:59:13Z",
+          "duplicates_ignored": [],
+          "top_by_volume": [
+            {
+              "keyword": "glutathione peptide",
+              "volume": 390,
+              "position": 21.0
+            },
+            {
+              "keyword": "aicar peptide",
+              "volume": 140,
+              "position": 5.0
+            },
+            {
+              "keyword": "peptide glutathione",
+              "volume": 140,
+              "position": 42.0
+            },
+            {
+              "keyword": "tb 4",
+              "volume": 110,
+              "position": 41.0
+            },
+            {
+              "keyword": "buy peg-mgf",
+              "volume": 70,
+              "position": 12.0
+            },
+            {
+              "keyword": "buy mgf peptide",
+              "volume": 70,
+              "position": 18.0
+            }
+          ]
+        }
+      ],
+      "unique_keywords_across_sources": 9,
+      "priority": "medium"
+    },
+    {
+      "market_code": "at",
+      "country_name": "Austria",
+      "evidence_sources": [
+        {
+          "source_domain": "researchpeptide.eu",
+          "file": "researchpeptide.eu-organic.Positions-at-20260912-2026-09-13T05_47_25Z.csv",
+          "unique_keywords": 1,
+          "rows": 1,
+          "exported_at": "2026-09-13T05:47:25Z",
+          "duplicates_ignored": [],
+          "top_by_volume": [
+            {
+              "keyword": "peptides eu",
+              "volume": 480,
+              "position": 23.0
+            }
+          ]
+        }
+      ],
+      "unique_keywords_across_sources": 1,
+      "priority": "low"
+    },
+    {
+      "market_code": "fr",
+      "country_name": "France",
+      "evidence_sources": [
+        {
+          "source_domain": "researchpeptide.eu",
+          "file": "researchpeptide.eu-organic.Positions-fr-20260912-2026-09-13T05_48_27Z.csv",
+          "unique_keywords": 1,
+          "rows": 1,
+          "exported_at": "2026-09-13T05:48:27Z",
+          "duplicates_ignored": [
+            "researchpeptide.eu-organic.Positions-fr-20260912-2026-09-13T05_47_39Z.csv"
+          ],
+          "top_by_volume": [
+            {
+              "keyword": "european peptide",
+              "volume": 50,
+              "position": 44.0
+            }
+          ]
+        }
+      ],
+      "unique_keywords_across_sources": 1,
+      "priority": "medium"
+    },
+    {
+      "market_code": "de",
+      "country_name": "Germany",
+      "evidence_sources": [
+        {
+          "source_domain": "researchpeptide.eu",
+          "file": "researchpeptide.eu-organic.Positions-de-20260912-2026-09-13T05_47_09Z.csv",
+          "unique_keywords": 2,
+          "rows": 2,
+          "exported_at": "2026-09-13T05:47:09Z",
+          "duplicates_ignored": [],
+          "top_by_volume": [
+            {
+              "keyword": "research chemical peptides",
+              "volume": 110,
+              "position": 48.0
+            },
+            {
+              "keyword": "peptide for research",
+              "volume": 70,
+              "position": 87.0
+            }
+          ]
+        },
+        {
+          "source_domain": "researchpeptide.co.uk",
+          "file": "researchpeptide.co.uk-organic.Positions-de-20260912-2026-09-13T06_00_00Z.csv",
+          "unique_keywords": 7,
+          "rows": 7,
+          "exported_at": "2026-09-13T06:00:00Z",
+          "duplicates_ignored": [],
+          "top_by_volume": [
+            {
+              "keyword": "hgh fragment 176-191",
+              "volume": 260,
+              "position": 52.0
+            },
+            {
+              "keyword": "fragment 176-191",
+              "volume": 260,
+              "position": 69.0
+            },
+            {
+              "keyword": "hexarelin",
+              "volume": 140,
+              "position": 2.0
+            },
+            {
+              "keyword": "peptides hcg",
+              "volume": 140,
+              "position": 3.0
+            },
+            {
+              "keyword": "igf 1 des",
+              "volume": 90,
+              "position": 3.0
+            },
+            {
+              "keyword": "hgh 191aa",
+              "volume": 70,
+              "position": 1.0
+            }
+          ]
+        }
+      ],
+      "unique_keywords_across_sources": 8,
+      "priority": "high"
+    },
+    {
+      "market_code": "nl",
+      "country_name": "Netherlands",
+      "evidence_sources": [
+        {
+          "source_domain": "researchpeptide.eu",
+          "file": "researchpeptide.eu-organic.Positions-nl-20260912-2026-09-13T05_46_55Z.csv",
+          "unique_keywords": 4,
+          "rows": 5,
+          "exported_at": "2026-09-13T05:46:55Z",
+          "duplicates_ignored": [],
+          "top_by_volume": [
+            {
+              "keyword": "research chem peptide",
+              "volume": 90,
+              "position": 71.0
+            },
+            {
+              "keyword": "research chemicals peptides",
+              "volume": 90,
+              "position": 82.0
+            },
+            {
+              "keyword": "researchpeptides-europe.com",
+              "volume": 40,
+              "position": 47.0
+            },
+            {
+              "keyword": "research peptides",
+              "volume": 40,
+              "position": 61.0
+            }
+          ]
+        },
+        {
+          "source_domain": "researchpeptide.co.uk",
+          "file": "researchpeptide.co.uk-organic.Positions-nl-20260912-2026-09-13T05_56_14Z.csv",
+          "unique_keywords": 16,
+          "rows": 17,
+          "exported_at": "2026-09-13T05:56:14Z",
+          "duplicates_ignored": [
+            "researchpeptide.co.uk-organic.Positions-nl-20260912-2026-09-13T05_55_51Z.csv"
+          ],
+          "top_by_volume": [
+            {
+              "keyword": "glutathione peptide",
+              "volume": 70,
+              "position": 22.0
+            },
+            {
+              "keyword": "peptide glutathione",
+              "volume": 70,
+              "position": 41.0
+            },
+            {
+              "keyword": "hexareline peptide apotheek prijs",
+              "volume": 50,
+              "position": 32.0
+            },
+            {
+              "keyword": "peg mgf online",
+              "volume": 40,
+              "position": 2.0
+            },
+            {
+              "keyword": "peg mgf online aankoop",
+              "volume": 40,
+              "position": 9.0
+            },
+            {
+              "keyword": "bestellen frag 176-191 peptide",
+              "volume": 40,
+              "position": 18.0
+            }
+          ]
+        }
+      ],
+      "unique_keywords_across_sources": 19,
+      "priority": "high"
+    },
+    {
+      "market_code": "es",
+      "country_name": "Spain",
+      "evidence_sources": [
+        {
+          "source_domain": "researchpeptides.es",
+          "file": "researchpeptides.es-organic.Positions-es-20260909-2026-09-10T04_09_51Z.csv",
+          "unique_keywords": 45,
+          "rows": 99,
+          "exported_at": "2026-09-10T04:09:51Z",
+          "duplicates_ignored": [],
+          "top_by_volume": [
+            {
+              "keyword": "retatrutide comprar",
+              "volume": 880,
+              "position": 50.0
+            },
+            {
+              "keyword": "agua bacteriostática farmacia",
+              "volume": 260,
+              "position": 53.0
+            },
+            {
+              "keyword": "bacteriostatic water",
+              "volume": 260,
+              "position": 73.0
+            },
+            {
+              "keyword": "pen peptides spain",
+              "volume": 210,
+              "position": 14.0
+            },
+            {
+              "keyword": "comprar peptidos en españa",
+              "volume": 140,
+              "position": 29.0
+            },
+            {
+              "keyword": "peptides eu",
+              "volume": 140,
+              "position": 32.0
+            }
+          ]
+        }
+      ],
+      "unique_keywords_across_sources": 45,
+      "priority": "high"
+    },
+    {
+      "market_code": "se",
+      "country_name": "Sweden",
+      "evidence_sources": [
+        {
+          "source_domain": "researchpeptide.eu",
+          "file": "researchpeptide.eu-organic.Positions-se-20260912-2026-09-13T05_48_02Z.csv",
+          "unique_keywords": 1,
+          "rows": 1,
+          "exported_at": "2026-09-13T05:48:02Z",
+          "duplicates_ignored": [],
+          "top_by_volume": [
+            {
+              "keyword": "peptides eu",
+              "volume": 260,
+              "position": 20.0
+            }
+          ]
+        }
+      ],
+      "unique_keywords_across_sources": 1,
+      "priority": "low"
+    },
+    {
+      "market_code": "uk",
+      "country_name": "United Kingdom",
+      "evidence_sources": [
+        {
+          "source_domain": "researchpeptide.co.uk",
+          "file": "researchpeptide.co.uk-organic.Positions-uk-20260912-2026-09-13T05_54_07Z.csv",
+          "unique_keywords": 219,
+          "rows": 252,
+          "exported_at": "2026-09-13T05:54:07Z",
+          "duplicates_ignored": [],
+          "top_by_volume": [
+            {
+              "keyword": "cjc 1295",
+              "volume": 4400,
+              "position": 42.0
+            },
+            {
+              "keyword": "bacteriostatic water",
+              "volume": 4400,
+              "position": 45.0
+            },
+            {
+              "keyword": "glow peptide",
+              "volume": 3600,
+              "position": 44.0
+            },
+            {
+              "keyword": "retatrutide buy",
+              "volume": 2900,
+              "position": 21.0
+            },
+            {
+              "keyword": "cjc 1295 ipamorelin",
+              "volume": 2900,
+              "position": 45.0
+            },
+            {
+              "keyword": "kpv peptide",
+              "volume": 2900,
+              "position": 48.0
+            }
+          ]
+        }
+      ],
+      "unique_keywords_across_sources": 219,
+      "priority": "high"
+    },
+    {
+      "market_code": "us",
+      "country_name": "United States",
+      "evidence_sources": [
+        {
+          "source_domain": "researchpeptide.co.uk",
+          "file": "researchpeptide.co.uk-organic.Positions-us-20260911-2026-09-13T06_02_17Z.csv",
+          "unique_keywords": 72,
+          "rows": 88,
+          "exported_at": "2026-09-13T06:02:17Z",
+          "duplicates_ignored": [],
+          "top_by_volume": [
+            {
+              "keyword": "glow blend peptide",
+              "volume": 2400,
+              "position": 65.0
+            },
+            {
+              "keyword": "hgh 191aa",
+              "volume": 1900,
+              "position": 8.0
+            },
+            {
+              "keyword": "hgh191aa",
+              "volume": 1000,
+              "position": 1.0
+            },
+            {
+              "keyword": "fragment 176-191",
+              "volume": 880,
+              "position": 66.0
+            },
+            {
+              "keyword": "hospira bacteriostatic water 10 ml",
+              "volume": 480,
+              "position": 19.0
+            },
+            {
+              "keyword": "myostatin inhibitor peptide",
+              "volume": 480,
+              "position": 27.0
+            }
+          ]
+        }
+      ],
+      "unique_keywords_across_sources": 72,
+      "priority": "high"
+    }
+  ],
+  "implementation_plan": {
+    "phase_1_structure": "Create docs/seo/keywords-by-market/{market}.json and a master index keywords-index.json",
+    "phase_2_ingest": "Ingest all canonical exports with market_code + source_domain on every keyword",
+    "phase_3_content": "Wire high-priority markets (UK, ES, NL, DE, US) into researchLinks + locale copy; lighter treatment for FR/SE/AT/AU until volume grows",
+    "phase_4_links": "Homepage hub markets=['eu','es','uk','nl','de'] with locale-specific anchors"
+  }
+}

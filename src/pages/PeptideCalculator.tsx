@@ -1,6 +1,8 @@
 import React from 'react';
 import { Calculator, Sigma } from 'lucide-react';
 import { Reveal } from '../design-system';
+import { LocaleLink } from '../i18n/LocaleLink';
+import { ResearchLinkHub } from '../components/seo/ResearchLinkHub';
 
 function round(value: number) {
   return Math.round(value * 10000) / 10000;
@@ -20,11 +22,11 @@ export default function PeptideCalculator() {
         <Reveal className="text-center mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 text-brand-600 rounded-full text-xs font-black uppercase tracking-widest mb-6">
             <Calculator className="h-4 w-4" />
-            Lab Utility
+            Calculadora de péptidos · Lab utility
           </div>
-          <h1>Peptide Calculator</h1>
+          <h1>Peptide Calculator / Calculadora de péptidos</h1>
           <p className="text-gray-500 mt-4 font-medium italic max-w-3xl mx-auto">
-            Quick reconstitution and aliquot-volume estimates for laboratory planning. Validate all values against your SOP and batch documentation. Not for human or veterinary use.
+            Free peptide calculator for European laboratories — quick reconstitution and aliquot-volume estimates with bacteriostatic water or other validated diluents. Validate all values against your SOP and batch documentation. Research use only; not for human or veterinary use.
           </p>
         </Reveal>
 
@@ -89,12 +91,18 @@ export default function PeptideCalculator() {
                 <p className="text-2xl font-black text-brand-300">{round(requiredVolumeMl)} mL</p>
               </div>
               <p className="text-gray-400 leading-relaxed">
-                For laboratory planning and preparation only. Confirm final concentration and aliquot volumes against method-specific requirements before experimental use.
+                For laboratory planning and preparation only. Confirm final concentration and aliquot volumes against method-specific requirements before experimental use. Pair with{' '}
+                <LocaleLink to="/product/bacteriostatic-water" className="text-brand-300 hover:text-white underline-offset-2 hover:underline">
+                  bacteriostatic water
+                </LocaleLink>{' '}
+                from the Research Peptides EU catalog.
               </p>
             </div>
           </Reveal>
         </div>
       </div>
+
+      <ResearchLinkHub variant="compact" markets={['eu', 'es']} />
     </div>
   );
 }

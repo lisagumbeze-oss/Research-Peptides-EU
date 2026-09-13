@@ -4,6 +4,7 @@ import { LocaleLink } from '../i18n/LocaleLink';
 import { BookOpen, Sparkles, ArrowRight, Clock, User } from 'lucide-react';
 import { Reveal } from '../design-system';
 import { staggerDelay } from '../design-system/motion';
+import { ResearchLinkHub } from '../components/seo/ResearchLinkHub';
 
 export default function Blog() {
   const [posts, setPosts] = useState<any[]>([]);
@@ -113,6 +114,8 @@ export default function Blog() {
            </div>
          )}
       </main>
+
+      <ResearchLinkHub variant="compact" markets={['eu', 'es']} />
     </div>
   );
 }

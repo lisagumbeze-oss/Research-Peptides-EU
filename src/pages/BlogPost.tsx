@@ -4,7 +4,7 @@ import { LocaleLink } from '../i18n/LocaleLink';
 import { supabase } from '../supabase';
 import { BookOpen, ArrowLeft, Clock, Share2, Tag, Calendar } from 'lucide-react';
 import { Reveal } from '../design-system';
-
+import { ResearchLinkHub } from '../components/seo/ResearchLinkHub';
 import { usePageSeo } from '../seo/SeoProvider';
 
 export default function BlogPost() {
@@ -132,14 +132,24 @@ export default function BlogPost() {
         {/* Footer Navigation */}
         <footer className="mt-24 pt-16 border-t border-gray-100 text-center">
            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-8">End of Scientific Journal Entry</p>
-           <LocaleLink 
-             to="/blog" 
-             className="inline-flex items-center justify-center px-10 py-5 bg-gray-900 text-white rounded-[2rem] font-black uppercase tracking-widest text-[10px] hover:bg-brand-600 hover:shadow-2xl hover:shadow-glow transition-all motion-safe:active:scale-95"
-           >
-              Return to All Research
-           </LocaleLink>
+           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+             <LocaleLink 
+               to="/blog" 
+               className="inline-flex items-center justify-center px-10 py-5 bg-gray-900 text-white rounded-[2rem] font-black uppercase tracking-widest text-[10px] hover:bg-brand-600 hover:shadow-2xl hover:shadow-glow transition-all motion-safe:active:scale-95"
+             >
+                Return to All Research
+             </LocaleLink>
+             <LocaleLink
+               to="/shop"
+               className="inline-flex items-center justify-center px-8 py-4 border border-gray-200 text-gray-800 rounded-[2rem] font-black uppercase tracking-widest text-[10px] hover:border-brand-400 hover:text-brand-600 transition-all"
+             >
+                Buy research peptides EU
+             </LocaleLink>
+           </div>
         </footer>
       </main>
+
+      <ResearchLinkHub variant="compact" markets={['eu', 'es']} showOutbound={false} />
     </article>
   );
 }

@@ -1,4 +1,5 @@
 import { lazy, Suspense, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { HeroSection } from '../components/home/HeroSection';
 import { FeaturedProductsSection } from '../components/home/FeaturedProductsSection';
 import { NewestProductsSection } from '../components/home/NewestProductsSection';
@@ -6,8 +7,11 @@ import { BestsellerProductsSection } from '../components/home/BestsellerProducts
 import { CategoryProductSections } from '../components/home/CategoryProductSections';
 import { HomeSectionFallback } from '../components/home/HomeSectionFallback';
 import { LazyWhenVisible } from '../components/LazyWhenVisible';
+import { ResearchLinkHub } from '../components/seo/ResearchLinkHub';
 import { loadHomeCatalog } from '../lib/homeCatalog';
 import { usePageSeo } from '../seo/SeoProvider';
+import { descriptionForLocale, titleForPath } from '../seo/pageTitles';
+import type { LocaleCode } from '../i18n/locales';
 
 void loadHomeCatalog();
 
@@ -52,10 +56,13 @@ function DeferredSection({
 }
 
 export default function Home() {
+  const { i18n } = useTranslation();
+  const locale = i18n.language as LocaleCode;
+
   usePageSeo({
-    title: "Research Peptides EU | Premium Research Peptides for European Laboratories",
-    description: "Premium research-grade peptides and compounds for European laboratories. Third-party tested, EU distribution, next-day shipping available.",
-    canonicalPath: "/",
+    title: titleForPath('/', locale),
+    description: descriptionForLocale(locale),
+    canonicalPath: '/',
   });
 
   return (
@@ -77,6 +84,9 @@ export default function Home() {
       </DeferredSection>
       <DeferredSection minHeight="min-h-[280px]">
         <CustomerExperienceSection />
+      </DeferredSection>
+      <DeferredSection minHeight="min-h-[420px]">
+        <ResearchLinkHub variant="full" markets={['eu', 'es', 'uk', 'us', 'nl', 'de', 'fr', 'at', 'se', 'au']} />
       </DeferredSection>
       <DeferredSection minHeight="min-h-[200px]">
         <CtaSection />

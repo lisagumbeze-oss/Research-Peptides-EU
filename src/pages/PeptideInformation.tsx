@@ -1,6 +1,8 @@
 import { BookText, FlaskConical, TestTube2 } from 'lucide-react';
 import { Reveal } from '../design-system';
 import { staggerDelay } from '../design-system/motion';
+import { LocaleLink } from '../i18n/LocaleLink';
+import { ResearchLinkHub } from '../components/seo/ResearchLinkHub';
 
 const infoArticles = [
   { title: 'Intro to Peptides', readTime: '8 min', summary: 'Core terminology, structure basics, and key lab concepts for handling peptide compounds.' },
@@ -20,7 +22,15 @@ export default function PeptideInformation() {
           </div>
           <h1>Peptide Information</h1>
           <p className="text-gray-500 mt-4 font-medium italic max-w-3xl mx-auto">
-            Structured learning resources for peptide chemistry, synthesis, purification, and analytical interpretation in research settings.
+            Structured learning resources for peptide chemistry, synthesis, purification, and analytical interpretation — written for Research Peptides Europe laboratory teams across Spain and the EU. See also the{' '}
+            <LocaleLink to="/shop" className="text-brand-600 not-italic font-semibold hover:underline">
+              research peptides EU catalog
+            </LocaleLink>
+            {' '}and{' '}
+            <LocaleLink to="/peptide-calculator" className="text-brand-600 not-italic font-semibold hover:underline">
+              peptide calculator
+            </LocaleLink>
+            .
           </p>
         </Reveal>
 
@@ -57,6 +67,8 @@ export default function PeptideInformation() {
           </div>
         </Reveal>
       </div>
+
+      <ResearchLinkHub variant="compact" markets={['eu', 'es']} />
     </div>
   );
 }

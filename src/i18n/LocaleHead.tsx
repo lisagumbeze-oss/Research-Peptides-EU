@@ -5,7 +5,7 @@ import { BRAND_NAME } from '../config/brand';
 import { supportedLocales } from './locales';
 import { pathWithLocale, stripLocaleFromPath } from './routing';
 import { useSeoOverride } from '../seo/SeoProvider';
-import { DEFAULT_DESCRIPTION, titleForPath } from '../seo/pageTitles';
+import { descriptionForLocale, titleForPath } from '../seo/pageTitles';
 import { organizationJsonLd, siteOrigin, websiteJsonLd } from '../seo/structuredData';
 import { JsonLd } from '../components/seo/JsonLd';
 import type { LocaleCode } from './locales';
@@ -88,7 +88,7 @@ export function LocaleHead() {
     document.documentElement.lang = locale;
 
     const title = override?.title ?? titleForPath(path, locale);
-    const description = override?.description ?? DEFAULT_DESCRIPTION;
+    const description = override?.description ?? descriptionForLocale(locale);
     const canonicalPath = override?.canonicalPath ?? path;
     const canonical = `${origin}${pathWithLocale(locale, canonicalPath === '/' ? '/' : canonicalPath)}`;
 

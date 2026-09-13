@@ -1,0 +1,128 @@
+{
+  "market_code": "de",
+  "country_name": "Germany",
+  "brand_target": "Research Peptides EU",
+  "evidence_sources": [
+    {
+      "evidence_source_domain": "researchpeptide.eu",
+      "source_file": "researchpeptide.eu-organic.Positions-de-20260912-2026-09-13T05_47_09Z.csv",
+      "rows": 2,
+      "unique_keywords": 2
+    },
+    {
+      "evidence_source_domain": "researchpeptide.co.uk",
+      "source_file": "researchpeptide.co.uk-organic.Positions-de-20260912-2026-09-13T06_00_00Z.csv",
+      "rows": 7,
+      "unique_keywords": 7
+    }
+  ],
+  "unique_keyword_count": 8,
+  "target_count": 8,
+  "skipped_count": 0,
+  "keywords": [
+    {
+      "keyword": "hgh fragment 176-191",
+      "market_code": "de",
+      "position": 52.0,
+      "volume": 260,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "fragment 176-191",
+      "market_code": "de",
+      "position": 69.0,
+      "volume": 260,
+      "kd": 25,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-fragment-176-191-5mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hexarelin",
+      "market_code": "de",
+      "position": 2.0,
+      "volume": 140,
+      "kd": 47,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hexarelin-2mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptides hcg",
+      "market_code": "de",
+      "position": 3.0,
+      "volume": 140,
+      "kd": 10,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hcg-human-chorionic-gonadotropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "research chemical peptides",
+      "market_code": "de",
+      "position": 48.0,
+      "volume": 110,
+      "kd": 63,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptide.eu/",
+      "evidence_source_domains": [
+        "researchpeptide.eu"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "igf 1 des",
+      "market_code": "de",
+      "position": 3.0,
+      "volume": 90,
+      "kd": 16,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/igf-1-des-1mg/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "hgh 191aa",
+      "market_code": "de",
+      "position": 1.0,
+      "volume": 70,
+      "kd": 28,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/product/hgh-191aasomatropin/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptide for research",
+      "market_code": "de",
+      "position": 33.0,
+      "volume": 70,
+      "kd": 54,
+      "intent": "informational",
+      "best_url": "https://researchpeptide.co.uk/",
+      "evidence_source_domains": [
+        "researchpeptide.co.uk"
+      ],
+      "status": "target"
+    }
+  ]
+}

@@ -1,0 +1,691 @@
+{
+  "source": "researchpeptides.es Semrush organic positions ES 2026-09-09",
+  "source_file": "researchpeptides.es-organic.Positions-es-20260909-2026-09-10T04_09_51Z.csv",
+  "market_notes": [
+    "Primary evidence market: Spain (Google ES).",
+    "Brand target remains whole of Europe — keep EU/Europe modifiers and ship-to-EU framing on all locales.",
+    "Spain geo modifiers support ES demand without replacing EU positioning.",
+    "Research-use-only framing required; avoid human dosing / medical claims."
+  ],
+  "unique_keyword_count": 45,
+  "keywords": [
+    {
+      "keyword": "retatrutide comprar",
+      "position": 50.0,
+      "volume": 880,
+      "kd": 8,
+      "intent": "transactional",
+      "best_url": "https://researchpeptides.es/producto/semaglutide",
+      "ranking_urls": [
+        "https://researchpeptides.es/producto/semaglutide"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "agua bacteriostática farmacia",
+      "position": 53.0,
+      "volume": 260,
+      "kd": 5,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/nl/product/bacteriostatic-water",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/nl/product/bacteriostatic-water"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bacteriostatic water",
+      "position": 73.0,
+      "volume": 260,
+      "kd": 18,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/de/product/bacteriostatic-water",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/de/product/bacteriostatic-water"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "pen peptides spain",
+      "position": 14.0,
+      "volume": 210,
+      "kd": 34,
+      "intent": "navigational",
+      "best_url": "https://researchpeptides.es/",
+      "ranking_urls": [
+        "https://researchpeptides.es/"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "comprar peptidos en españa",
+      "position": 29.0,
+      "volume": 140,
+      "kd": 4,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/sk",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/sk"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptides eu",
+      "position": 32.0,
+      "volume": 140,
+      "kd": 12,
+      "intent": "informational",
+      "best_url": "https://researchpeptides.es/sl",
+      "ranking_urls": [
+        "https://researchpeptides.es/sl"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide barato",
+      "position": 58.0,
+      "volume": 140,
+      "kd": 7,
+      "intent": "commercial",
+      "best_url": "https://www.researchpeptides.es/es/product/semaglutide",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/product/semaglutide"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "original acetato de sermorelina",
+      "position": 78.0,
+      "volume": 140,
+      "kd": 4,
+      "intent": "informational",
+      "best_url": "https://researchpeptides.es/producto/ghrp-2-pralmorelin-5mg",
+      "ranking_urls": [
+        "https://researchpeptides.es/producto/ghrp-2-pralmorelin-5mg"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "péptidos españa",
+      "position": 33.0,
+      "volume": 110,
+      "kd": 7,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/hu",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hu"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptdes",
+      "position": 42.0,
+      "volume": 110,
+      "kd": 27,
+      "intent": "informational",
+      "best_url": "https://researchpeptides.es/",
+      "ranking_urls": [
+        "https://researchpeptides.es/"
+      ],
+      "status": "noise"
+    },
+    {
+      "keyword": "precio cagrilintide",
+      "position": 70.0,
+      "volume": 110,
+      "kd": 5,
+      "intent": "transactional",
+      "best_url": "https://researchpeptides.es/producto/semaglutide",
+      "ranking_urls": [
+        "https://researchpeptides.es/producto/semaglutide"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptidasa",
+      "position": 76.0,
+      "volume": 110,
+      "kd": 37,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/es/peptide-information",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/peptide-information"
+      ],
+      "status": "noise"
+    },
+    {
+      "keyword": "péptidos comprar en linea",
+      "position": 34.0,
+      "volume": 90,
+      "kd": 7,
+      "intent": "transactional",
+      "best_url": "https://www.researchpeptides.es/hr/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hr/shop"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cagrilintide venta",
+      "position": 36.0,
+      "volume": 90,
+      "kd": 4,
+      "intent": "commercial",
+      "best_url": "https://www.researchpeptides.es/es/product/cagrilintide-semaglutide-blend",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/product/cagrilintide-semaglutide-blend"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "comprar cagrilintide",
+      "position": 45.0,
+      "volume": 90,
+      "kd": 4,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/es/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/shop"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide spain",
+      "position": 46.0,
+      "volume": 90,
+      "kd": 6,
+      "intent": "commercial, informational",
+      "best_url": "https://www.researchpeptides.es/hr/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hr/shop"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cagrilintide precio",
+      "position": 49.0,
+      "volume": 90,
+      "kd": 5,
+      "intent": "transactional",
+      "best_url": "https://www.researchpeptides.es/es/product/cagrilintide-semaglutide-blend",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/product/cagrilintide-semaglutide-blend"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "retatrutide buy",
+      "position": 54.0,
+      "volume": 90,
+      "kd": 20,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/hr/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hr/shop"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "folistatina comprar",
+      "position": 60.0,
+      "volume": 90,
+      "kd": 7,
+      "intent": "transactional",
+      "best_url": "https://www.researchpeptides.es/es/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/shop"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "comprar original cagrilintide",
+      "position": 66.0,
+      "volume": 90,
+      "kd": 1,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/es/product/cagrilintide-semaglutide-blend",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/product/cagrilintide-semaglutide-blend"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "follistatin venta",
+      "position": 74.0,
+      "volume": 90,
+      "kd": 4,
+      "intent": "commercial",
+      "best_url": "https://www.researchpeptides.es/es/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/shop"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "cagrilintide barato",
+      "position": 84.0,
+      "volume": 90,
+      "kd": 4,
+      "intent": "commercial",
+      "best_url": "https://www.researchpeptides.es/es/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/shop"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "24peptides",
+      "position": 7.0,
+      "volume": 70,
+      "kd": 8,
+      "intent": "navigational",
+      "best_url": "https://researchpeptides.es/en/product/mazdutide",
+      "ranking_urls": [
+        "https://researchpeptides.es/en/product/mazdutide"
+      ],
+      "status": "noise"
+    },
+    {
+      "keyword": "lipofectamine",
+      "position": 33.0,
+      "volume": 70,
+      "kd": 30,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/es/product/hcg",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/product/hcg"
+      ],
+      "status": "noise"
+    },
+    {
+      "keyword": "peptids",
+      "position": 38.0,
+      "volume": 70,
+      "kd": 23,
+      "intent": "informational",
+      "best_url": "https://researchpeptides.es/",
+      "ranking_urls": [
+        "https://researchpeptides.es/"
+      ],
+      "status": "noise"
+    },
+    {
+      "keyword": "peptidr",
+      "position": 48.0,
+      "volume": 70,
+      "kd": 45,
+      "intent": "informational",
+      "best_url": "https://researchpeptides.es/",
+      "ranking_urls": [
+        "https://researchpeptides.es/"
+      ],
+      "status": "noise"
+    },
+    {
+      "keyword": "igf-1 comprar",
+      "position": 52.0,
+      "volume": 70,
+      "kd": 7,
+      "intent": "transactional",
+      "best_url": "https://www.researchpeptides.es/es/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/shop"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "europa peptide",
+      "position": 15.0,
+      "volume": 50,
+      "kd": 9,
+      "intent": "informational, navigational",
+      "best_url": "https://www.researchpeptides.es/ro/about-us",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/ro/about-us"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "research peptides-europe",
+      "position": 29.0,
+      "volume": 50,
+      "kd": 45,
+      "intent": "informational",
+      "best_url": "https://researchpeptides.es/",
+      "ranking_urls": [
+        "https://researchpeptides.es/"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "calculadora peptidos",
+      "position": 30.0,
+      "volume": 50,
+      "kd": 7,
+      "intent": "commercial",
+      "best_url": "https://www.researchpeptides.es/cs/peptide-calculator",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/cs/peptide-calculator"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptidos comprar españa",
+      "position": 30.0,
+      "volume": 50,
+      "kd": 3,
+      "intent": "transactional",
+      "best_url": "https://www.researchpeptides.es/hu",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hu"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "péptidos inyectables comprar",
+      "position": 40.0,
+      "volume": 50,
+      "kd": 7,
+      "intent": "transactional",
+      "best_url": "https://www.researchpeptides.es/ro",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/ro"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "pepties",
+      "position": 43.0,
+      "volume": 50,
+      "kd": 52,
+      "intent": "informational",
+      "best_url": "https://researchpeptides.es/",
+      "ranking_urls": [
+        "https://researchpeptides.es/"
+      ],
+      "status": "noise"
+    },
+    {
+      "keyword": "comprar retatrutide en españa",
+      "position": 46.0,
+      "volume": 50,
+      "kd": 4,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/hu/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hu/shop"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "agua bacteriostática para inyección",
+      "position": 47.0,
+      "volume": 50,
+      "kd": 3,
+      "intent": "informational",
+      "best_url": "https://researchpeptides.es/nl/product/bacteriostatic-water-0-9-benzyl-alcohol-10ml-hospira-injection-usp",
+      "ranking_urls": [
+        "https://researchpeptides.es/nl/product/bacteriostatic-water-0-9-benzyl-alcohol-10ml-hospira-injection-usp"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "bacteriostatic water sterile",
+      "position": 50.0,
+      "volume": 50,
+      "kd": 31,
+      "intent": "informational",
+      "best_url": "https://researchpeptides.es/nl/product/bacteriostatic-water-0-9-benzyl-alcohol-10ml-hospira-injection-usp",
+      "ranking_urls": [
+        "https://researchpeptides.es/nl/product/bacteriostatic-water-0-9-benzyl-alcohol-10ml-hospira-injection-usp"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "estreptavidina",
+      "position": 53.0,
+      "volume": 50,
+      "kd": 20,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/es/peptide-information",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/peptide-information"
+      ],
+      "status": "noise"
+    },
+    {
+      "keyword": "cagrilintide peptide",
+      "position": 54.0,
+      "volume": 50,
+      "kd": 17,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/es/product/cagrilintide-semaglutide-blend",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/es/product/cagrilintide-semaglutide-blend"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "water bacteriostatic",
+      "position": 57.0,
+      "volume": 50,
+      "kd": 48,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/de/product/bacteriostatic-water",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/de/product/bacteriostatic-water"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptides buy",
+      "position": 62.0,
+      "volume": 50,
+      "kd": 58,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/hu",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hu"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "peptides comprar",
+      "position": 9.0,
+      "volume": 40,
+      "kd": 8,
+      "intent": "transactional",
+      "best_url": "https://www.researchpeptides.es/hu",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hu"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "comprar péptidos españa",
+      "position": 25.0,
+      "volume": 40,
+      "kd": 3,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/hu",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hu"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "comprar retratutida",
+      "position": 51.0,
+      "volume": 40,
+      "kd": 2,
+      "intent": "transactional",
+      "best_url": "https://www.researchpeptides.es/hr/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hr/shop"
+      ],
+      "status": "typo_variant"
+    },
+    {
+      "keyword": "dónde comprar cagrilintide",
+      "position": 54.0,
+      "volume": 40,
+      "kd": 6,
+      "intent": "transactional",
+      "best_url": "https://www.researchpeptides.es/hr/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hr/shop"
+      ],
+      "status": "target"
+    },
+    {
+      "keyword": "buy retatrutide",
+      "position": 58.0,
+      "volume": 40,
+      "kd": 13,
+      "intent": "informational",
+      "best_url": "https://www.researchpeptides.es/hr/shop",
+      "ranking_urls": [
+        "https://www.researchpeptides.es/hr/shop"
+      ],
+      "status": "target"
+    }
+  ],
+  "clusters": [
+    {
+      "id": "spain-buy-peptides",
+      "primary": "comprar peptidos en españa",
+      "secondary": [
+        "péptidos españa",
+        "peptidos comprar españa",
+        "comprar péptidos españa",
+        "péptidos comprar en linea",
+        "peptides comprar"
+      ],
+      "pages": [
+        "/es",
+        "/es/shop",
+        "/blog/research-peptides-spain-europe"
+      ],
+      "europe_bridge": [
+        "peptides eu",
+        "research peptides-europe",
+        "europa peptide"
+      ]
+    },
+    {
+      "id": "retatrutide",
+      "primary": "retatrutide comprar",
+      "secondary": [
+        "comprar retatrutide en españa",
+        "retatrutide spain",
+        "retatrutide buy",
+        "buy retatrutide",
+        "retatrutide barato",
+        "pen peptides spain"
+      ],
+      "pages": [
+        "/es/shop",
+        "/product/retatrutide-glp-3",
+        "/product/vio-labs-retatrutide-40mg-3ml-prefilled-pen",
+        "/blog/retatrutide-research-peptide-eu"
+      ],
+      "europe_bridge": [
+        "peptides eu",
+        "research peptides-europe"
+      ]
+    },
+    {
+      "id": "bacteriostatic-water",
+      "primary": "agua bacteriostática farmacia",
+      "secondary": [
+        "bacteriostatic water",
+        "agua bacteriostática para inyección",
+        "bacteriostatic water sterile",
+        "water bacteriostatic"
+      ],
+      "pages": [
+        "/product/bacteriostatic-water-0-9-benzyl-alcohol-30ml",
+        "/blog/reconstitute-research-peptides",
+        "/es/peptide-calculator"
+      ],
+      "europe_bridge": [
+        "peptides eu"
+      ]
+    },
+    {
+      "id": "cagrilintide",
+      "primary": "comprar cagrilintide",
+      "secondary": [
+        "cagrilintide precio",
+        "precio cagrilintide",
+        "cagrilintide venta",
+        "cagrilintide barato",
+        "dónde comprar cagrilintide",
+        "comprar original cagrilintide",
+        "cagrilintide peptide"
+      ],
+      "pages": [
+        "/es/shop",
+        "/blog/research-peptides-spain-europe"
+      ],
+      "europe_bridge": [
+        "peptides eu"
+      ],
+      "note": "No dedicated seed PDP yet — target shop + blog until catalog SKU exists."
+    },
+    {
+      "id": "follistatin-igf",
+      "primary": "igf-1 comprar",
+      "secondary": [
+        "folistatina comprar",
+        "follistatin venta"
+      ],
+      "pages": [
+        "/product/igf-1-lr3-1mg",
+        "/es/shop"
+      ],
+      "europe_bridge": [
+        "peptides eu"
+      ]
+    },
+    {
+      "id": "eu-brand",
+      "primary": "peptides eu",
+      "secondary": [
+        "research peptides-europe",
+        "europa peptide",
+        "peptides buy"
+      ],
+      "pages": [
+        "/",
+        "/about-us",
+        "/es",
+        "/en"
+      ],
+      "europe_bridge": [
+        "peptides eu",
+        "research peptides-europe"
+      ]
+    },
+    {
+      "id": "calculator",
+      "primary": "calculadora peptidos",
+      "secondary": [],
+      "pages": [
+        "/peptide-calculator",
+        "/es/peptide-calculator"
+      ],
+      "europe_bridge": []
+    }
+  ],
+  "implementation_surfaces": {
+    "keyword_list": "docs/seo/keywords-spain-europe.json",
+    "blog_seed": "scripts/seed-blogs.ts",
+    "product_seed": "src/data/seedCatalog.ts",
+    "es_home_shop": [
+      "src/i18n/locales/es/home.json",
+      "src/i18n/locales/es/shop.json"
+    ],
+    "page_titles": "src/seo/pageTitles.ts"
+  }
+}

@@ -27,7 +27,7 @@ export function CtaSection() {
                   className: 'relative z-10 w-full sm:w-auto shrink-0 whitespace-nowrap',
                 })}
               >
-                Shop catalog
+                Shop research peptides EU
                 <ArrowRight className="h-4 w-4 shrink-0 motion-safe:transition-transform motion-safe:duration-200 group-hover:translate-x-0.5" />
               </LocaleLink>
               <Button variant="ghost" size="lg" onClick={openWizard} className="gap-2 border border-white/15 whitespace-nowrap">
@@ -35,6 +35,21 @@ export function CtaSection() {
                 Browse by research area
               </Button>
             </div>
+            <p className="mt-6 text-xs text-silver-400 max-w-lg mx-auto leading-relaxed">
+              Also see{' '}
+              <LocaleLink to="/about-us" className="text-brand-300 hover:text-white underline-offset-2 hover:underline">
+                Research Peptides Europe
+              </LocaleLink>
+              ,{' '}
+              <LocaleLink to="/blog/research-peptides-spain-europe" className="text-brand-300 hover:text-white underline-offset-2 hover:underline">
+                peptides for Spain and Europe
+              </LocaleLink>
+              , and the{' '}
+              <LocaleLink to="/faq" className="text-brand-300 hover:text-white underline-offset-2 hover:underline">
+                researcher FAQ
+              </LocaleLink>
+              .
+            </p>
           </Reveal>
         </GlowPanel>
       </Container>
