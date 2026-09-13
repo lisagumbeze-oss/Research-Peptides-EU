@@ -25,6 +25,7 @@ import { RouteChunkErrorBoundary } from './RouteChunkErrorBoundary';
 import { postNewsletterSubscribe } from '../lib/transactionalEmailApi';
 import { JsonLd } from './seo/JsonLd';
 import { overlayMotion } from '../design-system/motion';
+import { SITE_URL } from '../config/brand';
 
 function LayoutShell() {
   const { user, profile, setUser } = useAuthStore();
@@ -95,25 +96,26 @@ function LayoutShell() {
     }
   };
 
+  const origin = SITE_URL.replace(/\/+$/, '');
   const globalSchemas = [
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Research Peptides EU",
-      "url": "https://researchpeptide.eu",
+      "url": origin,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://researchpeptide.eu/logo.png"
+        "url": `${origin}/logo.png`
       }
     },
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "url": "https://researchpeptide.eu",
+      "url": origin,
       "name": "Research Peptides EU",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://researchpeptide.eu/search?q={search_term_string}",
+        "target": `${origin}/search?q={search_term_string}`,
         "query-input": "required name=search_term_string"
       }
     },
@@ -121,7 +123,7 @@ function LayoutShell() {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Research Peptides EU",
-      "url": "https://researchpeptide.eu"
+      "url": origin
     }
   ];
 

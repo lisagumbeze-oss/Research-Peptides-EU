@@ -2,6 +2,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
+import { SITE_URL } from '../config/brand';
+
 interface SEOProps {
   title: string;
   description: string;
@@ -15,10 +17,11 @@ export function SEO({
   description,
   canonicalPath,
   type = 'website',
-  image = 'https://researchpeptide.eu/og-image.jpg',
+  image = `${SITE_URL.replace(/\/+$/, '')}/og-image.jpg`,
 }: SEOProps) {
   const location = useLocation();
-  const currentUrl = `https://researchpeptide.eu${canonicalPath || location.pathname}`;
+  const origin = SITE_URL.replace(/\/+$/, '');
+  const currentUrl = `${origin}${canonicalPath || location.pathname}`;
 
   return (
     <Helmet>

@@ -22,4 +22,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://researchpeptide.eu/sitemap.xml
+Sitemap: https://www.researchpeptide.eu/sitemap.xml

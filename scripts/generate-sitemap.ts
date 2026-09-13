@@ -2,21 +2,51 @@
  * Writes public/sitemap.xml with locale hreflang alternates (+ product URLs from Supabase).
  *
  *   npm run sitemap:generate
+ *
+ * Canonical host must match production redirects (apex → www) or Google Search Console
+ * reports "Sitemap could not be read" / discovers 0 URLs.
  */
 import 'dotenv/config';
 import fs from 'fs';
 import path from 'path';
 import { createClient } from '@supabase/supabase-js';
 
-const SITE_ORIGIN = (process.env.VITE_SITE_URL || 'https://researchpeptide.eu').replace(/\/+$/, '');
+/** Prefer www — production redirects researchpeptide.eu → www.researchpeptide.eu */
+function canonicalOrigin(raw: string): string {
+  let origin = raw.replace(/\/+$/, '');
+  origin = origin.replace('://researchpeptide.eu', '://www.researchpeptide.eu');
+  return origin;
+}
 
-const LOCALES = ['en', 'nl', 'de', 'fr'] as const;
+const SITE_ORIGIN = canonicalOrigin(process.env.VITE_SITE_URL || 'https://www.researchpeptide.eu');
+
+/** Keep in sync with src/i18n/locales.ts supportedLocales */
+const LOCALES = [
+  'en',
+  'nl',
+  'fr',
+  'de',
+  'es',
+  'it',
+  'pt',
+  'hr',
+  'pl',
+  'ro',
+  'cs',
+  'da',
+  'sv',
+  'fi',
+  'el',
+  'hu',
+  'sk',
+  'sl',
+  'bg',
+] as const;
 
 const STATIC_PATHS = [
   '/',
   '/shop',
   '/categories',
-  '/search',
   '/faq',
   '/shipping',
   '/contact',
@@ -45,25 +75,25 @@ function escapeXml(value: string) {
     .replace(/"/g, '&quot;');
 }
 
-function hreflangLinks(path: string): string {
+function hreflangLinks(pathName: string): string {
   const lines = LOCALES.map(
     (locale) =>
-      `    <xhtml:link rel="alternate" hreflang="${locale}" href="${escapeXml(loc(locale, path))}" />`,
+      `    <xhtml:link rel="alternate" hreflang="${locale}" href="${escapeXml(loc(locale, pathName))}" />`,
   );
   lines.push(
-    `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(loc('en', path))}" />`,
+    `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(loc('en', pathName))}" />`,
   );
   return lines.join('\n');
 }
 
-function urlEntry(path: string, priority: string, changefreq: string) {
+function urlEntry(pathName: string, priority: string, changefreq: string) {
   const lastmod = new Date().toISOString().slice(0, 10);
   return `  <url>
-    <loc>${escapeXml(loc('en', path))}</loc>
+    <loc>${escapeXml(loc('en', pathName))}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
-${hreflangLinks(path)}
+${hreflangLinks(pathName)}
   </url>`;
 }
 
@@ -79,13 +109,13 @@ async function productPaths(): Promise<string[]> {
     .from('products')
     .select('slug')
     .not('slug', 'is', null)
-    .limit(500);
+    .limit(2000);
   if (error) {
     console.warn('Product fetch failed:', error.message);
     return [];
   }
   return (data ?? [])
-    .map((row) => (row.slug ? `/product/${row.slug}` : null))
+    .map((row) => (row.slug ? `/product/${String(row.slug).trim()}` : null))
     .filter((p): p is string => Boolean(p));
 }
 
@@ -115,7 +145,7 @@ async function main() {
   }
 
   for (const p of blogRoutes) {
-    entries.push(urlEntry(p, '0.7', 'weekly'));
+    entries.push(urlEntry(p, '0.6', 'weekly'));
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -126,7 +156,9 @@ ${entries.join('\n')}
 
   const out = path.join(process.cwd(), 'public', 'sitemap.xml');
   fs.writeFileSync(out, xml, 'utf8');
-  console.log(`Wrote ${entries.length} URL groups (${LOCALES.length} locales each) to ${out}`);
+  console.log(
+    `Wrote ${entries.length} URL groups (${LOCALES.length} locales + x-default) to ${out} using origin ${SITE_ORIGIN}`,
+  );
 }
 
 main().catch((err) => {

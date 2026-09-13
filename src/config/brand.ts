@@ -7,7 +7,7 @@ export const SUPPORT_EMAIL =
   import.meta.env.VITE_SUPPORT_EMAIL || 'info@researchpeptide.eu';
 
 export const SITE_URL =
-  import.meta.env.VITE_SITE_URL || 'https://researchpeptide.eu';
+  import.meta.env.VITE_SITE_URL || 'https://www.researchpeptide.eu';
 
 export const LEGAL_ENTITY = 'Research Peptides EU B.V.';
 export const HQ_LOCATION = 'Markt 34, 5281 AV Boxtel, North Brabant, Netherlands';
