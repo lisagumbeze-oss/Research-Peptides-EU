@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { LocaleLink } from '../i18n/LocaleLink';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { useTranslation } from 'react-i18next';
-import { Star } from 'lucide-react';
 import { supabase } from '../supabase';
 import { useCartStore } from '../store/useCartStore';
 import { useAuthStore } from '../store/useAuthStore';
@@ -16,6 +15,7 @@ import { ProductGallery } from '../components/product-detail/ProductGallery';
 import { ProductPurchasePanel } from '../components/product-detail/ProductPurchasePanel';
 import { ProductDescriptionCards } from '../components/product-detail/ProductDescriptionCards';
 import { ProductRecommendations } from '../components/product-detail/ProductRecommendations';
+import { StarRow } from '../components/products/ProductCardRating';
 import { useProductCatalogActions } from '../hooks/useProductCatalogActions';
 import type { CatalogProduct } from '../components/products/ProductCard';
 import { usePageSeo } from '../seo/SeoProvider';
@@ -26,23 +26,6 @@ import { productDescriptionSummary } from '../lib/parseProductDescription';
 import { productDisplaySocialProof } from '../lib/productDisplaySocialProof';
 import { findCachedProduct, rememberProduct } from '../lib/catalogCache';
 import { stripLocaleFromPath } from '../i18n/routing';
-
-const STATIC_REVIEWS = [
-  {
-    name: 'Dr. Alexander V.',
-    role: 'Clinical Research · EU',
-    content:
-      'Purity levels exceeded our laboratory requirements. Vacuum sealing remained intact during EU transit.',
-    date: '2 days ago',
-  },
-  {
-    name: 'Sarah M.',
-    role: 'Biotech Analyst · NL',
-    content:
-      'Structural integrity of the lyophilized powder was excellent. Reconstitution was immediate and clear.',
-    date: '1 week ago',
-  },
-];
 
 export default function ProductDetails() {
   const { t, i18n } = useTranslation('product');
@@ -284,19 +267,22 @@ export default function ProductDetails() {
               <h2 className="text-h2 font-display font-bold text-navy-950">{t('reviews.title')}</h2>
             </div>
             <div className="flex items-center gap-3 p-4 rounded-2xl bg-mist-50 border border-brand-50">
-              <span className="text-sm font-bold text-navy-950">{t('reviews.ratingLabel')}</span>
-              <div className="flex text-warning">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-current" />
-                ))}
-              </div>
+              <span className="text-sm font-bold text-navy-950 tabular-nums">
+                {socialProof.rating.toFixed(1)} / 5.0
+              </span>
+              <StarRow
+                rating={socialProof.rating}
+                starClassName="h-4 w-4"
+                filledClassName="text-warning"
+                emptyClassName="text-brand-100"
+              />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {STATIC_REVIEWS.map((review) => (
+            {socialProof.reviews.map((review) => (
               <blockquote
-                key={review.name}
+                key={`${review.name}-${review.date}-${review.content.slice(0, 24)}`}
                 className="p-6 rounded-2xl bg-mist-50 border border-brand-50 text-steel-600 text-sm leading-relaxed"
               >
                 <p className="italic mb-4">&ldquo;{review.content}&rdquo;</p>

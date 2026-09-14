@@ -7,6 +7,7 @@ import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { localeToIntl } from '../lib/currency';
 import { isLocaleCode, type LocaleCode } from '../i18n/locales';
 import { toastMotion } from '../design-system/motion';
+import { productPath } from '../lib/productUrl';
 
 /** English country labels in `europeanLocations` → ISO 3166-1 alpha-2 */
 const COUNTRY_ISO: Record<string, string> = {
@@ -35,7 +36,8 @@ type TimeAgo =
 
 interface PurchaseEvent {
   id: number;
-  product: string;
+  productName: string;
+  productSlug: string;
   city: string;
   country: string;
   time: TimeAgo;
@@ -94,7 +96,8 @@ export default function SalesNotification() {
 
         setCurrentEvent({
           id: Date.now(),
-          product,
+          productName: product.name,
+          productSlug: product.slug,
           city: location.city,
           country: location.country,
           time,
@@ -129,18 +132,29 @@ export default function SalesNotification() {
           <div className="relative bg-white rounded-xl shadow-elevated border border-brand-100 overflow-hidden flex items-stretch">
             <button
               type="button"
-              onClick={() => navigate(`/search?q=${encodeURIComponent(currentEvent.product)}`)}
-              className="flex flex-1 items-stretch min-w-0 text-left hover:bg-mist-50 transition-colors"
+              onClick={() =>
+                navigate(
+                  productPath({
+                    slug: currentEvent.productSlug,
+                    title: currentEvent.productName,
+                  }),
+                )
+              }
+              className="flex flex-1 items-stretch min-w-0 text-left cursor-pointer hover:bg-mist-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-inset"
+              aria-label={t('viewProduct', {
+                defaultValue: `View ${currentEvent.productName}`,
+                product: currentEvent.productName,
+              })}
             >
               <div className="bg-gradient-cta flex items-center justify-center px-4 shrink-0">
                 <CheckCircle2 className="text-white w-6 h-6" aria-hidden />
               </div>
-              <div className="p-3 flex-1 min-w-0">
+              <div className="p-3 pr-8 flex-1 min-w-0">
                 <p className="text-[13px] text-steel-600 mb-0.5 leading-tight">
                   {t('purchased', { location: locationLabel })}
                 </p>
                 <p className="text-sm font-bold text-navy-950 line-clamp-1 leading-tight">
-                  {currentEvent.product}
+                  {currentEvent.productName}
                 </p>
                 <p className="text-[11px] text-brand-600 mt-1 font-medium">{timeLabel}</p>
               </div>
@@ -148,8 +162,11 @@ export default function SalesNotification() {
             <button
               type="button"
               aria-label={t('dismiss')}
-              onClick={() => setCurrentEvent(null)}
-              className="absolute top-2 right-2 text-silver-400 hover:text-brand-600 p-1 motion-safe:active:scale-95"
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentEvent(null);
+              }}
+              className="absolute top-2 right-2 text-silver-400 hover:text-brand-600 p-1 motion-safe:active:scale-95 z-10"
             >
               <X className="w-3 h-3" aria-hidden />
             </button>

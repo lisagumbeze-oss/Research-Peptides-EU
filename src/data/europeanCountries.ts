@@ -86,15 +86,15 @@ export const europeanLocations = [
   { country: 'Czech Republic', city: 'Prague' }
 ];
 
-export const sampleProducts = [
-  'BPC-157 5mg',
-  'TB-500 10mg',
-  'Tirzepatide 10mg',
-  'Semaglutide 5mg',
-  'Retatrutide 5mg',
-  'Melanotan 2 10mg',
-  'IGF-1 LR3 1mg',
-  'CJC-1295 / Ipamorelin Blend',
-  'MK-677 30ml',
-  'Bacteriostatic Water 30ml'
+export const sampleProducts: Array<{ name: string; slug: string }> = [
+  { name: 'BPC-157 5mg', slug: 'bpc-157' },
+  { name: 'TB-500 10mg', slug: 'thymosin-beta-4-tb500-10mg' },
+  { name: 'Tirzepatide 10mg', slug: 'tirzepatide' },
+  { name: 'Semaglutide 5mg', slug: 'semaglutide' },
+  { name: 'Retatrutide 5mg', slug: 'retatrutide' },
+  { name: 'Melanotan 2 10mg', slug: 'mt-2-melanotan-2-acetate-10mg' },
+  { name: 'IGF-1 LR3 1mg', slug: 'igf-1-lr3-1mg' },
+  { name: 'CJC-1295 / Ipamorelin Blend', slug: 'cjc-1295-no-dac-ipamorelin-blend' },
+  { name: 'MK-677 10mg', slug: 'mk-677-ibutamoren-10mg-100-tablets' },
+  { name: 'Bacteriostatic Water', slug: 'bacteriostatic-water' },
 ];
