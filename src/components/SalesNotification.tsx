@@ -127,7 +127,7 @@ export default function SalesNotification() {
           key={currentEvent.id}
           {...popover}
           role="status"
-          className="fixed z-[60] bottom-20 md:bottom-6 left-4 right-4 md:left-6 md:right-auto w-auto max-w-[340px] mx-auto md:mx-0"
+          className="fixed z-[60] bottom-above-mobile-nav md:bottom-6 left-4 right-4 md:left-6 md:right-auto w-auto max-w-[340px] mx-auto md:mx-0"
         >
           <div className="relative bg-white rounded-xl shadow-elevated border border-brand-100 overflow-hidden flex items-stretch">
             <button

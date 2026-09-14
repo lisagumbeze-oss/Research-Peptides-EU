@@ -1,9 +1,16 @@
 @import "tailwindcss";
 
+/* Self-hosted fonts — no render-blocking Google Fonts CSS */
+@import "@fontsource-variable/dm-sans/wght.css";
+@import "@fontsource-variable/dm-sans/wght-italic.css";
+@import "@fontsource-variable/sora/wght.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
 @theme {
   /* Typography */
-  --font-display: "Sora", system-ui, sans-serif;
-  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-display: "Sora Variable", "Sora", system-ui, sans-serif;
+  --font-sans: "DM Sans Variable", "DM Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   /* Brand — logo teal → navy gradient */
@@ -180,6 +187,33 @@
 }
 
 @layer utilities {
+  /* iOS / notched device safe areas (requires viewport-fit=cover) */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .px-safe {
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+
+  .safe-bottom {
+    bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Mobile bottom nav = 4rem (h-16) + safe inset; overlays sit above it */
+  .bottom-above-mobile-nav {
+    bottom: calc(4rem + env(safe-area-inset-bottom, 0px) + 0.75rem);
+  }
+
+  .pb-mobile-nav {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+  }
+
   .font-display {
     font-family: var(--font-display);
   }

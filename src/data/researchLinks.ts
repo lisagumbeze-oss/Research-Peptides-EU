@@ -408,10 +408,43 @@ export const homepageInternalLinks: InternalResearchLink[] = [
     },
     markets: ALL_EU,
   },
+  {
+    id: 'categories-hub',
+    href: '/categories',
+    anchor: {
+      en: 'Browse research peptide categories',
+      es: 'Explorar categorías de péptidos de investigación',
+      nl: 'Blader door onderzoekspeptide-categorieën',
+      de: 'Forschungspeptid-Kategorien durchsuchen',
+      fr: 'Parcourir les catégories de peptides de recherche',
+    },
+    blurb: {
+      en: 'Dedicated landings for specialized research lines — metabolic, blends, and lab supplies.',
+      es: 'Páginas dedicadas por línea de investigación.',
+      nl: 'Dedicated landings per researchlijn.',
+      de: 'Eigene Landingpages für Forschungslinien.',
+      fr: 'Pages dédiées par ligne de recherche.',
+    },
+    markets: ALL_EU,
+  },
+  {
+    id: 'peptide-guide',
+    href: '/peptide-guide',
+    anchor: {
+      en: 'Peptide research guide for laboratories',
+      es: 'Guía de péptidos para laboratorios',
+      nl: 'Peptide-onderzoeksgids voor laboratoria',
+      de: 'Peptid-Leitfaden für Labore',
+      fr: 'Guide des peptides pour laboratoires',
+    },
+    markets: ALL_EU,
+  },
 ];
 
 export const compactInternalLinkIds = [
   'shop-eu',
+  'categories-hub',
+  'peptide-guide',
   'calculator',
   'bac-water',
   'retatrutide',
@@ -419,6 +452,7 @@ export const compactInternalLinkIds = [
   'glow-blend',
   'blog-uk-eu',
   'coa',
+  'faq',
 ] as const;
 
 export const outboundResearchLinks: OutboundResearchLink[] = [

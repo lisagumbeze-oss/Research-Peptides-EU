@@ -39,8 +39,8 @@ export const gradients = {
 } as const;
 
 export const fonts = {
-  display: '"Sora", system-ui, sans-serif',
-  sans: '"DM Sans", system-ui, sans-serif',
+  display: '"Sora Variable", "Sora", system-ui, sans-serif',
+  sans: '"DM Sans Variable", "DM Sans", system-ui, sans-serif',
   mono: '"JetBrains Mono", ui-monospace, monospace',
 } as const;
 

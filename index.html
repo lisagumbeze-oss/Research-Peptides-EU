@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta
       name="description"
       content="Research Peptides EU — premium research-grade peptides and compounds for European laboratories. Third-party tested, EU distribution."
@@ -11,27 +11,24 @@
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Research Peptides EU" />
+    <meta property="og:image" content="https://www.researchpeptide.eu/brand_logo.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Sora:wght@600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="twitter:image" content="https://www.researchpeptide.eu/brand_logo.png" />
     <link rel="icon" type="image/webp" href="/favicon.webp" />
     <title>Research Peptides EU | Premium Research Peptides</title>
-    
-    <!-- Preload Fonts for Core Web Vitals -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Sora:wght@600;700;800&display=swap" as="style" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0CJRFHNL7Z"></script>
+    <!-- Analytics deferred until after first paint -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-0CJRFHNL7Z');
+      window.addEventListener('load', function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0CJRFHNL7Z';
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', 'G-0CJRFHNL7Z');
+      });
     </script>
   </head>
   <body>

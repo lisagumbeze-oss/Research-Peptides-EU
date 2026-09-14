@@ -5,6 +5,7 @@ import { Shield } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Button } from '../../design-system';
 import { overlayMotion } from '../../design-system/motion';
+import { useChromeStore } from '../../store/useChromeStore';
 
 const CONSENT_KEY = 'rp-eu-cookie-consent';
 
@@ -13,17 +14,22 @@ export type CookieConsentLevel = 'all' | 'essential';
 export function CookieConsent() {
   const { t } = useTranslation('legal');
   const [visible, setVisible] = useState(false);
+  const setCookieBannerOpen = useChromeStore((s) => s.setCookieBannerOpen);
   const reduceMotion = useReducedMotion();
   const panel = overlayMotion(Boolean(reduceMotion));
 
   useEffect(() => {
     try {
       const stored = localStorage.getItem(CONSENT_KEY);
-      if (!stored) setVisible(true);
+      if (!stored) {
+        setVisible(true);
+        setCookieBannerOpen(true);
+      }
     } catch {
       setVisible(true);
+      setCookieBannerOpen(true);
     }
-  }, []);
+  }, [setCookieBannerOpen]);
 
   const save = (level: CookieConsentLevel) => {
     try {
@@ -32,6 +38,7 @@ export function CookieConsent() {
       /* ignore */
     }
     setVisible(false);
+    setCookieBannerOpen(false);
   };
 
   return (
@@ -42,7 +49,7 @@ export function CookieConsent() {
           aria-labelledby="cookie-consent-title"
           aria-describedby="cookie-consent-desc"
           {...panel}
-          className="fixed bottom-20 md:bottom-6 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-[90] bg-white border border-brand-100 rounded-2xl shadow-elevated p-5 md:p-6"
+          className="fixed bottom-above-mobile-nav md:bottom-6 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-[90] bg-white border border-brand-100 rounded-2xl shadow-elevated p-5 md:p-6"
         >
           <div className="flex gap-3 mb-4">
             <div className="shrink-0 w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center">

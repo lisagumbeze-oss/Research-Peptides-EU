@@ -1,5 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "functions": {
     "api/**/*.ts": {
       "maxDuration": 30
@@ -19,7 +21,7 @@
       "destination": "/api/sitemap"
     },
     {
-      "source": "/((?!api/|assets/|favicon|src/|sitemap\\.xml|sitemaps\\.xml|robots\\.txt|.*\\.(?:xml|txt|ico|png|jpg|jpeg|webp|svg|gif|webmanifest|js|css|map)$).*)",
+      "source": "/((?!api/|assets/|favicon|src/|sitemap\\.xml|sitemaps\\.xml|robots\\.txt|prerender-manifest\\.json|.*\\.(?:xml|txt|ico|png|jpg|jpeg|webp|svg|gif|webmanifest|js|css|map)$).*)",
       "destination": "/index.html"
     }
   ],
@@ -28,6 +30,12 @@
       "source": "/robots.txt",
       "headers": [
         { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/(.*)/index.html",
+      "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     }

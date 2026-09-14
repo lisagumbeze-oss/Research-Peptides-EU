@@ -8,32 +8,34 @@ import { useAuthStore } from './store/useAuthStore';
 import { useWishlistStore } from './store/useWishlistStore';
 import { supabase } from './supabase';
 
+/** Keep home in the main chunk for first paint; lazy-load the rest. */
 import Home from './pages/Home';
-import Shop from './pages/Shop';
-import ProductDetails from './pages/ProductDetails';
-import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import Profile from './pages/Profile';
-import Orders from './pages/Orders';
-import Wishlist from './pages/Wishlist';
-import Search from './pages/Search';
-import Categories from './pages/Categories';
-import Login from './pages/Login';
-import FAQ from './pages/FAQ';
-import Shipping from './pages/Shipping';
-import Contact from './pages/Contact';
-import Terms from './pages/Terms';
-import Privacy from './pages/Privacy';
-import RefundReturns from './pages/RefundReturns';
-import PeptideGuide from './pages/PeptideGuide';
-import AboutUs from './pages/AboutUs';
-import PeptideCalculator from './pages/PeptideCalculator';
-import COALibrary from './pages/COALibrary';
-import PeptideInformation from './pages/PeptideInformation';
-import PeptideResearch from './pages/PeptideResearch';
 
+const Shop = lazy(() => import('./pages/Shop'));
+const ProductDetails = lazy(() => import('./pages/ProductDetails'));
+const Cart = lazy(() => import('./pages/Cart'));
+const Checkout = lazy(() => import('./pages/Checkout'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const Profile = lazy(() => import('./pages/Profile'));
+const Orders = lazy(() => import('./pages/Orders'));
+const Wishlist = lazy(() => import('./pages/Wishlist'));
+const Search = lazy(() => import('./pages/Search'));
+const Categories = lazy(() => import('./pages/Categories'));
+const CategoryLanding = lazy(() => import('./pages/CategoryLanding'));
+const Login = lazy(() => import('./pages/Login'));
+const FAQ = lazy(() => import('./pages/FAQ'));
+const Shipping = lazy(() => import('./pages/Shipping'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Terms = lazy(() => import('./pages/Terms'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const RefundReturns = lazy(() => import('./pages/RefundReturns'));
+const PeptideGuide = lazy(() => import('./pages/PeptideGuide'));
+const AboutUs = lazy(() => import('./pages/AboutUs'));
+const PeptideCalculator = lazy(() => import('./pages/PeptideCalculator'));
+const COALibrary = lazy(() => import('./pages/COALibrary'));
+const PeptideInformation = lazy(() => import('./pages/PeptideInformation'));
+const PeptideResearch = lazy(() => import('./pages/PeptideResearch'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 
 export default function App() {
@@ -103,6 +105,7 @@ function AppRoutes() {
           <Route path="wishlist" element={<Wishlist />} />
           <Route path="search" element={<Search />} />
           <Route path="categories" element={<Categories />} />
+          <Route path="category/:slug" element={<CategoryLanding />} />
           <Route path="login" element={<Login />} />
           <Route path="faq" element={<FAQ />} />
           <Route path="shipping" element={<Shipping />} />

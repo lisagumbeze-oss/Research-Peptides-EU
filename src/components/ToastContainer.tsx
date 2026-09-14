@@ -7,7 +7,7 @@ export default function ToastContainer() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="fixed bottom-8 right-8 z-[100] flex flex-col gap-3 max-w-md w-full sm:w-[380px]">
+    <div className="fixed z-[100] bottom-above-mobile-nav md:bottom-8 right-4 left-4 md:left-auto md:right-8 flex flex-col gap-3 max-w-md w-auto md:w-[380px] ml-auto">
       <AnimatePresence>
         {toasts.map((toast) => (
           <motion.div

@@ -1,50 +1,77 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { LocaleLink } from '../i18n/LocaleLink';
+import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { supabase } from '../supabase';
 import { BookOpen, ArrowLeft, Clock, Share2, Tag, Calendar } from 'lucide-react';
 import { Reveal } from '../design-system';
 import { ResearchLinkHub } from '../components/seo/ResearchLinkHub';
 import { usePageSeo } from '../seo/SeoProvider';
+import { blogPath, blogSlug, looksLikeUuid } from '../lib/blogUrl';
+import { stripLocaleFromPath } from '../i18n/routing';
 
 export default function BlogPost() {
-  const { id } = useParams<{ id: string }>();
+  const { id: idOrSlug } = useParams<{ id: string }>();
+  const navigate = useLocaleNavigate();
   const [post, setPost] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPost = async () => {
+      if (!idOrSlug) return;
       try {
-        const { data } = await supabase.from('blog_posts').select('*').eq('id', id).single();
-        if (data) setPost(data);
+        if (looksLikeUuid(idOrSlug)) {
+          const { data } = await supabase.from('blog_posts').select('*').eq('id', idOrSlug).maybeSingle();
+          if (data) setPost(data);
+        } else {
+          const { data } = await supabase.from('blog_posts').select('*').limit(500);
+          const match = (data ?? []).find(
+            (row) => blogSlug(row) === idOrSlug || String(row.slug || '') === idOrSlug,
+          );
+          if (match) setPost(match);
+        }
       } catch (error) {
-        console.error("Error fetching blog post:", error);
+        console.error('Error fetching blog post:', error);
       } finally {
         setLoading(false);
       }
     };
     fetchPost();
-  }, [id]);
+  }, [idOrSlug]);
 
-  usePageSeo(post ? {
-    title: `${post.title} | Research Peptides EU Blog`,
-    description: post.content.substring(0, 150) + '...',
-    canonicalPath: `/blog/${post.id}`,
-    ogType: 'article',
-    ogImage: post.image_url,
-    jsonLd: [{
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": post.title,
-      "image": post.image_url ? [post.image_url] : [],
-      "datePublished": post.created_at,
-      "dateModified": post.updated_at || post.created_at,
-      "author": {
-        "@type": "Organization",
-        "name": "Research Peptides EU Editorial Board"
-      }
-    }]
-  } : null);
+  useEffect(() => {
+    if (!post) return;
+    const canonical = blogPath(post);
+    if (stripLocaleFromPath(window.location.pathname) !== canonical) {
+      navigate(canonical, { replace: true });
+    }
+  }, [post, navigate]);
+
+  usePageSeo(
+    post
+      ? {
+          title: `${post.title} | Research Peptides EU Blog`,
+          description: `${String(post.content || '').substring(0, 150)}...`,
+          canonicalPath: blogPath(post),
+          ogType: 'article',
+          ogImage: post.image_url,
+          jsonLd: [
+            {
+              '@context': 'https://schema.org',
+              '@type': 'Article',
+              headline: post.title,
+              image: post.image_url ? [post.image_url] : [],
+              datePublished: post.created_at,
+              dateModified: post.updated_at || post.created_at,
+              author: {
+                '@type': 'Organization',
+                name: 'Research Peptides EU Editorial Board',
+              },
+            },
+          ],
+        }
+      : null,
+  );
 
   if (loading) {
     return (

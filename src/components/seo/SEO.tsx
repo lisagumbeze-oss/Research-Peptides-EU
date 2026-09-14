@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
-import { SITE_URL } from '../config/brand';
+import { BRAND_NAME, SITE_URL, defaultOgImageUrl } from '../../config/brand';
 
 interface SEOProps {
   title: string;
@@ -17,11 +17,12 @@ export function SEO({
   description,
   canonicalPath,
   type = 'website',
-  image = `${SITE_URL.replace(/\/+$/, '')}/og-image.jpg`,
+  image,
 }: SEOProps) {
   const location = useLocation();
   const origin = SITE_URL.replace(/\/+$/, '');
   const currentUrl = `${origin}${canonicalPath || location.pathname}`;
+  const ogImage = image || defaultOgImageUrl(origin);
 
   return (
     <Helmet>
@@ -34,14 +35,14 @@ export function SEO({
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type} />
       <meta property="og:url" content={currentUrl} />
-      <meta property="og:image" content={image} />
-      <meta property="og:site_name" content="Research Peptides EU" />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:site_name" content={BRAND_NAME} />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image" content={ogImage} />
     </Helmet>
   );
 }

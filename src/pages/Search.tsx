@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { LocaleLink } from '../i18n/LocaleLink';
+import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { Search as SearchIcon, ArrowRight } from 'lucide-react';
 import { supabase } from '../supabase';
 import { sortProducts, type CatalogSortKey } from '../lib/productSort';
+import { categoryPath } from '../lib/categoryUrl';
 import { Container } from '../design-system';
 import { CatalogPageHeader } from '../components/catalog/CatalogPageHeader';
 import { CatalogTrustBar } from '../components/catalog/CatalogTrustBar';
@@ -17,6 +19,7 @@ import { peekCatalog, rememberCatalog } from '../lib/catalogCache';
 
 export default function Search() {
   const cached = peekCatalog();
+  const navigate = useLocaleNavigate();
   const [allProducts, setAllProducts] = useState<CatalogProduct[]>(cached?.products ?? []);
   const [categories, setCategories] = useState<CategoryOption[]>(cached?.categories ?? []);
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,7 +28,15 @@ export default function Search() {
   const [sortBy, setSortBy] = useState<CatalogSortKey | 'relevance'>('relevance');
 
   const selectedCategorySlug = searchParams.get('category') || '';
+  const qParam = searchParams.get('q') || '';
   const { isInWishlist, handleToggleWishlist, handleAddToCart } = useProductCatalogActions();
+
+  // Legacy /search?category=slug → dedicated category landing (keep q= search here)
+  useEffect(() => {
+    if (selectedCategorySlug && !qParam && !searchTerm.trim()) {
+      navigate(categoryPath(selectedCategorySlug), { replace: true });
+    }
+  }, [selectedCategorySlug, qParam, searchTerm, navigate]);
 
   useEffect(() => {
     void (async () => {
@@ -125,6 +136,10 @@ export default function Search() {
               value={selectedCategorySlug}
               onChange={(e) => {
                 const next = e.target.value;
+                if (next && !searchTerm.trim()) {
+                  navigate(categoryPath(next));
+                  return;
+                }
                 setSearchParams(next ? { category: next } : {});
               }}
               className="w-full py-3 px-4 rounded-xl border border-brand-100 bg-white text-sm font-semibold text-steel-600 focus:outline-none focus:ring-2 focus:ring-brand-400 shadow-card"

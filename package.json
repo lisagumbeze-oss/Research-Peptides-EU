@@ -8,10 +8,13 @@
   },
   "scripts": {
     "dev": "vite --port=5173 --host=0.0.0.0",
-    "build": "npm run sitemap:generate && vite build",
+    "build": "npm run sitemap:generate && vite build && npm run prerender",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
+    "prerender": "tsx scripts/prerender-seo.ts",
+    "prerender:verify": "tsx scripts/verify-prerender.ts",
+    "qa:phase-f": "tsx scripts/phase-f-validate.ts",
     "db:test": "tsx server/scripts/test-db.ts",
     "db:migrate": "tsx server/scripts/migrate.ts",
     "db:import:powder": "tsx server/scripts/import-peptide-powder-catalog.ts",
@@ -28,6 +31,9 @@
     "qa:phase10": "node scripts/qa-phase10-browser.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@fontsource-variable/sora": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
     "@google/genai": "^1.29.0",
     "@supabase/supabase-js": "^2.103.2",
     "@tailwindcss/vite": "^4.1.14",

@@ -169,7 +169,7 @@ export function CatalogFilters(props: CatalogFiltersProps) {
             role="dialog"
             aria-modal="true"
             aria-label="Product filters"
-            className="fixed inset-y-0 right-0 w-full max-w-sm bg-white z-[60] p-6 shadow-elevated lg:hidden flex flex-col"
+            className="fixed inset-y-0 right-0 w-full max-w-sm bg-white z-[60] pt-6 px-6 pb-[calc(1.5rem+4rem+env(safe-area-inset-bottom,0px))] shadow-elevated lg:hidden flex flex-col"
           >
               <div className="flex justify-between items-center mb-6">
                 <h2 className="font-display font-bold text-lg">{t('filters.filters')}</h2>
@@ -185,7 +185,7 @@ export function CatalogFilters(props: CatalogFiltersProps) {
               <div className="flex-1 overflow-y-auto">
                 <FiltersPanel {...props} idPrefix="mobile-" />
               </div>
-              <Button className="mt-6 w-full" onClick={onCloseMobile}>
+              <Button className="mt-6 w-full shrink-0" onClick={onCloseMobile}>
                 {t('filters.showResults')}
               </Button>
             </motion.div>

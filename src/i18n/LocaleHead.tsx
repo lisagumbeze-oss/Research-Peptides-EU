@@ -6,7 +6,7 @@ import { supportedLocales } from './locales';
 import { pathWithLocale, stripLocaleFromPath } from './routing';
 import { useSeoOverride } from '../seo/SeoProvider';
 import { descriptionForLocale, titleForPath } from '../seo/pageTitles';
-import { organizationJsonLd, siteOrigin, websiteJsonLd } from '../seo/structuredData';
+import { defaultOgImage, globalEntityJsonLd, siteOrigin } from '../seo/structuredData';
 import { JsonLd } from '../components/seo/JsonLd';
 import type { LocaleCode } from './locales';
 
@@ -50,37 +50,8 @@ export function LocaleHead() {
   const locale = i18n.language as LocaleCode;
   const path = stripLocaleFromPath(location.pathname);
   const origin = siteOrigin();
-  const siteUrl = siteOrigin();
 
-  const globalJsonLd = useMemo(
-    () => [
-      organizationJsonLd(), 
-      websiteJsonLd(locale),
-      {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "@id": `${siteUrl}/#localbusiness`,
-        "name": "Research Peptides EU",
-        "url": siteUrl,
-        "logo": `${siteUrl}/brand_logo.png`,
-        "image": `${siteUrl}/brand_logo.png`,
-        "description": "Premium research-grade peptides and compounds for European laboratories. Third-party tested, EU distribution, next-day shipping available.",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Markt 34",
-          "postalCode": "5281 AV",
-          "addressLocality": "Boxtel",
-          "addressRegion": "North Brabant",
-          "addressCountry": "NL"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint"
-        }
-      }
-    ],
-    [locale, siteUrl],
-  );
-
+  const globalJsonLd = useMemo(() => globalEntityJsonLd(locale), [locale]);
   const pageJsonLd = override?.jsonLd ?? [];
   const allJsonLd = useMemo(() => [...globalJsonLd, ...pageJsonLd], [globalJsonLd, pageJsonLd]);
 
@@ -91,6 +62,7 @@ export function LocaleHead() {
     const description = override?.description ?? descriptionForLocale(locale);
     const canonicalPath = override?.canonicalPath ?? path;
     const canonical = `${origin}${pathWithLocale(locale, canonicalPath === '/' ? '/' : canonicalPath)}`;
+    const ogImage = override?.ogImage || defaultOgImage();
 
     document.title = title;
     upsertMeta('description', description);
@@ -102,21 +74,18 @@ export function LocaleHead() {
     upsertMeta('og:url', canonical, true);
     upsertMeta('og:type', override?.ogType ?? 'website', true);
     upsertMeta('og:site_name', BRAND_NAME, true);
-    if (override?.ogImage) {
-      upsertMeta('og:image', override.ogImage, true);
-    }
+    upsertMeta('og:image', ogImage, true);
 
     upsertMeta('twitter:card', 'summary_large_image');
     upsertMeta('twitter:title', title);
     upsertMeta('twitter:description', description);
+    upsertMeta('twitter:image', ogImage);
 
     const existing = document.querySelectorAll('link[data-rp-hreflang]');
     existing.forEach((el) => el.remove());
 
     const basePath = path === '/' ? '' : path;
-    const hrefPath = override?.canonicalPath?.startsWith('/product/')
-      ? override.canonicalPath
-      : basePath;
+    const hrefPath = override?.canonicalPath ?? basePath;
 
     for (const loc of supportedLocales) {
       const link = document.createElement('link');

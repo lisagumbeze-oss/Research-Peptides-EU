@@ -2,6 +2,9 @@ import { BookOpen, FlaskConical, ShieldCheck, Beaker } from 'lucide-react';
 import { LocaleLink } from '../i18n/LocaleLink';
 import { Reveal } from '../design-system';
 import { staggerDelay } from '../design-system/motion';
+import { AnswerCapsule } from '../components/seo/AnswerCapsule';
+import { usePageSeo } from '../seo/SeoProvider';
+import { HQ_LOCATION } from '../config/brand';
 
 const guideTopics = [
   {
@@ -27,6 +30,13 @@ const guideTopics = [
 ];
 
 export default function PeptideGuide() {
+  usePageSeo({
+    title: 'Peptide Guide | Research Peptides EU',
+    description:
+      'Practical guide to research peptides: fundamentals, storage, reconstitution, and quality verification for laboratory workflows.',
+    canonicalPath: '/peptide-guide',
+  });
+
   return (
     <div className="bg-white min-h-screen pt-12 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -42,12 +52,23 @@ export default function PeptideGuide() {
           </p>
         </Reveal>
 
-        {/* Answer Capsule for GEO Optimization */}
-        <Reveal delay={0.08} className="bg-brand-50 border-l-4 border-brand-500 p-6 rounded-r-2xl mb-12 text-left max-w-3xl mx-auto shadow-sm">
-          <p className="text-navy-950 font-bold text-lg mb-2">Quick Answer: What are Research Peptides?</p>
-          <p className="text-steel-700 font-medium leading-relaxed">
-            Research peptides are synthesized short chains of amino acids utilized exclusively for in vitro laboratory studies. To maintain structural stability, they require lyophilization, cold-chain storage, and careful reconstitution using bacteriostatic water prior to experimental application.
-          </p>
+        <Reveal delay={0.08} className="mb-12 max-w-3xl mx-auto">
+          <AnswerCapsule title="Quick answer: what are research peptides?">
+            <p>
+              Research peptides are short chains of amino acids supplied for controlled laboratory and in-vitro
+              studies only — not for human consumption. Typical workflows use lyophilized material, cold-chain
+              storage, and reconstitution (often with bacteriostatic water) before experiments. Research Peptides
+              EU dispatches from {HQ_LOCATION} with EUR pricing across the EU. See the{' '}
+              <LocaleLink to="/shop" className="text-brand-700 font-semibold hover:underline">
+                catalog
+              </LocaleLink>{' '}
+              and{' '}
+              <LocaleLink to="/coas" className="text-brand-700 font-semibold hover:underline">
+                COA library
+              </LocaleLink>
+              .
+            </p>
+          </AnswerCapsule>
         </Reveal>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">

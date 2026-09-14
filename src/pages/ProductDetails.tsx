@@ -16,6 +16,7 @@ import { ProductPurchasePanel } from '../components/product-detail/ProductPurcha
 import { ProductDescriptionCards } from '../components/product-detail/ProductDescriptionCards';
 import { ProductRecommendations } from '../components/product-detail/ProductRecommendations';
 import { StarRow } from '../components/products/ProductCardRating';
+import { AnswerCapsule } from '../components/seo/AnswerCapsule';
 import { useProductCatalogActions } from '../hooks/useProductCatalogActions';
 import type { CatalogProduct } from '../components/products/ProductCard';
 import { usePageSeo } from '../seo/SeoProvider';
@@ -257,6 +258,20 @@ export default function ProductDetails() {
             onCopyLink={copyLink}
           />
         </div>
+
+        <Reveal className="mb-10">
+          <AnswerCapsule title={`Quick answer: what is ${displayTitle}?`}>
+            <p>
+              {descriptionTeaser ||
+                `${displayTitle} is a research-grade compound from Research Peptides EU for laboratory use only.`}{' '}
+              Supplied with EUR pricing and EU dispatch. Not for human consumption — review specifications and{' '}
+              <LocaleLink to="/coas" className="text-brand-700 font-semibold hover:underline">
+                COA documentation
+              </LocaleLink>{' '}
+              before use in controlled research workflows.
+            </p>
+          </AnswerCapsule>
+        </Reveal>
 
         <ProductDescriptionCards description={displayDescription} productTitle={displayTitle} />
 

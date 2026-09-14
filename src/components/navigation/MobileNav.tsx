@@ -9,6 +9,7 @@ import { overlayMotion, slideFromRightMotion } from '../../design-system/motion'
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import LanguageSwitcher from './LanguageSwitcher';
 import { cn } from '../../lib/utils';
+import { categoryPath } from '../../lib/categoryUrl';
 
 type MobileNavProps = {
   open: boolean;
@@ -127,7 +128,7 @@ export default function MobileNav({
                     {categories.map((cat) => (
                       <li key={cat.id}>
                         <LocaleLink
-                          to={`/search?category=${cat.slug}`}
+                          to={categoryPath(cat.slug)}
                           className={linkClass}
                           onClick={onClose}
                         >

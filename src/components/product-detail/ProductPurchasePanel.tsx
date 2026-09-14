@@ -48,6 +48,8 @@ type ProductPurchasePanelProps = {
   onCopyLink: () => void;
 };
 
+import { useChromeStore } from '../../store/useChromeStore';
+
 export function ProductPurchasePanel({
   title,
   description,
@@ -69,15 +71,30 @@ export function ProductPurchasePanel({
   onCopyLink,
 }: ProductPurchasePanelProps) {
   const { t } = useTranslation('product');
+  const cookieBannerOpen = useChromeStore((s) => s.cookieBannerOpen);
   const basePrice = Number(currentPrice) || 0;
   const reduceMotion = useReducedMotion();
   const enter = fadeUpVariants();
   const shareMotion = accordionMotion(Boolean(reduceMotion));
   const [justAdded, setJustAdded] = useState(false);
+  const [ctaInView, setCtaInView] = useState(true);
   const addedTimer = useRef<number>(0);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     return () => window.clearTimeout(addedTimer.current);
+  }, []);
+
+  useEffect(() => {
+    const el = ctaRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setCtaInView(entry.isIntersecting),
+      { root: null, threshold: 0.35, rootMargin: '-8px 0px 0px 0px' },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   const handleAddToCartClick = () => {
@@ -331,7 +348,7 @@ export function ProductPurchasePanel({
         ))}
       </div>
 
-      <div className="flex gap-3">
+      <div ref={ctaRef} className="flex gap-3">
         <div className="flex items-center border border-brand-100 rounded-xl overflow-hidden bg-white shadow-card">
           <button
             type="button"
@@ -385,6 +402,46 @@ export function ProductPurchasePanel({
           {t('purchase.laboratoryOnly')}
         </span>
       </p>
+
+      {/* Sticky buy bar — mobile only, when primary CTA scrolls away */}
+      <AnimatePresence>
+        {!ctaInView && !cookieBannerOpen ? (
+          <motion.div
+            key="mobile-buy-bar"
+            initial={reduceMotion ? false : { y: 24, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={reduceMotion ? undefined : { y: 24, opacity: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.2 }}
+            className="md:hidden fixed z-[55] left-0 right-0 bottom-above-mobile-nav px-3 pointer-events-none"
+            role="region"
+            aria-label={t('purchase.addToCart')}
+          >
+            <div className="pointer-events-auto mx-auto max-w-lg flex items-center gap-3 rounded-2xl border border-brand-100 bg-white/95 backdrop-blur-xl shadow-elevated p-3">
+              <div className="min-w-0 flex-1">
+                <p className="text-xs text-steel-600 truncate">{title}</p>
+                <p className="text-base font-display font-bold text-navy-950 tabular-nums">
+                  {formatCurrency(basePrice)}
+                </p>
+              </div>
+              <Button
+                size="md"
+                onClick={handleAddToCartClick}
+                className={cn('gap-2 shrink-0', justAdded && 'bg-success hover:brightness-100')}
+                aria-live="polite"
+              >
+                {justAdded ? (
+                  <CheckCircle2 className="h-4 w-4" aria-hidden />
+                ) : (
+                  <ShoppingCart className="h-4 w-4" aria-hidden />
+                )}
+                {justAdded
+                  ? t('purchase.addedToCart', { defaultValue: 'Added' })
+                  : t('purchase.addToCart')}
+              </Button>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </motion.div>
   );
 }

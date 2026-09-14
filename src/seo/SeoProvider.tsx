@@ -5,7 +5,7 @@ export type PageSeoConfig = {
   description?: string;
   /** Path without locale prefix, e.g. `/shop` or `/product/bpc-157` */
   canonicalPath?: string;
-  ogType?: 'website' | 'product';
+  ogType?: 'website' | 'product' | 'article';
   ogImage?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown>[];

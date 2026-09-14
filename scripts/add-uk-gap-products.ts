@@ -54,11 +54,11 @@ function penDescription(): string {
 
 Overview
 
-Retatrutide (often referenced as a GLP-3 / triple-agonist research compound) is supplied here in a 40mg prefilled pen format for controlled laboratory handling. This presentation is intended for research teams that require precise, repeatable dispensing in metabolic pathway and receptor-signalling studies.
+Retatrutide (often referenced as a GLP-3 / triple-agonist research compound) is supplied here in a 40mg prefilled pen format for controlled laboratory handling. This presentation is intended for research teams that require precise, repeatable dispensing in metabolic pathway and receptor-signalling studies. See also our vial-format [Retatrutide research peptide](/product/retatrutide-glp-3) for conventional lyophilized protocols.
 
 Research Context
 
-Retatrutide is studied as a multi-receptor agonist spanning GLP-1, GIP, and glucagon receptor pathways. The pen format supports protocol designs where accurate aliquot delivery and reduced open-vial handling are preferred over conventional lyophilized vials.
+Retatrutide is studied as a multi-receptor agonist spanning GLP-1, GIP, and glucagon receptor pathways. Labs comparing incretin research materials often also evaluate [Semaglutide GLP-1 research peptide](/product/semaglutide-glp-1) and [Tirzepatide research peptide](/product/tirzepatide) under the same assay conditions. The pen format supports protocol designs where accurate aliquot delivery and reduced open-vial handling are preferred over conventional lyophilized vials.
 
 Product Notes
 
@@ -66,9 +66,19 @@ Product Notes
 • Format: ready-to-dispense laboratory presentation
 • Intended use: scientific research and laboratory assays only
 
+Related Research Compounds
+
+• [Retatrutide research peptide](/product/retatrutide-glp-3)
+
+• [Semaglutide GLP-1 research peptide](/product/semaglutide-glp-1)
+
+• [Tirzepatide research peptide](/product/tirzepatide)
+
+• [Cagrilintide research peptide](/product/gagrilintide-5mg)
+
 Important
 
-This product is supplied strictly for scientific research and laboratory use and is not intended for human or veterinary consumption. Buy research peptides in the EU from Research Peptides EU for laboratory procurement only.`);
+This product is supplied strictly for scientific research and laboratory use and is not intended for human or veterinary consumption. [Buy research peptides online](/shop) from Research Peptides EU for laboratory procurement only.`);
 }
 
 async function fetchUk(slug: string): Promise<UkProduct> {

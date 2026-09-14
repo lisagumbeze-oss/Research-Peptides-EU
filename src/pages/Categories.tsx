@@ -7,6 +7,8 @@ import { CatalogPageHeader } from '../components/catalog/CatalogPageHeader';
 import { CatalogTrustBar } from '../components/catalog/CatalogTrustBar';
 import { cn } from '../lib/utils';
 import { staggerDelay } from '../design-system/motion';
+import { categoryPath } from '../lib/categoryUrl';
+import { usePageSeo } from '../seo/SeoProvider';
 
 type Category = {
   id: string;
@@ -20,6 +22,13 @@ const icons = [Dna, Beaker, TestTube2, Layers, Pill];
 export default function Categories() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
+
+  usePageSeo({
+    title: 'Research Peptide Categories | Research Peptides EU',
+    description:
+      'Browse specialized research peptide categories — metabolic, blends, SARMs-adjacent research lines, and lab supplies. EUR pricing, EU dispatch.',
+    canonicalPath: '/categories',
+  });
 
   useEffect(() => {
     void (async () => {
@@ -43,7 +52,7 @@ export default function Categories() {
             Product <span className="text-brand-400">categories</span>
           </>
         }
-        description="Explore specialized research lines — each category links to filtered catalog results."
+        description="Explore specialized research lines — each category opens a dedicated landing with compounds, FAQ, and documentation links."
       />
       <CatalogTrustBar />
 
@@ -69,7 +78,7 @@ export default function Categories() {
                 return (
                   <Reveal key={category.id} delay={staggerDelay(i)}>
                     <LocaleLink
-                      to={`/search?category=${category.slug}`}
+                      to={categoryPath(category.slug)}
                       className={cn(
                         'group flex flex-col h-full p-8 rounded-3xl bg-white border border-brand-100',
                         'shadow-card hover:shadow-elevated hover:border-brand-300 transition-all duration-300 motion-reduce:transition-none',

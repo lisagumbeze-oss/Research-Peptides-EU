@@ -23,15 +23,15 @@ import { AgeGate } from './gdpr/AgeGate';
 import { PageLoader } from './PageLoader';
 import { RouteChunkErrorBoundary } from './RouteChunkErrorBoundary';
 import { postNewsletterSubscribe } from '../lib/transactionalEmailApi';
-import { JsonLd } from './seo/JsonLd';
 import { overlayMotion } from '../design-system/motion';
-import { SITE_URL } from '../config/brand';
+import { useChromeStore } from '../store/useChromeStore';
 
 function LayoutShell() {
   const { user, profile, setUser } = useAuthStore();
   const { openSearch } = useSearchStore();
   const navigate = useLocaleNavigate();
   const location = useLocation();
+  const cookieBannerOpen = useChromeStore((s) => s.cookieBannerOpen);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -96,40 +96,8 @@ function LayoutShell() {
     }
   };
 
-  const origin = SITE_URL.replace(/\/+$/, '');
-  const globalSchemas = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Research Peptides EU",
-      "url": origin,
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${origin}/logo.png`
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": origin,
-      "name": "Research Peptides EU",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": `${origin}/search?q={search_term_string}`,
-        "query-input": "required name=search_term_string"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Research Peptides EU",
-      "url": origin
-    }
-  ];
-
   return (
     <div className="min-h-screen flex flex-col bg-mist-50 text-navy-950">
-      <JsonLd data={globalSchemas} />
       <a
         href="#main-content"
         className="absolute left-4 -top-20 z-[100] rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-navy-950 shadow-elevated ring-2 ring-brand-500 transition-[top] focus:top-4 focus:outline-none"
@@ -157,7 +125,7 @@ function LayoutShell() {
         onOpenSearch={openSearch}
       />
 
-      <main id="main-content" className="flex-grow pb-20 md:pb-0 relative" tabIndex={-1}>
+      <main id="main-content" className="flex-grow pb-mobile-nav md:pb-0 relative" tabIndex={-1}>
         <RouteChunkErrorBoundary>
           <Suspense fallback={<PageLoader />}>
             <Outlet />
@@ -175,12 +143,12 @@ function LayoutShell() {
       />
 
       <AnimatePresence>
-        {showBackToTop && (
+        {showBackToTop && !cookieBannerOpen && (
           <motion.button
             type="button"
             onClick={handleBackToTop}
             {...backToTopMotion}
-            className="fixed bottom-24 md:bottom-8 left-4 md:left-8 z-50 bg-brand-500 hover:bg-brand-600 text-white rounded-full p-3 shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 motion-safe:active:scale-95"
+            className="fixed bottom-above-mobile-nav md:bottom-8 left-4 md:left-8 z-40 bg-brand-500 hover:bg-brand-600 text-white rounded-full p-3 shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 motion-safe:active:scale-95"
             aria-label="Back to top"
           >
             <ArrowUp className="h-5 w-5" aria-hidden />
@@ -189,7 +157,7 @@ function LayoutShell() {
       </AnimatePresence>
 
       <MobileBottomNav />
-      {!location.pathname.includes('/admin') && <SalesNotification />}
+      {!location.pathname.includes('/admin') && !cookieBannerOpen && <SalesNotification />}
       <CartDrawer />
       <Omnisearch />
       <SelectorWizard />

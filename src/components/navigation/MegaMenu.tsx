@@ -7,6 +7,7 @@ import { supabase } from '../../supabase';
 import { researchTools, type MegaMenuId } from '../../navigation/config';
 import { overlayMotion, dropDownMotion } from '../../design-system/motion';
 import { cn } from '../../lib/utils';
+import { categoryPath } from '../../lib/categoryUrl';
 
 type CategoryRow = {
   id: string;
@@ -110,7 +111,7 @@ export default function MegaMenu({ activeMenu, onClose }: MegaMenuProps) {
                         {categories.map((cat) => (
                           <li key={cat.id}>
                             <LocaleLink
-                              to={`/search?category=${cat.slug}`}
+                              to={categoryPath(cat.slug)}
                               onClick={onClose}
                               className={cn(
                                 'block rounded-xl border border-transparent px-4 py-3',

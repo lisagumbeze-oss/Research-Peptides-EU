@@ -5,7 +5,7 @@ import logo from '../../assets/brandLogo';
 import { Container, ScientificBackdrop } from '../../design-system';
 import { footerInventory, footerLegal, footerResearch, footerSupport } from '../../navigation/config';
 import { brandName } from '../../design-system/tokens';
-import { SUPPORT_EMAIL } from '../../config/brand';
+import { BRAND_NAME, HQ_LOCATION, LEGAL_ENTITY, SUPPORT_EMAIL } from '../../config/brand';
 
 type SiteFooterProps = {
   newsletterEmail: string;
@@ -38,14 +38,14 @@ export default function SiteFooter({
             </LocaleLink>
             <p className="text-sm text-silver-400 leading-relaxed max-w-sm">
               <LocaleLink to="/about-us" className="text-brand-300 hover:text-white">
-                Research Peptides Europe
+                {BRAND_NAME}
               </LocaleLink>{' '}
-              delivers research-grade peptide compounds to European laboratories — including Spain and
+              ({LEGAL_ENTITY}) delivers research-grade peptide compounds to European laboratories — including Spain and
               the wider EU — with third-party verified purity and pharmaceutical-level handling.
             </p>
             <p className="flex items-start gap-2 text-xs text-brand-300/90 mt-4 max-w-sm leading-relaxed">
               <MapPin className="h-4 w-4 shrink-0 mt-0.5" aria-hidden />
-              Markt 34, 5281 AV Boxtel, North Brabant, Netherlands
+              {HQ_LOCATION}
             </p>
             <div className="flex flex-wrap gap-3 mt-6">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-brand-200">

@@ -1,5 +1,6 @@
 import { HomeProductSegment } from './HomeProductSegment';
 import { useHomeCatalog } from '../../hooks/useHomeCatalog';
+import { categoryPath } from '../../lib/categoryUrl';
 
 export function CategoryProductSections() {
   const { categoryRails, loading } = useHomeCatalog();
@@ -37,7 +38,7 @@ export function CategoryProductSections() {
             </>
           }
           description={`Selected ${rail.category.name.toLowerCase()} peptides for in-vitro laboratory research.`}
-          href={`/search?category=${rail.category.slug}`}
+          href={categoryPath(rail.category.slug)}
           ctaLabel={`View ${rail.category.name}`}
           products={rail.products}
           loading={false}

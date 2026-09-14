@@ -7,6 +7,7 @@ import { Container, Section } from '../../design-system';
 import { SectionHeading } from './SectionHeading';
 import { staggerDelay } from '../../design-system/motion';
 import { cn } from '../../lib/utils';
+import { categoryPath } from '../../lib/categoryUrl';
 
 type Category = {
   id: string;
@@ -62,7 +63,7 @@ export function CategoryShowcaseSection() {
                   className="h-full"
                 >
                   <LocaleLink
-                    to={`/search?category=${cat.slug}`}
+                    to={categoryPath(cat.slug)}
                     className={cn(
                       'group flex flex-col h-full min-h-[9rem] p-5 rounded-2xl',
                       'bg-white/5 border border-white/10 backdrop-blur-sm',

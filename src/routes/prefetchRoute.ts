@@ -51,6 +51,12 @@ export function prefetchProductRoute() {
   void import('../pages/ProductDetails');
 }
 
+function prefetchCategoryRoute() {
+  if (prefetched.has('__category__')) return;
+  prefetched.add('__category__');
+  void import('../pages/CategoryLanding');
+}
+
 function prefetchBlogPostRoute() {
   if (prefetched.has('__blog_post__')) return;
   prefetched.add('__blog_post__');
@@ -61,6 +67,10 @@ export function prefetchFromPath(to: string) {
   const path = routeKey(to);
   if (path.startsWith('/product/')) {
     prefetchProductRoute();
+    return;
+  }
+  if (path.startsWith('/category/')) {
+    prefetchCategoryRoute();
     return;
   }
   if (path.startsWith('/blog/') && path !== '/blog') {
@@ -74,6 +84,7 @@ export function prefetchFromPath(to: string) {
 /** Warm remaining storefront chunks after first paint (mobile has no hover). */
 export function prefetchAllStorefrontRoutes() {
   prefetchProductRoute();
+  prefetchCategoryRoute();
   prefetchBlogPostRoute();
   for (const key of Object.keys(ROUTE_PRELOADERS)) {
     prefetchRoutePath(key);

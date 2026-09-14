@@ -34,21 +34,24 @@ export function HeroSection() {
         <img
           src={heroBg}
           alt=""
-          className="hidden md:block h-full w-full object-cover opacity-35"
-          loading="lazy"
+          className="h-full w-full object-cover object-[center_30%] opacity-25 md:opacity-35 md:object-center"
+          loading="eager"
           decoding="async"
           fetchPriority="low"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/70 to-navy-950/50" />
-        <ScientificBackdrop variant="dark" className="opacity-90" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-glow pointer-events-none" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/90 via-navy-950/75 to-navy-950 md:bg-gradient-to-r md:from-navy-950/95 md:via-navy-950/70 md:to-navy-950/50" />
+        <ScientificBackdrop variant="dark" glow className="opacity-90" />
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[min(100%,800px)] h-[280px] md:h-[400px] bg-gradient-glow pointer-events-none"
+          aria-hidden
+        />
       </div>
 
-      <Container className="relative z-10 py-16 md:py-24 lg:py-28">
+      <Container className="relative z-10 py-12 md:py-24 lg:py-28">
         <GlassPanel variant="dark" padding="none" className="overflow-hidden shadow-glow">
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.85fr)] items-center">
             <motion.div
-              className="p-8 md:p-12 lg:p-12 lg:pr-8"
+              className="p-6 sm:p-8 md:p-12 lg:p-12 lg:pr-8"
               variants={staggerContainerVariants()}
               initial="hidden"
               animate="visible"
@@ -57,21 +60,21 @@ export function HeroSection() {
                 {t('hero.eyebrow')}
               </motion.p>
 
-              <motion.h1 variants={staggerItemVariants()} className="text-display text-white mb-6">
+              <motion.h1 variants={staggerItemVariants()} className="text-display text-white mb-5 md:mb-6">
                 {t('hero.title')}{' '}
                 <span className="text-gradient-brand">{t('hero.titleHighlight')}</span>
               </motion.h1>
 
               <motion.p
                 variants={staggerItemVariants()}
-                className="text-silver-400 text-sm md:text-base leading-relaxed mb-8 max-w-lg"
+                className="text-silver-400 text-sm md:text-base leading-relaxed mb-7 md:mb-8 max-w-lg"
               >
                 {t('hero.subtitle')}
               </motion.p>
 
               <motion.div
                 variants={staggerItemVariants()}
-                className="flex flex-col sm:flex-row lg:flex-nowrap gap-3 mb-10"
+                className="flex flex-col sm:flex-row lg:flex-nowrap gap-3 mb-8 md:mb-10"
               >
                 <LocaleLink
                   to="/shop"
@@ -94,7 +97,10 @@ export function HeroSection() {
                 </Button>
               </motion.div>
 
-              <motion.ul variants={staggerItemVariants()} className="flex flex-nowrap items-center gap-2 overflow-x-auto">
+              <motion.ul
+                variants={staggerItemVariants()}
+                className="flex flex-nowrap items-center gap-2 overflow-x-auto pb-1 -mx-1 px-1 scrollbar-none"
+              >
                 {trustPills.map(({ icon: Icon, label }) => (
                   <li
                     key={label}
@@ -107,16 +113,16 @@ export function HeroSection() {
               </motion.ul>
             </motion.div>
 
-            <div className="relative flex items-center justify-center p-6 lg:p-8 min-h-[220px] lg:min-h-0">
+            <div className="relative flex items-center justify-center px-6 pb-8 pt-2 lg:p-8 min-h-[200px] sm:min-h-[220px] lg:min-h-0">
               {!reduceMotion ? (
                 <motion.div
-                  className="absolute w-52 h-52 rounded-full bg-brand-400/25 blur-3xl"
+                  className="absolute w-40 h-40 sm:w-52 sm:h-52 rounded-full bg-brand-400/30 blur-3xl"
                   animate={{ scale: [1, 1.12, 1], opacity: [0.4, 0.55, 0.4] }}
                   transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
                   aria-hidden
                 />
               ) : (
-                <div className="absolute w-52 h-52 rounded-full bg-brand-400/25 blur-3xl" aria-hidden />
+                <div className="absolute w-40 h-40 sm:w-52 sm:h-52 rounded-full bg-brand-400/30 blur-3xl" aria-hidden />
               )}
               <motion.img
                 src={vialsHero}
@@ -126,7 +132,7 @@ export function HeroSection() {
                 variants={fadeUpVariants()}
                 initial="hidden"
                 animate="visible"
-                className="relative z-10 w-full max-w-[22rem] sm:max-w-[26rem] lg:max-w-[30rem] aspect-[16/9] object-contain drop-shadow-[0_24px_48px_rgba(45,181,163,0.35)]"
+                className="relative z-10 w-full max-w-[18rem] sm:max-w-[26rem] lg:max-w-[30rem] aspect-[16/9] object-contain drop-shadow-[0_24px_48px_rgba(45,181,163,0.35)]"
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"

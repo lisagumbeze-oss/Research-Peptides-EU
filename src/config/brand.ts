@@ -2,6 +2,7 @@
 
 export const BRAND_NAME = 'Research Peptides EU';
 export const BRAND_SHORT = 'Research Peptides EU';
+export const LEGAL_ENTITY = 'Research Peptides EU B.V.';
 
 export const SUPPORT_EMAIL =
   import.meta.env.VITE_SUPPORT_EMAIL || 'info@researchpeptide.eu';
@@ -9,5 +10,29 @@ export const SUPPORT_EMAIL =
 export const SITE_URL =
   import.meta.env.VITE_SITE_URL || 'https://www.researchpeptide.eu';
 
-export const LEGAL_ENTITY = 'Research Peptides EU B.V.';
+/** Single-line NAP for footers and copy */
 export const HQ_LOCATION = 'Markt 34, 5281 AV Boxtel, North Brabant, Netherlands';
+
+/** Structured address — keep in sync with LocalBusiness schema */
+export const HQ_ADDRESS = {
+  streetAddress: 'Markt 34',
+  postalCode: '5281 AV',
+  addressLocality: 'Boxtel',
+  addressRegion: 'North Brabant',
+  addressCountry: 'NL',
+} as const;
+
+export const BRAND_DESCRIPTION =
+  'Premium research-grade peptides and compounds for European laboratories. Third-party tested, EUR pricing, EU distribution from the Netherlands. Laboratory research use only.';
+
+/** Absolute default social / schema image (served from /public) */
+export function defaultOgImageUrl(origin = SITE_URL.replace(/\/+$/, '')): string {
+  return `${origin}/brand_logo.png`;
+}
+
+export function siteOriginFromConfig(): string {
+  return SITE_URL.replace(/\/+$/, '').replace(
+    '://researchpeptide.eu',
+    '://www.researchpeptide.eu',
+  );
+}

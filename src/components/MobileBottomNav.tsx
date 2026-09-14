@@ -25,7 +25,7 @@ export default function MobileBottomNav() {
 
   return (
     <nav
-      className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-brand-100 pb-safe shadow-[0_-4px_24px_rgba(10,15,30,0.06)]"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-brand-100 pb-safe px-safe shadow-[0_-4px_24px_rgba(10,15,30,0.06)]"
       aria-label="Mobile primary navigation"
     >
       <div className="flex justify-around items-center h-16 px-2">

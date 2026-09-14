@@ -8,6 +8,8 @@ import { buttonClassName, Reveal } from '../design-system';
 import { accordionMotion } from '../design-system/motion';
 import { cn } from '../lib/utils';
 import { usePageSeo } from '../seo/SeoProvider';
+import { AnswerCapsule } from '../components/seo/AnswerCapsule';
+import { HQ_LOCATION, SUPPORT_EMAIL } from '../config/brand';
 
 const GROUP_META = [
   { key: 'product', icon: FlaskConical },
@@ -29,6 +31,10 @@ export default function FAQ() {
   );
 
   usePageSeo({
+    title: 'FAQ | Research Peptides EU',
+    description:
+      'Answers on research-use policies, EU shipping, purity testing, and ordering research peptides from Research Peptides EU.',
+    canonicalPath: '/faq',
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -56,12 +62,18 @@ export default function FAQ() {
       subtitle={t('faq.subtitle')}
       icon={<HelpCircle className="h-4 w-4" aria-hidden />}
     >
-      {/* Answer Capsule for GEO Optimization */}
-      <Reveal className="bg-brand-50 border-l-4 border-brand-500 p-6 rounded-r-2xl mb-10 text-left shadow-sm">
-        <p className="text-navy-950 font-bold text-lg mb-2">Quick Answer: Shipping & Quality</p>
-        <p className="text-steel-700 font-medium leading-relaxed">
-          Research Peptides EU ships exclusively within Europe using temperature-controlled logistics to ensure peptide stability. All batches undergo rigorous third-party HPLC and MS testing, guaranteeing a minimum of 99% purity for your laboratory research.
-        </p>
+      <Reveal className="mb-10">
+        <AnswerCapsule title="Quick answer: shipping, purity, and research use">
+          <p>
+            Research Peptides EU supplies research-grade peptides for laboratory use only — not for human
+            consumption. Orders dispatch from the Netherlands ({HQ_LOCATION}) across the EU with EUR pricing.
+            Batches emphasize third-party testing; see the{' '}
+            <LocaleLink to="/coas" className="text-brand-700 font-semibold hover:underline">
+              COA library
+            </LocaleLink>{' '}
+            and contact {SUPPORT_EMAIL} for order questions.
+          </p>
+        </AnswerCapsule>
       </Reveal>
 
       {GROUP_META.map((group, groupIdx) => {

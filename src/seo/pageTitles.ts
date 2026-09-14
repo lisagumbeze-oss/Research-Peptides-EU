@@ -18,6 +18,13 @@ export const PAGE_TITLES: Record<string, TitleEntry> = {
     es: 'Comprar péptidos en España y Europa | Catálogo de investigación',
   },
   '/categories': { en: 'Categories', nl: 'Categorieën', de: 'Kategorien', fr: 'Catégories', es: 'Categorías de péptidos' },
+  '/peptide-guide': {
+    en: 'Peptide Guide',
+    nl: 'Peptide-gids',
+    de: 'Peptid-Leitfaden',
+    fr: 'Guide des peptides',
+    es: 'Guía de péptidos',
+  },
   '/search': { en: 'Search', nl: 'Zoeken', de: 'Suche', fr: 'Recherche', es: 'Buscar péptidos' },
   '/cart': { en: 'Cart', nl: 'Winkelwagen', de: 'Warenkorb', fr: 'Panier', es: 'Carrito' },
   '/checkout': { en: 'Checkout', nl: 'Afrekenen', de: 'Kasse', fr: 'Paiement', es: 'Pago' },

@@ -3,7 +3,8 @@
  * Served via rewrite from /sitemap.xml so Content-Type and host stay correct.
  */
 type ProductRow = { slug: string | null };
-type BlogRow = { id: string };
+type CategoryRow = { slug: string | null };
+type BlogRow = { id: string; title?: string | null; slug?: string | null };
 
 const LOCALES = [
   'en',
@@ -113,9 +114,10 @@ async function supabaseRows<T>(table: string, select: string, limit: number): Pr
 
 async function buildSitemapXml(): Promise<string> {
   const origin = siteOrigin();
-  const [products, blogs] = await Promise.all([
+  const [products, categories, blogs] = await Promise.all([
     supabaseRows<ProductRow>('products', 'slug', 2000),
-    supabaseRows<BlogRow>('blog_posts', 'id', 500),
+    supabaseRows<CategoryRow>('categories', 'slug', 500),
+    supabaseRows<BlogRow>('blog_posts', 'id,title,slug', 500),
   ]);
 
   const entries: string[] = [];
@@ -124,6 +126,11 @@ async function buildSitemapXml(): Promise<string> {
     const changefreq = p === '/' || p === '/shop' ? 'daily' : 'weekly';
     entries.push(urlEntry(origin, p, priority, changefreq));
   }
+  for (const row of categories) {
+    const slug = (row.slug || '').trim();
+    if (!slug) continue;
+    entries.push(urlEntry(origin, `/category/${slug}`, '0.85', 'weekly'));
+  }
   for (const row of products) {
     const slug = (row.slug || '').trim();
     if (!slug) continue;
@@ -131,7 +138,19 @@ async function buildSitemapXml(): Promise<string> {
   }
   for (const row of blogs) {
     if (!row.id) continue;
-    entries.push(urlEntry(origin, `/blog/${row.id}`, '0.6', 'weekly'));
+    const explicit = (row.slug || '').trim();
+    if (explicit) {
+      entries.push(urlEntry(origin, `/blog/${explicit}`, '0.6', 'weekly'));
+      continue;
+    }
+    const base =
+      String(row.title || 'post')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 80) || 'post';
+    const shortId = String(row.id).replace(/-/g, '').slice(0, 8);
+    entries.push(urlEntry(origin, `/blog/${base}-${shortId}`, '0.6', 'weekly'));
   }
 
   return `<?xml version="1.0" encoding="UTF-8"?>

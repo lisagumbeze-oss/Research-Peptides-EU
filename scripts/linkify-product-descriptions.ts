@@ -6,9 +6,11 @@
  * - Uses markdown [anchor](href) — rendered by ProductDescriptionCards
  *
  * Usage:
- *   npx tsx scripts/linkify-product-descriptions.ts            # dry-run
- *   npx tsx scripts/linkify-product-descriptions.ts --apply    # write Supabase
- *   npx tsx scripts/linkify-product-descriptions.ts --limit 5
+ *   npx tsx scripts/linkify-product-descriptions.ts            # dry-run (file payload)
+ *   npx tsx scripts/linkify-product-descriptions.ts --apply
+ *   npx tsx scripts/linkify-product-descriptions.ts --slugs=glp-3-pen-40mg --apply
+ *   npx tsx scripts/linkify-product-descriptions.ts --from-db --apply
+ *   npx tsx scripts/linkify-product-descriptions.ts --limit=5
  */
 import 'dotenv/config';
 import fs from 'node:fs';
@@ -108,6 +110,18 @@ const RELATED: Record<string, RelatedLink[]> = {
     { slug: 'semaglutide-glp-1', anchor: 'Semaglutide research peptide' },
     { slug: 'tirzepatide', anchor: 'Tirzepatide research peptide' },
     { slug: 'gagrilintide-5mg', anchor: 'Cagrilintide research peptide' },
+    { slug: 'glp-3-pen-40mg', anchor: 'Retatrutide GLP-3 pen 40mg' },
+  ],
+  'glp-3-pen-40mg': [
+    { slug: 'retatrutide-glp-3', anchor: 'Retatrutide research peptide' },
+    { slug: 'semaglutide-glp-1', anchor: 'Semaglutide GLP-1 research peptide' },
+    { slug: 'tirzepatide', anchor: 'Tirzepatide research peptide' },
+    { slug: 'gagrilintide-5mg', anchor: 'Cagrilintide research peptide' },
+  ],
+  'tesamorelin-13mg-ipamorelin-3mg-16mg-blend': [
+    { slug: 'tesamorelin', anchor: 'Tesamorelin research peptide' },
+    { slug: 'ipamorelin', anchor: 'Ipamorelin research peptide' },
+    { slug: 'tesamorelin-5mg-ipamorelin-5mg-10mg-total-peptide-blend', anchor: 'Tesamorelin Ipamorelin 5mg/5mg blend' },
   ],
   'semaglutide-glp-1': [
     { slug: 'retatrutide-glp-3', anchor: 'Retatrutide research peptide' },
@@ -254,7 +268,12 @@ function aliasesForSlug(slug: string): string[] {
       out.add('GHK Cu');
     }
     if (/^kpv$/i.test(slug)) out.add('KPV peptide');
-    if (/retatrutide/i.test(slug)) out.add('Retatrutide');
+    if (/retatrutide/i.test(slug) && !/pen/i.test(slug)) out.add('Retatrutide');
+    if (/glp-3-pen/i.test(slug)) {
+      out.add('GLP-3 pen');
+      out.add('Retatrutide GLP-3 pen');
+      out.add('Retatrutide pen');
+    }
     if (/semaglutide/i.test(slug)) out.add('Semaglutide');
     if (/tirzepatide/i.test(slug)) out.add('Tirzepatide');
     if (/igf-1-lr3/i.test(slug)) {
@@ -604,7 +623,59 @@ function linkifyDescription(
 }
 
 async function main() {
-  const payloads = JSON.parse(fs.readFileSync(PAYLOAD_PATH, 'utf8')) as Record<string, string>;
+  const fromDb = process.argv.includes('--from-db');
+  const slugsArg = process.argv.find((a) => a.startsWith('--slugs='));
+  const onlySlugs = slugsArg
+    ? slugsArg
+        .slice('--slugs='.length)
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean)
+    : null;
+
+  let payloads: Record<string, string> = {};
+  if (fromDb || onlySlugs) {
+    const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!url || !key) throw new Error('Missing SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY');
+    const supabase = createClient(url, key);
+    let q = supabase.from('products').select('slug, description');
+    if (onlySlugs?.length) q = q.in('slug', onlySlugs);
+    const { data, error } = await q;
+    if (error) throw new Error(error.message);
+    for (const row of data || []) {
+      if (row.slug && row.description) payloads[row.slug] = String(row.description);
+    }
+    // Alias index still needs the full synced catalog for cross-links
+    if (fs.existsSync(PAYLOAD_PATH)) {
+      const filePayloads = JSON.parse(fs.readFileSync(PAYLOAD_PATH, 'utf8')) as Record<string, string>;
+      for (const [slug, desc] of Object.entries(filePayloads)) {
+        if (!(slug in payloads)) payloads[slug] = desc;
+      }
+      // When --slugs is set, only transform those rows (keep others for alias graph only)
+      if (onlySlugs?.length) {
+        const aliasSlugs = Object.keys(payloads);
+        const aliases = buildAliasIndex(aliasSlugs);
+        const results: Record<string, { inbound: number; outbound: number; notes: string[]; preview?: string }> = {};
+        const updated: Record<string, string> = {};
+        for (const slug of onlySlugs) {
+          const raw = payloads[slug];
+          if (!raw) {
+            console.warn('missing description', slug);
+            continue;
+          }
+          const { text, inbound, outbound, notes } = linkifyDescription(slug, raw, aliases, aliasSlugs);
+          updated[slug] = text;
+          results[slug] = { inbound, outbound, notes, preview: text.slice(0, 400) };
+        }
+        await finish(updated, results, APPLY);
+        return;
+      }
+    }
+  } else {
+    payloads = JSON.parse(fs.readFileSync(PAYLOAD_PATH, 'utf8')) as Record<string, string>;
+  }
+
   const slugs = Object.keys(payloads);
   const aliases = buildAliasIndex(slugs);
 
@@ -633,6 +704,14 @@ async function main() {
     };
   }
 
+  await finish(updated, results, APPLY);
+}
+
+async function finish(
+  updated: Record<string, string>,
+  results: Record<string, { inbound: number; outbound: number; notes: string[]; preview?: string }>,
+  apply: boolean,
+) {
   fs.mkdirSync(OUT_DIR, { recursive: true });
   const outPayload = path.join(OUT_DIR, 'linkified-description-payloads.json');
   const outReport = path.join(OUT_DIR, 'linkified-description-report.json');
@@ -647,15 +726,17 @@ async function main() {
     },
     { inbound: 0, outbound: 0 },
   );
+  const n = Math.max(Object.keys(results).length, 1);
 
   console.log(
     JSON.stringify(
       {
-        mode: APPLY ? 'apply' : 'dry-run',
+        mode: apply ? 'apply' : 'dry-run',
         products: Object.keys(results).length,
         totals,
-        avgInbound: +(totals.inbound / Object.keys(results).length).toFixed(2),
-        avgOutbound: +(totals.outbound / Object.keys(results).length).toFixed(2),
+        avgInbound: +(totals.inbound / n).toFixed(2),
+        avgOutbound: +(totals.outbound / n).toFixed(2),
+        results,
         outPayload,
         outReport,
       },
@@ -664,7 +745,7 @@ async function main() {
     ),
   );
 
-  if (!APPLY) {
+  if (!apply) {
     console.log('Dry-run only. Re-run with --apply to write Supabase.');
     return;
   }

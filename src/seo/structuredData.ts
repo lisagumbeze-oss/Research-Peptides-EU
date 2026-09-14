@@ -1,32 +1,113 @@
-import { BRAND_NAME, SITE_URL, SUPPORT_EMAIL } from '../config/brand';
+import {
+  BRAND_DESCRIPTION,
+  BRAND_NAME,
+  HQ_ADDRESS,
+  LEGAL_ENTITY,
+  SUPPORT_EMAIL,
+  defaultOgImageUrl,
+  siteOriginFromConfig,
+} from '../config/brand';
 import { DEFAULT_CURRENCY } from '../lib/currency';
 import { pathWithLocale } from '../i18n/routing';
 import type { LocaleCode } from '../i18n/locales';
 import { productPath } from '../lib/productUrl';
 
 export function siteOrigin(): string {
-  return SITE_URL.replace(/\/+$/, '');
+  return siteOriginFromConfig();
+}
+
+export function defaultOgImage(): string {
+  return defaultOgImageUrl(siteOrigin());
 }
 
 export function organizationJsonLd() {
+  const origin = siteOrigin();
+  const logo = defaultOgImage();
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${origin}/#organization`,
     name: BRAND_NAME,
-    url: siteOrigin(),
+    legalName: LEGAL_ENTITY,
+    url: origin,
     email: SUPPORT_EMAIL,
-    areaServed: 'European Union',
+    logo: {
+      '@type': 'ImageObject',
+      url: logo,
+    },
+    image: logo,
+    description: BRAND_DESCRIPTION,
+    areaServed: {
+      '@type': 'Place',
+      name: 'European Union',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      ...HQ_ADDRESS,
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: SUPPORT_EMAIL,
+      areaServed: 'EU',
+      availableLanguage: ['en', 'nl', 'de', 'fr', 'es'],
+    },
   };
 }
 
 export function websiteJsonLd(locale: LocaleCode) {
+  const origin = siteOrigin();
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${origin}/#website`,
     name: BRAND_NAME,
-    url: `${siteOrigin()}${pathWithLocale(locale, '/')}`,
+    url: `${origin}${pathWithLocale(locale, '/')}`,
     inLanguage: locale,
+    publisher: { '@id': `${origin}/#organization` },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${origin}${pathWithLocale(locale, '/search')}?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
   };
+}
+
+export function localBusinessJsonLd() {
+  const origin = siteOrigin();
+  const logo = defaultOgImage();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${origin}/#localbusiness`,
+    name: BRAND_NAME,
+    legalName: LEGAL_ENTITY,
+    url: origin,
+    email: SUPPORT_EMAIL,
+    logo,
+    image: logo,
+    description: BRAND_DESCRIPTION,
+    address: {
+      '@type': 'PostalAddress',
+      ...HQ_ADDRESS,
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: SUPPORT_EMAIL,
+      areaServed: 'EU',
+      availableLanguage: ['en', 'nl', 'de', 'fr', 'es'],
+    },
+    areaServed: {
+      '@type': 'Place',
+      name: 'European Union',
+    },
+  };
+}
+
+/** Single source for global entity graphs — use once per page (LocaleHead only). */
+export function globalEntityJsonLd(locale: LocaleCode) {
+  return [organizationJsonLd(), websiteJsonLd(locale), localBusinessJsonLd()];
 }
 
 type ProductRow = {
@@ -53,7 +134,7 @@ export function productJsonLd(product: ProductRow, locale: LocaleCode) {
     '@type': 'Product',
     name: product.title,
     description: product.description ?? undefined,
-    image: images.length ? images : undefined,
+    image: images.length ? images : [defaultOgImage()],
     sku: product.slug ?? String(product.id),
     url,
     brand: { '@type': 'Brand', name: BRAND_NAME },

@@ -119,25 +119,59 @@ async function productPaths(): Promise<string[]> {
     .filter((p): p is string => Boolean(p));
 }
 
+async function categoryPaths(): Promise<string[]> {
+  const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return [];
+  const supabase = createClient(url, key);
+  const { data, error } = await supabase
+    .from('categories')
+    .select('slug')
+    .not('slug', 'is', null)
+    .limit(500);
+  if (error) return [];
+  return (data ?? [])
+    .map((row) => (row.slug ? `/category/${String(row.slug).trim()}` : null))
+    .filter((p): p is string => Boolean(p));
+}
+
 async function blogPaths(): Promise<string[]> {
   const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) return [];
   const supabase = createClient(url, key);
-  const { data, error } = await supabase.from('blog_posts').select('id').limit(500);
+  const { data, error } = await supabase.from('blog_posts').select('id, title, slug').limit(500);
   if (error) return [];
-  return (data ?? []).map((row) => `/blog/${row.id}`);
+  return (data ?? []).map((row) => {
+    const explicit = row.slug && String(row.slug).trim();
+    if (explicit) return `/blog/${explicit}`;
+    // Stable derived slug (matches src/lib/blogUrl.ts)
+    const base = String(row.title || 'post')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 80) || 'post';
+    const shortId = String(row.id || '').replace(/-/g, '').slice(0, 8);
+    return `/blog/${base}-${shortId}`;
+  });
 }
 
 async function main() {
-  const productRoutes = await productPaths();
-  const blogRoutes = await blogPaths();
+  const [productRoutes, categoryRoutes, blogRoutes] = await Promise.all([
+    productPaths(),
+    categoryPaths(),
+    blogPaths(),
+  ]);
   const entries: string[] = [];
 
   for (const p of STATIC_PATHS) {
     const priority = p === '/' ? '1.0' : p === '/shop' ? '0.9' : '0.7';
     const changefreq = p === '/' || p === '/shop' ? 'daily' : 'weekly';
     entries.push(urlEntry(p, priority, changefreq));
+  }
+
+  for (const p of categoryRoutes) {
+    entries.push(urlEntry(p, '0.85', 'weekly'));
   }
 
   for (const p of productRoutes) {
