@@ -14,6 +14,7 @@ import { productPath } from '../lib/productUrl';
 import { Container, Reveal } from '../design-system';
 import { ProductGallery } from '../components/product-detail/ProductGallery';
 import { ProductPurchasePanel } from '../components/product-detail/ProductPurchasePanel';
+import { ProductDescriptionCards } from '../components/product-detail/ProductDescriptionCards';
 import { ProductRecommendations } from '../components/product-detail/ProductRecommendations';
 import { useProductCatalogActions } from '../hooks/useProductCatalogActions';
 import type { CatalogProduct } from '../components/products/ProductCard';
@@ -21,6 +22,8 @@ import { usePageSeo } from '../seo/SeoProvider';
 import { breadcrumbJsonLd, productJsonLd } from '../seo/structuredData';
 import type { LocaleCode } from '../i18n/locales';
 import { localizedProductDescription, localizedProductTitle } from '../lib/localizedProduct';
+import { productDescriptionSummary } from '../lib/parseProductDescription';
+import { productDisplaySocialProof } from '../lib/productDisplaySocialProof';
 import { findCachedProduct, rememberProduct } from '../lib/catalogCache';
 import { stripLocaleFromPath } from '../i18n/routing';
 
@@ -66,6 +69,14 @@ export default function ProductDetails() {
 
   const displayTitle = product ? localizedProductTitle(product, locale) : '';
   const displayDescription = product ? localizedProductDescription(product, locale) : '';
+  const descriptionTeaser = useMemo(
+    () => productDescriptionSummary(displayDescription),
+    [displayDescription],
+  );
+  const socialProof = useMemo(
+    () => productDisplaySocialProof(product?.id ?? product?.slug),
+    [product?.id, product?.slug],
+  );
 
   const seoConfig = useMemo(() => {
     if (!product) return null;
@@ -244,11 +255,11 @@ export default function ProductDetails() {
 
           <ProductPurchasePanel
             title={displayTitle}
-            description={displayDescription}
+            description={descriptionTeaser}
             currentPrice={currentPrice}
             compareWas={compareWas}
-            reviewCount={reviews.length}
-            rating={product.rating}
+            reviewCount={socialProof.reviewCount}
+            rating={socialProof.rating}
             quantity={quantity}
             onQuantityChange={setQuantity}
             variants={product.variants || []}
@@ -263,6 +274,8 @@ export default function ProductDetails() {
             onCopyLink={copyLink}
           />
         </div>
+
+        <ProductDescriptionCards description={displayDescription} productTitle={displayTitle} />
 
         <Reveal as="section" className="rounded-3xl bg-white/90 backdrop-blur-sm border border-brand-100 p-8 md:p-12 shadow-card mb-16">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">

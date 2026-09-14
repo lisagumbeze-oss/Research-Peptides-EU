@@ -1,12 +1,14 @@
 import { LocaleLink } from '../../i18n/LocaleLink';
 import { Heart, ShoppingCart } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
+import { useMemo } from 'react';
 import { Card } from '../../design-system';
 import { ProductBadge } from './ProductBadge';
 import { ProductCardRating } from './ProductCardRating';
 import { ProductImagePlaceholder } from './ProductImagePlaceholder';
 import { ProductCardPriceBlock } from './ProductCardPriceBlock';
 import { getPrimaryProductBadge } from '../../lib/productBadges';
+import { productDisplaySocialProof } from '../../lib/productDisplaySocialProof';
 import { productPath } from '../../lib/productUrl';
 import { staggerDelay } from '../../design-system/motion';
 import { cn } from '../../lib/utils';
@@ -52,6 +54,10 @@ export function ProductCard({
   const lowStock = Number(product.inventory) < 10;
   const categoryLabel = product.categories?.[0];
   const reduceMotion = useReducedMotion();
+  const socialProof = useMemo(
+    () => productDisplaySocialProof(product.id || product.slug),
+    [product.id, product.slug],
+  );
 
   const card = (
     <Card
@@ -118,8 +124,8 @@ export function ProductCard({
           {product.title}
         </LocaleLink>
         <ProductCardRating
-          rating={product.rating}
-          reviewCount={product.review_count}
+          rating={socialProof.rating}
+          reviewCount={socialProof.reviewCount}
           className="mt-2 mb-2"
           starClassName="h-3.5 w-3.5"
         />

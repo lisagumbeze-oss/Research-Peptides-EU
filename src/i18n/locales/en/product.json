@@ -3,6 +3,12 @@
     "title": "Product not found",
     "cta": "Return to shop"
   },
+  "dossier": {
+    "eyebrow": "Research profile",
+    "title": "Compound dossier",
+    "subtitle": "Structured laboratory notes for {{title}}.",
+    "sectionCount": "{{count}} sections"
+  },
   "reviews": {
     "eyebrow": "Researcher community",
     "title": "Verified reviews",

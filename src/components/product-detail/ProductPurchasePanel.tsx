@@ -9,7 +9,6 @@ import {
   Share2,
   ShieldCheck,
   ShoppingCart,
-  Star,
   Truck,
   Zap,
 } from 'lucide-react';
@@ -17,6 +16,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { Button, Badge } from '../../design-system';
 import { accordionMotion, fadeUpVariants } from '../../design-system/motion';
 import { ProductBadge } from '../products/ProductBadge';
+import { StarRow } from '../products/ProductCardRating';
 import { formatCurrency } from '../../lib/utils';
 import { cn } from '../../lib/utils';
 
@@ -179,14 +179,12 @@ export function ProductPurchasePanel({
       </div>
 
       <div className="flex items-center gap-2">
-        <div className="flex text-warning">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className={cn('h-4 w-4', i < Math.round(rating) ? 'fill-current' : 'text-brand-100')}
-            />
-          ))}
-        </div>
+        <StarRow
+          rating={rating}
+          starClassName="h-4 w-4"
+          filledClassName="text-warning"
+          emptyClassName="text-brand-100"
+        />
         <span className="text-sm text-steel-600">{t('purchase.reviewsCount', { count: reviewCount })}</span>
       </div>
 
