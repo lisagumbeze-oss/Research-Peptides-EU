@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { FlaskConical } from 'lucide-react';
 import { Reveal } from '../../design-system';
 import { parseProductDescription } from '../../lib/parseProductDescription';
+import { renderLinkedText } from '../../lib/renderLinkedText';
 import { cn } from '../../lib/utils';
 
 type ProductDescriptionCardsProps = {
@@ -79,7 +80,7 @@ export function ProductDescriptionCards({
             {section.body ? (
               <div className="text-sm text-steel-600 leading-relaxed space-y-3 flex-1">
                 {section.body.split(/\n{2,}/).map((para, i) => (
-                  <p key={i}>{para}</p>
+                  <p key={i}>{renderLinkedText(para)}</p>
                 ))}
               </div>
             ) : null}
@@ -89,7 +90,7 @@ export function ProductDescriptionCards({
                 {section.bullets.map((item) => (
                   <li key={item} className="flex gap-2 text-sm text-steel-600 leading-snug">
                     <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-brand-500 shrink-0" aria-hidden />
-                    <span>{item}</span>
+                    <span>{renderLinkedText(item)}</span>
                   </li>
                 ))}
               </ul>

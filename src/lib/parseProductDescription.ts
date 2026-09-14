@@ -6,7 +6,7 @@ export type DescriptionSection = {
 };
 
 const KNOWN_HEADING =
-  /^(Overview|What Is\b.+|Research Context|Product Notes|Important|Key Features?|Specifications?|Storage(?: and Handling)?|Applications?|Research Applications?|Mechanism(?: of Action)?(?: in Laboratory Studies)?|Molecular and Chemical Composition|Advantages of Using\b.+|Laboratory Use|Research Use|Composition|Dosage Form|Purity|Handling|How (?:It|to)\b.+)\b/i;
+  /^(Overview|What Is\b.+|Research Context|Product Notes|Important|Key Features?|Specifications?|Storage(?: and Handling)?|Applications?|Research Applications?|Mechanism(?: of Action)?(?: in Laboratory Studies)?|Molecular and Chemical Composition|Advantages of Using\b.+|Laboratory Use|Research Use|Composition|Dosage Form|Purity|Handling|How (?:It|to)\b.+|Related Research Compounds|Scientific References|References|Disclaimer|Research Use Disclaimer)\b/i;
 
 function normalizeBullets(text: string): string {
   return text
