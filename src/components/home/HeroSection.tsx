@@ -120,13 +120,13 @@ export function HeroSection() {
               )}
               <motion.img
                 src={vialsHero}
-                alt="Premium research peptide vials"
-                width={384}
-                height={384}
+                alt="Research Peptides EU — Retatrutide and Semaglutide research vials"
+                width={640}
+                height={360}
                 variants={fadeUpVariants()}
                 initial="hidden"
                 animate="visible"
-                className="relative z-10 w-full max-w-[18rem] sm:max-w-[20rem] lg:max-w-[22rem] aspect-square object-contain drop-shadow-[0_24px_48px_rgba(67,87,214,0.35)]"
+                className="relative z-10 w-full max-w-[22rem] sm:max-w-[26rem] lg:max-w-[30rem] aspect-[16/9] object-contain drop-shadow-[0_24px_48px_rgba(45,181,163,0.35)]"
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"

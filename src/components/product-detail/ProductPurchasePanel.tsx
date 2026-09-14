@@ -3,6 +3,7 @@ import { LocaleLink } from '../../i18n/LocaleLink';
 import { useTranslation } from 'react-i18next';
 import {
   CheckCircle2,
+  ChevronDown,
   Heart,
   LinkIcon,
   Share2,
@@ -215,31 +216,51 @@ export function ProductPurchasePanel({
 
       {variants.length > 0 && (
         <div className="p-4 rounded-2xl bg-mist-50 border border-brand-100">
-          <h3 className="text-caption text-brand-600 mb-3">{t('purchase.specification')}</h3>
-          <div className="flex flex-wrap gap-2">
-            {variants.map((v, i) => {
-              const label =
-                v.attributes?.attribute_pa_peptides ||
-                v.display_name ||
-                t('purchase.variantFallback', { index: i + 1 });
-              const selected = selectedVariant?.variation_id === v.variation_id;
-              return (
-                <button
-                  key={v.variation_id || i}
-                  type="button"
-                  onClick={() => onSelectVariant(v)}
-                  className={cn(
-                    'px-4 py-2 rounded-xl text-sm font-semibold border-2 transition-colors motion-safe:active:scale-[0.98]',
-                    selected
-                      ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-card'
-                      : 'border-brand-100 bg-white text-steel-600 hover:border-brand-300',
-                  )}
-                  aria-pressed={selected}
-                >
-                  {label}
-                </button>
-              );
-            })}
+          <label
+            htmlFor="product-specification"
+            className="text-caption text-brand-600 mb-3 block"
+          >
+            {t('purchase.specification')}
+          </label>
+          <div className="relative">
+            <select
+              id="product-specification"
+              value={
+                selectedVariant?.variation_id ??
+                variants[0]?.variation_id ??
+                '0'
+              }
+              onChange={(e) => {
+                const value = e.target.value;
+                const next =
+                  variants.find((v, i) => String(v.variation_id ?? i) === value) ??
+                  variants[0];
+                if (next) onSelectVariant(next);
+              }}
+              className={cn(
+                'w-full h-12 appearance-none rounded-xl border-2 border-brand-100 bg-white',
+                'pl-4 pr-10 text-sm font-semibold text-navy-950',
+                'transition-[border-color,box-shadow] duration-200',
+                'focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-500',
+                'hover:border-brand-300',
+              )}
+            >
+              {variants.map((v, i) => {
+                const label =
+                  v.attributes?.attribute_pa_peptides ||
+                  v.display_name ||
+                  t('purchase.variantFallback', { index: i + 1 });
+                return (
+                  <option key={v.variation_id || i} value={String(v.variation_id ?? i)}>
+                    {label}
+                  </option>
+                );
+              })}
+            </select>
+            <ChevronDown
+              className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-600"
+              aria-hidden
+            />
           </div>
         </div>
       )}
