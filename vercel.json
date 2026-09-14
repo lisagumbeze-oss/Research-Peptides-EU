@@ -22,7 +22,7 @@
     },
     {
       "source": "/((?!api/|assets/|favicon|src/|sitemap\\.xml|sitemaps\\.xml|robots\\.txt|prerender-manifest\\.json|.*\\.(?:xml|txt|ico|png|jpg|jpeg|webp|svg|gif|webmanifest|js|css|map)$).*)",
-      "destination": "/index.html"
+      "destination": "/index"
     }
   ],
   "headers": [
