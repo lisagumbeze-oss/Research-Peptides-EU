@@ -28,8 +28,8 @@ const DEFAULT_OG = `${SITE_ORIGIN}/brand_logo.png`;
 const BRAND_DESCRIPTION =
   'Premium research-grade peptides and compounds for European laboratories. Third-party tested, EUR pricing, EU distribution from the Netherlands. Laboratory research use only.';
 const HQ_ADDRESS = {
-  streetAddress: 'Markt 34',
-  postalCode: '5281 AV',
+  streetAddress: 'Vivaldistraat 19',
+  postalCode: '5283 KP',
   addressLocality: 'Boxtel',
   addressRegion: 'North Brabant',
   addressCountry: 'NL',
@@ -147,11 +147,11 @@ const PAGE_META: Record<
       es: 'Contacto Research Peptides EU',
     },
     blurb: {
-      en: `Reach our team at ${SUPPORT_EMAIL}. HQ: Markt 34, 5281 AV Boxtel, Netherlands.`,
-      nl: `Neem contact op via ${SUPPORT_EMAIL}. HQ: Markt 34, 5281 AV Boxtel, Nederland.`,
-      de: `Kontakt: ${SUPPORT_EMAIL}. HQ: Markt 34, 5281 AV Boxtel, Niederlande.`,
-      fr: `Contact: ${SUPPORT_EMAIL}. Siège: Markt 34, 5281 AV Boxtel, Pays-Bas.`,
-      es: `Contacto: ${SUPPORT_EMAIL}. Sede: Markt 34, 5281 AV Boxtel, Países Bajos.`,
+      en: `Reach our team at ${SUPPORT_EMAIL}. HQ: Vivaldistraat 19, 5283 KP Boxtel, Netherlands.`,
+      nl: `Neem contact op via ${SUPPORT_EMAIL}. HQ: Vivaldistraat 19, 5283 KP Boxtel, Nederland.`,
+      de: `Kontakt: ${SUPPORT_EMAIL}. HQ: Vivaldistraat 19, 5283 KP Boxtel, Niederlande.`,
+      fr: `Contact: ${SUPPORT_EMAIL}. Siège: Vivaldistraat 19, 5283 KP Boxtel, Pays-Bas.`,
+      es: `Contacto: ${SUPPORT_EMAIL}. Sede: Vivaldistraat 19, 5283 KP Boxtel, Países Bajos.`,
     },
   },
   '/peptide-guide': {
@@ -481,7 +481,7 @@ function buildBodyMain(opts: {
         <p><strong>Research use only.</strong> Not for human consumption. EU laboratory supply.</p>
       </main>
       <footer>
-        <p>${escapeHtml(BRAND)} — Markt 34, 5281 AV Boxtel, Netherlands · <a href="mailto:${escapeAttr(SUPPORT_EMAIL)}">${escapeHtml(SUPPORT_EMAIL)}</a></p>
+        <p>${escapeHtml(BRAND)} — Vivaldistraat 19, 5283 KP Boxtel, Netherlands · <a href="mailto:${escapeAttr(SUPPORT_EMAIL)}">${escapeHtml(SUPPORT_EMAIL)}</a></p>
       </footer>
     </div>
   `.trim();

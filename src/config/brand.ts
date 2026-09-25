@@ -11,12 +11,12 @@ export const SITE_URL =
   import.meta.env.VITE_SITE_URL || 'https://www.researchpeptide.eu';
 
 /** Single-line NAP for footers and copy */
-export const HQ_LOCATION = 'Markt 34, 5281 AV Boxtel, North Brabant, Netherlands';
+export const HQ_LOCATION = 'Vivaldistraat 19, 5283 KP Boxtel, North Brabant, Netherlands';
 
 /** Structured address — keep in sync with LocalBusiness schema */
 export const HQ_ADDRESS = {
-  streetAddress: 'Markt 34',
-  postalCode: '5281 AV',
+  streetAddress: 'Vivaldistraat 19',
+  postalCode: '5283 KP',
   addressLocality: 'Boxtel',
   addressRegion: 'North Brabant',
   addressCountry: 'NL',
