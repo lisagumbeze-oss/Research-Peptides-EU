@@ -28,7 +28,7 @@ function readStoredLocale(): LocaleCode | null {
 }
 
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<LocaleCode>(() => readStoredLocale() ?? detectBrowserLocale());
+  const [locale, setLocaleState] = useState<LocaleCode>(() => readStoredLocale() ?? 'en');
 
   const setLocale = useCallback((code: LocaleCode) => {
     setLocaleState(code);
