@@ -387,18 +387,17 @@ async function main() {
           .eq('slug', row.ourSlug!)
           .maybeSingle();
         if (error) throw new Error(error.message);
-        previous = (data?.description as string | null) ?? null;
+        previous = (data as { description?: string } | null)?.description ?? null;
       }
 
       let applied = false;
       if (apply && supabase) {
-        const { data, error } = await supabase
-          .from('products')
+        const { data, error } = await (supabase.from('products') as any)
           .update({ description: tweaked })
           .eq('slug', row.ourSlug!)
           .select('slug');
         if (error) throw new Error(error.message);
-        if (!data?.length) throw new Error('product slug not found in DB');
+        if (!data || !(data as unknown[]).length) throw new Error('product slug not found in DB');
         applied = true;
       }
 

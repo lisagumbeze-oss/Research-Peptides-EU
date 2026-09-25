@@ -463,7 +463,7 @@ function buildBodyMain(opts: {
   const home = localePath(opts.locale, '/');
   const shop = localePath(opts.locale, '/shop');
   return `
-    <div data-rp-prerender="1">
+    <div data-rp-prerender="1" style="display:none !important;">
       <a href="${escapeAttr(home)}" style="position:absolute;left:-9999px">Skip to content</a>
       <header>
         <p><a href="${escapeAttr(home)}">${escapeHtml(BRAND)}</a></p>
