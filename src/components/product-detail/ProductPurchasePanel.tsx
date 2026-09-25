@@ -19,6 +19,8 @@ import { ProductBadge } from '../products/ProductBadge';
 import { StarRow } from '../products/ProductCardRating';
 import { formatCurrency } from '../../lib/utils';
 import { cn } from '../../lib/utils';
+import { WhatsappIcon } from '../icons/WhatsappIcon';
+import { buildWhatsAppLink } from '../../config/brand';
 
 type Variant = {
   variation_id?: string;
@@ -348,12 +350,12 @@ export function ProductPurchasePanel({
         ))}
       </div>
 
-      <div ref={ctaRef} className="flex gap-3">
+      <div ref={ctaRef} className="flex gap-2 sm:gap-3">
         <div className="flex items-center border border-brand-100 rounded-xl overflow-hidden bg-white shadow-card">
           <button
             type="button"
             onClick={() => onQuantityChange(Math.max(1, quantity - 1))}
-            className="px-4 py-3 text-steel-600 hover:bg-brand-50 motion-safe:active:scale-95 transition-colors"
+            className="px-3.5 py-3 text-steel-600 hover:bg-brand-50 motion-safe:active:scale-95 transition-colors"
             aria-label={t('purchase.decreaseQty')}
           >
             −
@@ -363,13 +365,13 @@ export function ProductPurchasePanel({
             min={1}
             value={quantity}
             onChange={(e) => onQuantityChange(Math.max(1, parseInt(e.target.value, 10) || 1))}
-            className="w-14 text-center font-bold text-navy-950 border-x border-brand-100 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            className="w-12 text-center font-bold text-navy-950 border-x border-brand-100 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             aria-label={t('purchase.quantity')}
           />
           <button
             type="button"
             onClick={() => onQuantityChange(quantity + 1)}
-            className="px-4 py-3 text-steel-600 hover:bg-brand-50 motion-safe:active:scale-95 transition-colors"
+            className="px-3.5 py-3 text-steel-600 hover:bg-brand-50 motion-safe:active:scale-95 transition-colors"
             aria-label={t('purchase.increaseQty')}
           >
             +
@@ -377,7 +379,6 @@ export function ProductPurchasePanel({
         </div>
         <Button
           size="lg"
-          fullWidth
           onClick={handleAddToCartClick}
           className={cn('gap-2 flex-1', justAdded && 'bg-success hover:brightness-100')}
           aria-live="polite"
@@ -389,6 +390,17 @@ export function ProductPurchasePanel({
           )}
           {justAdded ? t('purchase.addedToCart', { defaultValue: 'Added' }) : t('purchase.addToCart')}
         </Button>
+        <a
+          href={buildWhatsAppLink(title, window.location.pathname)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 px-4 py-3 rounded-xl bg-[#25D366] text-white hover:bg-emerald-600 font-semibold shadow-card transition-all motion-safe:active:scale-95 flex items-center justify-center gap-2"
+          aria-label={`Inquire about ${title} on WhatsApp`}
+          title="Inquire on WhatsApp"
+        >
+          <WhatsappIcon className="h-5 w-5" />
+          <span className="hidden sm:inline font-bold">WhatsApp</span>
+        </a>
       </div>
 
       <p className="text-xs text-silver-400 text-center space-y-1">
@@ -416,13 +428,23 @@ export function ProductPurchasePanel({
             role="region"
             aria-label={t('purchase.addToCart')}
           >
-            <div className="pointer-events-auto mx-auto max-w-lg flex items-center gap-3 rounded-2xl border border-brand-100 bg-white/95 backdrop-blur-xl shadow-elevated p-3">
+            <div className="pointer-events-auto mx-auto max-w-lg flex items-center gap-2 rounded-2xl border border-brand-100 bg-white/95 backdrop-blur-xl shadow-elevated p-3">
               <div className="min-w-0 flex-1">
                 <p className="text-xs text-steel-600 truncate">{title}</p>
                 <p className="text-base font-display font-bold text-navy-950 tabular-nums">
                   {formatCurrency(basePrice)}
                 </p>
               </div>
+              <a
+                href={buildWhatsAppLink(title, window.location.pathname)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-xl bg-[#25D366] text-white hover:bg-emerald-600 shadow-card transition-all motion-safe:active:scale-95 flex items-center justify-center shrink-0"
+                aria-label="WhatsApp"
+                title="WhatsApp"
+              >
+                <WhatsappIcon className="h-5 w-5" />
+              </a>
               <Button
                 size="md"
                 onClick={handleAddToCartClick}

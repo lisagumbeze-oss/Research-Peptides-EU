@@ -12,6 +12,8 @@ import { productDisplaySocialProof } from '../../lib/productDisplaySocialProof';
 import { productPath } from '../../lib/productUrl';
 import { staggerDelay } from '../../design-system/motion';
 import { cn } from '../../lib/utils';
+import { WhatsappIcon } from '../icons/WhatsappIcon';
+import { buildWhatsAppLink } from '../../config/brand';
 
 export type CatalogProduct = {
   id: string;
@@ -129,23 +131,30 @@ export function ProductCard({
           className="mt-2 mb-2"
           starClassName="h-3.5 w-3.5"
         />
-        {showDescription && product.description ? (
-          <p className="text-xs text-steel-600 line-clamp-2 leading-relaxed mb-3 flex-1">
-            {product.description}
-          </p>
-        ) : (
-          <div className="flex-1 min-h-[0.5rem]" />
-        )}
-        <div className="flex items-end justify-between gap-2 pt-3 mt-auto border-t border-brand-50">
+        <div className="flex-1 min-h-[0.5rem]" />
+        <div className="flex items-center justify-between gap-2 pt-3 mt-auto border-t border-brand-50">
           <ProductCardPriceBlock product={product} />
-          <button
-            type="button"
-            onClick={onAddToCart}
-            className="shrink-0 p-3 rounded-xl bg-navy-950 text-white hover:bg-brand-500 hover:shadow-glow shadow-card transition-all motion-safe:active:scale-95"
-            aria-label={`Add ${product.title} to cart`}
-          >
-            <ShoppingCart className="h-4 w-4 md:h-5 md:w-5" />
-          </button>
+          <div className="flex items-center gap-1.5 shrink-0">
+            <a
+              href={buildWhatsAppLink(product.title, productHref)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 px-3.5 rounded-xl bg-[#25D366] text-white hover:bg-emerald-600 shadow-card transition-all motion-safe:active:scale-95 flex items-center justify-center"
+              aria-label={`Inquire about ${product.title} on WhatsApp`}
+              title="Inquire on WhatsApp"
+            >
+              <WhatsappIcon className="h-5 w-5" />
+            </a>
+            <button
+              type="button"
+              onClick={onAddToCart}
+              className="p-2.5 px-3.5 rounded-xl bg-navy-950 text-white hover:bg-brand-500 hover:shadow-glow shadow-card transition-all motion-safe:active:scale-95 flex items-center justify-center"
+              aria-label={`Add ${product.title} to cart`}
+              title="Add to cart"
+            >
+              <ShoppingCart className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       </div>
     </Card>

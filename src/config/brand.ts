@@ -36,3 +36,15 @@ export function siteOriginFromConfig(): string {
     '://www.researchpeptide.eu',
   );
 }
+
+export const WHATSAPP_NUMBER =
+  import.meta.env.VITE_WHATSAPP_NUMBER || '+31612345678';
+
+export function buildWhatsAppLink(productTitle: string, routePath: string): string {
+  const origin = siteOriginFromConfig();
+  const fullUrl = `${origin}${routePath.startsWith('/') ? routePath : `/${routePath}`}`;
+  const text = `Hello! I would like to inquire about ${productTitle} (${fullUrl})`;
+  const cleanNumber = WHATSAPP_NUMBER.replace(/[^\d]/g, '');
+  return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(text)}`;
+}
+
