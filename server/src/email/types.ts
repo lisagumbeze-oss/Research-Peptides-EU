@@ -12,6 +12,7 @@ export type OrderEmailPayload = {
   customerName: string;
   totalAmount: number;
   shippingCost: number;
+  shippingMethod?: string;
   paymentMethod: string;
   createdAt: string;
   items: OrderLineItem[];

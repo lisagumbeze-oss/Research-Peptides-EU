@@ -618,7 +618,14 @@ export default function AdminDashboard() {
                              <p className="font-bold text-sm text-navy-950">{order.user_id?.substring(0, 8) || 'Guest'}</p>
                              <p className="text-[10px] font-bold text-silver-400 uppercase tracking-tight">{new Date(order.created_at).toLocaleDateString()}</p>
                           </td>
-                          <td className="px-8 py-6 font-black text-brand-600">{formatCurrency(order.total_amount)}</td>
+                          <td className="px-8 py-6">
+                            <span className="font-black text-brand-600">{formatCurrency(order.total_amount)}</span>
+                            {order.shipping_address?.shipping_method && (
+                              <p className="text-[10px] font-medium text-steel-500 truncate max-w-[140px] mt-0.5" title={order.shipping_address.shipping_method}>
+                                {order.shipping_address.shipping_method}
+                              </p>
+                            )}
+                          </td>
                           <td className="px-8 py-6">
                              <select 
                                 value={order.status}
@@ -753,6 +760,11 @@ export default function AdminDashboard() {
                 <h2 className="text-xl font-black text-navy-950 font-mono">#{orderDetail.id}</h2>
                 <p className="text-xs text-steel-600 mt-1">Placed {orderDetail.created_at ? new Date(orderDetail.created_at).toLocaleString() : '—'}</p>
                 <p className="text-xs text-steel-600 font-mono mt-1">Customer user_id: {orderDetail.user_id || 'Guest checkout'}</p>
+                {orderDetail.shipping_address?.shipping_method && (
+                  <p className="text-xs text-brand-700 font-bold mt-1">
+                    Shipping: {orderDetail.shipping_address.shipping_method} ({orderDetail.shipping_address.shipping_cost > 0 ? formatCurrency(orderDetail.shipping_address.shipping_cost) : 'Free'})
+                  </p>
+                )}
               </div>
               <button type="button" onClick={() => setOrderDetail(null)} className="p-2 rounded-xl hover:bg-brand-50 text-steel-600" aria-label="Close">
                 <X className="h-6 w-6" />

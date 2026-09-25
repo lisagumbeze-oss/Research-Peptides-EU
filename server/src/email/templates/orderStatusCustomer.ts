@@ -26,8 +26,20 @@ export function renderOrderStatusCustomerEmail(payload: OrderEmailPayload): Emai
         <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;text-transform:capitalize;">${payload.status}</td>
       </tr>
       <tr>
-        <td style="font-size:13px;color:#64748b;padding:4px 0;">Total</td>
-        <td style="font-size:13px;color:#249688;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping Method</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${payload.shippingMethod || 'Standard Delivery'}</td>
+      </tr>
+      <tr>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping Cost</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${payload.shippingCost > 0 ? formatCurrency(payload.shippingCost) : 'Free (€0.00)'}</td>
+      </tr>
+      <tr>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Payment Method</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;text-transform:capitalize;">${payload.paymentMethod}</td>
+      </tr>
+      <tr>
+        <td style="font-size:15px;color:#0f172a;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">Total</td>
+        <td style="font-size:15px;color:#249688;text-align:right;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
     </table>`;
 

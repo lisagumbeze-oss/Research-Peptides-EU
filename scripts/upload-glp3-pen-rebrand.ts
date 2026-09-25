@@ -14,11 +14,11 @@ if (!url || !key) {
 const supabase = createClient(url, key);
 
 const SLUG = 'glp-3-pen-40mg';
-const LOCAL_PEN_IMAGE = path.resolve('scratch/product-rebrand-samples/rebranded-glp-3-pen-40mg.png');
-const LOCAL_BOX_IMAGE = path.resolve('scratch/product-rebrand-samples/rebranded-glp-3-pen-box-40mg.png');
+const LOCAL_PEN_IMAGE = path.resolve('scratch/product-rebrand-samples/rebranded-glp-3-pen-40mg.jpg');
+const LOCAL_BOX_IMAGE = path.resolve('scratch/product-rebrand-samples/rebranded-glp-3-pen-box-40mg.jpg');
 
-const STORAGE_PEN_PATH = `rebrand/${SLUG}.png`;
-const STORAGE_BOX_PATH = `rebrand/${SLUG}-box.png`;
+const STORAGE_PEN_PATH = `rebrand/${SLUG}.jpg`;
+const STORAGE_BOX_PATH = `rebrand/${SLUG}-box.jpg`;
 
 async function main() {
   if (!fs.existsSync(LOCAL_PEN_IMAGE)) {
@@ -29,7 +29,7 @@ async function main() {
   console.log('Uploading rebranded GLP-3 Pen image to storage...');
   const penBuffer = fs.readFileSync(LOCAL_PEN_IMAGE);
   const { error: penUpErr } = await supabase.storage.from('products').upload(STORAGE_PEN_PATH, penBuffer, {
-    contentType: 'image/png',
+    contentType: 'image/jpeg',
     upsert: true,
     cacheControl: '3600',
   });
@@ -50,7 +50,7 @@ async function main() {
     console.log('Uploading rebranded GLP-3 Box image to storage...');
     const boxBuffer = fs.readFileSync(LOCAL_BOX_IMAGE);
     const { error: boxUpErr } = await supabase.storage.from('products').upload(STORAGE_BOX_PATH, boxBuffer, {
-      contentType: 'image/png',
+      contentType: 'image/jpeg',
       upsert: true,
       cacheControl: '3600',
     });

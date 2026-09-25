@@ -25,13 +25,22 @@ function buildOrderPayload(row: any): OrderEmailPayload | null {
       }))
     : [];
 
+  const shippingCost = Number(shipping.shipping_cost ?? shipping.shippingCost ?? row.shipping_cost ?? 0);
+  const shippingMethod =
+    shipping.shipping_method ||
+    shipping.shippingMethod ||
+    shipping.shipping_type ||
+    shipping.shippingType ||
+    (shippingCost === 0 ? 'Free Shipping' : 'Standard Delivery');
+
   return {
     orderId: row.id,
     status: row.status || 'pending',
     customerEmail: email,
     customerName: shipping.fullName || 'Researcher',
     totalAmount: Number(row.total_amount || 0),
-    shippingCost: Number(shipping.shipping_cost || 0),
+    shippingCost,
+    shippingMethod,
     paymentMethod: shipping.payment_method || 'unknown',
     createdAt: row.created_at,
     items

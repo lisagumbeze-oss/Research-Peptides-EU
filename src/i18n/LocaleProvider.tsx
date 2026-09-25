@@ -1,11 +1,11 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { setActiveLocale } from '../lib/currency';
 import {
-  detectBrowserLocale,
   getLocaleDefinition,
   isLocaleCode,
   type LocaleCode,
 } from './locales';
+
 
 const STORAGE_KEY = 'rp-eu-locale';
 

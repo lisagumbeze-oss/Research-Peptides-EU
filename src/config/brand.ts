@@ -38,7 +38,7 @@ export function siteOriginFromConfig(): string {
 }
 
 export const WHATSAPP_NUMBER =
-  import.meta.env.VITE_WHATSAPP_NUMBER || '+31612345678';
+  import.meta.env.VITE_WHATSAPP_NUMBER || '+447474780484';
 
 export function buildWhatsAppLink(productTitle: string, routePath: string): string {
   const origin = siteOriginFromConfig();

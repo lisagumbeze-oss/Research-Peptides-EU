@@ -1015,32 +1015,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.researchpeptide.eu/en/product/semax" />
   </url>
   <url>
-    <loc>https://www.researchpeptide.eu/en/product/glp-3-pen-40mg</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.researchpeptide.eu/en/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://www.researchpeptide.eu/nl/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.researchpeptide.eu/fr/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.researchpeptide.eu/de/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.researchpeptide.eu/es/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://www.researchpeptide.eu/it/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.researchpeptide.eu/pt/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="hr" href="https://www.researchpeptide.eu/hr/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.researchpeptide.eu/pl/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="ro" href="https://www.researchpeptide.eu/ro/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="cs" href="https://www.researchpeptide.eu/cs/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="da" href="https://www.researchpeptide.eu/da/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://www.researchpeptide.eu/sv/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="fi" href="https://www.researchpeptide.eu/fi/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="el" href="https://www.researchpeptide.eu/el/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="hu" href="https://www.researchpeptide.eu/hu/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="sk" href="https://www.researchpeptide.eu/sk/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="sl" href="https://www.researchpeptide.eu/sl/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="bg" href="https://www.researchpeptide.eu/bg/product/glp-3-pen-40mg" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.researchpeptide.eu/en/product/glp-3-pen-40mg" />
-  </url>
-  <url>
     <loc>https://www.researchpeptide.eu/en/product/follistatin-344-1mg</loc>
     <lastmod>2026-09-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -2183,6 +2157,32 @@
     <xhtml:link rel="alternate" hreflang="sl" href="https://www.researchpeptide.eu/sl/product/dermorphin" />
     <xhtml:link rel="alternate" hreflang="bg" href="https://www.researchpeptide.eu/bg/product/dermorphin" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.researchpeptide.eu/en/product/dermorphin" />
+  </url>
+  <url>
+    <loc>https://www.researchpeptide.eu/en/product/glp-3-pen-40mg</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.researchpeptide.eu/en/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.researchpeptide.eu/nl/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.researchpeptide.eu/fr/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.researchpeptide.eu/de/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.researchpeptide.eu/es/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.researchpeptide.eu/it/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.researchpeptide.eu/pt/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="hr" href="https://www.researchpeptide.eu/hr/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://www.researchpeptide.eu/pl/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.researchpeptide.eu/ro/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.researchpeptide.eu/cs/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://www.researchpeptide.eu/da/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.researchpeptide.eu/sv/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://www.researchpeptide.eu/fi/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.researchpeptide.eu/el/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://www.researchpeptide.eu/hu/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://www.researchpeptide.eu/sk/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="sl" href="https://www.researchpeptide.eu/sl/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="bg" href="https://www.researchpeptide.eu/bg/product/glp-3-pen-40mg" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.researchpeptide.eu/en/product/glp-3-pen-40mg" />
   </url>
   <url>
     <loc>https://www.researchpeptide.eu/en/product/ghrp-6-10mg</loc>

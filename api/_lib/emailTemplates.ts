@@ -115,6 +115,7 @@ export type OrderEmailPayload = {
   customerNotes?: string;
   totalAmount: number;
   shippingCost: number;
+  shippingMethod?: string;
   paymentMethod: string;
   items: OrderLineItem[];
 };
@@ -169,14 +170,19 @@ export function renderOrderCreatedCustomerEmail(payload: OrderEmailPayload): Ema
         <strong>Address:</strong> ${safeHtml(payload.shippingAddressLine1 || '')}<br />
         <strong>City:</strong> ${safeHtml(payload.shippingCity || '')}<br />
         <strong>Postal Code:</strong> ${safeHtml(payload.shippingPostalCode || '')}<br />
-        <strong>Country:</strong> ${safeHtml(payload.shippingCountry || '')}
+        <strong>Country:</strong> ${safeHtml(payload.shippingCountry || '')}<br />
+        <strong>Shipping Method:</strong> ${safeHtml(payload.shippingMethod || 'Standard Delivery')} (${payload.shippingCost > 0 ? formatCurrency(payload.shippingCost) : 'Free'})
       </p>
       ${payload.customerNotes ? `<p style="margin:10px 0 0;font-size:13px;color:#334155;line-height:1.7;"><strong>Notes:</strong> ${safeHtml(payload.customerNotes)}</p>` : ''}
     </div>
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping</td>
-        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${formatCurrency(payload.shippingCost)}</td>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping Method</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${safeHtml(payload.shippingMethod || 'Standard Delivery')}</td>
+      </tr>
+      <tr>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping Cost</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${payload.shippingCost > 0 ? formatCurrency(payload.shippingCost) : 'Free (€0.00)'}</td>
       </tr>
       <tr>
         <td style="font-size:13px;color:#64748b;padding:4px 0;">Payment Method</td>
@@ -234,7 +240,9 @@ export function renderOrderCreatedAdminEmail(payload: OrderEmailPayload): EmailR
         <strong>Address:</strong> ${safeHtml(payload.shippingAddressLine1 || '')}<br />
         <strong>City:</strong> ${safeHtml(payload.shippingCity || '')}<br />
         <strong>Postal Code:</strong> ${safeHtml(payload.shippingPostalCode || '')}<br />
-        <strong>Country:</strong> ${safeHtml(payload.shippingCountry || '')}
+        <strong>Country:</strong> ${safeHtml(payload.shippingCountry || '')}<br />
+        <strong>Shipping Method:</strong> ${safeHtml(payload.shippingMethod || 'Standard Delivery')}<br />
+        <strong>Shipping Cost:</strong> ${payload.shippingCost > 0 ? formatCurrency(payload.shippingCost) : 'Free (€0.00)'}
       </p>
       ${payload.customerNotes ? `<p style="margin:10px 0 0;font-size:13px;color:#334155;line-height:1.7;"><strong>Notes:</strong> ${safeHtml(payload.customerNotes)}</p>` : ''}
     </div>
@@ -247,12 +255,20 @@ export function renderOrderCreatedAdminEmail(payload: OrderEmailPayload): EmailR
         <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;text-transform:capitalize;">${safeHtml(payload.status)}</td>
       </tr>
       <tr>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping Method</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${safeHtml(payload.shippingMethod || 'Standard Delivery')}</td>
+      </tr>
+      <tr>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping Cost</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${payload.shippingCost > 0 ? formatCurrency(payload.shippingCost) : 'Free (€0.00)'}</td>
+      </tr>
+      <tr>
         <td style="font-size:13px;color:#64748b;padding:4px 0;">Payment Method</td>
         <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${safeHtml(paymentMethodLabel(payload.paymentMethod))}</td>
       </tr>
       <tr>
-        <td style="font-size:13px;color:#64748b;padding:4px 0;">Total</td>
-        <td style="font-size:13px;color:#249688;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
+        <td style="font-size:15px;color:#0f172a;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">Total</td>
+        <td style="font-size:15px;color:#249688;text-align:right;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
     </table>
     ${isCryptoPaymentMethod(payload.paymentMethod) ? renderBtcPaymentInstructions({ orderId: payload.orderId, totalAmount: payload.totalAmount, forAdmin: true }) : ''}`;
@@ -347,7 +363,8 @@ export function renderOrderStatusCustomerEmail(payload: OrderEmailPayload): Emai
         <strong>Address:</strong> ${safeHtml(payload.shippingAddressLine1 || '')}<br />
         <strong>City:</strong> ${safeHtml(payload.shippingCity || '')}<br />
         <strong>Postal Code:</strong> ${safeHtml(payload.shippingPostalCode || '')}<br />
-        <strong>Country:</strong> ${safeHtml(payload.shippingCountry || '')}
+        <strong>Country:</strong> ${safeHtml(payload.shippingCountry || '')}<br />
+        <strong>Shipping Method:</strong> ${safeHtml(payload.shippingMethod || 'Standard Delivery')} (${payload.shippingCost > 0 ? formatCurrency(payload.shippingCost) : 'Free'})
       </p>
       ${payload.customerNotes ? `<p style="margin:10px 0 0;font-size:13px;color:#334155;line-height:1.7;"><strong>Notes:</strong> ${safeHtml(payload.customerNotes)}</p>` : ''}
     </div>
@@ -357,12 +374,20 @@ export function renderOrderStatusCustomerEmail(payload: OrderEmailPayload): Emai
         <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;text-transform:capitalize;">${safeHtml(payload.status)}</td>
       </tr>
       <tr>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping Method</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${safeHtml(payload.shippingMethod || 'Standard Delivery')}</td>
+      </tr>
+      <tr>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping Cost</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${payload.shippingCost > 0 ? formatCurrency(payload.shippingCost) : 'Free (€0.00)'}</td>
+      </tr>
+      <tr>
         <td style="font-size:13px;color:#64748b;padding:4px 0;">Payment Method</td>
         <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${safeHtml(paymentMethodLabel(payload.paymentMethod))}</td>
       </tr>
       <tr>
-        <td style="font-size:13px;color:#64748b;padding:4px 0;">Total</td>
-        <td style="font-size:13px;color:#249688;text-align:right;padding:4px 0;font-weight:800;">${formatCurrency(payload.totalAmount)}</td>
+        <td style="font-size:15px;color:#0f172a;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">Total</td>
+        <td style="font-size:15px;color:#249688;text-align:right;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
     </table>`;
 

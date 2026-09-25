@@ -31,6 +31,14 @@ function buildOrderPayload(row: Record<string, any>, statusOverride?: string): O
       }))
     : [];
 
+  const shippingCost = Number(shipping.shipping_cost ?? shipping.shippingCost ?? row.shipping_cost ?? 0);
+  const shippingMethod =
+    shipping.shipping_method ||
+    shipping.shippingMethod ||
+    shipping.shipping_type ||
+    shipping.shippingType ||
+    (shippingCost === 0 ? 'Free Shipping' : 'Standard Delivery');
+
   return {
     orderId: row.id,
     status: statusOverride || row.status || 'pending',
@@ -43,7 +51,8 @@ function buildOrderPayload(row: Record<string, any>, statusOverride?: string): O
     shippingCountry: shipping.country || '',
     customerNotes: shipping.notes || shipping.note || '',
     totalAmount: Number(row.total_amount || 0),
-    shippingCost: Number(shipping.shipping_cost || 0),
+    shippingCost,
+    shippingMethod,
     paymentMethod: shipping.payment_method || 'unknown',
     items
   };

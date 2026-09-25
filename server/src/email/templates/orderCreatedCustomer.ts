@@ -57,8 +57,12 @@ export function renderOrderCreatedCustomerEmail(payload: OrderEmailPayload): Ema
     </table>
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping</td>
-        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${formatCurrency(payload.shippingCost)}</td>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping Method</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${payload.shippingMethod || 'Standard Delivery'}</td>
+      </tr>
+      <tr>
+        <td style="font-size:13px;color:#64748b;padding:4px 0;">Shipping Cost</td>
+        <td style="font-size:13px;color:#0f172a;text-align:right;padding:4px 0;font-weight:700;">${payload.shippingCost > 0 ? formatCurrency(payload.shippingCost) : 'Free (€0.00)'}</td>
       </tr>
       <tr>
         <td style="font-size:13px;color:#64748b;padding:4px 0;">Payment Method</td>
