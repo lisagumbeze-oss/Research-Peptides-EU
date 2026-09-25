@@ -3,7 +3,7 @@
 **Status:** Phase F complete — A→F program done (deploy to activate live bot HTML)  
 **Site:** https://www.researchpeptide.eu  
 **Stack:** Vite 6 + React 19 SPA (Vercel), Tailwind v4, 19 locales, Supabase  
-**Constraint:** Do not break Supabase auth, cart, checkout, Psilio, admin, wishlist, wizard, Smartsupp, feeds.
+**Constraint:** Do not break Supabase auth, cart, checkout, admin, wishlist, wizard, tawk.to, feeds.
 
 ---
 
