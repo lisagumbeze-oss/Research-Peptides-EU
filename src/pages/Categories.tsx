@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { LocaleLink } from '../i18n/LocaleLink';
 import { ArrowRight, Beaker, Dna, Layers, Pill, TestTube2 } from 'lucide-react';
 import { supabase } from '../supabase';
@@ -9,6 +10,11 @@ import { cn } from '../lib/utils';
 import { staggerDelay } from '../design-system/motion';
 import { categoryPath } from '../lib/categoryUrl';
 import { usePageSeo } from '../seo/SeoProvider';
+import {
+  localizedCategoryDescription,
+  localizedCategoryName,
+} from '../lib/localizedCategory';
+import type { LocaleCode } from '../i18n/locales';
 
 type Category = {
   id: string;
@@ -20,6 +26,8 @@ type Category = {
 const icons = [Dna, Beaker, TestTube2, Layers, Pill];
 
 export default function Categories() {
+  const { i18n } = useTranslation();
+  const locale = i18n.language as LocaleCode;
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -89,10 +97,12 @@ export default function Categories() {
                         <Icon className="h-6 w-6 text-brand-600 group-hover:text-white" aria-hidden />
                       </div>
                       <h2 className="font-display font-bold text-xl text-navy-950 group-hover:text-brand-600 transition-colors mb-2">
-                        {category.name}
+                        {localizedCategoryName(category, locale)}
                       </h2>
-                      {category.description ? (
-                        <p className="text-sm text-steel-600 leading-relaxed flex-1">{category.description}</p>
+                      {localizedCategoryDescription(category, locale) ? (
+                        <p className="text-sm text-steel-600 leading-relaxed flex-1">
+                          {localizedCategoryDescription(category, locale)}
+                        </p>
                       ) : (
                         <p className="text-sm text-silver-400 flex-1">View compounds in this research line.</p>
                       )}

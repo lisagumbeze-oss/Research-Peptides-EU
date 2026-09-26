@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { LocaleLink } from '../../i18n/LocaleLink';
 import { ArrowRight, Beaker, Dna, Layers, Pill, TestTube2 } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
@@ -8,6 +9,11 @@ import { SectionHeading } from './SectionHeading';
 import { staggerDelay } from '../../design-system/motion';
 import { cn } from '../../lib/utils';
 import { categoryPath } from '../../lib/categoryUrl';
+import {
+  localizedCategoryDescription,
+  localizedCategoryName,
+} from '../../lib/localizedCategory';
+import type { LocaleCode } from '../../i18n/locales';
 
 type Category = {
   id: string;
@@ -19,6 +25,8 @@ type Category = {
 const iconPool = [Dna, Beaker, TestTube2, Layers, Pill];
 
 export function CategoryShowcaseSection() {
+  const { i18n } = useTranslation();
+  const locale = i18n.language as LocaleCode;
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const reduceMotion = useReducedMotion();
@@ -75,10 +83,12 @@ export function CategoryShowcaseSection() {
                       <Icon className="h-5 w-5 text-brand-200 group-hover:text-white" aria-hidden />
                     </div>
                     <h3 className="font-display font-semibold text-white text-sm md:text-base mb-1 group-hover:text-brand-200 transition-colors">
-                      {cat.name}
+                      {localizedCategoryName(cat, locale)}
                     </h3>
-                    {cat.description ? (
-                      <p className="text-xs text-silver-400 line-clamp-2 flex-1">{cat.description}</p>
+                    {localizedCategoryDescription(cat, locale) ? (
+                      <p className="text-xs text-silver-400 line-clamp-2 flex-1">
+                        {localizedCategoryDescription(cat, locale)}
+                      </p>
                     ) : null}
                     <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-brand-300 opacity-0 group-hover:opacity-100 transition-opacity">
                       Browse <ArrowRight className="h-3 w-3" />

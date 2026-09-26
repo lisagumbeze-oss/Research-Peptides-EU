@@ -10,6 +10,8 @@ import { useFocusTrap } from '../../hooks/useFocusTrap';
 import LanguageSwitcher from './LanguageSwitcher';
 import { cn } from '../../lib/utils';
 import { categoryPath } from '../../lib/categoryUrl';
+import { localizedCategoryName } from '../../lib/localizedCategory';
+import type { LocaleCode } from '../../i18n/locales';
 
 type MobileNavProps = {
   open: boolean;
@@ -33,7 +35,8 @@ export default function MobileNav({
   onOpenSearch,
 }: MobileNavProps) {
   const { t } = useTranslation('common');
-  const { t: tNav } = useTranslation('nav');
+  const { t: tNav, i18n } = useTranslation('nav');
+  const locale = i18n.language as LocaleCode;
   const [categories, setCategories] = useState<CategoryRow[]>([]);
   const [shopExpanded, setShopExpanded] = useState(true);
   const reduceMotion = useReducedMotion();
@@ -132,7 +135,7 @@ export default function MobileNav({
                           className={linkClass}
                           onClick={onClose}
                         >
-                          {cat.name}
+                          {localizedCategoryName(cat, locale)}
                         </LocaleLink>
                       </li>
                     ))}

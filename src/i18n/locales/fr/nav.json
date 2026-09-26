@@ -36,6 +36,11 @@
   "mega": {
     "browseCatalog": "Parcourir le catalogue",
     "allCategories": "Toutes les catégories",
-    "featured": "Composés en vedette"
+    "featured": "Composés en vedette",
+    "europeanCatalog": "Catalogue européen",
+    "inventoryTitle": "Inventaire de grade recherche",
+    "inventoryDesc": "Composés testés par des tiers, expédiés dans toute l’UE depuis nos opérations aux Pays-Bas.",
+    "loadingCategories": "Chargement des catégories…",
+    "emptyCategories": "Explorez le"
   }
 }

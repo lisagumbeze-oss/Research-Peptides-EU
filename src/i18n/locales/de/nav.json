@@ -36,6 +36,11 @@
   "mega": {
     "browseCatalog": "Katalog durchsuchen",
     "allCategories": "Alle Kategorien",
-    "featured": "Empfohlene Verbindungen"
+    "featured": "Empfohlene Verbindungen",
+    "europeanCatalog": "Europäischer Katalog",
+    "inventoryTitle": "Inventar in Forschungsqualität",
+    "inventoryDesc": "Drittgeprüfte Verbindungen mit EU-Versand aus unseren niederländischen Betriebsstätten.",
+    "loadingCategories": "Kategorien werden geladen…",
+    "emptyCategories": "Entdecken Sie den"
   }
 }

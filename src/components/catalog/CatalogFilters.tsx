@@ -8,6 +8,8 @@ import { Button, GlassPanel } from '../../design-system';
 import { overlayMotion, slideFromRightMotion } from '../../design-system/motion';
 import type { CategoryOption } from './types';
 import { cn } from '../../lib/utils';
+import { localizedCategoryName } from '../../lib/localizedCategory';
+import type { LocaleCode } from '../../i18n/locales';
 
 export type CatalogFiltersProps = {
   categories: CategoryOption[];
@@ -39,7 +41,8 @@ function FiltersPanel({
 }: Omit<CatalogFiltersProps, 'showMobile' | 'onCloseMobile' | 'onOpenMobile' | 'className' | 'mode'> & {
   idPrefix?: string;
 }) {
-  const { t } = useTranslation('shop');
+  const { t, i18n } = useTranslation('shop');
+  const locale = i18n.language as LocaleCode;
   return (
     <div className="space-y-8">
       <div>
@@ -63,7 +66,7 @@ function FiltersPanel({
                       : 'text-steel-600 group-hover:text-navy-950',
                   )}
                 >
-                  {cat.name}
+                  {localizedCategoryName(cat, locale)}
                 </span>
               </label>
             </li>

@@ -36,6 +36,11 @@
   "mega": {
     "browseCatalog": "Catalogus bekijken",
     "allCategories": "Alle categorieën",
-    "featured": "Uitgelichte verbindingen"
+    "featured": "Uitgelichte verbindingen",
+    "europeanCatalog": "Europese catalogus",
+    "inventoryTitle": "Voorraad van onderzoekskwaliteit",
+    "inventoryDesc": "Door derden geteste verbindingen, verzonden door heel Europa vanuit onze Nederlandse operatie.",
+    "loadingCategories": "Categorieën laden…",
+    "emptyCategories": "Bekijk de"
   }
 }

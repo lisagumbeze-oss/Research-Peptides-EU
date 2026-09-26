@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LocaleLink } from '../i18n/LocaleLink';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { Search as SearchIcon, ArrowRight } from 'lucide-react';
@@ -16,8 +17,12 @@ import { useProductCatalogActions } from '../hooks/useProductCatalogActions';
 import type { CategoryOption } from '../components/catalog/types';
 import type { CatalogProduct } from '../components/products/ProductCard';
 import { peekCatalog, rememberCatalog } from '../lib/catalogCache';
+import { localizedCategoryName } from '../lib/localizedCategory';
+import type { LocaleCode } from '../i18n/locales';
 
 export default function Search() {
+  const { i18n } = useTranslation();
+  const locale = i18n.language as LocaleCode;
   const cached = peekCatalog();
   const navigate = useLocaleNavigate();
   const [allProducts, setAllProducts] = useState<CatalogProduct[]>(cached?.products ?? []);
@@ -91,8 +96,10 @@ export default function Search() {
     setSearchParams({});
   };
 
-  const categoryName =
-    categories.find((c) => c.slug === selectedCategorySlug)?.name ?? selectedCategorySlug;
+  const selectedCategory = categories.find((c) => c.slug === selectedCategorySlug);
+  const categoryName = selectedCategory
+    ? localizedCategoryName(selectedCategory, locale)
+    : selectedCategorySlug;
 
   return (
     <div className="min-h-screen bg-mist-50">
@@ -147,7 +154,7 @@ export default function Search() {
               <option value="">All categories</option>
               {categories.map((cat) => (
                 <option key={cat.slug} value={cat.slug}>
-                  {cat.name}
+                  {localizedCategoryName(cat, locale)}
                 </option>
               ))}
             </select>

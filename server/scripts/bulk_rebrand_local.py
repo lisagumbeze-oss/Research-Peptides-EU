@@ -32,7 +32,11 @@ GALLERY = OUT_DIR / "index.html"
 
 # Product name band on 1024x1024 blank template (between URL and disclaimer)
 NAME_BOX = (360, 640, 665, 760)
+# Slightly larger wipe so leftover ash plate edges are fully covered
+NAME_WIPE = (352, 628, 672, 768)
 NAVY = (26, 54, 93)
+# Fallback if paper sampling fails
+LABEL_PAPER = (254, 254, 254)
 
 
 def clean_label_title(title: str) -> str:
@@ -83,17 +87,41 @@ def fit_font(draw: ImageDraw.ImageDraw, text: str, max_width: int, max_height: i
 
 
 def sample_fill(template: Image.Image) -> tuple[int, int, int]:
-    """Sample label paper color from the name band so overlay has no hard box edge."""
+    """Sample white label paper OUTSIDE the name band (never the ash plate center)."""
     px = template.convert("RGB").load()
-    cx = (NAME_BOX[0] + NAME_BOX[2]) // 2
-    cy = (NAME_BOX[1] + NAME_BOX[3]) // 2
-    return px[cx, cy]
+    # Known near-white paper spots beside URL / upper label / under disclaimer
+    candidates = [
+        (380, 580),
+        (600, 540),
+        (640, 580),
+        (380, 800),
+        (640, 800),
+    ]
+    whites: list[tuple[int, int, int]] = []
+    for x, y in candidates:
+        r, g, b = px[x, y]
+        if r >= 245 and g >= 245 and b >= 245:
+            whites.append((r, g, b))
+    if not whites:
+        return LABEL_PAPER
+    n = len(whites)
+    fill = (sum(c[0] for c in whites) // n, sum(c[1] for c in whites) // n, sum(c[2] for c in whites) // n)
+    # Clamp: never allow ash-gray fill to propagate
+    if fill[0] < 248 or fill[1] < 248 or fill[2] < 248:
+        return LABEL_PAPER
+    return fill
+
+
+def is_ash_rgb(rgb: tuple[int, int, int]) -> bool:
+    r, g, b = rgb
+    return abs(r - g) <= 4 and abs(g - b) <= 4 and 228 <= r <= 245
 
 
 def render_product(template: Image.Image, title: str, fill: tuple[int, int, int]) -> Image.Image:
     img = template.copy().convert("RGB")
     draw = ImageDraw.Draw(img)
-    draw.rectangle(NAME_BOX, fill=fill)
+    # Wipe name region with white paper — product name sits on the bottle label itself
+    draw.rectangle(NAME_WIPE, fill=fill)
 
     label = clean_label_title(title).upper()
     max_w = NAME_BOX[2] - NAME_BOX[0] - 8
@@ -109,7 +137,7 @@ def render_product(template: Image.Image, title: str, fill: tuple[int, int, int]
     y = NAME_BOX[1] + (NAME_BOX[3] - NAME_BOX[1] - total_h) // 2
     cx = (NAME_BOX[0] + NAME_BOX[2]) // 2
 
-    for i, line in enumerate(lines):
+    for line in lines:
         bbox = draw.textbbox((0, 0), line, font=font)
         tw = bbox[2] - bbox[0]
         th = bbox[3] - bbox[1]
@@ -118,6 +146,20 @@ def render_product(template: Image.Image, title: str, fill: tuple[int, int, int]
 
     return img
 
+
+def assert_no_ash_plate(img: Image.Image, slug: str) -> None:
+    """Hard-fail if the name-band background is still ash gray."""
+    px = img.convert("RGB").load()
+    # Sample corners of NAME_BOX (away from navy text center)
+    probes = [
+        (NAME_BOX[0] + 12, NAME_BOX[1] + 12),
+        (NAME_BOX[2] - 12, NAME_BOX[1] + 12),
+        (NAME_BOX[0] + 12, NAME_BOX[3] - 12),
+        (NAME_BOX[2] - 12, NAME_BOX[3] - 12),
+    ]
+    ash_hits = sum(1 for x, y in probes if is_ash_rgb(px[x, y]))
+    if ash_hits >= 3:
+        raise SystemExit(f"Ash plate still present after render: {slug} samples={[px[x, y] for x, y in probes]}")
 
 def load_catalog(limit: int | None) -> list[dict]:
     if not INVENTORY.exists():
@@ -261,6 +303,9 @@ def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     template = Image.open(TEMPLATE)
     fill = sample_fill(template)
+    print(f"Label paper fill RGB: {fill}")
+    if is_ash_rgb(fill):
+        raise SystemExit(f"Refusing ash fill color {fill} — fix template / sample_fill")
     rows = load_catalog(args.limit)
 
     items = []
@@ -270,6 +315,7 @@ def main() -> None:
         out_name = f"{slug}.png"
         out_path = OUT_DIR / out_name
         img = render_product(template, title, fill)
+        assert_no_ash_plate(img, slug)
         img.save(out_path, format="PNG", optimize=True)
         items.append(
             {

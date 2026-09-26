@@ -19,6 +19,10 @@ import { categoryPath } from '../lib/categoryUrl';
 import { ResearchLinkHub } from '../components/seo/ResearchLinkHub';
 import { AnswerCapsule } from '../components/seo/AnswerCapsule';
 import { HQ_LOCATION } from '../config/brand';
+import {
+  localizedCategoryDescription,
+  localizedCategoryName,
+} from '../lib/localizedCategory';
 
 type CategoryRow = {
   id: string;
@@ -80,8 +84,13 @@ export default function CategoryLanding() {
     };
   }, [slug]);
 
-  const displayName = category?.name ?? slug.replace(/-/g, ' ');
-  const intro = buildIntro(displayName, category?.description);
+  const displayName = category
+    ? localizedCategoryName(category, locale)
+    : slug.replace(/-/g, ' ');
+  const intro = buildIntro(
+    displayName,
+    category ? localizedCategoryDescription(category, locale) : null,
+  );
   const canonicalPath = categoryPath(slug);
 
   const seoConfig = useMemo(() => {

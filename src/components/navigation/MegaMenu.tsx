@@ -8,6 +8,11 @@ import { researchTools, type MegaMenuId } from '../../navigation/config';
 import { overlayMotion, dropDownMotion } from '../../design-system/motion';
 import { cn } from '../../lib/utils';
 import { categoryPath } from '../../lib/categoryUrl';
+import {
+  localizedCategoryDescription,
+  localizedCategoryName,
+} from '../../lib/localizedCategory';
+import type { LocaleCode } from '../../i18n/locales';
 
 type CategoryRow = {
   id: string;
@@ -22,7 +27,8 @@ type MegaMenuProps = {
 };
 
 export default function MegaMenu({ activeMenu, onClose }: MegaMenuProps) {
-  const { t } = useTranslation('nav');
+  const { t, i18n } = useTranslation('nav');
+  const locale = i18n.language as LocaleCode;
   const [categories, setCategories] = useState<CategoryRow[]>([]);
   const [loading, setLoading] = useState(false);
   const reduceMotion = useReducedMotion();
@@ -70,10 +76,12 @@ export default function MegaMenu({ activeMenu, onClose }: MegaMenuProps) {
                     <div className="absolute inset-0 bg-scientific-grid opacity-30" aria-hidden />
                     <div className="relative z-10">
                       <FlaskConical className="h-8 w-8 text-brand-300 mb-4" aria-hidden />
-                      <p className="text-caption text-brand-200 mb-2">European catalog</p>
-                      <h3 className="font-display text-xl font-bold mb-2">Research-grade inventory</h3>
+                      <p className="text-caption text-brand-200 mb-2">{t('mega.europeanCatalog')}</p>
+                      <h3 className="font-display text-xl font-bold text-white mb-2">
+                        {t('mega.inventoryTitle')}
+                      </h3>
                       <p className="text-sm text-brand-100/90 leading-relaxed mb-4">
-                        Third-party tested compounds shipped across the EU from our Netherlands operations.
+                        {t('mega.inventoryDesc')}
                       </p>
                       <LocaleLink
                         to="/shop"
@@ -97,10 +105,10 @@ export default function MegaMenu({ activeMenu, onClose }: MegaMenuProps) {
                       </LocaleLink>
                     </div>
                     {loading ? (
-                      <p className="text-sm text-silver-400">Loading categories…</p>
+                      <p className="text-sm text-silver-400">{t('mega.loadingCategories')}</p>
                     ) : categories.length === 0 ? (
                       <p className="text-sm text-steel-600">
-                        Explore the{' '}
+                        {t('mega.emptyCategories')}{' '}
                         <LocaleLink to="/shop" onClick={onClose} className="text-brand-600 font-semibold">
                           {t('mega.browseCatalog')}
                         </LocaleLink>
@@ -119,11 +127,11 @@ export default function MegaMenu({ activeMenu, onClose }: MegaMenuProps) {
                               )}
                             >
                               <span className="font-semibold text-sm text-navy-950 group-hover:text-brand-600">
-                                {cat.name}
+                                {localizedCategoryName(cat, locale)}
                               </span>
-                              {cat.description ? (
+                              {cat.description || localizedCategoryDescription(cat, locale) ? (
                                 <span className="block text-xs text-steel-600 mt-0.5 line-clamp-2">
-                                  {cat.description}
+                                  {localizedCategoryDescription(cat, locale)}
                                 </span>
                               ) : null}
                             </LocaleLink>

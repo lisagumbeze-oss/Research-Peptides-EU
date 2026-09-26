@@ -45,6 +45,11 @@
   "mega": {
     "browseCatalog": "Browse catalog",
     "allCategories": "All categories",
-    "featured": "Featured compounds"
+    "featured": "Featured compounds",
+    "europeanCatalog": "European catalog",
+    "inventoryTitle": "Research-grade inventory",
+    "inventoryDesc": "Third-party tested compounds shipped across the EU from our Netherlands operations.",
+    "loadingCategories": "Loading categories…",
+    "emptyCategories": "Explore the"
   }
 }

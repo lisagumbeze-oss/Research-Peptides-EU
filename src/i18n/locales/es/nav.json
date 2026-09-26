@@ -45,6 +45,11 @@
   "mega": {
     "browseCatalog": "Explorar catálogo",
     "allCategories": "Todas las categorías",
-    "featured": "Compuestos destacados"
+    "featured": "Compuestos destacados",
+    "europeanCatalog": "Catálogo europeo",
+    "inventoryTitle": "Inventario de grado investigación",
+    "inventoryDesc": "Compuestos verificados por terceros, enviados por toda la UE desde nuestras operaciones en Países Bajos.",
+    "loadingCategories": "Cargando categorías…",
+    "emptyCategories": "Explora el"
   }
 }
