@@ -282,7 +282,7 @@ export function localizedCategoryName(category: CategoryLike, locale: LocaleCode
   const slug = String(category.slug ?? '').trim();
   const localized = slug ? copyFor(slug, locale)?.name : null;
   if (localized) return localized;
-  return String(category.name ?? slug.replace(/-/g, ' ') || '');
+  return String(category.name ?? (slug.replace(/-/g, ' ') || ''));
 }
 
 export function localizedCategoryDescription(category: CategoryLike, locale: LocaleCode): string {
