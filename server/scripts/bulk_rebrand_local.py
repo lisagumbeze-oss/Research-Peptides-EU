@@ -166,6 +166,16 @@ def load_catalog(limit: int | None) -> list[dict]:
         raise SystemExit(f"Missing inventory: {INVENTORY}. Run inventory-product-images.ts first.")
     data = json.loads(INVENTORY.read_text(encoding="utf-8"))
     rows = data["rows"]
+    # Vial blank template only — never overwrite pen / injector product photography
+    before = len(rows)
+    rows = [
+        r
+        for r in rows
+        if not re.search(r"pen|injector|prefilled", f"{r.get('slug', '')} {r.get('title', '')}", re.I)
+    ]
+    skipped = before - len(rows)
+    if skipped:
+        print(f"Skipping {skipped} pen/injector products (keep original photography)")
     if limit is not None:
         rows = rows[:limit]
     return rows

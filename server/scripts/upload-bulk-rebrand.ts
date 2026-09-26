@@ -44,14 +44,23 @@ async function main() {
     items: ManifestItem[];
   };
 
-  console.log(`Uploading ${manifest.items.length} products${dryRun ? ' (dry-run)' : ''}...`);
+  const items = manifest.items.filter((item) => {
+    const hay = `${item.slug} ${item.title}`;
+    return !/pen|injector|prefilled/i.test(hay);
+  });
+  const skipped = manifest.items.length - items.length;
+  if (skipped) {
+    console.log(`Skipping ${skipped} pen/injector products (keep original photography)`);
+  }
+
+  console.log(`Uploading ${items.length} products${dryRun ? ' (dry-run)' : ''}...`);
 
   const results: Array<Record<string, unknown>> = [];
   let ok = 0;
   let fail = 0;
 
-  for (let i = 0; i < manifest.items.length; i++) {
-    const item = manifest.items[i];
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
     const localPath = path.join(OUT_DIR, item.file);
     const storagePath = `rebrand/${item.slug}.png`;
 
@@ -91,8 +100,8 @@ async function main() {
       console.error(`[FAIL] ${item.slug}:`, e?.message || e);
     }
 
-    if ((i + 1) % 20 === 0 || i + 1 === manifest.items.length) {
-      console.log(`[${i + 1}/${manifest.items.length}] ok=${ok} fail=${fail}`);
+    if ((i + 1) % 20 === 0 || i + 1 === items.length) {
+      console.log(`[${i + 1}/${items.length}] ok=${ok} fail=${fail}`);
     }
   }
 
@@ -101,6 +110,7 @@ async function main() {
     dryRun,
     ok,
     fail,
+    skipped,
     results,
   };
   fs.writeFileSync(REPORT, JSON.stringify(report, null, 2));
