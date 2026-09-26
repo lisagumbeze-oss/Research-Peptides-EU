@@ -85,7 +85,7 @@ export default function Header({
           >
             <img
               src={logo}
-              alt=""
+              alt="Research Peptides EU"
               className={cn(
                 'w-auto transition-[height] duration-300 motion-reduce:transition-none',
                 scrolled ? 'h-9 md:h-10' : 'h-10 md:h-11',

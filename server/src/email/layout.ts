@@ -13,6 +13,11 @@ export function formatCurrency(value: number, locale = 'en-IE', currency = 'EUR'
 export function renderBrandLayout(params: { title: string; preheader: string; bodyHtml: string }) {
   const brandName = process.env.EMAIL_BRAND_NAME || 'Research Peptides EU';
   const supportAddress = process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.eu';
+  const siteUrl = (process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://www.researchpeptide.eu').replace(
+    /\/+$/,
+    '',
+  );
+  const logoUrl = `${siteUrl}/brand_logo.png`;
 
   return `<!doctype html>
 <html lang="en">
@@ -29,8 +34,17 @@ export function renderBrandLayout(params: { title: string; preheader: string; bo
         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#ffffff;border-radius:18px;overflow:hidden;border:1px solid #e2e8f0;">
           <tr>
             <td style="background:linear-gradient(120deg,#0f2744,#2db5a3 55%,#1a365d);padding:24px;">
-              <h1 style="margin:0;font-size:20px;line-height:1.2;color:#ffffff;font-weight:800;">${safe(brandName)}</h1>
-              <p style="margin:6px 0 0;color:#c8f2eb;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;">Research Operations</p>
+              <table role="presentation" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td style="vertical-align:middle;padding-right:14px;">
+                    <img src="${safe(logoUrl)}" alt="${safe(brandName)}" width="56" height="56" style="display:block;border:0;border-radius:12px;background:#ffffff;" />
+                  </td>
+                  <td style="vertical-align:middle;">
+                    <h1 style="margin:0;font-size:20px;line-height:1.2;color:#ffffff;font-weight:800;">${safe(brandName)}</h1>
+                    <p style="margin:6px 0 0;color:#c8f2eb;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;">Research Operations</p>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
           <tr>

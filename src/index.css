@@ -179,6 +179,69 @@
     background-size: 48px 48px;
   }
 
+  .blog-prose {
+    @apply text-base md:text-[1.05rem] text-steel-600 leading-[1.8] break-words;
+  }
+
+  .blog-prose h2 {
+    @apply font-display font-bold text-navy-950 tracking-tight mt-12 mb-4 first:mt-0;
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  }
+
+  .blog-prose h3 {
+    @apply font-display font-semibold text-navy-950 mt-9 mb-3;
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  }
+
+  .blog-prose h4 {
+    @apply font-display font-semibold text-navy-950 mt-7 mb-2 text-base;
+  }
+
+  .blog-prose p {
+    @apply mb-5;
+  }
+
+  .blog-prose ul,
+  .blog-prose ol {
+    @apply mb-6 pl-6 space-y-2;
+  }
+
+  .blog-prose ul {
+    @apply list-disc;
+  }
+
+  .blog-prose ol {
+    @apply list-decimal;
+  }
+
+  .blog-prose li {
+    @apply pl-1;
+  }
+
+  .blog-prose li::marker {
+    @apply text-brand-500;
+  }
+
+  .blog-prose blockquote {
+    @apply my-8 border-l-4 border-brand-400 bg-mist-50 px-5 py-4 rounded-r-2xl text-navy-900 italic;
+  }
+
+  .blog-prose hr {
+    @apply my-10 border-brand-100;
+  }
+
+  .blog-prose code {
+    @apply font-mono text-[0.9em] bg-mist-50 text-navy-950 px-1.5 py-0.5 rounded-md border border-brand-50;
+  }
+
+  .blog-prose pre {
+    @apply my-8 overflow-x-auto rounded-2xl bg-navy-950 text-white p-5 shadow-card;
+  }
+
+  .blog-prose pre code {
+    @apply bg-transparent border-0 text-inherit p-0;
+  }
+
   /* Hex-node molecule motif — pairs with .bg-scientific-grid */
   .bg-scientific-molecule {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%232DB5A3' stroke-width='1' stroke-opacity='0.35'%3E%3Ccircle cx='30' cy='30' r='3' fill='%232DB5A3' fill-opacity='0.2'/%3E%3Ccircle cx='90' cy='30' r='3' fill='%232DB5A3' fill-opacity='0.2'/%3E%3Ccircle cx='60' cy='60' r='3' fill='%232DB5A3' fill-opacity='0.25'/%3E%3Ccircle cx='30' cy='90' r='3' fill='%232DB5A3' fill-opacity='0.2'/%3E%3Ccircle cx='90' cy='90' r='3' fill='%232DB5A3' fill-opacity='0.2'/%3E%3Cline x1='30' y1='30' x2='60' y2='60'/%3E%3Cline x1='90' y1='30' x2='60' y2='60'/%3E%3Cline x1='30' y1='90' x2='60' y2='60'/%3E%3Cline x1='90' y1='90' x2='60' y2='60'/%3E%3Cline x1='30' y1='30' x2='90' y2='30'/%3E%3Cline x1='30' y1='90' x2='90' y2='90'/%3E%3C/g%3E%3C/svg%3E");
@@ -231,6 +294,16 @@
 
   .skeleton-block {
     @apply rounded-xl bg-brand-100/80 motion-safe:animate-pulse motion-reduce:animate-none;
+  }
+
+  @keyframes hero-orb-drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(5%, -6%, 0) scale(1.08);
+    }
   }
 
   @keyframes ticker-scroll {

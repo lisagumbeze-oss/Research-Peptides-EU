@@ -1,42 +1,90 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ArrowLeft, BookOpen, Calendar, Clock, Tag } from 'lucide-react';
 import { LocaleLink } from '../i18n/LocaleLink';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
+import { useLocale } from '../i18n/LocaleProvider';
 import { supabase } from '../supabase';
-import { BookOpen, ArrowLeft, Clock, Share2, Tag, Calendar } from 'lucide-react';
-import { Reveal } from '../design-system';
+import { Badge, Container, Reveal, ScientificBackdrop, buttonClassName } from '../design-system';
 import { ResearchLinkHub } from '../components/seo/ResearchLinkHub';
+import { BlogMarkdown } from '../components/blog/BlogMarkdown';
+import { RecommendedPostsSidebar } from '../components/blog/RecommendedPostsSidebar';
+import { ArticleShareButton } from '../components/blog/ArticleShareButton';
 import { usePageSeo } from '../seo/SeoProvider';
-import { blogPath, blogSlug, looksLikeUuid } from '../lib/blogUrl';
+import { breadcrumbJsonLd } from '../seo/structuredData';
+import { blogPath, blogSlug } from '../lib/blogUrl';
+import {
+  extractArticleHeadings,
+  readingTimeMinutes,
+  selectRecommendedPosts,
+  stripMarkdown,
+  type BlogPostRecord,
+} from '../lib/blog';
+import { formatLocaleDate } from '../lib/formatLocaleDate';
 import { stripLocaleFromPath } from '../i18n/routing';
+import { BRAND_NAME } from '../config/brand';
+import logo from '../assets/brandLogo';
+
+const AUTHOR_NAME = `${BRAND_NAME} Editorial Board`;
 
 export default function BlogPost() {
   const { id: idOrSlug } = useParams<{ id: string }>();
   const navigate = useLocaleNavigate();
-  const [post, setPost] = useState<any>(null);
+  const { locale } = useLocale();
+  const [post, setPost] = useState<BlogPostRecord | null>(null);
+  const [recommended, setRecommended] = useState<BlogPostRecord[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
+
     const fetchPost = async () => {
       if (!idOrSlug) return;
+      setLoading(true);
       try {
-        if (looksLikeUuid(idOrSlug)) {
-          const { data } = await supabase.from('blog_posts').select('*').eq('id', idOrSlug).maybeSingle();
-          if (data) setPost(data);
-        } else {
-          const { data } = await supabase.from('blog_posts').select('*').limit(500);
-          const match = (data ?? []).find(
-            (row) => blogSlug(row) === idOrSlug || String(row.slug || '') === idOrSlug,
-          );
-          if (match) setPost(match);
+        const { data, error } = await supabase
+          .from('blog_posts')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(100);
+
+        if (error) throw error;
+        const rows = (data ?? []) as BlogPostRecord[];
+        let match = rows.find(
+          (row) =>
+            row.id === idOrSlug ||
+            blogSlug(row) === idOrSlug ||
+            String(row.slug || '') === idOrSlug,
+        );
+
+        if (!match) {
+          const { data: single } = await supabase
+            .from('blog_posts')
+            .select('*')
+            .eq('id', idOrSlug)
+            .maybeSingle();
+          match = (single as BlogPostRecord | null) ?? undefined;
         }
+
+        if (cancelled) return;
+        const next = match ?? null;
+        setPost(next);
+        setRecommended(next ? selectRecommendedPosts(next, rows) : []);
       } catch (error) {
         console.error('Error fetching blog post:', error);
+        if (!cancelled) {
+          setPost(null);
+          setRecommended([]);
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
-    fetchPost();
+
+    void fetchPost();
+    return () => {
+      cancelled = true;
+    };
   }, [idOrSlug]);
 
   useEffect(() => {
@@ -47,56 +95,79 @@ export default function BlogPost() {
     }
   }, [post, navigate]);
 
-  usePageSeo(
-    post
-      ? {
-          title: `${post.title} | Research Peptides EU Blog`,
-          description: `${String(post.content || '').substring(0, 150)}...`,
-          canonicalPath: blogPath(post),
-          ogType: 'article',
-          ogImage: post.image_url,
-          jsonLd: [
-            {
-              '@context': 'https://schema.org',
-              '@type': 'Article',
-              headline: post.title,
-              image: post.image_url ? [post.image_url] : [],
-              datePublished: post.created_at,
-              dateModified: post.updated_at || post.created_at,
-              author: {
-                '@type': 'Organization',
-                name: 'Research Peptides EU Editorial Board',
-              },
-            },
+  const excerpt = useMemo(() => stripMarkdown(String(post?.content || ''), 180), [post]);
+  const minutes = useMemo(() => readingTimeMinutes(String(post?.content || '')), [post]);
+  const headings = useMemo(() => extractArticleHeadings(String(post?.content || '')), [post]);
+
+  const pageSeo = useMemo(() => {
+    if (!post) return null;
+    return {
+      title: `${post.title} | ${BRAND_NAME} Journal`,
+      description: excerpt,
+      canonicalPath: blogPath(post),
+      ogType: 'article' as const,
+      ogImage: post.image_url || undefined,
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: post.title,
+          description: excerpt,
+          image: post.image_url ? [post.image_url] : [],
+          datePublished: post.created_at,
+          dateModified: post.updated_at || post.created_at,
+          author: { '@type': 'Organization', name: AUTHOR_NAME },
+          publisher: { '@type': 'Organization', name: BRAND_NAME },
+        },
+        breadcrumbJsonLd(
+          [
+            { name: 'Home', path: '/' },
+            { name: 'Research Journal', path: '/blog' },
+            { name: String(post.title || 'Article'), path: blogPath(post) },
           ],
-        }
-      : null,
-  );
+          locale,
+        ),
+      ],
+    };
+  }, [post, excerpt, locale]);
+
+  usePageSeo(pageSeo);
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-24 space-y-8 animate-pulse">
-        <div className="h-4 w-32 bg-gray-100 rounded-full" />
-        <div className="h-20 bg-gray-100 rounded-2xl w-full" />
-        <div className="h-96 bg-gray-100 rounded-[3rem] w-full" />
-        <div className="space-y-4">
-           <div className="h-4 bg-gray-100 rounded w-full" />
-           <div className="h-4 bg-gray-100 rounded w-full" />
-           <div className="h-4 bg-gray-100 rounded w-3/4" />
-        </div>
+      <div className="bg-mist-50 min-h-screen">
+        <Container className="py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_20rem] gap-10 animate-pulse">
+            <div className="space-y-6">
+              <div className="h-4 w-40 bg-brand-100 rounded-full" />
+              <div className="h-16 bg-brand-100 rounded-2xl w-full" />
+              <div className="h-72 bg-brand-100 rounded-3xl w-full" />
+              <div className="space-y-3">
+                <div className="h-4 bg-brand-100 rounded w-full" />
+                <div className="h-4 bg-brand-100 rounded w-full" />
+                <div className="h-4 bg-brand-100 rounded w-2/3" />
+              </div>
+            </div>
+            <div className="hidden lg:block space-y-4">
+              <div className="h-64 bg-brand-100 rounded-3xl" />
+              <div className="h-40 bg-brand-100 rounded-3xl" />
+            </div>
+          </div>
+        </Container>
       </div>
     );
   }
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-8 bg-gray-50">
-        <div className="text-center bg-white p-12 rounded-[3rem] shadow-xl border border-gray-100">
-          <BookOpen className="h-16 w-16 text-gray-200 mx-auto mb-6" />
-          <h2 className="text-3xl font-black text-gray-900 mb-4">Research Entry Forbidden</h2>
-          <p className="text-gray-400 font-medium mb-8">The requested publication could not be identified.</p>
-          <LocaleLink to="/blog" className="inline-flex items-center gap-2 text-brand-600 font-black uppercase tracking-widest text-xs hover:gap-4 transition-all">
-            <ArrowLeft className="h-3 w-3" /> Return to Archives
+      <div className="min-h-screen flex items-center justify-center p-8 bg-mist-50">
+        <div className="text-center bg-white p-12 rounded-3xl shadow-card border border-brand-100 max-w-md">
+          <BookOpen className="h-14 w-14 text-brand-200 mx-auto mb-6" aria-hidden />
+          <h1 className="text-2xl font-display font-bold text-navy-950 mb-3">Article not found</h1>
+          <p className="text-steel-600 mb-8">The requested journal entry could not be identified.</p>
+          <LocaleLink to="/blog" className={buttonClassName({ variant: 'primary', size: 'md' })}>
+            <ArrowLeft className="h-4 w-4" aria-hidden />
+            Return to journal
           </LocaleLink>
         </div>
       </div>
@@ -104,77 +175,106 @@ export default function BlogPost() {
   }
 
   return (
-    <article className="bg-white min-h-screen pb-32">
-      {/* Article Header */}
-      <header className="max-w-4xl mx-auto px-4 sm:px-6 pt-16 pb-12">
-        <LocaleLink to="/blog" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-brand-600 transition-colors mb-12">
-          <ArrowLeft className="h-3 w-3" /> Scientific Journals
-        </LocaleLink>
-        
-        <Reveal>
-          <div className="flex flex-wrap items-center gap-6 mb-8 text-[10px] font-black uppercase tracking-widest text-brand-600">
-             <span className="flex items-center gap-2 px-4 py-1.5 bg-brand-50 rounded-full"><Tag className="h-3 w-3" /> Research Insight</span>
-             <span className="flex items-center gap-2 text-gray-400"><Calendar className="h-3 w-3" /> {new Date(post.created_at).toLocaleDateString()}</span>
-             <span className="flex items-center gap-2 text-gray-400"><Clock className="h-3 w-3" /> 5 Min Read</span>
-          </div>
-          
-          <h1 className="mb-10 text-gray-900 leading-tight">
-            {post.title}
-          </h1>
+    <article className="bg-mist-50 min-h-screen">
+      <div className="relative overflow-hidden border-b border-brand-100 bg-white">
+        <ScientificBackdrop variant="light" glow className="opacity-70" />
+        <Container className="relative z-10 pt-10 pb-6">
+          <nav aria-label="Breadcrumb" className="text-sm text-steel-600">
+            <ol className="flex flex-wrap items-center gap-2">
+              <li>
+                <LocaleLink to="/blog" className="inline-flex items-center gap-2 hover:text-brand-700">
+                  <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
+                  Research Journal
+                </LocaleLink>
+              </li>
+              <li aria-hidden className="text-silver-400">
+                /
+              </li>
+              <li className="text-navy-950 font-medium line-clamp-1 max-w-[42ch]">{post.title}</li>
+            </ol>
+          </nav>
+        </Container>
+      </div>
 
-          <div className="flex items-center justify-between pb-12 border-b border-gray-100">
-             <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-full bg-gray-900 p-0.5">
-                   <div className="w-full h-full rounded-full bg-white flex items-center justify-center font-black text-xs text-brand-600">PS</div>
+      <Container className="py-10 lg:py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_20rem] xl:grid-cols-[minmax(0,1fr)_22rem] gap-10 xl:gap-14 items-start">
+          <div>
+            <Reveal as="header" className="bg-white border border-brand-100 rounded-3xl shadow-card overflow-hidden">
+              {post.image_url ? (
+                <div className="aspect-[16/8] bg-mist-50">
+                  <img
+                    src={post.image_url}
+                    alt=""
+                    className="h-full w-full object-cover"
+                    fetchPriority="high"
+                  />
                 </div>
-                <div>
-                   <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Authored by</p>
-                   <p className="text-sm font-black text-gray-900">Research Peptides EU Editorial Board</p>
+              ) : null}
+
+              <div className="p-6 sm:p-8 lg:p-12">
+                <div className="flex flex-wrap items-center gap-3 mb-5">
+                  <Badge variant="brand">
+                    <Tag className="h-3 w-3 mr-1.5" aria-hidden />
+                    Research insight
+                  </Badge>
+                  {post.created_at ? (
+                    <span className="inline-flex items-center gap-1.5 text-caption">
+                      <Calendar className="h-3 w-3" aria-hidden />
+                      <time dateTime={post.created_at}>{formatLocaleDate(post.created_at, locale)}</time>
+                    </span>
+                  ) : null}
+                  <span className="inline-flex items-center gap-1.5 text-caption">
+                    <Clock className="h-3 w-3" aria-hidden />
+                    {minutes} min read
+                  </span>
                 </div>
-             </div>
-             <button className="p-4 rounded-2xl bg-gray-50 text-gray-400 hover:text-brand-600 hover:bg-brand-50 transition-all">
-                <Share2 className="h-5 w-5" />
-             </button>
-          </div>
-        </Reveal>
-      </header>
 
-      {/* Featured Image */}
-      {post.image_url && (
-        <Reveal variant="scaleIn" delay={0.08} className="max-w-6xl mx-auto px-4 mb-20">
-          <div className="aspect-[21/9] rounded-[3.5rem] overflow-hidden shadow-2xl shadow-navy-950/10">
-            <img src={post.image_url} alt={post.title} className="w-full h-full object-cover" />
-          </div>
-        </Reveal>
-      )}
+                <h1 className="text-navy-950 mb-5">{post.title}</h1>
+                {excerpt ? <p className="text-body-lg max-w-3xl">{excerpt}</p> : null}
 
-      {/* Content */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6">
-        <Reveal delay={0.12} className="prose prose-xl prose-blue max-w-none text-gray-600 font-medium leading-relaxed">
-          <div className="whitespace-pre-wrap selection:bg-brand-100">
-             {post.content}
-          </div>
-        </Reveal>
+                <div className="mt-8 pt-6 border-t border-brand-50 flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={logo}
+                      alt=""
+                      width={44}
+                      height={44}
+                      className="h-11 w-11 rounded-full object-cover bg-white border border-brand-100"
+                    />
+                    <div>
+                      <p className="text-caption">Authored by</p>
+                      <p className="text-sm font-semibold text-navy-950">{AUTHOR_NAME}</p>
+                    </div>
+                  </div>
+                  <ArticleShareButton title={String(post.title || BRAND_NAME)} />
+                </div>
+              </div>
+            </Reveal>
 
-        {/* Footer Navigation */}
-        <footer className="mt-24 pt-16 border-t border-gray-100 text-center">
-           <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-8">End of Scientific Journal Entry</p>
-           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-             <LocaleLink 
-               to="/blog" 
-               className="inline-flex items-center justify-center px-10 py-5 bg-gray-900 text-white rounded-[2rem] font-black uppercase tracking-widest text-[10px] hover:bg-brand-600 hover:shadow-2xl hover:shadow-glow transition-all motion-safe:active:scale-95"
-             >
-                Return to All Research
-             </LocaleLink>
-             <LocaleLink
-               to="/shop"
-               className="inline-flex items-center justify-center px-8 py-4 border border-gray-200 text-gray-800 rounded-[2rem] font-black uppercase tracking-widest text-[10px] hover:border-brand-400 hover:text-brand-600 transition-all"
-             >
-                Buy research peptides EU
-             </LocaleLink>
-           </div>
-        </footer>
-      </main>
+            <Reveal delay={0.08} className="mt-8 bg-white border border-brand-100 rounded-3xl shadow-card p-6 sm:p-8 lg:p-12">
+              <BlogMarkdown content={String(post.content || '')} />
+
+              <footer className="mt-12 pt-8 border-t border-brand-100">
+                <p className="text-sm text-steel-600 leading-relaxed mb-8">
+                  Materials discussed in this journal are supplied for controlled laboratory and in-vitro research
+                  only — not for human consumption or clinical use.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <LocaleLink to="/blog" className={buttonClassName({ variant: 'primary', size: 'md' })}>
+                    <ArrowLeft className="h-4 w-4" aria-hidden />
+                    More journal entries
+                  </LocaleLink>
+                  <LocaleLink to="/shop" className={buttonClassName({ variant: 'outline', size: 'md' })}>
+                    Shop research peptides
+                  </LocaleLink>
+                </div>
+              </footer>
+            </Reveal>
+          </div>
+
+          <RecommendedPostsSidebar posts={recommended} headings={headings} locale={locale} />
+        </div>
+      </Container>
 
       <ResearchLinkHub variant="compact" markets={['eu', 'es']} showOutbound={false} />
     </article>

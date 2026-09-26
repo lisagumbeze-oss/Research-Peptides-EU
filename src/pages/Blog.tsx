@@ -6,18 +6,21 @@ import { Reveal } from '../design-system';
 import { staggerDelay } from '../design-system/motion';
 import { ResearchLinkHub } from '../components/seo/ResearchLinkHub';
 import { usePageSeo } from '../seo/SeoProvider';
-import { blogPath } from '../lib/blogUrl';
+import { blogExcerpt, blogPath } from '../lib/blogUrl';
+import { readingTimeMinutes, type BlogPostRecord } from '../lib/blog';
+
+const BLOG_INDEX_SEO = {
+  title: 'Research Journal | Research Peptides EU',
+  description:
+    'Scientific insights on peptide research, laboratory handling, and EU research supply — from Research Peptides EU.',
+  canonicalPath: '/blog',
+} as const;
 
 export default function Blog() {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<BlogPostRecord[]>([]);
   const [loading, setLoading] = useState(true);
 
-  usePageSeo({
-    title: 'Research Journal | Research Peptides EU',
-    description:
-      'Scientific insights on peptide research, laboratory handling, and EU research supply — from Research Peptides EU.',
-    canonicalPath: '/blog',
-  });
+  usePageSeo(BLOG_INDEX_SEO);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -112,7 +115,7 @@ export default function Blog() {
                   <div className="px-2 flex-grow flex flex-col">
                     <div className="flex items-center gap-6 text-[10px] font-black uppercase tracking-widest text-gray-400 mb-5">
                       <span className="flex items-center gap-2">
-                        <Clock className="h-3 w-3" /> 4 Min Read
+                        <Clock className="h-3 w-3" /> {readingTimeMinutes(String(post.content || ''))} min read
                       </span>
                       <span className="flex items-center gap-2">
                         <User className="h-3 w-3" /> Editorial Team
@@ -124,7 +127,7 @@ export default function Blog() {
                     </h2>
 
                     <p className="text-gray-500 font-medium leading-relaxed mb-8 line-clamp-3">
-                      {String(post.content || '').substring(0, 150)}...
+                      {blogExcerpt(String(post.content || ''))}
                     </p>
 
                     <div className="mt-auto">

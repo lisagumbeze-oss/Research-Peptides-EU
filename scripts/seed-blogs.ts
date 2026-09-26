@@ -182,10 +182,21 @@ Always confirm SKU specs and COAs. Research use only — not for human or veteri
 ];
 
 async function seed() {
+  const { data: existing, error: existingError } = await supabase
+    .from('blog_posts')
+    .select('id');
+  if (existingError) {
+    console.error(existingError.message);
+    process.exit(1);
+  }
+  const have = new Set((existing || []).map((row) => row.id));
+
   for (const post of blogPosts) {
-    const { error } = await supabase
-      .from('blog_posts')
-      .upsert(post, { onConflict: 'id' });
+    if (have.has(post.id)) {
+      console.log(`Skip existing post: ${post.id}`);
+      continue;
+    }
+    const { error } = await supabase.from('blog_posts').insert(post);
 
     if (error) {
       console.error("Error inserting post:", error.message);
