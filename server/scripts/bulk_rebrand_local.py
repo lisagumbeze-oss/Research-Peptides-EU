@@ -118,10 +118,10 @@ def is_ash_rgb(rgb: tuple[int, int, int]) -> bool:
 
 
 def render_product(template: Image.Image, title: str, fill: tuple[int, int, int]) -> Image.Image:
+    """Draw the product name on the label. Never paint a background plate."""
+    del fill  # kept for call-site compatibility; text sits on the bottle label itself
     img = template.copy().convert("RGB")
     draw = ImageDraw.Draw(img)
-    # Wipe name region with white paper — product name sits on the bottle label itself
-    draw.rectangle(NAME_WIPE, fill=fill)
 
     label = clean_label_title(title).upper()
     max_w = NAME_BOX[2] - NAME_BOX[0] - 8
@@ -148,18 +148,20 @@ def render_product(template: Image.Image, title: str, fill: tuple[int, int, int]
 
 
 def assert_no_ash_plate(img: Image.Image, slug: str) -> None:
-    """Hard-fail if the name-band background is still ash gray."""
+    """Hard-fail if a flat name plate (ash or solid white box) is still behind the title."""
     px = img.convert("RGB").load()
-    # Sample corners of NAME_BOX (away from navy text center)
     probes = [
         (NAME_BOX[0] + 12, NAME_BOX[1] + 12),
         (NAME_BOX[2] - 12, NAME_BOX[1] + 12),
         (NAME_BOX[0] + 12, NAME_BOX[3] - 12),
         (NAME_BOX[2] - 12, NAME_BOX[3] - 12),
     ]
-    ash_hits = sum(1 for x, y in probes if is_ash_rgb(px[x, y]))
-    if ash_hits >= 3:
-        raise SystemExit(f"Ash plate still present after render: {slug} samples={[px[x, y] for x, y in probes]}")
+    samples = [px[x, y] for x, y in probes]
+    ash_hits = sum(1 for rgb in samples if is_ash_rgb(rgb))
+    # A painted plate is a flat near-white field; real label paper varies with the bottle curve.
+    flat_white = sum(1 for r, g, b in samples if r >= 252 and g >= 252 and b >= 252)
+    if ash_hits >= 3 or flat_white >= 3:
+        raise SystemExit(f"Name plate still present after render: {slug} samples={samples}")
 
 def load_catalog(limit: int | None) -> list[dict]:
     if not INVENTORY.exists():

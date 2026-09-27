@@ -1,6 +1,6 @@
 import { renderBrandLayout, stripHtml, formatCurrency } from '../layout.js';
 import type { EmailRenderResult, OrderEmailPayload } from '../types.js';
-import { BTC_PAYMENT_ADDRESS, isCryptoPaymentMethod } from '../paymentConfig.js';
+import { CRYPTO_WALLETS, cryptoWalletLabel, isCryptoPaymentMethod, CRYPTO_PAYMENT_DISCOUNT_PERCENT } from '../paymentConfig.js';
 
 export function renderOrderCreatedAdminEmail(payload: OrderEmailPayload): EmailRenderResult {
   const itemRows = payload.items
@@ -17,13 +17,26 @@ export function renderOrderCreatedAdminEmail(payload: OrderEmailPayload): EmailR
   const btcBlock = isCryptoPaymentMethod(payload.paymentMethod)
     ? `
     <div style="margin:18px 0 0;padding:16px;border:1px solid #fdba74;background:#fff7ed;border-radius:12px;">
-      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#c2410c;font-weight:800;">Bitcoin Payment Details Sent to Customer</p>
+      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#c2410c;font-weight:800;">Cryptocurrency Payment Details Sent to Customer</p>
       <p style="margin:0 0 10px;font-size:13px;color:#9a3412;line-height:1.7;">
-        Customer was instructed to send the BTC equivalent of <strong>${formatCurrency(payload.totalAmount)}</strong> to:
+        Customer was instructed to send <strong>one</strong> of the exact amounts below for an order total of <strong>${formatCurrency(payload.totalAmount)}</strong> (includes a ${CRYPTO_PAYMENT_DISCOUNT_PERCENT}% cryptocurrency discount on the product subtotal):
       </p>
+      ${CRYPTO_WALLETS.map((wallet) => {
+        const siteUrl = (process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://www.researchpeptide.eu').replace(/\/+$/, '');
+        const qrUrl = wallet.qrSrc
+          ? /^https?:\/\//i.test(wallet.qrSrc)
+            ? wallet.qrSrc
+            : `${siteUrl}${wallet.qrSrc.startsWith('/') ? wallet.qrSrc : `/${wallet.qrSrc}`}`
+          : '';
+        const quote = payload.cryptoQuotes?.[wallet.id];
+        return `
+      <p style="margin:12px 0 4px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#9a3412;font-weight:800;">${cryptoWalletLabel(wallet)}</p>
+      ${quote ? `<p style="margin:0 0 4px;font-size:16px;font-weight:800;color:#0f172a;">Send exactly ${quote.amount} ${wallet.symbol}</p><p style="margin:0 0 8px;font-size:12px;color:#9a3412;">${formatCurrency(quote.eurPerCoin)} per ${wallet.symbol}</p>` : ''}
+      ${qrUrl ? `<p style="margin:0 0 8px;"><img src="${qrUrl}" alt="${cryptoWalletLabel(wallet)} QR code" width="176" height="176" style="display:block;width:176px;height:176px;border:1px solid #fed7aa;border-radius:12px;background:#ffffff;" /></p>` : ''}
       <p style="margin:0;padding:12px;background:#ffffff;border:1px solid #fed7aa;border-radius:10px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;color:#0f172a;word-break:break-all;font-weight:700;">
-        ${BTC_PAYMENT_ADDRESS}
-      </p>
+        ${wallet.address}
+      </p>`;
+      }).join('')}
     </div>`
     : '';
 

@@ -5,6 +5,7 @@ import { Button, FormError, GlassPanel } from '../../design-system';
 import { accordionMotion } from '../../design-system/motion';
 import { formatCurrency, cn } from '../../lib/utils';
 import { PRIMARY_PROMO_CODE } from '../../lib/promoCodes';
+import { CryptoDiscountNotice } from '../checkout/CryptoDiscountNotice';
 
 type OrderSummaryPanelProps = {
   subtotal: number;
@@ -135,6 +136,8 @@ export function OrderSummaryPanel({
       <Button size="lg" fullWidth onClick={onCheckout}>
         {proceedLabel}
       </Button>
+
+      <CryptoDiscountNotice className="mt-4" compact />
 
       <p className="mt-4 text-[11px] text-steel-600 leading-relaxed">{t('cart.vatNote')}</p>
 

@@ -21,6 +21,7 @@ import { formatCurrency } from '../../lib/utils';
 import { cn } from '../../lib/utils';
 import { WhatsappIcon } from '../icons/WhatsappIcon';
 import { buildWhatsAppLink } from '../../config/brand';
+import { CryptoDiscountNotice } from '../checkout/CryptoDiscountNotice';
 
 type Variant = {
   variation_id?: string;
@@ -226,6 +227,8 @@ export function ProductPurchasePanel({
         </div>
         <Badge variant="purity">{t('purchase.priceVerified')}</Badge>
       </div>
+
+      <CryptoDiscountNotice compact />
 
       {description ? (
         <p className="text-steel-600 text-sm leading-relaxed whitespace-pre-line">{description}</p>

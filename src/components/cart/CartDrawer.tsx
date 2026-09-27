@@ -8,6 +8,7 @@ import { buttonClassName } from '../../design-system';
 import { overlayMotion, slideFromRightMotion } from '../../design-system/motion';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { CartLineItem } from './CartLineItem';
+import { CryptoDiscountNotice } from '../checkout/CryptoDiscountNotice';
 
 const FREE_SHIPPING_THRESHOLD = 500;
 
@@ -136,6 +137,7 @@ export default function CartDrawer() {
                   <span className="tabular-nums">{formatCurrency(getTotal())}</span>
                 </div>
                 <p className="text-xs text-steel-600">Shipping &amp; VAT calculated at checkout.</p>
+                <CryptoDiscountNotice compact />
                 <LocaleLink
                   to="/checkout"
                   onClick={closeCart}

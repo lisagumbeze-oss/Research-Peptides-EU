@@ -1,28 +1,43 @@
 import { renderBrandLayout, stripHtml, formatCurrency } from '../layout.js';
 import type { EmailRenderResult, OrderEmailPayload } from '../types.js';
-import { BTC_PAYMENT_ADDRESS, isCryptoPaymentMethod } from '../paymentConfig.js';
+import { CRYPTO_WALLETS, cryptoWalletLabel, isCryptoPaymentMethod, CRYPTO_PAYMENT_DISCOUNT_PERCENT } from '../paymentConfig.js';
+import type { CryptoQuote } from '../cryptoQuotes.js';
 
 function renderBtcPaymentInstructions(payload: {
   orderId: string;
   totalAmount: number;
   forAdmin?: boolean;
+  cryptoQuotes?: Record<string, CryptoQuote>;
 }) {
   const shortId = payload.orderId.slice(0, 8);
   return `
     <div style="margin:18px 0;padding:16px;border:1px solid #fdba74;background:#fff7ed;border-radius:12px;">
       <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#c2410c;font-weight:800;">
-        ${payload.forAdmin ? 'Bitcoin Payment Details Sent to Customer' : 'Pay with Bitcoin'}
+        ${payload.forAdmin ? 'Cryptocurrency Payment Details Sent to Customer' : 'Pay with Cryptocurrency'}
       </p>
       <p style="margin:0 0 10px;font-size:13px;color:#9a3412;line-height:1.7;">
         ${
           payload.forAdmin
-            ? `Customer was instructed to send the BTC equivalent of <strong>${formatCurrency(payload.totalAmount)}</strong> to:`
-            : `Please send the Bitcoin equivalent of <strong>${formatCurrency(payload.totalAmount)}</strong> to the address below. Use Order ID <strong>${shortId}</strong> as a reference where possible.`
+            ? `Customer was instructed to send the cryptocurrency equivalent of <strong>${formatCurrency(payload.totalAmount)}</strong> (includes a ${CRYPTO_PAYMENT_DISCOUNT_PERCENT}% cryptocurrency discount on the product subtotal) to one of these wallets:`
+            : `Please send <strong>one</strong> of the exact amounts below. The order total is <strong>${formatCurrency(payload.totalAmount)}</strong>, already including a ${CRYPTO_PAYMENT_DISCOUNT_PERCENT}% cryptocurrency discount on the product subtotal. Use Order ID <strong>${shortId}</strong> as a reference where possible.`
         }
       </p>
+      ${CRYPTO_WALLETS.map((wallet) => {
+        const siteUrl = (process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://www.researchpeptide.eu').replace(/\/+$/, '');
+        const qrUrl = wallet.qrSrc
+          ? /^https?:\/\//i.test(wallet.qrSrc)
+            ? wallet.qrSrc
+            : `${siteUrl}${wallet.qrSrc.startsWith('/') ? wallet.qrSrc : `/${wallet.qrSrc}`}`
+          : '';
+        const quote = payload.cryptoQuotes?.[wallet.id];
+        return `
+      <p style="margin:12px 0 4px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#9a3412;font-weight:800;">${cryptoWalletLabel(wallet)}</p>
+      ${quote ? `<p style="margin:0 0 4px;font-size:16px;font-weight:800;color:#0f172a;">Send exactly ${quote.amount} ${wallet.symbol}</p><p style="margin:0 0 8px;font-size:12px;color:#9a3412;">${formatCurrency(quote.eurPerCoin)} per ${wallet.symbol}</p>` : ''}
+      ${qrUrl ? `<p style="margin:0 0 8px;"><img src="${qrUrl}" alt="${cryptoWalletLabel(wallet)} QR code" width="176" height="176" style="display:block;width:176px;height:176px;border:1px solid #fed7aa;border-radius:12px;background:#ffffff;" /></p>` : ''}
       <p style="margin:0;padding:12px;background:#ffffff;border:1px solid #fed7aa;border-radius:10px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;color:#0f172a;word-break:break-all;font-weight:700;">
-        ${BTC_PAYMENT_ADDRESS}
-      </p>
+        ${wallet.address}
+      </p>`;
+      }).join('')}
       ${
         payload.forAdmin
           ? ''
@@ -73,7 +88,7 @@ export function renderOrderCreatedCustomerEmail(payload: OrderEmailPayload): Ema
         <td style="font-size:15px;color:#249688;text-align:right;padding:8px 0;font-weight:800;border-top:1px solid #e2e8f0;">${formatCurrency(payload.totalAmount)}</td>
       </tr>
     </table>
-    ${isCryptoPaymentMethod(payload.paymentMethod) ? renderBtcPaymentInstructions({ orderId: payload.orderId, totalAmount: payload.totalAmount }) : ''}`;
+    ${isCryptoPaymentMethod(payload.paymentMethod) ? renderBtcPaymentInstructions({ orderId: payload.orderId, totalAmount: payload.totalAmount, cryptoQuotes: payload.cryptoQuotes }) : ''}`;
 
   const html = renderBrandLayout({
     title: `Order Confirmed • ${payload.orderId.slice(0, 8)}`,

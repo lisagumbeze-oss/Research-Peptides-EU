@@ -60,7 +60,7 @@
         "items": [
           {
             "q": "Which payment methods do you accept?",
-            "a": "We accept Bitcoin (BTC) paid to our published wallet address, bank transfer, and card orders reviewed manually."
+            "a": "We accept cryptocurrency paid to our published wallet addresses and bank transfer. Cryptocurrency payments receive a 10% discount on the product subtotal at checkout. Shipping is not discounted."
           },
           {
             "q": "What is your return policy?",

@@ -6,6 +6,8 @@ import { renderOrderStatusCustomerEmail } from './templates/orderStatusCustomer.
 import { renderContactSubmittedAdminEmail } from './templates/contactSubmittedAdmin.js';
 import { renderContactSubmittedCustomerEmail } from './templates/contactSubmittedCustomer.js';
 import type { ContactEmailPayload, OrderEmailPayload } from './types.js';
+import { isCryptoPaymentMethod } from './paymentConfig.js';
+import { fetchCryptoQuotes } from './cryptoQuotes.js';
 
 function getAdminRecipient() {
   return process.env.EMAIL_ADMIN_TO || process.env.EMAIL_SUPPORT_ADDRESS || 'info@researchpeptide.eu';
@@ -76,6 +78,14 @@ export async function sendOrderCreatedEmails(orderId: string) {
 
   const payload = buildOrderPayload(row);
   if (!payload) return { skipped: true, reason: 'missing-customer-email' as const };
+
+  if (isCryptoPaymentMethod(payload.paymentMethod)) {
+    try {
+      payload.cryptoQuotes = await fetchCryptoQuotes(payload.totalAmount);
+    } catch (error) {
+      console.error('crypto quote failed', error);
+    }
+  }
 
   const adminTemplate = renderOrderCreatedAdminEmail(payload);
   const customerTemplate = renderOrderCreatedCustomerEmail(payload);

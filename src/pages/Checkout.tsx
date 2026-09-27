@@ -7,7 +7,7 @@ import { useAuthStore } from '../store/useAuthStore';
 import { formatCurrency, DEFAULT_CURRENCY, cn } from '../lib/utils';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
 import { supabase } from '../supabase';
-import { CheckCircle, Loader2, Truck, Package, Globe, Shield, Landmark, Bitcoin, Copy, Check } from 'lucide-react';
+import { CheckCircle, Loader2, Truck, Package, Globe, Shield, Landmark, Wallet } from 'lucide-react';
 import { isEuropeanCountry, EUROPEAN_COUNTRIES } from '../data/europeanCountries';
 import { postOrderCreatedEmail, postBtcPaymentDeclared } from '../lib/transactionalEmailApi';
 import { CheckoutSkeleton } from '../components/Skeleton';
@@ -24,7 +24,9 @@ import {
   checkoutSelectClass,
 } from '../components/checkout/fieldStyles';
 import { usePageSeo } from '../seo/SeoProvider';
-import { BTC_PAYMENT_ADDRESS } from '../lib/paymentConfig';
+import { CRYPTO_PAYMENT_DISCOUNT_PERCENT, cryptoPaymentDiscountAmount } from '../lib/paymentConfig';
+import { CryptoDueAmounts } from '../components/checkout/CryptoDueAmounts';
+import { CryptoDiscountNotice } from '../components/checkout/CryptoDiscountNotice';
 
 /** Shipping rates in EUR (Netherlands fulfilment · May 2026). */
 const SHIPPING_METHODS = {
@@ -50,10 +52,10 @@ type PaymentMethodId = 'bank' | 'crypto';
 const ALL_PAYMENT_METHODS: Array<{
   id: PaymentMethodId;
   name: string;
-  icon: typeof Bitcoin;
+  icon: typeof Wallet;
   subtext: string;
 }> = [
-  { id: 'crypto', name: 'Bitcoin (BTC)', icon: Bitcoin, subtext: 'Pay directly to our BTC wallet' },
+  { id: 'crypto', name: 'Cryptocurrency', icon: Wallet, subtext: 'Pay directly to our crypto wallets' },
   { id: 'bank', name: 'Bank Transfer', icon: Landmark, subtext: 'Direct Structural Payment' },
 ];
 
@@ -81,12 +83,12 @@ export default function Checkout() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [placedOrderId, setPlacedOrderId] = useState<string | null>(null);
   const [checkoutMessage, setCheckoutMessage] = useState('');
-  const [addressCopied, setAddressCopied] = useState(false);
   const [isDeclaringPayment, setIsDeclaringPayment] = useState(false);
   const [paymentDeclared, setPaymentDeclared] = useState(false);
   const [lockedTotals, setLockedTotals] = useState<{
     subtotal: number;
     promoDiscount: number;
+    cryptoDiscount: number;
     shippingCost: number;
     finalTotal: number;
   } | null>(null);
@@ -97,8 +99,6 @@ export default function Checkout() {
   const [showPromo, setShowPromo] = useState(false);
   const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({});
   const [paymentErrors, setPaymentErrors] = useState<Record<string, string>>({});
-  const [attestAge, setAttestAge] = useState(false);
-  const [attestResearchUse, setAttestResearchUse] = useState(false);
   const [attestTerms, setAttestTerms] = useState(false);
   const [attestationError, setAttestationError] = useState('');
 
@@ -168,11 +168,14 @@ export default function Checkout() {
   const subtotalValue = getSubtotal();
   const promoDiscountValue = Math.min(appliedDiscount, subtotalValue);
   const orderTotalBeforePayment = subtotalValue - promoDiscountValue + shippingCost;
+  const merchandiseNet = Math.max(0, subtotalValue - promoDiscountValue);
+  const cryptoDiscountValue =
+    paymentMethod === 'crypto' ? cryptoPaymentDiscountAmount(merchandiseNet) : 0;
   const bankTransferAvailable = orderTotalBeforePayment >= BANK_TRANSFER_MIN_EUR;
   const availablePaymentMethods = ALL_PAYMENT_METHODS.filter(
     (method) => method.id === 'crypto' || (method.id === 'bank' && bankTransferAvailable),
   );
-  const finalTotalValue = orderTotalBeforePayment;
+  const finalTotalValue = Math.max(0, orderTotalBeforePayment - cryptoDiscountValue);
 
   // If bank drops below the threshold (e.g. shipping/promo change), fall back to crypto.
   React.useEffect(() => {
@@ -243,7 +246,7 @@ export default function Checkout() {
   };
 
   const validateAttestation = () => {
-    if (!attestAge || !attestResearchUse || !attestTerms) {
+    if (!attestTerms) {
       setAttestationError(t('attestation.required'));
       return false;
     }
@@ -281,6 +284,7 @@ export default function Checkout() {
       setLockedTotals({
         subtotal: subtotalValue,
         promoDiscount: promoDiscountValue,
+        cryptoDiscount: cryptoDiscountValue,
         shippingCost,
         finalTotal: finalTotalValue
       });
@@ -303,9 +307,9 @@ export default function Checkout() {
           payment_method: paymentMethod,
           shipping_method: selectedMethod.name,
           shipping_cost: shippingCost,
+          crypto_discount_percent: paymentMethod === 'crypto' ? CRYPTO_PAYMENT_DISCOUNT_PERCENT : 0,
+          crypto_discount: cryptoDiscountValue,
           attestation: {
-            age_18_plus: true,
-            research_use_only: true,
             terms_accepted: true,
             attested_at: new Date().toISOString(),
           },
@@ -330,7 +334,7 @@ export default function Checkout() {
       if (emailDispatchFailed) {
         setCheckoutMessage('Order placed, but one or more transactional emails failed. Please contact support with your order ID.');
       } else if (paymentMethod === 'crypto') {
-        setCheckoutMessage('Order created. Send Bitcoin to the address below, then tap “I have Paid”.');
+        setCheckoutMessage('Order created. Send payment to one of the cryptocurrency addresses below, then tap “I have Paid”.');
       } else {
         setCheckoutMessage('Order created successfully. Admin and customer emails were sent. Bank transfer instructions will follow by email.');
       }
@@ -354,23 +358,13 @@ export default function Checkout() {
     }
   };
 
-  const handleCopyBtcAddress = async () => {
-    try {
-      await navigator.clipboard.writeText(BTC_PAYMENT_ADDRESS);
-      setAddressCopied(true);
-      window.setTimeout(() => setAddressCopied(false), 2000);
-    } catch {
-      setCheckoutMessage('Could not copy address. Please select and copy it manually.');
-    }
-  };
-
   const handleDeclareBtcPaid = async () => {
     if (!placedOrderId || paymentDeclared || isDeclaringPayment) return;
     setIsDeclaringPayment(true);
     try {
       await postBtcPaymentDeclared(placedOrderId);
       setPaymentDeclared(true);
-      setCheckoutMessage('Thanks — we have been notified. Our team will verify your Bitcoin payment shortly.');
+      setCheckoutMessage('Thanks — we have been notified. Our team will verify your cryptocurrency payment shortly.');
     } catch (error: any) {
       console.error('BTC payment declare failed:', error);
       setCheckoutMessage(error?.message || 'Could not confirm payment declaration. Please contact support with your order ID.');
@@ -474,6 +468,8 @@ export default function Checkout() {
                   <FormError message={shippingErrors.shippingMethod} className="mt-1" />
                 </fieldset>
 
+                <CryptoDiscountNotice />
+
                 <Button type="button" size="lg" fullWidth onClick={handleContinueToPayment} className="h-auto py-5 text-lg">
                   Continue to Payment
                 </Button>
@@ -489,6 +485,8 @@ export default function Checkout() {
                   <button type="button" onClick={() => setStep(1)} className="text-xs font-black text-brand-600 uppercase tracking-widest hover:underline motion-safe:active:scale-95">Edit Shipping</button>
                 </div>
 
+                <CryptoDiscountNotice className="mb-2" />
+
                 <div className="grid grid-cols-1 gap-4" role="radiogroup" aria-labelledby="checkout-payment-heading">
                   {availablePaymentMethods.map((method) => (
                     <button key={method.id} type="button" role="radio" aria-checked={paymentMethod === method.id} onClick={() => setPaymentMethod(method.id)} className={checkoutPaymentChoiceClass(paymentMethod === method.id)}>
@@ -496,8 +494,19 @@ export default function Checkout() {
                         <method.icon className="w-8 h-8" aria-hidden />
                       </div>
                       <div className="text-left flex-1">
-                        <span className="text-lg font-black text-navy-950">{method.name}</span>
-                        <p className="text-xs font-bold text-silver-400">{method.subtext}</p>
+                        <span className="flex flex-wrap items-center gap-2">
+                          <span className="text-lg font-black text-navy-950">{method.name}</span>
+                          {method.id === 'crypto' ? (
+                            <span className="rounded-full bg-brand-500 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-white">
+                              {t('cryptoDiscount.badge', { percent: CRYPTO_PAYMENT_DISCOUNT_PERCENT })}
+                            </span>
+                          ) : null}
+                        </span>
+                        <p className="text-xs font-bold text-silver-400">
+                          {method.id === 'crypto'
+                            ? t('cryptoDiscount.compact', { percent: CRYPTO_PAYMENT_DISCOUNT_PERCENT })
+                            : method.subtext}
+                        </p>
                       </div>
                       <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${paymentMethod === method.id ? 'border-brand-500 bg-brand-500' : 'border-silver-400'}`}>
                         {paymentMethod === method.id && <div className="w-2.5 h-2.5 rounded-full bg-white shadow-sm" />}
@@ -540,43 +549,24 @@ export default function Checkout() {
                 )}
 
                 {paymentMethod === 'crypto' && (
-                  <div className="bg-orange-50 p-8 rounded-[2rem] text-center space-y-4 border border-orange-100">
-                    <Bitcoin className="w-16 h-16 text-orange-500 mx-auto" />
+                  <div className="bg-brand-50 p-8 rounded-[2rem] text-center space-y-4 border border-brand-100">
+                    <Wallet className="w-16 h-16 text-brand-600 mx-auto" />
                     <div>
-                      <h3 className="text-xl font-black text-navy-950">Bitcoin Payment</h3>
-                      <p className="text-sm font-bold text-orange-800 mt-2">
-                        After placing your order you will see our BTC address. Send the Bitcoin equivalent of{' '}
-                        <span className="font-black underline">{formatCurrency(finalTotalValue)}</span>, then confirm with “I have Paid”.
+                      <h3 className="text-xl font-black text-navy-950">Cryptocurrency Payment</h3>
+                      <p className="text-sm font-bold text-steel-600 mt-2">
+                        Send one of the exact amounts below. Wallet addresses appear after the order is placed.
                       </p>
+                      <p className="text-sm font-semibold text-brand-700 mt-3">
+                        {t('cryptoDiscount.applied', { percent: CRYPTO_PAYMENT_DISCOUNT_PERCENT })}
+                      </p>
+                      <div className="mt-4">
+                        <CryptoDueAmounts eurAmount={finalTotalValue} variant="summary" />
+                      </div>
                     </div>
                   </div>
                 )}
 
                 <div className="space-y-3 rounded-[2rem] border border-brand-100 bg-mist-50 p-6">
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={attestAge}
-                      onChange={(e) => {
-                        setAttestAge(e.target.checked);
-                        setAttestationError('');
-                      }}
-                      className="mt-1 h-4 w-4 rounded border-brand-200 text-brand-600 focus:ring-brand-500"
-                    />
-                    <span className="text-sm font-semibold text-navy-950">{t('attestation.age')}</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={attestResearchUse}
-                      onChange={(e) => {
-                        setAttestResearchUse(e.target.checked);
-                        setAttestationError('');
-                      }}
-                      className="mt-1 h-4 w-4 rounded border-brand-200 text-brand-600 focus:ring-brand-500"
-                    />
-                    <span className="text-sm font-semibold text-navy-950">{t('attestation.researchUse')}</span>
-                  </label>
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input
                       type="checkbox"
@@ -631,36 +621,44 @@ export default function Checkout() {
                    <p className="text-lg font-black text-brand-600 select-all tracking-wider">{placedOrderId || 'Processing...'}</p>
                 </div>
 
+                <AnimatePresence>
+                  {checkoutMessage ? (
+                    <motion.p
+                      key={checkoutMessage}
+                      {...promoMotion}
+                      className="text-amber-700 bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 mt-4 text-sm font-semibold max-w-lg mx-auto"
+                      role="status"
+                    >
+                      {checkoutMessage}
+                    </motion.p>
+                  ) : null}
+                </AnimatePresence>
+
                 {paymentMethod === 'crypto' ? (
-                  <div className="mt-8 max-w-lg mx-auto text-left space-y-4">
-                    <div className="bg-orange-50 border border-orange-100 rounded-[2rem] p-6 space-y-4">
+                  <motion.div
+                    initial={{ opacity: reduceMotion ? 1 : 0, y: reduceMotion ? 0 : 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: reduceMotion ? 0 : 0.35, delay: reduceMotion ? 0 : 0.05 }}
+                    className="mt-6 max-w-lg mx-auto text-left space-y-4"
+                  >
+                    <div className="bg-white border border-brand-200 rounded-[2rem] p-6 space-y-4 shadow-sm">
                       <div className="flex items-center gap-3">
-                        <Bitcoin className="w-8 h-8 text-orange-500 shrink-0" />
+                        <div className="w-12 h-12 rounded-2xl bg-brand-500 text-white flex items-center justify-center shrink-0">
+                          <Wallet className="w-6 h-6" aria-hidden />
+                        </div>
                         <div>
-                          <h3 className="text-lg font-black text-navy-950">Send Bitcoin Payment</h3>
-                          <p className="text-xs font-bold text-orange-800">
-                            Amount due: {formatCurrency(lockedTotals?.finalTotal ?? finalTotalValue)} (BTC equivalent)
+                          <h3 className="text-lg font-black text-navy-950">Send Cryptocurrency</h3>
+                          <p className="text-xs font-bold text-steel-600">
+                            Amount due: {formatCurrency(lockedTotals?.finalTotal ?? finalTotalValue)}. Send the exact amount for one currency below.
+                          </p>
+                          <p className="text-xs font-semibold text-brand-700 mt-1">
+                            {t('cryptoDiscount.applied', { percent: CRYPTO_PAYMENT_DISCOUNT_PERCENT })}
                           </p>
                         </div>
                       </div>
-                      <div>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-silver-400 mb-2">BTC Address</p>
-                        <div className="flex items-stretch gap-2">
-                          <p className="flex-1 p-3 bg-white border border-orange-100 rounded-xl font-mono text-xs sm:text-sm font-bold text-navy-950 break-all select-all">
-                            {BTC_PAYMENT_ADDRESS}
-                          </p>
-                          <button
-                            type="button"
-                            onClick={handleCopyBtcAddress}
-                            className="px-4 rounded-xl bg-navy-950 text-white hover:bg-navy-900 transition-colors motion-safe:active:scale-95 flex items-center justify-center"
-                            aria-label="Copy Bitcoin address"
-                          >
-                            {addressCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                          </button>
-                        </div>
-                      </div>
+                      <CryptoDueAmounts eurAmount={lockedTotals?.finalTotal ?? finalTotalValue} variant="wallets" />
                       <p className="text-xs font-medium text-steel-600 leading-relaxed">
-                        Send the Bitcoin equivalent of your order total to this address. After the transfer is submitted, tap the button below so our team can verify it.
+                        After the transfer is submitted, tap the button below so our team can verify it.
                       </p>
                     </div>
 
@@ -684,28 +682,15 @@ export default function Checkout() {
                         className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl px-4 py-4 text-sm font-semibold text-center"
                         role="status"
                       >
-                        Payment declared — we will verify your Bitcoin transfer and update your order.
+                        Payment declared — we will verify your cryptocurrency transfer and update your order.
                       </motion.div>
                     )}
-                  </div>
+                  </motion.div>
                 ) : (
                   <p className="text-steel-600 mt-6 max-w-sm mx-auto font-medium">
                     An admin will contact you shortly via email with transfer details.
                   </p>
                 )}
-
-                <AnimatePresence>
-                  {checkoutMessage ? (
-                    <motion.p
-                      key={checkoutMessage}
-                      {...promoMotion}
-                      className="text-amber-700 bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 mt-4 text-sm font-semibold max-w-lg mx-auto"
-                      role="status"
-                    >
-                      {checkoutMessage}
-                    </motion.p>
-                  ) : null}
-                </AnimatePresence>
                 <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
                   {user ? (
                     <Button type="button" size="lg" onClick={() => navigate('/orders')} className="h-auto px-10 py-4">
@@ -740,6 +725,12 @@ export default function Checkout() {
                 <div className="flex justify-between text-sm font-black text-emerald-500">
                   <span>Promo Discount</span>
                   <span>-{formatCurrency(lockedTotals?.promoDiscount ?? promoDiscountValue)}</span>
+                </div>
+              )}
+              {(lockedTotals?.cryptoDiscount ?? cryptoDiscountValue) > 0 && (
+                <div className="flex justify-between text-sm font-black text-emerald-500">
+                  <span>{t('cryptoDiscount.summaryLabel', { percent: CRYPTO_PAYMENT_DISCOUNT_PERCENT })}</span>
+                  <span>-{formatCurrency(lockedTotals?.cryptoDiscount ?? cryptoDiscountValue)}</span>
                 </div>
               )}
               <div className="flex justify-between text-sm font-bold text-steel-600">

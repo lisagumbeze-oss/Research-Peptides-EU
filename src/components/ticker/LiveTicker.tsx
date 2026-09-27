@@ -1,9 +1,9 @@
-import { AlertCircle, FlaskConical, Zap, Package } from 'lucide-react';
+import { AlertCircle, FlaskConical, Wallet, Zap, Package } from 'lucide-react';
 import { useReducedMotion } from 'motion/react';
 import { cn } from '../../lib/utils';
 
 const TICKER_ITEMS = [
-  { icon: Package, text: 'EU DISPATCH: Netherlands warehouse — tracked laboratory shipments', color: 'text-brand-400' },
+  { icon: Wallet, text: 'CRYPTO PAYMENT: Save 10% on the product subtotal when you pay with cryptocurrency', color: 'text-brand-300' },
   { icon: Zap, text: 'ANALYTICS: Third-party HPLC verification on catalog batches', color: 'text-success' },
   { icon: FlaskConical, text: 'RESEARCH USE ONLY: Not for human or veterinary use', color: 'text-purity' },
   { icon: AlertCircle, text: 'DOCUMENTATION: COA available for verified batch lines', color: 'text-brand-300' },

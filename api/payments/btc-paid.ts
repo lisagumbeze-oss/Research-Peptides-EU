@@ -35,7 +35,7 @@ export default async function handler(req: any, res: any) {
     if (!isCryptoPaymentMethod(shipping.payment_method)) {
       return res.status(400).json({
         success: false,
-        error: 'This order is not a Bitcoin payment order.',
+        error: 'This order is not a cryptocurrency payment order.',
       });
     }
 

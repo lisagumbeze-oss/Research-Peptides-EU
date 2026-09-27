@@ -16,6 +16,7 @@ export type OrderEmailPayload = {
   paymentMethod: string;
   createdAt: string;
   items: OrderLineItem[];
+  cryptoQuotes?: Record<string, { amount: string; eurPerCoin: number }>;
 };
 
 export type ContactEmailPayload = {
