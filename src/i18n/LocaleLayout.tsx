@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { Navigate, Outlet, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LocaleProvider, useLocale } from './LocaleProvider';
@@ -12,8 +12,11 @@ import { SeoProvider } from '../seo/SeoProvider';
  * (e.g. /shop → /en/shop when "shop" is not a locale code).
  */
 export function LocaleLayout() {
+  const { locale: paramLocale } = useParams<{ locale: string }>();
+  const initialLocale = paramLocale && isLocaleCode(paramLocale) ? paramLocale : DEFAULT_LOCALE;
+
   return (
-    <LocaleProvider>
+    <LocaleProvider initialLocale={initialLocale}>
       <LocaleLayoutInner />
     </LocaleProvider>
   );
@@ -28,7 +31,7 @@ function LocaleLayoutInner() {
   const localeCode: LocaleCode | null =
     paramLocale && isLocaleCode(paramLocale) ? paramLocale : null;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!localeCode) return;
     setLocale(localeCode);
     void i18n.changeLanguage(localeCode);
@@ -36,14 +39,12 @@ function LocaleLayoutInner() {
   }, [localeCode, setLocale, i18n]);
 
   if (!localeCode) {
-    let target = DEFAULT_LOCALE;
-    try {
-      const ls = localStorage.getItem('rp-eu-locale');
-      if (ls && isLocaleCode(ls)) target = ls;
-    } catch {
-      /* ignore */
-    }
-    return <Navigate to={pathWithLocale(target, `${location.pathname}${location.search}${location.hash}`)} replace />;
+    return (
+      <Navigate
+        to={pathWithLocale(DEFAULT_LOCALE, `${location.pathname}${location.search}${location.hash}`)}
+        replace
+      />
+    );
   }
 
   return (

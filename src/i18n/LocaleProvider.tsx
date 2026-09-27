@@ -2,12 +2,8 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useS
 import { setActiveLocale } from '../lib/currency';
 import {
   getLocaleDefinition,
-  isLocaleCode,
   type LocaleCode,
 } from './locales';
-
-
-const STORAGE_KEY = 'rp-eu-locale';
 
 type LocaleContextValue = {
   locale: LocaleCode;
@@ -17,18 +13,14 @@ type LocaleContextValue = {
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 
-function readStoredLocale(): LocaleCode | null {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored && isLocaleCode(stored)) return stored;
-  } catch {
-    /* private browsing */
-  }
-  return null;
-}
-
-export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<LocaleCode>(() => readStoredLocale() ?? 'en');
+export function LocaleProvider({
+  children,
+  initialLocale = 'en',
+}: {
+  children: React.ReactNode;
+  initialLocale?: LocaleCode;
+}) {
+  const [locale, setLocaleState] = useState<LocaleCode>(initialLocale);
 
   const setLocale = useCallback((code: LocaleCode) => {
     setLocaleState(code);
@@ -36,11 +28,6 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setActiveLocale(locale);
-    try {
-      localStorage.setItem(STORAGE_KEY, locale);
-    } catch {
-      /* ignore */
-    }
     document.documentElement.lang = locale;
   }, [locale]);
 

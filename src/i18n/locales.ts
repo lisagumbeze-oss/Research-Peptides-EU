@@ -54,10 +54,9 @@ export function isLocaleCode(value: string): value is LocaleCode {
   return localeCodes.has(value as LocaleCode);
 }
 
+/** English is the site language until the visitor chooses another one. */
 export function detectBrowserLocale(): LocaleCode {
-  if (typeof navigator === 'undefined') return 'en';
-  const lang = navigator.language.split('-')[0].toLowerCase();
-  return isLocaleCode(lang) ? lang : 'en';
+  return 'en';
 }
 
 export function getLocaleDefinition(code: LocaleCode): LocaleDefinition {
