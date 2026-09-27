@@ -21,6 +21,7 @@ import TawkToChat from './chat/TawkToChat';
 import { CookieConsent } from './gdpr/CookieConsent';
 import { AgeGate } from './gdpr/AgeGate';
 import { PageLoader } from './PageLoader';
+import { ScrollPageToTop } from './ScrollToTop';
 import { RouteChunkErrorBoundary } from './RouteChunkErrorBoundary';
 import { postNewsletterSubscribe } from '../lib/transactionalEmailApi';
 import { overlayMotion } from '../design-system/motion';
@@ -128,6 +129,7 @@ function LayoutShell() {
       <main id="main-content" className="flex-grow pb-mobile-nav md:pb-0 relative" tabIndex={-1}>
         <RouteChunkErrorBoundary>
           <Suspense fallback={<PageLoader />}>
+            <ScrollPageToTop />
             <Outlet />
           </Suspense>
         </RouteChunkErrorBoundary>

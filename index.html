@@ -2,6 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta
       name="description"
@@ -41,6 +44,18 @@
     </script>
   </head>
   <body>
+    <script>
+      (function () {
+        function resetScroll() {
+          if (location.hash && location.hash.length > 1) return;
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          if (document.body) document.body.scrollTop = 0;
+        }
+        resetScroll();
+        window.addEventListener('pageshow', resetScroll);
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
