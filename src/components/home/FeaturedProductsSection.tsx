@@ -13,7 +13,7 @@ export function FeaturedProductsSection() {
           <span className="text-brand-600">research formulations</span>
         </>
       }
-      description="Top-rated sequences with documented purity profiles — engineered for metabolic, cognitive, and regenerative research models."
+      description="How to buy Tirzepatide in the Netherlands? Where can I buy Semaglutide in Germany? Priority compounds with documented purity for metabolic and regenerative laboratory models — plus how much for other top-rated sequences across the EU."
       href="/shop"
       ctaLabel="Full catalog"
       products={featured}

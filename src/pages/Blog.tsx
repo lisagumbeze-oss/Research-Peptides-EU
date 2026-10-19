@@ -8,6 +8,8 @@ import { ResearchLinkHub } from '../components/seo/ResearchLinkHub';
 import { usePageSeo } from '../seo/SeoProvider';
 import { blogExcerpt, blogPath } from '../lib/blogUrl';
 import { readingTimeMinutes, type BlogPostRecord } from '../lib/blog';
+import { resolveBlogCoverImage } from '../lib/blogProductMatch';
+import { useBlogProductCatalog } from '../hooks/useBlogProductCatalog';
 
 const BLOG_INDEX_SEO = {
   title: 'Research Journal | Research Peptides EU',
@@ -19,6 +21,7 @@ const BLOG_INDEX_SEO = {
 export default function Blog() {
   const [posts, setPosts] = useState<BlogPostRecord[]>([]);
   const [loading, setLoading] = useState(true);
+  const { products } = useBlogProductCatalog();
 
   usePageSeo(BLOG_INDEX_SEO);
 
@@ -83,6 +86,7 @@ export default function Blog() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {posts.map((post, idx) => {
               const href = blogPath(post);
+              const coverImage = resolveBlogCoverImage(post.title, post.image_url, products);
               return (
                 <Reveal
                   key={post.id}
@@ -94,9 +98,9 @@ export default function Blog() {
                     to={href}
                     className="block relative aspect-[16/10] rounded-[2.5rem] overflow-hidden bg-gray-100 mb-8 shadow-xl shadow-gray-200/20"
                   >
-                    {post.image_url ? (
+                    {coverImage ? (
                       <img
-                        src={post.image_url}
+                        src={coverImage}
                         alt={post.title}
                         className="w-full h-full object-cover motion-safe:group-hover:scale-110 transition-transform duration-1000 motion-reduce:transition-none"
                       />

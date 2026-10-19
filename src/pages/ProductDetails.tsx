@@ -15,6 +15,7 @@ import { ProductGallery } from '../components/product-detail/ProductGallery';
 import { ProductPurchasePanel } from '../components/product-detail/ProductPurchasePanel';
 import { ProductDescriptionCards } from '../components/product-detail/ProductDescriptionCards';
 import { ProductRecommendations } from '../components/product-detail/ProductRecommendations';
+import { ProductBuyerQuestions } from '../components/product-detail/ProductBuyerQuestions';
 import { StarRow } from '../components/products/ProductCardRating';
 import { AnswerCapsule } from '../components/seo/AnswerCapsule';
 import { useProductCatalogActions } from '../hooks/useProductCatalogActions';
@@ -249,7 +250,6 @@ export default function ProductDetails() {
             variants={product.variants || []}
             selectedVariant={selectedVariant}
             onSelectVariant={setSelectedVariant}
-            specifications={product.specifications || []}
             onAddToCart={handleAddToCart}
             inWishlist={productIds.includes(product.id)}
             onToggleWishlist={() => toggleWishlist(product.id, user?.id || '')}
@@ -274,6 +274,10 @@ export default function ProductDetails() {
         </Reveal>
 
         <ProductDescriptionCards description={displayDescription} productTitle={displayTitle} />
+
+        <Reveal className="mb-16">
+          <ProductBuyerQuestions title={displayTitle} slug={String(product.slug || slug || '')} />
+        </Reveal>
 
         <Reveal as="section" className="rounded-3xl bg-white/90 backdrop-blur-sm border border-brand-100 p-8 md:p-12 shadow-card mb-16">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">

@@ -2,6 +2,10 @@ import { ArrowRight, BookOpen, Clock } from 'lucide-react';
 import { LocaleLink } from '../../i18n/LocaleLink';
 import { blogPath } from '../../lib/blogUrl';
 import { readingTimeMinutes, stripMarkdown, type ArticleHeading, type BlogPostRecord } from '../../lib/blog';
+import {
+  resolveBlogCoverImage,
+  type BlogMatchableProduct,
+} from '../../lib/blogProductMatch';
 import { formatLocaleDate } from '../../lib/formatLocaleDate';
 import { Badge, Card, buttonClassName } from '../../design-system';
 import { cn } from '../../lib/utils';
@@ -10,6 +14,7 @@ type RecommendedPostsSidebarProps = {
   posts: BlogPostRecord[];
   headings?: ArticleHeading[];
   locale: string;
+  products?: BlogMatchableProduct[];
   className?: string;
 };
 
@@ -17,6 +22,7 @@ export function RecommendedPostsSidebar({
   posts,
   headings = [],
   locale,
+  products = [],
   className,
 }: RecommendedPostsSidebarProps) {
   const showToc = headings.length >= 2;
@@ -57,13 +63,14 @@ export function RecommendedPostsSidebar({
             {posts.map((post) => {
               const href = blogPath(post);
               const minutes = readingTimeMinutes(String(post.content || ''));
+              const coverImage = resolveBlogCoverImage(post.title, post.image_url, products);
               return (
                 <li key={post.id} className="py-4 first:pt-0 last:pb-0">
                   <LocaleLink to={href} className="group flex gap-3.5">
                     <div className="relative h-[4.5rem] w-[4.5rem] shrink-0 overflow-hidden rounded-xl bg-mist-50 border border-brand-50">
-                      {post.image_url ? (
+                      {coverImage ? (
                         <img
-                          src={post.image_url}
+                          src={coverImage}
                           alt=""
                           className="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-105"
                           loading="lazy"

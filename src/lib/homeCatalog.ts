@@ -2,6 +2,7 @@ import { supabase } from '../supabase';
 import { SHOP_PRODUCT_COLUMNS } from './shopCatalogQuery';
 import { rememberProducts } from './catalogCache';
 import { sortProducts } from './productSort';
+import { pinPriorityProducts } from './priorityProducts';
 import type { CatalogProduct } from '../components/products/ProductCard';
 import type { CategoryOption } from '../components/catalog/types';
 
@@ -62,9 +63,18 @@ export function pickHomeSegments(
   categories: CategoryOption[],
 ): HomeSegments {
   const used = new Set<string>();
-  const featured = takeUnused(sortProducts(products, 'rating-desc'), HOME_SEGMENT_SIZE, used);
+  // Pin Tirzepatide / Semaglutide first, then fill with rating / featured scores.
+  const featured = takeUnused(
+    pinPriorityProducts(sortProducts(products, 'rating-desc')),
+    HOME_SEGMENT_SIZE,
+    used,
+  );
   const newest = takeUnused(sortProducts(products, 'newest'), HOME_SEGMENT_SIZE, used);
-  const bestsellers = takeUnused(sortProducts(products, 'featured'), HOME_SEGMENT_SIZE, used);
+  const bestsellers = takeUnused(
+    pinPriorityProducts(sortProducts(products, 'featured')),
+    HOME_SEGMENT_SIZE,
+    used,
+  );
 
   const categoryRails: HomeCategoryRail[] = categories
     .map((category) => ({

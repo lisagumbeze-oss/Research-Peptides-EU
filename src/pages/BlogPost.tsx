@@ -20,6 +20,11 @@ import {
   stripMarkdown,
   type BlogPostRecord,
 } from '../lib/blog';
+import {
+  injectProductImagesIntoBlogContent,
+  resolveBlogCoverImage,
+} from '../lib/blogProductMatch';
+import { useBlogProductCatalog } from '../hooks/useBlogProductCatalog';
 import { formatLocaleDate } from '../lib/formatLocaleDate';
 import { stripLocaleFromPath } from '../i18n/routing';
 import { BRAND_NAME } from '../config/brand';
@@ -34,6 +39,7 @@ export default function BlogPost() {
   const [post, setPost] = useState<BlogPostRecord | null>(null);
   const [recommended, setRecommended] = useState<BlogPostRecord[]>([]);
   const [loading, setLoading] = useState(true);
+  const { products } = useBlogProductCatalog();
 
   useEffect(() => {
     let cancelled = false;
@@ -95,9 +101,20 @@ export default function BlogPost() {
     }
   }, [post, navigate]);
 
+  const articleContent = useMemo(
+    () =>
+      post
+        ? injectProductImagesIntoBlogContent(post.title, String(post.content || ''), products)
+        : '',
+    [post, products],
+  );
+  const coverImage = useMemo(
+    () => (post ? resolveBlogCoverImage(post.title, post.image_url, products) : null),
+    [post, products],
+  );
   const excerpt = useMemo(() => stripMarkdown(String(post?.content || ''), 180), [post]);
   const minutes = useMemo(() => readingTimeMinutes(String(post?.content || '')), [post]);
-  const headings = useMemo(() => extractArticleHeadings(String(post?.content || '')), [post]);
+  const headings = useMemo(() => extractArticleHeadings(articleContent), [articleContent]);
 
   const pageSeo = useMemo(() => {
     if (!post) return null;
@@ -106,14 +123,14 @@ export default function BlogPost() {
       description: excerpt,
       canonicalPath: blogPath(post),
       ogType: 'article' as const,
-      ogImage: post.image_url || undefined,
+      ogImage: coverImage || undefined,
       jsonLd: [
         {
           '@context': 'https://schema.org',
           '@type': 'Article',
           headline: post.title,
           description: excerpt,
-          image: post.image_url ? [post.image_url] : [],
+          image: coverImage ? [coverImage] : [],
           datePublished: post.created_at,
           dateModified: post.updated_at || post.created_at,
           author: { '@type': 'Organization', name: AUTHOR_NAME },
@@ -129,7 +146,7 @@ export default function BlogPost() {
         ),
       ],
     };
-  }, [post, excerpt, locale]);
+  }, [post, excerpt, locale, coverImage]);
 
   usePageSeo(pageSeo);
 
@@ -200,10 +217,10 @@ export default function BlogPost() {
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_20rem] xl:grid-cols-[minmax(0,1fr)_22rem] gap-10 xl:gap-14 items-start">
           <div>
             <Reveal as="header" className="bg-white border border-brand-100 rounded-3xl shadow-card overflow-hidden">
-              {post.image_url ? (
+              {coverImage ? (
                 <div className="aspect-[16/8] bg-mist-50">
                   <img
-                    src={post.image_url}
+                    src={coverImage}
                     alt=""
                     className="h-full w-full object-cover"
                     fetchPriority="high"
@@ -252,7 +269,7 @@ export default function BlogPost() {
             </Reveal>
 
             <Reveal delay={0.08} className="mt-8 bg-white border border-brand-100 rounded-3xl shadow-card p-6 sm:p-8 lg:p-12">
-              <BlogMarkdown content={String(post.content || '')} />
+              <BlogMarkdown content={articleContent} />
 
               <footer className="mt-12 pt-8 border-t border-brand-100">
                 <p className="text-sm text-steel-600 leading-relaxed mb-8">
@@ -272,7 +289,12 @@ export default function BlogPost() {
             </Reveal>
           </div>
 
-          <RecommendedPostsSidebar posts={recommended} headings={headings} locale={locale} />
+          <RecommendedPostsSidebar
+            posts={recommended}
+            headings={headings}
+            locale={locale}
+            products={products}
+          />
         </div>
       </Container>
 

@@ -38,7 +38,7 @@ export default function Shop() {
   const [priceRange, setPriceRange] = useState(() =>
     readyCatalog ? catalogPriceSliderMax(readyCatalog.products) : 500,
   );
-  const [sortBy, setSortBy] = useState<CatalogSortKey>('newest');
+  const [sortBy, setSortBy] = useState<CatalogSortKey>('featured');
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   const { isInWishlist, handleToggleWishlist, handleAddToCart } = useProductCatalogActions();

@@ -23,8 +23,23 @@ function isInternalPath(href: string): boolean {
   return href.startsWith('/') && !href.startsWith('//');
 }
 
+function isImageOnlyChildren(children: ReactNode): boolean {
+  if (Array.isArray(children)) {
+    const meaningful = children.filter((child) => {
+      if (child == null || child === false || child === true) return false;
+      if (typeof child === 'string') return child.trim().length > 0;
+      return true;
+    });
+    return meaningful.length === 1 && isImageOnlyChildren(meaningful[0]);
+  }
+  if (!isValidElement<{ src?: string }>(children)) return false;
+  return children.type === 'img' || typeof children.props?.src === 'string';
+}
+
 const linkClassName =
   'font-semibold text-brand-700 underline decoration-brand-200 underline-offset-4 hover:text-brand-800 hover:decoration-brand-500';
+
+const imageLinkClassName = 'block no-underline hover:opacity-95 transition-opacity';
 
 export function BlogMarkdown({ content }: BlogMarkdownProps) {
   const source = normalizeBlogMarkdown(content);
@@ -64,16 +79,17 @@ export function BlogMarkdown({ content }: BlogMarkdownProps) {
           pre: ({ children }) => <pre>{children}</pre>,
           a: ({ href, children }) => {
             const url = href || '';
+            const className = isImageOnlyChildren(children) ? imageLinkClassName : linkClassName;
             if (url.startsWith('#')) {
               return (
-                <a href={url} className={linkClassName}>
+                <a href={url} className={className}>
                   {children}
                 </a>
               );
             }
             if (isInternalPath(url)) {
               return (
-                <LocaleLink to={url} className={linkClassName}>
+                <LocaleLink to={url} className={className}>
                   {children}
                 </LocaleLink>
               );
@@ -84,7 +100,7 @@ export function BlogMarkdown({ content }: BlogMarkdownProps) {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${linkClassName} break-words`}
+                  className={`${className} break-words`}
                 >
                   {children}
                 </a>

@@ -6,7 +6,7 @@
   "dossier": {
     "eyebrow": "Research profile",
     "title": "Compound dossier",
-    "subtitle": "Structured laboratory notes for {{title}}.",
+    "subtitle": "How to buy {{title}} in Europe — structured laboratory notes, pricing context, and research specifications.",
     "sectionCount": "{{count}} sections"
   },
   "reviews": {
@@ -53,7 +53,7 @@
     "coaAvailable": "COA documentation available on request"
   },
   "recommendations": {
-    "relatedTitle": "Related research compounds",
+    "relatedTitle": "Related research compounds — where can I buy more in the EU?",
     "viewCatalog": "View catalog",
     "recentTitle": "Recently viewed"
   },

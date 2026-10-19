@@ -49,6 +49,8 @@ export const researchTools: NavLinkItem[] = [
 export const footerInventory: NavLinkItem[] = [
   { labelKey: 'footer.fullCatalog', href: '/shop' },
   { labelKey: 'footer.categories', href: '/categories' },
+  { labelKey: 'footer.tirzepatide', href: '/product/tirzepatide' },
+  { labelKey: 'footer.semaglutide', href: '/product/semaglutide' },
   { labelKey: 'footer.retatrutide', href: '/product/retatrutide' },
   { labelKey: 'footer.bacWater', href: '/product/bacteriostatic-water' },
   { labelKey: 'footer.advancedSearch', href: '/search' },
@@ -59,6 +61,8 @@ export const footerResearch: NavLinkItem[] = [
   { labelKey: 'footer.calculator', href: '/peptide-calculator' },
   { labelKey: 'footer.coaLibrary', href: '/coas' },
   { labelKey: 'footer.peptideInfo', href: '/peptide-information' },
+  { labelKey: 'footer.tirzepatideGuide', href: '/blog/tirzepatide-research-peptide-eu' },
+  { labelKey: 'footer.semaglutideGuide', href: '/blog/semaglutide-research-peptide-eu' },
   { labelKey: 'footer.ukEuropeGuide', href: '/blog/research-peptides-uk-europe' },
   { labelKey: 'footer.spainEuropeGuide', href: '/blog/research-peptides-spain-europe' },
   { labelKey: 'footer.reconstitutionGuide', href: '/blog/reconstitute-research-peptides' },

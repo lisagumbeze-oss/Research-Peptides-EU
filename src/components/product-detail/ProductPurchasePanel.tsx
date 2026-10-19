@@ -42,7 +42,6 @@ type ProductPurchasePanelProps = {
   variants: Variant[];
   selectedVariant: Variant | null;
   onSelectVariant: (v: Variant) => void;
-  specifications: string[];
   onAddToCart: () => void;
   inWishlist: boolean;
   onToggleWishlist: () => void;
@@ -65,7 +64,6 @@ export function ProductPurchasePanel({
   variants,
   selectedVariant,
   onSelectVariant,
-  specifications,
   onAddToCart,
   inWishlist,
   onToggleWishlist,
@@ -282,23 +280,6 @@ export function ProductPurchasePanel({
               aria-hidden
             />
           </div>
-        </div>
-      )}
-
-      {specifications.length > 0 && (
-        <div>
-          <h3 className="text-caption text-brand-600 mb-3">{t('purchase.productProfile')}</h3>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {specifications.map((spec, i) => (
-              <li
-                key={i}
-                className="flex items-center gap-2 text-sm text-steel-600 bg-white px-3 py-2 rounded-xl border border-brand-50"
-              >
-                <CheckCircle2 className="h-4 w-4 text-brand-500 shrink-0" />
-                <span className="line-clamp-2">{spec}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       )}
 

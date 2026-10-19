@@ -4,14 +4,14 @@ type TitleEntry = { en: string; nl?: string; de?: string; fr?: string; es?: stri
 
 export const PAGE_TITLES: Record<string, TitleEntry> = {
   '/': {
-    en: 'Research Peptides EU | Buy Research Peptides Online for EU & UK Labs',
+    en: 'Research Peptides EU | How to Buy Research Peptides in the Netherlands',
     nl: 'Research Peptides EU | Research Chem Peptide & Onderzoekspeptiden',
     de: 'Research Peptides EU | Peptide for Research & Forschungspeptide',
     fr: 'Research Peptides EU | European Peptide & Peptides de Recherche',
     es: 'Péptidos de investigación en España y Europa | Research Peptides EU',
   },
   '/shop': {
-    en: 'Buy Peptides Online UK & Europe | Research Catalog',
+    en: 'Where Can I Buy Peptides in the Netherlands & UK | Research Catalog',
     nl: 'Research Chemicals Peptides Kopen | EU-Catalogus',
     de: 'Forschungspeptide kaufen | Peptide for Research Katalog',
     fr: 'Boutique European Peptide | Catalogue de recherche',
@@ -66,7 +66,7 @@ export const PAGE_TITLES: Record<string, TitleEntry> = {
 };
 
 export const DEFAULT_DESCRIPTION =
-  'Research Peptides EU — buy research peptides online for European, UK and US laboratories. Third-party tested, EUR pricing, Netherlands dispatch across the EU and beyond.';
+  'Where can I buy research peptides in the Netherlands? How to buy Tirzepatide in Germany and how much for Semaglutide in the UK? Research Peptides EU — third-party tested, EUR pricing, Netherlands dispatch across Europe.';
 
 const LOCALE_DESCRIPTIONS: Partial<Record<LocaleCode, string>> = {
   en: DEFAULT_DESCRIPTION,

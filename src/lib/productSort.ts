@@ -1,5 +1,7 @@
 /** Shared catalog sort keys aligned with ecommerce-webapps skill (Featured, Best rated, etc.). */
 
+import { priorityRank } from './priorityProducts';
+
 export type CatalogSortKey =
   | 'featured'
   | 'rating-desc'
@@ -8,6 +10,7 @@ export type CatalogSortKey =
   | 'price-desc';
 
 type SortableProduct = {
+  slug?: string | null;
   price?: number;
   rating?: number;
   review_count?: number;
@@ -26,7 +29,11 @@ export function sortProducts<T extends SortableProduct>(items: T[], sortBy: Cata
 
   switch (sortBy) {
     case 'featured':
-      copy.sort((a, b) => featuredScore(b) - featuredScore(a));
+      copy.sort((a, b) => {
+        const byPriority = priorityRank(a.slug) - priorityRank(b.slug);
+        if (byPriority !== 0) return byPriority;
+        return featuredScore(b) - featuredScore(a);
+      });
       break;
     case 'rating-desc':
       copy.sort((a, b) => {

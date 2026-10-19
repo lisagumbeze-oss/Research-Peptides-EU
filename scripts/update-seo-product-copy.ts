@@ -8,6 +8,24 @@ async function main() {
 
   const updates = [
     {
+      slug: 'tirzepatide',
+      title: 'Tirzepatide | How to Buy Tirzepatide in the Netherlands',
+      description:
+        'Tirzepatide research peptide — dual GIP and GLP-1 receptor agonist for laboratory incretin and metabolic pathway studies. Where can I buy Tirzepatide in the Netherlands? Order from Research Peptides EU with COA documentation and EU dispatch. How much for Tirzepatide in Germany and the UK? Check live catalog pricing for research vials. How to buy Tirzepatide in Italy: add to cart, checkout in EUR, and we ship temperature-controlled across Europe. Often compared with Semaglutide GLP-1 research peptide under matched assay conditions. Research use only — not for human or veterinary use.',
+    },
+    {
+      slug: 'semaglutide',
+      title: 'Semaglutide | Where Can I Buy Semaglutide in Germany',
+      description:
+        'Semaglutide GLP-1 research peptide for selective GLP-1 receptor agonist laboratory models. How to buy Semaglutide in Germany? Order research-grade vials from Research Peptides EU with HPLC/COA pathways. Where can I buy Semaglutide in the UK and Netherlands? Ship from our European catalog with EUR pricing. How much for Semaglutide in Italy and Spain? See live product pricing before checkout. Common comparator alongside Tirzepatide dual agonist research material. Research use only — not for human or veterinary use.',
+    },
+    {
+      slug: 'semaglutide-glp-1',
+      title: 'Semaglutide GLP-1 | How Much for Semaglutide in the UK',
+      description:
+        'Semaglutide GLP-1 research peptide for selective GLP-1 receptor agonist laboratory models. How much for Semaglutide in the UK? Check live EUR catalog pricing. Where can I buy Semaglutide GLP-1 in France and the Netherlands? Research Peptides EU supplies COA-verified material for laboratory procurement. How to buy Semaglutide in Italy: add to cart and checkout for temperature-controlled EU dispatch. Research use only — not for human or veterinary use.',
+    },
+    {
       slug: 'hgh-fragment-176-191',
       description:
         'HGH Fragment 176-191 research peptide for metabolic fragment studies. Maps to fragment 176-191 / HGH fragment demand in DE, US, NL and UK research catalogs. Research use only.',
@@ -55,14 +73,19 @@ async function main() {
   ];
 
   for (const row of updates) {
+    const payload: { description: string; title?: string } = {
+      description: row.description,
+    };
+    if ('title' in row && row.title) payload.title = row.title;
+
     const { data, error } = await supabase
       .from('products')
-      .update({ description: row.description })
+      .update(payload)
       .eq('slug', row.slug)
-      .select('slug');
+      .select('slug,title');
     if (error) console.error(row.slug, error.message);
     else if (!data?.length) console.warn('missing', row.slug);
-    else console.log('Updated', row.slug);
+    else console.log('Updated', row.slug, data[0]?.title ?? '');
   }
 }
 main();

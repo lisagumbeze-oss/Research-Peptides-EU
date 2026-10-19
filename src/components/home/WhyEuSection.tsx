@@ -41,13 +41,13 @@ export function WhyEuSection() {
               <span className="text-brand-600">scientific trust</span>
             </>
           }
-          description="Headquartered in the Netherlands, Research Peptides Europe combines European regulatory discipline with pharmaceutical-grade logistics for research teams across Spain and the wider EU."
+          description="Headquartered in the Netherlands — where can I buy research peptides in Germany, Italy, or France? Research Peptides Europe combines regulatory discipline with pharmaceutical-grade logistics across Spain and the wider EU."
           align="center"
           className="mb-14"
         />
 
         <p className="text-center text-sm text-steel-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-          Browse the{' '}
+          How to buy peptides in the Netherlands? Browse the{' '}
           <LocaleLink to="/shop" className="font-semibold text-brand-700 hover:underline underline-offset-4">
             buy peptides online UK &amp; Europe catalog
           </LocaleLink>
@@ -56,16 +56,20 @@ export function WhyEuSection() {
             peptide calculator
           </LocaleLink>
           , or start with{' '}
+          <LocaleLink to="/product/tirzepatide" className="font-semibold text-brand-700 hover:underline underline-offset-4">
+            how to buy Tirzepatide in the Netherlands
+          </LocaleLink>
+          ,{' '}
+          <LocaleLink to="/product/semaglutide" className="font-semibold text-brand-700 hover:underline underline-offset-4">
+            where can I buy Semaglutide in Germany
+          </LocaleLink>
+          ,{' '}
           <LocaleLink to="/product/bacteriostatic-water" className="font-semibold text-brand-700 hover:underline underline-offset-4">
             bacteriostatic water
           </LocaleLink>
-          ,{' '}
+          , or{' '}
           <LocaleLink to="/product/retatrutide" className="font-semibold text-brand-700 hover:underline underline-offset-4">
-            Retatrutide buy (research)
-          </LocaleLink>
-          , and{' '}
-          <LocaleLink to="/product/cjc-1295-no-dac-ipamorelin-blend" className="font-semibold text-brand-700 hover:underline underline-offset-4">
-            CJC-1295 Ipamorelin
+            how much for Retatrutide in the UK
           </LocaleLink>
           .
         </p>

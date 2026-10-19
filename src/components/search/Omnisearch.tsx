@@ -12,7 +12,13 @@ import { productPath } from '../../lib/productUrl';
 import { modalMotion, overlayMotion } from '../../design-system/motion';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 
-const POPULAR_SEARCHES = ['BPC-157', 'TB-500', 'Semaglutide', 'CJC-1295', 'AOD-9604'];
+const POPULAR_SEARCHES = [
+  'Tirzepatide Netherlands',
+  'Semaglutide Germany',
+  'BPC-157 UK',
+  'how to buy TB-500',
+  'CJC-1295 Italy',
+];
 
 export default function Omnisearch() {
   const { isOpen, closeSearch } = useSearchStore();

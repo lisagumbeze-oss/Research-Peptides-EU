@@ -13,7 +13,7 @@ export function NewestProductsSection() {
           <span className="text-brand-600">research catalog</span>
         </>
       }
-      description="Newly listed compounds for laboratories expanding metabolic, recovery, and analytical workflows."
+      description="Newly listed compounds for laboratories expanding metabolic, recovery, and analytical workflows — how to buy new arrivals in the Netherlands, Germany, and Italy."
       href="/shop"
       ctaLabel="Browse newest"
       products={newest}

@@ -179,6 +179,96 @@ France, Sweden, and Austria currently show brand-level queries such as european 
 Always confirm SKU specs and COAs. Research use only — not for human or veterinary use.`,
     created_at: new Date().toISOString(),
   },
+  {
+    id: "semaglutide-research-peptide-eu",
+    title: "What is Semaglutide? GLP-1 Research Peptide Guide for EU Labs",
+    image_url: "https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80&w=2940",
+    content: `**Quick Answer:** Semaglutide is a long-acting GLP-1 receptor agonist research peptide used in laboratory metabolic and incretin-pathway models. Research Peptides EU supplies research-grade Semaglutide for EU and UK laboratories with batch documentation — for in-vitro and institutional research only, not for human or veterinary use.
+
+## What is Semaglutide as a research peptide?
+Semaglutide is studied as a selective GLP-1 (glucagon-like peptide-1) receptor agonist. In controlled laboratory settings, researchers use lyophilized Semaglutide material to examine incretin receptor signalling, cAMP responses, and related metabolic pathway assays. Teams searching to buy Semaglutide peptide for research should treat every SKU as a laboratory compound with COA verification.
+
+## Semaglutide GLP-1: why labs select it
+- Clear entity focus: GLP-1 receptor agonist (mono-agonist) research material
+- Compatible with standard lyophilized peptide reconstitution workflows
+- Useful comparator when evaluating dual agonists such as [Tirzepatide research peptide](/product/tirzepatide)
+- EUR catalog pricing with Netherlands dispatch across the EU and UK
+
+## How European laboratories source Semaglutide
+Laboratories comparing Semaglutide research peptide suppliers typically review HPLC purity claims, COA availability, cold-chain logistics, and research-use labelling. Research Peptides EU lists [Semaglutide GLP-1 research peptide](/product/semaglutide) in the live catalog for institutional procurement.
+
+## Handling and reconstitution notes
+Store lyophilized vials per your SOP (commonly frozen until use). Reconstitute with validated laboratory diluents such as [bacteriostatic water](/product/bacteriostatic-water). Plan aliquot volumes with the [peptide calculator](/peptide-calculator) before opening vials.
+
+## Related research reading
+- [Tirzepatide research peptide EU guide](/blog/tirzepatide-research-peptide-eu)
+- [Semaglutide vs Tirzepatide research comparison](/blog/semaglutide-vs-tirzepatide-research)
+- [Retatrutide for research](/blog/retatrutide-research-peptide-eu)
+
+Important: Research Peptides EU does not supply Semaglutide for human use, clinical treatment, or veterinary application.`,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "tirzepatide-research-peptide-eu",
+    title: "What is Tirzepatide? Dual GIP/GLP-1 Research Peptide Guide",
+    image_url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&q=80&w=2940",
+    content: `**Quick Answer:** Tirzepatide is a dual GIP and GLP-1 receptor agonist research peptide used in laboratory incretin and metabolic pathway studies. Research Peptides EU supplies Tirzepatide research material for EU and UK labs with analytical documentation — research use only.
+
+## What is Tirzepatide for laboratory research?
+Tirzepatide is studied as a unimolecular dual agonist engaging GIPR (glucose-dependent insulinotropic polypeptide receptor) and GLP-1R pathways. Research teams evaluating dual-agonist behaviour often compare Tirzepatide against selective GLP-1 agonists such as [Semaglutide GLP-1 research peptide](/product/semaglutide) under matched assay conditions.
+
+## Dual GIP/GLP-1 agonist: research framing
+In peer-reviewed receptor pharmacology literature, Tirzepatide is characterised as an imbalanced GLP-1/GIP co-agonist with distinct signalling and trafficking properties versus mono-agonists. Laboratories use research-grade material to study:
+- Receptor co-engagement models (GIPR / GLP-1R)
+- Signalling bias and cAMP pathway readouts
+- Comparative assays versus GLP-1-only research peptides
+
+## Buy Tirzepatide peptide for research (EU & UK)
+Queries such as “tirzepatide peptides UK”, “buy tirzepatide peptide”, and “tirzepatide research peptide EU” map to laboratory catalog purchase — not consumer wellness products. Browse the live [Tirzepatide research peptide](/product/tirzepatide) product page for vial strengths, pricing in EUR, and COA pathways.
+
+## Storage and laboratory handling
+Keep lyophilized Tirzepatide per institutional cold-storage SOP. Reconstitute with research-grade [bacteriostatic water](/product/bacteriostatic-water) and document lot numbers for audit trails. Use the [peptide calculator](/peptide-calculator) for volume planning.
+
+## Related guides
+- [Semaglutide GLP-1 research peptide guide](/blog/semaglutide-research-peptide-eu)
+- [Semaglutide vs Tirzepatide research comparison](/blog/semaglutide-vs-tirzepatide-research)
+- [Reconstitute research peptides with BAC water](/blog/reconstitute-research-peptides)
+
+All Tirzepatide material from Research Peptides EU is for in-vitro laboratory research only — not for human or veterinary use.`,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "semaglutide-vs-tirzepatide-research",
+    title: "Semaglutide vs Tirzepatide: Research Peptide Comparison for Labs",
+    image_url: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=2940",
+    content: `**Quick Answer:** Semaglutide is a selective GLP-1 receptor agonist research peptide; Tirzepatide is a dual GIP/GLP-1 receptor agonist. European laboratories often evaluate both compounds as comparators in incretin-pathway assays. Neither is supplied by Research Peptides EU for human use.
+
+## Side-by-side research comparison
+
+| Attribute | Semaglutide | Tirzepatide |
+|---|---|---|
+| Primary research entity | GLP-1 receptor agonist | Dual GIP / GLP-1 receptor agonist |
+| Typical research question | Selective GLP-1R pathway models | Co-agonist / dual-receptor models |
+| Catalog link | [Semaglutide](/product/semaglutide) | [Tirzepatide](/product/tirzepatide) |
+| Common companion supply | Bacteriostatic water, COA docs | Bacteriostatic water, COA docs |
+
+## When labs choose Semaglutide
+Choose [Semaglutide GLP-1 research peptide](/product/semaglutide) when the protocol requires a selective GLP-1 agonist reference or when comparing mono-agonist behaviour against dual or triple agonists (e.g. Retatrutide).
+
+## When labs choose Tirzepatide
+Choose [Tirzepatide research peptide](/product/tirzepatide) when the study design centres on dual GIPR/GLP-1R engagement, biased signalling, or head-to-head comparison with GLP-1-only material.
+
+## Shared laboratory requirements
+Both compounds are typically supplied lyophilized. Plan reconstitution with [bacteriostatic water](/product/bacteriostatic-water), verify batch COAs, and keep handling inside institutional SOPs. For EU and UK procurement, Research Peptides EU provides EUR pricing and Netherlands dispatch.
+
+## Further reading
+- [What is Semaglutide?](/blog/semaglutide-research-peptide-eu)
+- [What is Tirzepatide?](/blog/tirzepatide-research-peptide-eu)
+- [Buy peptides online UK & Europe research catalog guide](/blog/research-peptides-uk-europe)
+
+Research use only — not for human or veterinary use.`,
+    created_at: new Date().toISOString(),
+  },
 ];
 
 async function seed() {
