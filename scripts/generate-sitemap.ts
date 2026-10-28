@@ -1,7 +1,12 @@
 /**
- * Writes public/sitemap.xml with locale hreflang alternates (+ product URLs from Supabase).
+ * Writes a local preview sitemap (scratch/sitemap.xml) with locale hreflang alternates
+ * (+ product / category / blog URLs from Supabase).
  *
  *   npm run sitemap:generate
+ *
+ * Production serves /sitemap.xml via api/sitemap.ts (Vercel rewrite). Do NOT write
+ * public/sitemap.xml — a static file there overrides the rewrite and can strand an
+ * incomplete build-time sitemap (static pages only).
  *
  * Canonical host must match production redirects (apex → www) or Google Search Console
  * reports "Sitemap could not be read" / discovers 0 URLs.
@@ -97,14 +102,22 @@ ${hreflangLinks(pathName)}
   </url>`;
 }
 
-async function productPaths(): Promise<string[]> {
+function supabaseClient() {
   const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) {
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.VITE_SUPABASE_ANON_KEY ||
+    process.env.SUPABASE_ANON_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key);
+}
+
+async function productPaths(): Promise<string[]> {
+  const supabase = supabaseClient();
+  if (!supabase) {
     console.warn('Skipping product URLs (no Supabase credentials).');
     return [];
   }
-  const supabase = createClient(url, key);
   const { data, error } = await supabase
     .from('products')
     .select('slug')
@@ -120,10 +133,8 @@ async function productPaths(): Promise<string[]> {
 }
 
 async function categoryPaths(): Promise<string[]> {
-  const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) return [];
-  const supabase = createClient(url, key);
+  const supabase = supabaseClient();
+  if (!supabase) return [];
   const { data, error } = await supabase
     .from('categories')
     .select('slug')
@@ -136,23 +147,27 @@ async function categoryPaths(): Promise<string[]> {
 }
 
 async function blogPaths(): Promise<string[]> {
-  const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) return [];
-  const supabase = createClient(url, key);
-  const { data, error } = await supabase.from('blog_posts').select('id, title, slug').limit(500);
-  if (error) return [];
+  const supabase = supabaseClient();
+  if (!supabase) return [];
+  const { data, error } = await supabase.from('blog_posts').select('id, title').limit(500);
+  if (error) {
+    console.warn('Blog fetch failed:', error.message);
+    return [];
+  }
   return (data ?? []).map((row) => {
-    const explicit = row.slug && String(row.slug).trim();
-    if (explicit) return `/blog/${explicit}`;
-    // Stable derived slug (matches src/lib/blogUrl.ts)
-    const base = String(row.title || 'post')
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-      .slice(0, 80) || 'post';
-    const shortId = String(row.id || '').replace(/-/g, '').slice(0, 8);
-    return `/blog/${base}-${shortId}`;
+    // Matches src/lib/blogUrl.ts blogSlug() — blog_posts has no slug column.
+    const id = String(row.id || '').trim();
+    const looksLikeUuid =
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id);
+    if (id && !looksLikeUuid) return `/blog/${id}`;
+    const base =
+      String(row.title || 'post')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 80) || 'post';
+    const shortId = id.replace(/-/g, '').slice(0, 8);
+    return `/blog/${shortId ? `${base}-${shortId}` : base}`;
   });
 }
 
@@ -188,10 +203,23 @@ ${entries.join('\n')}
 </urlset>
 `;
 
-  const out = path.join(process.cwd(), 'public', 'sitemap.xml');
+  const scratchDir = path.join(process.cwd(), 'scratch');
+  fs.mkdirSync(scratchDir, { recursive: true });
+  const out = path.join(scratchDir, 'sitemap.xml');
   fs.writeFileSync(out, xml, 'utf8');
+
+  // Remove stale public copy so Vercel rewrite → /api/sitemap is not shadowed.
+  const publicCopy = path.join(process.cwd(), 'public', 'sitemap.xml');
+  if (fs.existsSync(publicCopy)) {
+    fs.unlinkSync(publicCopy);
+    console.log('Removed public/sitemap.xml (was shadowing /api/sitemap rewrite).');
+  }
+
   console.log(
     `Wrote ${entries.length} URL groups (${LOCALES.length} locales + x-default) to ${out} using origin ${SITE_ORIGIN}`,
+  );
+  console.log(
+    `Breakdown: static=${STATIC_PATHS.length} categories=${categoryRoutes.length} products=${productRoutes.length} blogs=${blogRoutes.length}`,
   );
 }
 
