@@ -21,7 +21,7 @@
       "destination": "/api/sitemap"
     },
     {
-      "source": "/((?!api/|assets/|favicon|src/|sitemap\\.xml|sitemaps\\.xml|robots\\.txt|prerender-manifest\\.json|.*\\.(?:xml|txt|ico|png|jpg|jpeg|webp|svg|gif|webmanifest|js|css|map)$).*)",
+      "source": "/((?!api/|assets/|favicon|src/|sitemap\\.xml|sitemaps\\.xml|sitemap-routes\\.json|robots\\.txt|prerender-manifest\\.json|.*\\.(?:xml|txt|json|ico|png|jpg|jpeg|webp|svg|gif|webmanifest|js|css|map)$).*)",
       "destination": "/index"
     }
   ],
