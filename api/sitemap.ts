@@ -3,14 +3,19 @@
  * Served via rewrite from /sitemap.xml (do not ship a public/sitemap.xml —
  * static files override rewrites on Vercel and can strand an incomplete build).
  *
- * Prefers live Supabase rows; falls back to api/sitemap-routes.generated.ts
- * (written at build by npm run sitemap:generate) when runtime env is missing.
+ * Prefers live Supabase rows; falls back to /sitemap-routes.json (written at
+ * build by npm run sitemap:generate) when runtime Supabase env is missing.
  */
-import { SITEMAP_ROUTE_CACHE } from './sitemap-routes.generated';
-
 type ProductRow = { slug: string | null };
 type CategoryRow = { slug: string | null };
 type BlogRow = { id: string; title?: string | null };
+
+type RouteCache = {
+  generatedAt?: string;
+  products: string[];
+  categories: string[];
+  blogs: string[];
+};
 
 const LOCALES = [
   'en',
@@ -123,7 +128,6 @@ function blogPathFromRow(row: BlogRow): string | null {
   return `/blog/${shortId ? `${base}-${shortId}` : base}`;
 }
 
-/** Simple offset pagination — avoid Range/Prefer which some edge runtimes mishandle. */
 async function supabaseRows<T>(table: string, select: string, pageSize = 1000): Promise<T[]> {
   const cfg = supabaseConfig();
   if (!cfg) return [];
@@ -163,19 +167,39 @@ async function supabaseRows<T>(table: string, select: string, pageSize = 1000): 
   return out;
 }
 
-async function loadDynamicPaths(): Promise<{
+async function loadRouteCache(origin: string): Promise<RouteCache | null> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const res = await fetch(`${origin}/sitemap-routes.json`, {
+      signal: controller.signal,
+      headers: { Accept: 'application/json' },
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as RouteCache;
+    if (!data || !Array.isArray(data.products)) return null;
+    return {
+      generatedAt: data.generatedAt,
+      products: data.products.filter(Boolean),
+      categories: Array.isArray(data.categories) ? data.categories.filter(Boolean) : [],
+      blogs: Array.isArray(data.blogs) ? data.blogs.filter(Boolean) : [],
+    };
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function loadDynamicPaths(origin: string): Promise<{
   productPaths: string[];
   categoryPaths: string[];
   blogPaths: string[];
-  source: 'live' | 'cache';
+  source: 'live' | 'cache' | 'none';
   diag: string;
 }> {
   const cfg = supabaseConfig();
-  const diagParts: string[] = [
-    `url=${cfg ? 'yes' : 'no'}`,
-    `key=${cfg?.keyKind || 'missing'}`,
-    `cacheProducts=${SITEMAP_ROUTE_CACHE.products.length}`,
-  ];
+  const diagParts: string[] = [`url=${cfg ? 'yes' : 'no'}`, `key=${cfg?.keyKind || 'missing'}`];
 
   if (cfg) {
     const [products, categories, blogs] = await Promise.all([
@@ -207,11 +231,23 @@ async function loadDynamicPaths(): Promise<{
     }
   }
 
+  const cache = await loadRouteCache(origin);
+  diagParts.push(`cacheProducts=${cache?.products.length ?? 0}`);
+  if (cache && cache.products.length > 0) {
+    return {
+      productPaths: cache.products.map((slug) => `/product/${slug}`),
+      categoryPaths: cache.categories.map((slug) => `/category/${slug}`),
+      blogPaths: cache.blogs.map((slug) => `/blog/${slug}`),
+      source: 'cache',
+      diag: diagParts.join(';'),
+    };
+  }
+
   return {
-    productPaths: SITEMAP_ROUTE_CACHE.products.map((slug) => `/product/${slug}`),
-    categoryPaths: SITEMAP_ROUTE_CACHE.categories.map((slug) => `/category/${slug}`),
-    blogPaths: SITEMAP_ROUTE_CACHE.blogs.map((slug) => `/blog/${slug}`),
-    source: 'cache',
+    productPaths: [],
+    categoryPaths: [],
+    blogPaths: [],
+    source: 'none',
     diag: diagParts.join(';'),
   };
 }
@@ -223,7 +259,7 @@ async function buildSitemapXml(): Promise<{
   diag: string;
 }> {
   const origin = siteOrigin();
-  const { productPaths, categoryPaths, blogPaths, source, diag } = await loadDynamicPaths();
+  const { productPaths, categoryPaths, blogPaths, source, diag } = await loadDynamicPaths(origin);
 
   const entries: string[] = [];
   for (const p of STATIC_PATHS) {
