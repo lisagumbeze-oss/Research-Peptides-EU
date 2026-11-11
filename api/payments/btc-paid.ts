@@ -2,6 +2,7 @@ import {
   fetchOrderById,
   patchOrderFields,
 } from '../_lib/supabaseOrders.js';
+import { handleOrderStatus } from '../_lib/orderEmailHandlers.js';
 import { renderBtcPaymentDeclaredAdminEmail } from '../_lib/emailTemplates.js';
 import { isCryptoPaymentMethod } from '../_lib/paymentConfig.js';
 import { sendTransactionalEmail } from '../_lib/resendSend.js';
@@ -58,6 +59,10 @@ export default async function handler(req: any, res: any) {
       shipping_address: nextShipping,
     });
 
+    let emailSent = false;
+    let emailError: string | null = null;
+    let customerStatusEmail: unknown = null;
+
     try {
       const adminTemplate = renderBtcPaymentDeclaredAdminEmail({
         orderId: row.id,
@@ -72,13 +77,31 @@ export default async function handler(req: any, res: any) {
         html: adminTemplate.html,
         text: adminTemplate.text,
       });
-    } catch (emailError) {
-      console.error('btc-paid admin email failed:', emailError);
+      emailSent = true;
+    } catch (err) {
+      console.error('btc-paid admin email failed:', err);
+      emailError = err instanceof Error ? err.message : String(err);
+    }
+
+    // Notify customer that order moved to processing (idempotent via sent_email_events).
+    try {
+      customerStatusEmail = await handleOrderStatus(order_id, 'processing');
+    } catch (err) {
+      console.error('btc-paid customer status email failed:', err);
+      const msg = err instanceof Error ? err.message : String(err);
+      emailError = emailError ? `${emailError} | ${msg}` : msg;
     }
 
     return res.status(200).json({
       success: true,
-      result: { declared: true, status: 'processing', declaredAt },
+      result: {
+        declared: true,
+        status: 'processing',
+        declaredAt,
+        emailSent,
+        emailError,
+        customerStatusEmail,
+      },
     });
   } catch (error: unknown) {
     console.error('btc-paid handler:', error);

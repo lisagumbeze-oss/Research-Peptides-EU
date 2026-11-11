@@ -12,6 +12,7 @@ import {
 } from '../data/seedCatalog';
 import { useToastStore } from '../store/useToastStore';
 import { postOrderStatusEmail } from '../lib/transactionalEmailApi';
+import { deleteOrder, listOrders, updateOrder } from '../lib/ordersApi';
 import { usePageSeo } from '../seo/SeoProvider';
 
 export default function AdminDashboard() {
@@ -111,7 +112,11 @@ export default function AdminDashboard() {
     try {
       const [prodRes, orderRes] = await Promise.all([
         supabase.from('products').select('*').order('created_at', { ascending: false }),
-        supabase.from('orders').select('*').order('created_at', { ascending: false })
+        listOrders().catch((err) => {
+          console.error(err);
+          addToast(err?.message || 'Failed to load orders', 'error');
+          return { orders: [] as any[] };
+        }),
       ]);
       if (prodRes.error) {
         console.error(prodRes.error);
@@ -119,14 +124,11 @@ export default function AdminDashboard() {
       } else if (prodRes.data) {
         setProducts(prodRes.data);
       }
-      if (orderRes.error) {
-        console.error(orderRes.error);
-        addToast(orderRes.error.message || 'Failed to load orders', 'error');
-      } else if (orderRes.data) {
-        setOrders(orderRes.data);
+      if (orderRes.orders) {
+        setOrders(orderRes.orders);
       }
     } catch (error) {
-      console.error("Error fetching admin data:", error);
+      console.error('Error fetching admin data:', error);
     } finally {
       setLoading(false);
     }
@@ -134,17 +136,24 @@ export default function AdminDashboard() {
 
   const updateOrderStatus = async (order: any, status: string) => {
     try {
-      const { error } = await supabase.from('orders').update({ status }).eq('id', order.id);
-      if (error) throw error;
-
-      await postOrderStatusEmail(order.id, status);
-
-      addToast(`Order ${order.id.substring(0, 8)} updated to ${status}`);
-      fetchData();
+      await updateOrder(order.id, { status });
     } catch (error: any) {
-      console.error("Error updating order:", error);
-      addToast(error?.message || "Failed to update order status", "error");
+      console.error('Error updating order status in DB:', error);
+      addToast(error?.message || 'Failed to update order status', 'error');
+      return;
     }
+
+    try {
+      await postOrderStatusEmail(order.id, status);
+      addToast(`Order ${order.id.substring(0, 8)} updated to ${status} — emails sent`);
+    } catch (emailError: any) {
+      console.error('Order status email failed:', emailError);
+      addToast(
+        `Status saved, but email failed: ${emailError?.message || 'unknown error'}`,
+        'error',
+      );
+    }
+    fetchData();
   };
 
   const openOrderActions = (order: any) => {
@@ -160,16 +169,12 @@ export default function AdminDashboard() {
   const saveOrderMeta = async (orderId: string) => {
     setIsSavingOrder(true);
     try {
-      const { error } = await supabase
-        .from('orders')
-        .update({ crypto_tx_hash: txidDraft || null })
-        .eq('id', orderId);
-      if (error) throw error;
-      addToast(`Order ${orderId.substring(0, 8)} metadata updated`, "success");
+      await updateOrder(orderId, { crypto_tx_hash: txidDraft || null });
+      addToast(`Order ${orderId.substring(0, 8)} metadata updated`, 'success');
       fetchData();
     } catch (error: any) {
-      console.error("Error saving order metadata:", error);
-      addToast(error?.message || "Failed to save order metadata", "error");
+      console.error('Error saving order metadata:', error);
+      addToast(error?.message || 'Failed to save order metadata', 'error');
     } finally {
       setIsSavingOrder(false);
     }
@@ -208,22 +213,29 @@ export default function AdminDashboard() {
         postalCode: orderDraft.postalCode,
       };
       const totalNum = parseFloat(orderDraft.total_amount);
-      const { error } = await supabase
-        .from('orders')
-        .update({
-          status: orderDraft.status,
-          crypto_tx_hash: orderDraft.crypto_tx_hash.trim() || null,
-          total_amount: Number.isFinite(totalNum) ? totalNum : orderDetail.total_amount,
-          shipping_address,
-        })
-        .eq('id', orderDetail.id);
-      if (error) throw error;
+      await updateOrder(orderDetail.id, {
+        status: orderDraft.status,
+        crypto_tx_hash: orderDraft.crypto_tx_hash.trim() || null,
+        total_amount: Number.isFinite(totalNum) ? totalNum : orderDetail.total_amount,
+        shipping_address,
+      });
 
-      if (orderDraft.status !== orderDetail.status) {
-        await postOrderStatusEmail(orderDetail.id, orderDraft.status);
+      const statusChanged = orderDraft.status !== orderDetail.status;
+      if (statusChanged) {
+        try {
+          await postOrderStatusEmail(orderDetail.id, orderDraft.status);
+          addToast('Order saved — status emails sent', 'success');
+        } catch (emailError: any) {
+          console.error('Order status email failed:', emailError);
+          addToast(
+            `Order saved, but email failed: ${emailError?.message || 'unknown error'}`,
+            'error',
+          );
+        }
+      } else {
+        addToast('Order saved', 'success');
       }
 
-      addToast('Order saved', 'success');
       setOrderDetail(null);
       fetchData();
     } catch (error: any) {
@@ -234,11 +246,10 @@ export default function AdminDashboard() {
     }
   };
 
-  const deleteOrder = async (orderId: string) => {
+  const removeOrder = async (orderId: string) => {
     if (!confirm('Permanently delete this order? This cannot be undone.')) return;
     try {
-      const { error } = await supabase.from('orders').delete().eq('id', orderId);
-      if (error) throw error;
+      await deleteOrder(orderId);
       addToast('Order deleted', 'success');
       if (orderDetail?.id === orderId) setOrderDetail(null);
       if (expandedOrderId === orderId) setExpandedOrderId(null);
@@ -657,7 +668,7 @@ export default function AdminDashboard() {
                                </button>
                                <button
                                  type="button"
-                                 onClick={() => deleteOrder(order.id)}
+                                 onClick={() => removeOrder(order.id)}
                                  className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
                                  title="Delete order"
                                >
@@ -765,6 +776,20 @@ export default function AdminDashboard() {
                     Shipping: {orderDetail.shipping_address.shipping_method} ({orderDetail.shipping_address.shipping_cost > 0 ? formatCurrency(orderDetail.shipping_address.shipping_cost) : 'Free'})
                   </p>
                 )}
+                <p className="text-xs text-navy-950 font-bold mt-1">
+                  Payment:{' '}
+                  {(() => {
+                    const method = String(orderDetail.shipping_address?.payment_method || '').toLowerCase();
+                    if (method === 'crypto') {
+                      const discount = Number(orderDetail.shipping_address?.crypto_discount_percent || 0);
+                      return discount > 0
+                        ? `Cryptocurrency (${discount}% merchandise discount)`
+                        : 'Cryptocurrency';
+                    }
+                    if (method === 'bank') return 'Bank Transfer';
+                    return method || 'Not specified';
+                  })()}
+                </p>
               </div>
               <button type="button" onClick={() => setOrderDetail(null)} className="p-2 rounded-xl hover:bg-brand-50 text-steel-600" aria-label="Close">
                 <X className="h-6 w-6" />
@@ -845,7 +870,7 @@ export default function AdminDashboard() {
               </button>
               <button
                 type="button"
-                onClick={() => deleteOrder(orderDetail.id)}
+                onClick={() => removeOrder(orderDetail.id)}
                 className="sm:w-auto px-6 py-4 rounded-2xl border-2 border-red-200 text-red-600 text-sm font-black uppercase tracking-widest hover:bg-red-50"
               >
                 Delete order

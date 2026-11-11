@@ -10,8 +10,8 @@ import {
   Clock,
   CreditCard,
 } from 'lucide-react';
-import { supabase } from '../supabase';
 import { useAuthStore } from '../store/useAuthStore';
+import { listOrders } from '../lib/ordersApi';
 import { formatCurrency } from '../lib/utils';
 import { productPath } from '../lib/productUrl';
 import { AccountShell } from '../components/account/AccountShell';
@@ -28,12 +28,8 @@ export default function Orders() {
     const fetchOrders = async () => {
       if (!user) return;
       try {
-        const { data } = await supabase
-          .from('orders')
-          .select('*')
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: false });
-        if (data) setOrders(data);
+        const { orders: rows } = await listOrders();
+        setOrders(rows || []);
       } catch (error) {
         console.error('Error fetching orders:', error);
       } finally {

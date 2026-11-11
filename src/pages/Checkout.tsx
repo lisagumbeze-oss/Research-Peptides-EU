@@ -6,10 +6,10 @@ import { useCartStore } from '../store/useCartStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { formatCurrency, DEFAULT_CURRENCY, cn } from '../lib/utils';
 import { useLocaleNavigate } from '../i18n/useLocaleNavigate';
-import { supabase } from '../supabase';
 import { CheckCircle, Loader2, Truck, Package, Globe, Shield, Landmark, Wallet } from 'lucide-react';
 import { isEuropeanCountry, EUROPEAN_COUNTRIES } from '../data/europeanCountries';
 import { postOrderCreatedEmail, postBtcPaymentDeclared } from '../lib/transactionalEmailApi';
+import { createOrder } from '../lib/ordersApi';
 import { CheckoutSkeleton } from '../components/Skeleton';
 import { PRIMARY_PROMO_CODE, PROMO_DISCOUNT_PERCENT, isValidPromoCode } from '../lib/promoCodes';
 import { Button, Container, FormError } from '../design-system';
@@ -290,14 +290,12 @@ export default function Checkout() {
       });
       setCheckoutMessage('');
 
-      // NOTE: We wrap non-schema columns (payment_method) inside shipping_address JSON
-      // to avoid Supabase errors until columns are officially added to the database.
-      // 1. Generate ID manually so we don't need .select() (which fails for guests due to RLS)
+      // payment_method / shipping meta live in shipping_address JSON (same shape as before).
       const generatedId = crypto.randomUUID();
 
       const orderData = {
         id: generatedId,
-        user_id: user?.id || null, // Allow null for Guest Checkout
+        user_id: user?.id || null,
         items: items,
         total_amount: finalTotalValue,
         currency: DEFAULT_CURRENCY,
@@ -313,13 +311,12 @@ export default function Checkout() {
             terms_accepted: true,
             attested_at: new Date().toISOString(),
           },
-        }
+        },
       };
-      
-      // 2. Insert order to Supabase
-      const { error } = await supabase.from('orders').insert([orderData]);
-      if (error) throw error;
-      const orderId = generatedId;
+
+      // Persist on Neon via /api/orders (auth remains Supabase for user_id when signed in).
+      const created = await createOrder(orderData);
+      const orderId = created.order?.id || generatedId;
       createdOrderId = orderId;
       setPlacedOrderId(orderId);
 
@@ -332,7 +329,9 @@ export default function Checkout() {
       }
 
       if (emailDispatchFailed) {
-        setCheckoutMessage('Order placed, but one or more transactional emails failed. Please contact support with your order ID.');
+        setCheckoutMessage(
+          `Order placed (ID ${orderId.slice(0, 8)}), but confirmation emails could not be sent. Please contact support with this order ID — do not place a duplicate order.`,
+        );
       } else if (paymentMethod === 'crypto') {
         setCheckoutMessage('Order created. Send payment to one of the cryptocurrency addresses below, then tap “I have Paid”.');
       } else {
@@ -362,9 +361,18 @@ export default function Checkout() {
     if (!placedOrderId || paymentDeclared || isDeclaringPayment) return;
     setIsDeclaringPayment(true);
     try {
-      await postBtcPaymentDeclared(placedOrderId);
+      const res = await postBtcPaymentDeclared(placedOrderId);
       setPaymentDeclared(true);
-      setCheckoutMessage('Thanks — we have been notified. Our team will verify your cryptocurrency payment shortly.');
+      const emailError = res.result?.emailError;
+      if (emailError) {
+        setCheckoutMessage(
+          `Payment declaration saved for order ${placedOrderId.slice(0, 8)}, but notification emails failed (${emailError}). Please contact support with your order ID.`,
+        );
+      } else {
+        setCheckoutMessage(
+          'Thanks — admin and customer notifications were sent. Our team will verify your cryptocurrency payment shortly.',
+        );
+      }
     } catch (error: any) {
       console.error('BTC payment declare failed:', error);
       setCheckoutMessage(error?.message || 'Could not confirm payment declaration. Please contact support with your order ID.');

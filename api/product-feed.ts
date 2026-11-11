@@ -43,23 +43,23 @@ function siteOriginFromRequest(req: any): string {
 }
 
 async function fetchProducts(): Promise<ProductRow[]> {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) throw new Error('SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is not configured');
-
-  const query =
-    'select=id,slug,title,description,price,images,categories,inventory,created_at&order=created_at.desc.nullslast';
-  const res = await fetch(`${url}/rest/v1/products?${query}`, {
-    headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-    },
-  });
-  if (!res.ok) {
-    const t = await res.text();
-    throw new Error(`Supabase products read failed: ${res.status} ${t}`);
-  }
-  return (await res.json()) as ProductRow[];
+  const { getNeonSql } = await import('./_lib/neonSql.js');
+  const sql = getNeonSql();
+  const rows = await sql`
+    SELECT
+      id::text AS id,
+      slug,
+      title,
+      description,
+      price,
+      images,
+      categories,
+      inventory,
+      created_at
+    FROM products
+    ORDER BY created_at DESC NULLS LAST
+  `;
+  return rows as ProductRow[];
 }
 
 function productLink(origin: string, p: ProductRow): string {

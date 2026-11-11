@@ -2,6 +2,7 @@ import { fetchOrderById, patchOrderShippingAddress } from './supabaseOrders.js';
 import {
   renderOrderCreatedAdminEmail,
   renderOrderCreatedCustomerEmail,
+  renderOrderStatusAdminEmail,
   renderOrderStatusCustomerEmail,
   type OrderEmailPayload,
   type OrderLineItem
@@ -139,21 +140,43 @@ export async function handleOrderStatus(orderId: string, status: string) {
   const payload = buildOrderPayload({ ...row, status });
   if (!payload) return { skipped: true, reason: 'missing-customer-email' as const };
 
-  const template = renderOrderStatusCustomerEmail(payload);
-  const result = await sendTransactionalEmail({
-    to: payload.customerEmail,
-    subject: template.subject,
-    html: template.html,
-    text: template.text
-  });
+  const customerTemplate = renderOrderStatusCustomerEmail(payload);
+  const adminTemplate = renderOrderStatusAdminEmail(payload);
 
-  if ('dryRun' in result && result.dryRun) {
-    return { dryRun: true as const };
+  const results = await Promise.allSettled([
+    sendTransactionalEmail({
+      to: payload.customerEmail,
+      subject: customerTemplate.subject,
+      html: customerTemplate.html,
+      text: customerTemplate.text,
+    }),
+    sendTransactionalEmail({
+      to: getAdminRecipient(),
+      subject: adminTemplate.subject,
+      html: adminTemplate.html,
+      text: adminTemplate.text,
+    }),
+  ]);
+
+  const failures = results.filter((r) => r.status === 'rejected') as PromiseRejectedResult[];
+  if (failures.length > 0) {
+    const reasons = failures
+      .map((f) => {
+        const reason = f.reason;
+        if (reason instanceof Error) return reason.message;
+        if (typeof reason === 'string') return reason;
+        return JSON.stringify(reason);
+      })
+      .join(' | ');
+    throw new Error(`Order-status email dispatch failed: ${reasons}`);
   }
-  if (!result.sent) {
-    throw new Error('Unexpected send state');
+
+  const successes = results.filter((r) => r.status === 'fulfilled') as PromiseFulfilledResult<any>[];
+  const dryRun = successes.some((s) => s.value.dryRun);
+  if (dryRun) {
+    return { dryRun: true as const };
   }
 
   await markOrderEvent(orderId, shipping, eventKey);
-  return { sent: true as const };
+  return { sent: true as const, recipients: ['customer', 'admin'] as const };
 }

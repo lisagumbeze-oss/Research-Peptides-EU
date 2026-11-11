@@ -6,7 +6,7 @@ function parseErrorBody(text: string, status: number): string {
   if (t.startsWith('<!') || t.includes('<!DOCTYPE')) {
     return (
       'Email API is not reachable (got a web page instead of JSON). ' +
-      'On Vercel, confirm the `/api` folder is deployed and Environment Variables include RESEND_API_KEY and RESEND_FROM.'
+      'On Vercel, confirm `/api` is deployed and env includes DATABASE_URL, RESEND_API_KEY, RESEND_FROM, and Supabase auth keys (see /api/email/health).'
     );
   }
   try {
@@ -101,5 +101,17 @@ export async function postBtcPaymentDeclared(orderId: string) {
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify({ order_id: orderId }),
   });
-  return readJsonResponse<{ success: boolean; result?: unknown }>(response);
+  return readJsonResponse<{
+    success: boolean;
+    result?: {
+      declared?: boolean;
+      skipped?: boolean;
+      reason?: string;
+      status?: string;
+      declaredAt?: string;
+      emailSent?: boolean;
+      emailError?: string | null;
+      customerStatusEmail?: unknown;
+    };
+  }>(response);
 }
