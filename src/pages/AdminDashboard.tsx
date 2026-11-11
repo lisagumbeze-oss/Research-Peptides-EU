@@ -17,9 +17,10 @@ import { usePageSeo } from '../seo/SeoProvider';
 
 export default function AdminDashboard() {
   usePageSeo({ title: 'Admin | Research Peptides EU', noindex: true });
-  const { profile, user } = useAuthStore();
+  const { profile, user, isAuthReady } = useAuthStore();
   const [products, setProducts] = useState<any[]>([]);
   const [orders, setOrders] = useState<any[]>([]);
+  const [ordersError, setOrdersError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'overview' | 'products' | 'orders' | 'system'>('overview');
   const addToast = useToastStore(state => state.addToast);
@@ -103,20 +104,24 @@ export default function AdminDashboard() {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const fetchData = async () => {
     setLoading(true);
+    setOrdersError(null);
     try {
       const [prodRes, orderRes] = await Promise.all([
         supabase.from('products').select('*').order('created_at', { ascending: false }),
-        listOrders().catch((err) => {
-          console.error(err);
-          addToast(err?.message || 'Failed to load orders', 'error');
-          return { orders: [] as any[] };
-        }),
+        listOrders()
+          .then((res) => {
+            setOrdersError(null);
+            return res;
+          })
+          .catch((err) => {
+            console.error(err);
+            const msg = err?.message || 'Failed to load orders';
+            setOrdersError(msg);
+            addToast(msg, 'error');
+            return { orders: [] as any[] };
+          }),
       ]);
       if (prodRes.error) {
         console.error(prodRes.error);
@@ -124,15 +129,19 @@ export default function AdminDashboard() {
       } else if (prodRes.data) {
         setProducts(prodRes.data);
       }
-      if (orderRes.orders) {
-        setOrders(orderRes.orders);
-      }
+      setOrders(orderRes.orders || []);
     } catch (error) {
       console.error('Error fetching admin data:', error);
     } finally {
       setLoading(false);
     }
   };
+
+  // Wait for Supabase session before calling /api/orders (needs Bearer token).
+  useEffect(() => {
+    if (!isAuthReady || profile?.role !== 'admin') return;
+    fetchData();
+  }, [isAuthReady, profile?.role]);
 
   const updateOrderStatus = async (order: any, status: string) => {
     try {
@@ -456,6 +465,24 @@ export default function AdminDashboard() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                  <div className="bg-white p-8 rounded-[2rem] border border-brand-100 shadow-sm">
                    <h3 className="text-xl font-bold mb-6">Recent Orders</h3>
+                   {ordersError ? (
+                     <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-950 space-y-2">
+                       <p className="font-bold">Could not load orders from Neon</p>
+                       <p className="text-amber-900/90 break-words">{ordersError}</p>
+                       <p className="text-xs text-amber-800">
+                         On Vercel, set <span className="font-mono">DATABASE_URL</span> (Neon connection string from your local <span className="font-mono">.env</span>) for Production, then redeploy. Check <span className="font-mono">/api/email/health</span> — <span className="font-mono">hasDatabaseUrl</span> must be true.
+                       </p>
+                       <button
+                         type="button"
+                         onClick={() => fetchData()}
+                         className="mt-2 px-4 py-2 rounded-xl bg-navy-950 text-white text-xs font-bold uppercase tracking-wider"
+                       >
+                         Retry
+                       </button>
+                     </div>
+                   ) : orders.length === 0 ? (
+                     <p className="text-sm text-steel-600">No orders yet.</p>
+                   ) : (
                    <div className="space-y-4">
                      {orders.slice(0, 5).map(order => (
                        <div key={order.id} className="flex items-center justify-between p-4 bg-mist-50 rounded-2xl hover:bg-brand-50 transition-colors">
@@ -475,6 +502,7 @@ export default function AdminDashboard() {
                        </div>
                      ))}
                    </div>
+                   )}
                  </div>
                  
                  <div className="bg-navy-950 text-white p-8 rounded-[2rem] shadow-xl relative overflow-hidden">

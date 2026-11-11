@@ -7,7 +7,7 @@ export function getNeonSql() {
   const databaseUrl = process.env.DATABASE_URL || process.env.DATABASE_URL_UNPOOLED;
   if (!databaseUrl) {
     throw new Error(
-      'DATABASE_URL is not configured (Neon). Set DATABASE_URL in Vercel / .env for api routes.',
+      'DATABASE_URL is not configured (Neon). Add DATABASE_URL in Vercel → Settings → Environment Variables (Production) using the same Neon connection string as local .env, then redeploy.',
     );
   }
   if (!cached) cached = neon(databaseUrl);

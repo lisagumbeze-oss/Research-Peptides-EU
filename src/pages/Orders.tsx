@@ -20,13 +20,17 @@ import { staggerDelay } from '../design-system/motion';
 
 export default function Orders() {
   const { i18n } = useTranslation();
-  const { user } = useAuthStore();
+  const { user, isAuthReady } = useAuthStore();
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchOrders = async () => {
-      if (!user) return;
+      if (!isAuthReady || !user) {
+        if (isAuthReady && !user) setLoading(false);
+        return;
+      }
+      setLoading(true);
       try {
         const { orders: rows } = await listOrders();
         setOrders(rows || []);
@@ -37,7 +41,7 @@ export default function Orders() {
       }
     };
     fetchOrders();
-  }, [user]);
+  }, [user, isAuthReady]);
 
   const getStatusStep = (status: string) => {
     switch (status) {
